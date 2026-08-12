@@ -1,0 +1,48 @@
+/* animations.css */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(59,130,246,.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(59,130,246,0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes confettiFall {
+  to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.fade-up   { animation: fadeUp .45s ease both; }
+.fade-in   { animation: fadeIn .3s ease both; }
+
+/* Stagger children */
+.fade-up:nth-child(2) { animation-delay: .05s; }
+.fade-up:nth-child(3) { animation-delay: .10s; }
+.fade-up:nth-child(4) { animation-delay: .15s; }
+.fade-up:nth-child(5) { animation-delay: .20s; }
+
+.progress-fill     { transition: width .6s cubic-bezier(.4,0,.2,1); }
+.content-card      { transition: box-shadow .2s, transform .2s; }
+.content-card:hover{ transform: translateY(-1px); }
+.sidebar           { transition: width .3s cubic-bezier(.4,0,.2,1); }
+.quiz-option       { transition: border-color .15s, background .15s; }
+.btn-primary       { transition: opacity .15s, transform .1s, box-shadow .15s; }
+.btn-primary:active{ transform: translateY(0) scale(.98); }
+.step-body         { transition: max-height .25s ease; }
+.outcome-check     { transition: background .2s, border-color .2s, transform .15s; }
+.outcome-check:active { transform: scale(.9); }
+
+/* Theme transition */
+body, .app-shell, .sidebar, .topbar, .content-card, .btn-primary, .btn-secondary, .toc-chapter-btn, .toc-section-btn, .panel-header, .fc-face, .flashcard-inner .fc-face { 
+  transition-property: background-color, color, border-color, box-shadow; 
+  transition-duration: .25s; 
+  transition-timing-function: ease; 
+}
+.flashcard-inner { transition: transform .5s cubic-bezier(.4,0,.2,1); }
+.step-chevron    { transition: transform .2s ease; }
+.progress-fill   { transition: width .6s cubic-bezier(.4,0,.2,1); }

@@ -1,0 +1,140 @@
+/* components.css — reusable UI components */
+
+/* Notification toast */
+#toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--surface-2); color: var(--text); padding: 12px 22px; border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: .88rem; font-weight: 500; z-index: 9999; opacity: 0;
+  transition: transform .3s ease, opacity .3s ease;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Welcome screen */
+#welcome-screen {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 32px 32px 60px; text-align: center;
+}
+.welcome-icon { font-size: 4rem; margin-bottom: 20px; }
+.welcome-title { font-size: 2.2rem; font-weight: 800; color: var(--text); margin-bottom: 12px; }
+.welcome-sub { font-size: 1.05rem; color: var(--text-2); max-width: 520px; margin-bottom: 32px; }
+.welcome-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 660px; margin-bottom: 32px; }
+.welcome-card {
+  background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius);
+  padding: 20px; cursor: pointer; transition: border-color .2s, transform .2s;
+}
+.welcome-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+.welcome-card .wc-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.welcome-card .wc-title { font-size: .88rem; font-weight: 700; margin-bottom: 4px; }
+.welcome-card .wc-desc  { font-size: .78rem; color: var(--text-2); }
+.chapters-quick-start { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 560px; }
+.quick-chapter {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 12px 16px; cursor: pointer; transition: border-color .15s; text-align: left;
+}
+.quick-chapter:hover { border-color: var(--blue); }
+.quick-ch-num { width: 32px; height: 32px; border-radius: 8px; background: var(--surface-2); border: 1.5px solid var(--border); color: var(--text); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .85rem; flex-shrink: 0; }
+.quick-ch-name { font-size: .9rem; font-weight: 600; flex: 1; }
+.quick-ch-sections { font-size: .75rem; color: var(--text-3); }
+.quick-ch-status { font-size: .8rem; color: var(--green); }
+
+/* Confidence chip */
+.confidence-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.conf-chip {
+  padding: 5px 14px; border-radius: 99px; border: 1.5px solid var(--border);
+  font-size: .75rem; font-weight: 700; cursor: pointer; transition: all .15s;
+  background: var(--surface-2); color: var(--text-2);
+}
+.conf-chip.easy   { border-color: var(--green);  color: var(--green);  }
+.conf-chip.medium { border-color: var(--yellow); color: var(--yellow); }
+.conf-chip.hard   { border-color: var(--red);    color: var(--red);    }
+.conf-chip.active { color: #fff; }
+.conf-chip.easy.active   { background: var(--green);  }
+.conf-chip.medium.active { background: var(--yellow); }
+.conf-chip.hard.active   { background: var(--red);    }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+
+/* Katex display override */
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+.katex { font-size: 1em; }
+
+/* Mobile responsive */
+
+@media (max-width: 900px) {
+  /* Sidebar becomes an overlay drawer instead of a grid column */
+  .app-shell { grid-template-columns: 1fr; }
+  .main-content { grid-column: 1 / -1; }
+
+  .sidebar-wrapper {
+    position: fixed;
+    top: var(--topbar-h);
+    left: 0;
+    width: 320px;
+    max-width: 85vw;
+    height: calc(100dvh - var(--topbar-h));
+    z-index: 450;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-lg);
+  }
+  .sidebar-wrapper.mobile-open { transform: translateX(0); }
+
+  /* Detail panel should never be collapsed to icon-only on mobile —
+     the drawer already hides/shows the whole thing */
+  .sidebar-detail { max-width: 264px; }
+  .sidebar-detail.collapsed { max-width: 264px; }
+
+  #sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: var(--topbar-h) 0 0 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 440;
+  }
+  .sidebar-wrapper.mobile-open ~ #sidebar-backdrop,
+  .sidebar-wrapper.mobile-open + #sidebar-backdrop {
+    display: block;
+  }
+
+  .welcome-cards { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .formula-grid { grid-template-columns: 1fr; }
+  #quiz-panel, #flashcard-panel, #formula-panel { width: 100vw; }
+  .dashboard-panel { width: 92vw; padding: 24px; }
+  .chapter-hero { padding: 24px; }
+  .chapter-hero h1 { font-size: 1.5rem; }
+  .chapter-hero-actions, .chapter-actions { flex-direction: column; align-items: stretch; }
+  .chapter-nav-bar { flex-direction: column; }
+  .chapter-nav-btn { max-width: 100%; }
+  .btn-hero, .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  .content-page { padding: 20px 16px max(80px, env(safe-area-inset-bottom)); }
+  .viz-controls { flex-direction: column; align-items: stretch; gap: 10px; }
+  .viz-control-group select, .viz-control-group input[type=range] { width: 100%; }
+  .viz-card { padding: 14px 12px; }
+  .viz-plot { margin: 0 -6px; }
+}
+
+@media (max-width: 600px) {
+  .topbar { gap: 8px; padding: 0 12px; }
+  .topbar-search { max-width: none; flex: 1; }
+  .topbar-search input { padding-left: 36px; padding-right: 12px; font-size: 0.9rem; }
+  .fc-actions { flex-direction: column; width: 100%; max-width: 100% !important; }
+  .btn-fc { width: 100%; justify-content: center; }
+  .quiz-options .quiz-option { padding: 12px; }
+  .quick-chapter { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .content-card { padding: 16px 18px; }
+  .worked-example-header { padding: 12px 16px; }
+  .step-header { padding: 12px 16px; }
+  .step-body { padding: 14px 16px 16px 44px; }
+}
+
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .sidebar-wrapper { width: 88vw; }
+}

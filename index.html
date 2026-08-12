@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MATH1036 — Interactive Calculus Study Book</title>
+  <meta name="description"
+    content="Interactive calculus study guide for MATH1036, 2nd semester. Flashcards, quizzes, visualizations, and step-by-step worked examples.">
+
+  <!-- Fonts: link in head is 15-40% faster than @import in CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  </noscript>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/darkmode.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false})"></script>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+     APP SHELL
+═══════════════════════════════════════════════════════ -->
+  <div class="app-shell">
+
+    <!-- ── Topbar ─────────────────────────────────────────── -->
+    <header class="topbar">
+      <!-- Sidebar toggle -->
+      <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="Toggle Sidebar" title="Toggle Sidebar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <line x1="9" y1="3" x2="9" y2="21" />
+        </svg>
+      </button>
+      <div class="topbar-search">
+        <span class="search-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </span>
+        <input type="text" id="global-search" placeholder="Search theorems, formulas, flashcards…" autocomplete="off">
+        <div id="search-overlay" class="hidden" role="listbox"></div>
+      </div>
+    </header>
+
+    <!-- ── Floating Two-Level Sidebar ──────────────────────────────── -->
+    <aside class="sidebar-wrapper">
+      <div class="sidebar-two-level" id="sidebar-two-level">
+        <!-- Nav Rail (Level 1) -->
+        <div class="sidebar-nav-rail">
+          <div class="sidebar-logo" id="sidebar-expand-toggle" style="cursor:pointer" title="Expand sidebar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 4a3 3 0 0 0-3 3v10a3 3 0 0 1-3 3" />
+              <path d="M8 9h6" />
+            </svg>
+          </div>
+
+          <div class="nav-rail-items" id="nav-rail-chapters">
+            <!-- Chapter icons injected here -->
+          </div>
+
+          <div class="nav-rail-spacer"></div>
+
+          <div class="nav-rail-items nav-rail-actions">
+            <!-- Formula Reference -->
+            <button class="icon-nav-btn" id="formula-btn" title="Formula Reference (∑)">
+              <span style="font-size:1.1rem;font-weight:700;">∑</span>
+            </button>
+            <!-- Flashcards -->
+            <button class="icon-nav-btn" id="fc-btn" title="Flashcards" onclick="Flashcards.open('all')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+                <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+                <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
+              </svg>
+            </button>
+            <!-- Dashboard -->
+            <button class="icon-nav-btn" id="dashboard-btn" title="Dashboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="20" x2="12" y2="10" />
+                <line x1="18" y1="20" x2="18" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Detail Sidebar (Level 2) -->
+        <div class="sidebar-detail" id="sidebar-detail">
+          <div class="sidebar-detail-header">
+            <div class="sidebar-brand" id="logo-home-btn" style="cursor:pointer;padding-left:12px"
+              title="Go to Welcome Screen">
+              <div class="sidebar-brand-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 4a3 3 0 0 0-3 3v10a3 3 0 0 1-3 3" />
+                  <path d="M8 9h6" />
+                </svg>
+              </div>
+              <span class="sidebar-brand-name">CALCULUS I</span>
+            </div>
+
+            <div class="sidebar-section-title-wrap">
+              <h2 class="sidebar-section-title" id="active-chapter-title">Chapter 1</h2>
+              <button class="sidebar-collapse-btn" id="sidebar-collapse-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-icon"
+                  style="transform: rotate(-90deg);">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="sidebar-search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-icon">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <input type="text" id="sidebar-search-input" placeholder="Search..." autocomplete="off">
+            </div>
+          </div>
+
+          <div class="sidebar-detail-content" id="sidebar-detail-content">
+            <!-- Sections injected here -->
+            <!-- </div>
+        
+        </div> -->
+          </div>
+        </div>
+    </aside>
+
+    <!-- Dims the page behind the mobile drawer; tap to close -->
+    <div id="sidebar-backdrop"></div>
+
+    <!-- ── Main content ─────────────────────────────────────── -->
+    <main class="main-content" id="main-content">
+      <div id="content-area"></div>
+    </main>
+
+  </div><!-- /app-shell -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+     FLASHCARD PANEL (slides in from right)
+═══════════════════════════════════════════════════════ -->
+  <div id="flashcard-panel" role="dialog" aria-label="Flashcards">
+    <div class="panel-header">
+      <span style="font-size:1.3rem"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="ui-icon" style="flex-shrink:0">
+          <path
+            d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+          <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+          <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
+        </svg></span>
+      <h2>Flashcards</h2>
+      <button class="panel-close" id="fc-close" aria-label="Close">✕</button>
+    </div>
+    <div class="fc-filter" id="fc-filter"></div>
+    <div class="fc-progress-row" id="fc-dots"></div>
+    <div class="fc-area" id="fc-area">
+      <p style="color:var(--text-3)">Loading flashcards…</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+     QUIZ PANEL (slides in from right)
+═══════════════════════════════════════════════════════ -->
+  <div id="quiz-panel" role="dialog" aria-label="Quiz">
+    <div class="panel-header">
+      <span style="font-size:1.3rem"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="ui-icon" style="flex-shrink:0">
+          <path
+            d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 0-.201 1.066c.264.676.4 1.378.4 2.115 0 3.314-2.686 6-6 6-.737 0-1.439-.136-2.115-.4a.98.98 0 0 0-1.066.201l-1.611 1.611c-.47.47-1.087.706-1.704.706s-1.233-.235-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.878-.289c-.58.085-1.17.085-1.75 0C1.865 22.04 0 20.174 0 17.854c0-.737.136-1.439.4-2.115a.98.98 0 0 0-.201-1.066L-1.412 13.06c-.47-.47-.706-1.087-.706-1.704s.235-1.233.706-1.704l1.568-1.568a1.026 1.026 0 0 0 .289-.878c-.085-.58-.085-1.17 0-1.75 0 0 0 0 0 0C.535 2.19 2.401.325 4.721.325c.737 0 1.439.136 2.115.4a.98.98 0 0 0 1.066-.201l1.611-1.611c.47-.47 1.087-.706 1.704-.706s1.233.235 1.704.706l1.568 1.568c.23.23.556.338.878.289.58-.085 1.17-.085 1.75 0 2.32.34 4.186 2.206 4.186 4.526 0 .737-.136 1.439-.4 2.115a.98.98 0 0 0 .201 1.066l1.611 1.611c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.568 1.568c-.23.23-.338.556-.289.878.085.58.085 1.17 0 1.75-1.175 4.381-5.59 7.037-9.97 5.86-1.542-.41-2.92-1.32-3.86-2.54z"
+            transform="scale(0.85) translate(3,3)" />
+        </svg></span>
+      <h2>Quiz</h2>
+      <button class="panel-close" id="quiz-close" aria-label="Close">✕</button>
+    </div>
+    <div id="quiz-content" style="flex:1;overflow-y:auto;padding:24px"></div>
+    <div id="quiz-nav" style="display:flex;gap:10px;padding:16px 24px;border-top:1px solid var(--border);flex-shrink:0">
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+     FORMULA REFERENCE PANEL (slides in from left)
+═══════════════════════════════════════════════════════ -->
+  <div id="formula-panel" role="dialog" aria-label="Formula Reference">
+    <div class="panel-header">
+      <span style="font-size:1.3rem">∑</span>
+      <h2>Formula Reference</h2>
+      <button class="panel-close" id="formula-close" aria-label="Close">✕</button>
+    </div>
+    <div id="formula-list" style="flex:1;overflow-y:auto;padding:12px"></div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+     DASHBOARD OVERLAY
+═══════════════════════════════════════════════════════ -->
+  <div id="dashboard-overlay" class="hidden" role="dialog" aria-label="Dashboard">
+    <div class="dashboard-panel">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+        <h2><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-icon"
+            style="flex-shrink:0">
+            <line x1="12" y1="20" x2="12" y2="10" />
+            <line x1="18" y1="20" x2="18" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="16" />
+          </svg> Learning Dashboard</h2>
+        <button class="btn-icon" id="dashboard-close">✕</button>
+      </div>
+      <div class="stats-grid" id="db-stats"></div>
+      <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-2)">CHAPTER PROGRESS</h3>
+      <div class="chapter-progress-list" id="db-chapter-list"></div>
+      <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap">
+        <button class="btn-primary"
+          onclick="Flashcards.open('all');document.getElementById('dashboard-overlay').classList.add('hidden')"><svg
+            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-icon"
+            style="flex-shrink:0">
+            <path
+              d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+            <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+            <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
+          </svg> Study Flashcards</button>
+        <button class="btn-secondary"
+          onclick="document.getElementById('dashboard-overlay').classList.add('hidden')">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+     TOAST
+═══════════════════════════════════════════════════════ -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+     DATA (offline — no fetch needed)
+═══════════════════════════════════════════════════════ -->
+  <script src="data/chapters.js"></script>
+  <script src="data/flashcards.js"></script>
+  <script src="data/quizzes.js"></script>
+  <script src="data/formulas.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════
+     LIBRARIES (Plotly, KaTeX auto-render already above)
+═══════════════════════════════════════════════════════ -->
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════
+     APP MODULES (order matters)
+═══════════════════════════════════════════════════════ -->
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/math.js"></script>
+  <script src="assets/js/graphs.js"></script>
+  <script src="assets/js/progress.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/flashcards.js"></script>
+  <script src="assets/js/quizzes.js"></script>
+  <script src="assets/js/search.js"></script>
+  <script src="assets/js/icons.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════
+     SIDEBAR TAB SWITCHING
+═══════════════════════════════════════════════════════ -->
+  <script>
+    document.querySelectorAll('.sidebar-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.sidebar-pane').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+
+</html>

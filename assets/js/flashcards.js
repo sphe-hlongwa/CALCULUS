@@ -9,17 +9,27 @@ const Flashcards = (() => {
   let deck   = [];
   let curIdx = 0;
   let filterCh = 'all';
+  let returnFocus = null;
 
   function open(chapterNum) {
+    returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     filterCh = chapterNum || 'all';
     rebuildDeck();
     curIdx = 0;
     panel?.classList.add('open');
+    if (panel) {
+      panel.tabIndex = -1;
+      panel.focus();
+    }
     renderCard();
     renderFilters();
   }
 
-  function close() { panel?.classList.remove('open'); }
+  function close() {
+    panel?.classList.remove('open');
+    returnFocus?.focus();
+    returnFocus = null;
+  }
 
   function rebuildDeck() {
     if (typeof flashcardsData === 'undefined') { deck = []; return; }

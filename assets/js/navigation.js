@@ -23,17 +23,21 @@ const Navigation = (() => {
       });
 
       // Event delegation for Nav Rail
-      railEl.addEventListener('click', e => {
-        const btn = e.target.closest('.icon-nav-btn');
-        if (btn && btn.dataset.id) {
-          loadChapter(btn.dataset.id);
-        }
-      });
+      if (!railEl.dataset.navigationBound) {
+        railEl.addEventListener('click', e => {
+          const btn = e.target.closest('.icon-nav-btn');
+          if (btn && btn.dataset.id) {
+            loadChapter(btn.dataset.id);
+          }
+        });
+        railEl.dataset.navigationBound = 'true';
+      }
     }
 
     // 2. Setup Toggle Collapse
     const toggleBtn = document.getElementById('sidebar-collapse-toggle');
-    if (toggleBtn) {
+    if (toggleBtn && !toggleBtn.dataset.navigationBound) {
+      toggleBtn.dataset.navigationBound = 'true';
       toggleBtn.addEventListener('click', () => {
         isCollapsed = !isCollapsed;
         document.getElementById('sidebar-detail')?.classList.toggle('collapsed', isCollapsed);
@@ -44,7 +48,8 @@ const Navigation = (() => {
     // 2b. Rail logo also re-expands the panel once collapsed (the chevron
     // itself is inside the collapsed panel and becomes unreachable at width 0)
     const expandBtn = document.getElementById('sidebar-expand-toggle');
-    if (expandBtn) {
+    if (expandBtn && !expandBtn.dataset.navigationBound) {
+      expandBtn.dataset.navigationBound = 'true';
       expandBtn.addEventListener('click', () => {
         if (!isCollapsed) return;
         isCollapsed = false;
@@ -56,7 +61,8 @@ const Navigation = (() => {
 
     // 3. Search Filter in Detail Sidebar
     const searchInput = document.getElementById('sidebar-search-input');
-    if (searchInput) {
+    if (searchInput && !searchInput.dataset.navigationBound) {
+      searchInput.dataset.navigationBound = 'true';
       searchInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
         document.querySelectorAll('#sidebar-detail-content .menu-item').forEach(item => {
@@ -106,12 +112,15 @@ const Navigation = (() => {
       detailContent.appendChild(menuSection);
 
       // Event delegation for detail section
-      detailContent.addEventListener('click', e => {
-        const btn = e.target.closest('.menu-item');
-        if (btn) {
-          loadChapter(btn.dataset.cid, btn.dataset.sid);
-        }
-      });
+      if (!detailContent.dataset.navigationBound) {
+        detailContent.addEventListener('click', e => {
+          const btn = e.target.closest('.menu-item');
+          if (btn) {
+            loadChapter(btn.dataset.cid, btn.dataset.sid);
+          }
+        });
+        detailContent.dataset.navigationBound = 'true';
+      }
     }
 
     // Update rail active state

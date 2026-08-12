@@ -9,17 +9,25 @@ const Quizzes = (() => {
   let activeQuiz = null;
   let idx = 0, score = 0, answered = false;
   let userAnswers = {};
+  let returnFocus = null;
 
   function open(quizId) {
     if (!panel || typeof quizzesData === 'undefined') return;
+    returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     activeQuiz = quizzesData.find(q => q.id === quizId);
     if (!activeQuiz) return;
     idx = 0; score = 0; answered = false; userAnswers = {};
     panel.classList.add('open');
+    panel.tabIndex = -1;
+    panel.focus();
     renderStart();
   }
 
-  function close() { panel?.classList.remove('open'); }
+  function close() {
+    panel?.classList.remove('open');
+    returnFocus?.focus();
+    returnFocus = null;
+  }
 
   function renderStart() {
     if (!content) return;
@@ -32,7 +40,9 @@ const Quizzes = (() => {
         <button class="btn-primary" id="start-quiz">Start Quiz →</button>
       </div>`;
     if (navRow) navRow.innerHTML = '';
-    document.getElementById('start-quiz')?.addEventListener('click', () => renderQuestion());
+    const startButton = document.getElementById('start-quiz');
+    startButton?.addEventListener('click', () => renderQuestion());
+    startButton?.focus();
   }
 
   function renderQuestion() {
@@ -43,10 +53,10 @@ const Quizzes = (() => {
     const pct = (idx / activeQuiz.questions.length) * 100;
 
     const optionsHTML = (q.type === 'tf' ? ['True', 'False'] : (q.options || [])).map((opt, i) => `
-      <div class="quiz-option" data-oi="${i}" tabindex="0">
+      <button type="button" class="quiz-option" data-oi="${i}">
         <div class="opt-letter">${String.fromCharCode(65 + i)}</div>
         <span>${opt}</span>
-      </div>`).join('');
+      </button>`).join('');
 
     content.innerHTML = `
       <div class="quiz-q-num">Question ${idx + 1} of ${activeQuiz.questions.length}</div>

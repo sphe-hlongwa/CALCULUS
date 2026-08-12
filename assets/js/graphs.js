@@ -17,6 +17,21 @@ const Graphs = (() => {
 
   const isMobile = () => window.innerWidth <= 640;
 
+  /** Convert a LaTeX expression to a human-readable plain-text string for
+   *  use inside Plotly trace names (which don't support KaTeX rendering). */
+  function latexToPlain(tex) {
+    return tex
+      .replace(/\\tfrac\{([^}]+)\}\{([^}]+)\}/g, '$1/$2')
+      .replace(/\\dfrac\{([^}]+)\}\{([^}]+)\}/g, '$1/$2')
+      .replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g,  '$1/$2')
+      .replace(/\\approx/g, '≈')
+      .replace(/\\pi/g,    'π')
+      .replace(/\\infty/g, '∞')
+      .replace(/\\sqrt\{([^}]+)\}/g, '√($1)')
+      .replace(/\\/g, '')    // strip any remaining backslashes
+      .replace(/[{}]/g, ''); // strip braces
+  }
+
   const layout = (extra = {}) => {
     const t = getTheme();
     const mobile = isMobile();
@@ -223,7 +238,7 @@ const Graphs = (() => {
           name: mobile ? `Approx ≈ ${area.toFixed(3)}` : `${methodLabel(type)}: Area ≈ ${area.toFixed(4)} (n=${n})` },
         { x: [null], y: [null], mode: 'markers',
           marker: { color: '#ef4444', size: 10, symbol: 'line-ew' },
-          name: mobile ? `Exact ≈ ${cfg.exactArea.toFixed(3)}` : `Exact area = ${cfg.exactLatex.replace(/\\/g,'')}` },
+          name: mobile ? `Exact ≈ ${cfg.exactArea.toFixed(3)}` : `Exact area = ${latexToPlain(cfg.exactLatex)}` },
       ], {
         ...layout(),
         title: { text: `${cfg.label} — ${methodLabel(type)} (n = ${n})`,
@@ -294,6 +309,23 @@ const Graphs = (() => {
         desc: 'On $[-1,2]$, the line stays above the cubic: ' +
               '$\\int_{-1}^{2}\\big[(x+2)-x^3\\big]\\,dx = \\tfrac{9}{4}$.',
       },
+      expVsLine: {
+        top: x => Math.exp(x), topLabel: 'f(x) = eˣ',
+        bottom: x => x + 1, bottomLabel: 'g(x) = x + 1',
+        a: -1, b: 2, pad: 0.3,
+        exactArea: Math.exp(2) - Math.exp(-1) - 1.5, exactLatex: 'e^2 - e^{-1} - \\tfrac{3}{2}',
+        desc: 'On $[-1,2]$, $e^x \\geq x+1$ (tangent at $x=0$): ' +
+              '$\\int_{-1}^{2}(e^x - (x+1))\\,dx = e^2 - e^{-1} - \\tfrac{3}{2}$.',
+      },
+      sinSq: {
+        top: x => Math.sin(x), topLabel: 'f(x) = sin x',
+        bottom: x => (x / Math.PI) * (x / Math.PI - 1), bottomLabel: 'g(x) = (x/π)(x/π−1)',
+        a: 0, b: Math.PI, pad: 0.3,
+        exactArea: 2 + Math.PI * Math.PI / 6, exactLatex: '2 + \\tfrac{\\pi^2}{6}',
+        desc: 'On $[0,\\pi]$, $\\sin x$ dominates a downward parabola scaled to the interval: ' +
+              '$\\int_0^{\\pi}\\!\\left[\\sin x - \\tfrac{x}{\\pi}\\!\\left(\\tfrac{x}{\\pi}-1\\right)\\right]dx \\approx ' +
+              (2 + Math.PI * Math.PI / 6).toFixed(4) + '$.',
+      },
     };
 
     function draw() {
@@ -313,7 +345,7 @@ const Graphs = (() => {
         { x: xs, y: ysTop, mode: 'lines', name: cfg.topLabel, line: { color: '#3b82f6', width: 2.5 } },
         { x: xs, y: ysBottom, mode: 'lines', name: cfg.bottomLabel, line: { color: '#8b5cf6', width: 2.5 } },
       ], { ...layout(), height: 300,
-        title: { text: `Area = ${cfg.exactLatex.replace(/\\tfrac\{(\d+)\}\{(\d+)\}/, '$1/$2').replace(/\\sqrt\{2\}/,'√2')} ≈ ${cfg.exactArea.toFixed(4)}`,
+        title: { text: `Area = ${latexToPlain(cfg.exactLatex)} ≈ ${cfg.exactArea.toFixed(4)}`,
                  font: { size: 12, color: getTheme().text } } }, config);
 
       if (descEl) {
@@ -481,47 +513,111 @@ const Graphs = (() => {
     pairEl?.addEventListener('change', draw);
   }
 
-  // ── 3c. Volumes by Slicing (Square Cross-Sections) ─────────────────────
+  // ── 3c. Volumes by Slicing (Interactive Cross-Sections) ─────────────────
   function slicingMethod(containerId) {
     const el = document.getElementById(containerId);
     if (!el || typeof Plotly === 'undefined') return;
     _trackAndResize(el);
+    const typeEl = document.getElementById(containerId + '-type');
 
-    // Solid base: circle x^2 + y^2 <= 4. Cross sections perpendicular to x-axis are squares.
-    const N = 20;
-    const meshTraces = [];
-    const xs = [];
-    for (let i = 0; i <= N; i++) {
-      const x = -2 + (4 * i) / N;
-      const yMax = Math.sqrt(Math.max(0, 4 - x * x));
-      xs.push(x);
+    // Solid base: circle x² + y² ≤ 4 (radius 2), cross-sections perpendicular to x-axis.
+    const SLICE_TYPES = {
+      square: {
+        label: 'Square',
+        // side = 2*yMax → A(x) = (2yMax)² = 4(4-x²)
+        volume: 128 / 3,
+        volLatex: '\\tfrac{128}{3}',
+        trace: (x, yMax) => ({
+          x: [x, x, x, x, x],
+          y: [-yMax, yMax, yMax, -yMax, -yMax],
+          z: [0,    0,    2*yMax, 2*yMax, 0],
+          line: { color: '#10b981', width: 3 },
+        }),
+      },
+      semicircle: {
+        label: 'Semicircle',
+        // diameter = 2*yMax → A(x) = π*(yMax)²/2
+        volume: (2 / 3) * Math.PI * 8,
+        volLatex: '\\tfrac{16\\pi}{3}',
+        trace: (x, yMax) => {
+          const pts = 16;
+          const yPts = [], zPts = [];
+          for (let k = 0; k <= pts; k++) {
+            const angle = (k / pts) * Math.PI;
+            yPts.push(yMax * Math.cos(angle));
+            zPts.push(yMax * Math.sin(angle));
+          }
+          yPts.push(yPts[0]); zPts.push(0);
+          return { x: Array(yPts.length).fill(x), y: yPts, z: zPts, line: { color: '#8b5cf6', width: 3 } };
+        },
+      },
+      triangle: {
+        label: 'Equilateral Triangle',
+        // base = 2*yMax → A(x) = √3 * yMax²
+        volume: (8 * Math.sqrt(3)) / 3 * 4,
+        volLatex: '\\tfrac{32\\sqrt{3}}{3}',
+        trace: (x, yMax) => ({
+          x: [x,    x,   x,    x],
+          y: [-yMax, yMax, 0, -yMax],
+          z: [0,     0,    yMax * Math.sqrt(3), 0],
+          line: { color: '#f59e0b', width: 3 },
+        }),
+      },
+    };
 
-      // Square slice at position x: width = 2*yMax, height = 2*yMax
-      meshTraces.push({
-        type: 'scatter3d',
-        x: [x, x, x, x, x],
-        y: [-yMax, yMax, yMax, -yMax, -yMax],
-        z: [0, 0, 2 * yMax, 2 * yMax, 0],
-        mode: 'lines',
-        line: { color: '#10b981', width: 3 },
-        showlegend: i === 0,
-        name: 'Square Slices A(x)'
+    function draw() {
+      const key = typeEl?.value || 'square';
+      const cfg = SLICE_TYPES[key];
+      const N = 22;
+      const traces = [];
+
+      for (let i = 0; i <= N; i++) {
+        const x = -2 + (4 * i) / N;
+        const yMax = Math.sqrt(Math.max(0, 4 - x * x));
+        if (yMax < 1e-9) continue;
+        const t = cfg.trace(x, yMax);
+        traces.push({
+          type: 'scatter3d', mode: 'lines',
+          x: t.x, y: t.y, z: t.z,
+          line: t.line,
+          showlegend: i === 0,
+          name: `${cfg.label} A(x)`,
+        });
+      }
+
+      // Draw the base circle outline
+      const circPts = 60;
+      const circY = [], circX = [];
+      for (let k = 0; k <= circPts; k++) {
+        const theta = (k / circPts) * 2 * Math.PI;
+        circX.push(2 * Math.cos(theta));
+        circY.push(2 * Math.sin(theta));
+      }
+      traces.push({
+        type: 'scatter3d', mode: 'lines',
+        x: circX, y: circY, z: Array(circPts + 1).fill(0),
+        line: { color: '#64748b', width: 2, dash: 'dot' },
+        name: 'Base circle',
       });
+
+      Plotly.react(el, traces, {
+        ...layout(),
+        height: 340,
+        scene: {
+          xaxis: { title: 'x', gridcolor: getTheme().grid },
+          yaxis: { title: 'y (base)', gridcolor: getTheme().grid },
+          zaxis: { title: 'z (height)', gridcolor: getTheme().grid },
+          camera: { eye: { x: 1.5, y: 1.5, z: 1.2 } },
+          bgcolor: getTheme().bg,
+        },
+        title: { text: `Slicing — ${cfg.label} Cross-Sections · V = ${latexToPlain(cfg.volLatex)} ≈ ${cfg.volume.toFixed(3)}`,
+                 font: { size: 12, color: getTheme().text } },
+        margin: { t: 40, b: 10, l: 10, r: 10 },
+      }, config);
     }
 
-    Plotly.newPlot(el, meshTraces, {
-      ...layout(),
-      height: 340,
-      scene: {
-        xaxis: { title: 'x', gridcolor: getTheme().grid },
-        yaxis: { title: 'y (base)', gridcolor: getTheme().grid },
-        zaxis: { title: 'z (height)', gridcolor: getTheme().grid },
-        camera: { eye: { x: 1.5, y: 1.5, z: 1.2 } },
-        bgcolor: getTheme().bg,
-      },
-      title: { text: 'Volumes by Slicing: Square Cross-Sections A(x) = (2√(4−x²))²', font: { size: 12, color: getTheme().text } },
-      margin: { t: 40, b: 10, l: 10, r: 10 },
-    }, config);
+    draw();
+    typeEl?.addEventListener('change', draw);
   }
 
   // ── 4. Hyperbolic Functions ───────────────────────────────────────────

@@ -12,7 +12,13 @@ const Search = (() => {
     if (typeof chaptersData !== 'undefined') {
       chaptersData.forEach(ch => {
         idx.push({ type: 'chapter', id: ch.id, title: `Ch ${ch.number}: ${ch.shortTitle}`, body: ch.sections.map(s => s.title).join(' ') });
-        ch.sections.forEach(s => idx.push({ type: 'section', id: ch.id, title: s.title, body: ch.shortTitle }));
+        ch.sections.forEach(s => idx.push({
+          type: 'section',
+          id: ch.id,
+          sectionId: s.id,
+          title: s.title,
+          body: ch.shortTitle,
+        }));
       });
     }
 
@@ -82,7 +88,7 @@ const Search = (() => {
     };
 
     overlay.innerHTML = hits.map(h => `
-      <div class="search-item" data-type="${h.type}" data-id="${h.id}" data-chapter-id="${h.chapterId || ''}" role="button" tabindex="0">
+      <div class="search-item" data-type="${h.type}" data-id="${h.id}" data-section-id="${h.sectionId || ''}" data-chapter-id="${h.chapterId || ''}" role="button" tabindex="0">
         <span class="search-icon">${typeIcons[h.type] || Icons.target}</span>
         <div>
           <div class="search-item-title">${h.title}
@@ -95,15 +101,39 @@ const Search = (() => {
 
     overlay.querySelectorAll('.search-item').forEach(item => {
       const activate = () => {
-        const { type, id, chapterId } = item.dataset;
+        const { type, id, sectionId, chapterId } = item.dataset;
         overlay.classList.add('hidden');
         document.getElementById('global-search').value = '';
 
-        if (type === 'chapter' || type === 'section') {
+        if (type === 'chapter') {
           Navigation.loadChapter(id);
+          setTimeout(() => {
+            const h1 = document.querySelector('.chapter-content h1');
+            if (h1) {
+              h1.tabIndex = -1;
+              h1.focus();
+            }
+          }, 100);
+        } else if (type === 'section') {
+          Navigation.loadChapter(id, sectionId);
+          setTimeout(() => {
+            const sec = document.getElementById(sectionId);
+            if (sec) {
+              sec.tabIndex = -1;
+              sec.focus();
+            }
+          }, 100);
         } else if (type === 'formula') {
-          document.getElementById('formula-panel')?.classList.add('open');
+          const panel = document.getElementById('formula-panel');
+          if (panel) {
+            panel.classList.add('open');
+            panel.tabIndex = -1;
+            panel.focus();
+          }
           if (typeof renderFormulaPanel === 'function') renderFormulaPanel();
+          setTimeout(() => {
+            document.querySelector(`[data-formula-id="${id}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 50);
         } else if (type === 'flashcard') {
           // Navigate to the matching chapter's flashcard deck
           const chNum = chapterId ? parseInt(chapterId.replace('chapter-', '')) : null;

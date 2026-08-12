@@ -374,6 +374,8 @@ const CHAPTER_CONTENT = {
             <option value="twoParabolas">f(x) = 2−x², g(x) = x² on [−1,1]</option>
             <option value="sinCos">f(x) = cos x, g(x) = sin x on [−π/4,π/4]</option>
             <option value="cubicLine">f(x) = x+2, g(x) = x³ on [−1,2]</option>
+            <option value="expVsLine">f(x) = eˣ, g(x) = x+1 on [−1,2]</option>
+            <option value="sinSq">f(x) = sin x vs scaled parabola on [0,π]</option>
           </select>
         </div>
       </div>
@@ -441,9 +443,19 @@ const CHAPTER_CONTENT = {
     </div>
 
     <div class="viz-card fade-up">
-      <h3>${Icons.box} 3D: Volumes by Slicing (Square Cross-Sections)</h3>
-      <p>Solid base $x^2 + y^2 \\leq 4$. Square cross-sections perpendicular to the $x$-axis with side length $2\\sqrt{4-x^2}$. Volume $= \\int_{-2}^2 (2\\sqrt{4-x^2})^2\\,dx = \\frac{128}{3}$.</p>
+      <h3>${Icons.box} 3D: Volumes by Slicing (Interactive Cross-Sections)</h3>
+      <p>Solid base: circle $x^2+y^2 \\leq 4$. Pick a cross-section shape perpendicular to the $x$-axis and see how the volume formula changes.</p>
       <div class="viz-plot" id="slicing-plot" style="height:340px"></div>
+      <div class="viz-controls">
+        <div class="viz-control-group">
+          <label>Cross-section:</label>
+          <select id="slicing-plot-type">
+            <option value="square">Square — A(x) = 4(4−x²), V = 128/3</option>
+            <option value="semicircle">Semicircle — A(x) = π(4−x²)/2, V = 16π/3</option>
+            <option value="triangle">Equilateral Triangle — A(x) = √3(4−x²), V = 32√3/3</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <div class="content-card card-exam fade-up">
@@ -1457,7 +1469,7 @@ const ContentRenderer = {
 
     // Quiz button
     const quizBtn = quizForChapter
-      ? `<button class="btn-hero btn-hero-secondary" onclick="Quizzes.open('${quizForChapter.id}')"><span class="btn-icon-inner">${Icons.puzzle}</span> Take Quiz</button>` : '';
+      ? `<button type="button" class="btn-hero btn-hero-secondary" data-action="open-quiz" data-quiz-id="${quizForChapter.id}"><span class="btn-icon-inner">${Icons.puzzle}</span> Take Quiz</button>` : '';
 
     area.innerHTML = `
       <div class="content-page fade-in">
@@ -1466,10 +1478,10 @@ const ContentRenderer = {
           <h1>${chapter.shortTitle}</h1>
           <div class="chapter-sections-list">${chapter.sections.length ? chapter.sections.map(s => `<span class="chapter-section-pill">${s.title}</span>`).join('') : '<span class="chapter-section-pill">Core calculus concepts for MATH1036</span>'}</div>
           <div class="chapter-hero-actions">
-            <button class="btn-hero btn-hero-primary" onclick="Flashcards.open(${num})"><span class="btn-icon-inner">${Icons.layers}</span> Flashcards</button>
+            <button type="button" class="btn-hero btn-hero-primary" data-action="open-flashcards"><span class="btn-icon-inner">${Icons.layers}</span> Flashcards</button>
             ${quizBtn}
-            <button class="btn-hero btn-hero-primary" onclick="ContentRenderer.markDone(${num})" id="mark-done-btn">
-              ${AppStorage.isComplete(chapter.id) ? `<span class="btn-icon-inner">${Icons.check}</span> Completed` : `<span class="btn-icon-inner">${Icons.starOff}</span> Mark Complete`}
+            <button type="button" class="btn-hero btn-hero-primary" data-action="mark-complete" id="mark-done-btn">
+              ${AppStorage.isComplete(chapter.id) ? `<span class="btn-icon-inner">${Icons.refresh}</span> Mark Incomplete` : `<span class="btn-icon-inner">${Icons.starOff}</span> Mark Complete`}
             </button>
           </div>
         </div>
@@ -1481,16 +1493,15 @@ const ContentRenderer = {
         <div class="content-card" style="border-left-color:var(--teal)" id="notes-card">
           <div class="card-badge" style="background:rgba(20,184,166,.1);color:var(--teal)">${Icons.notes} My Notes</div>
           <textarea id="chapter-notes" rows="4" placeholder="Write your notes for this chapter here…"
-            oninput="ContentRenderer.saveNote('${chapter.id}')"
-            style="width:100%;margin-top:10px;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-family:inherit;font-size:.88rem;background:var(--surface-2);color:var(--text);resize:vertical">${AppStorage.getNote(chapter.id)}</textarea>
+            style="width:100%;margin-top:10px;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-family:inherit;font-size:.88rem;background:var(--surface-2);color:var(--text);resize:vertical"></textarea>
           <div id="notes-status" style="font-size:.75rem;color:var(--text-3);margin-top:4px;text-align:right;min-height:18px;"></div>
         </div>
 
         <div class="chapter-actions">
-          <button class="btn-primary" onclick="Flashcards.open(${num})"><span class="btn-icon-inner">${Icons.layers}</span> Study Flashcards</button>
-          ${quizBtn ? `<button class="btn-primary" style="background:var(--teal)" onclick="Quizzes.open('${quizForChapter.id}')"><span class="btn-icon-inner">${Icons.puzzle}</span> Quiz Yourself</button>` : ''}
-          <button class="btn-secondary" data-mark-done-ch="${num}" onclick="ContentRenderer.markDone(${num})">
-            ${AppStorage.isComplete(chapter.id) ? `<span class="btn-icon-inner">${Icons.check}</span> Completed` : `<span class="btn-icon-inner">${Icons.starOff}</span> Mark Complete`}
+          <button type="button" class="btn-primary" data-action="open-flashcards"><span class="btn-icon-inner">${Icons.layers}</span> Study Flashcards</button>
+          ${quizBtn ? `<button type="button" class="btn-primary" style="background:var(--teal)" data-action="open-quiz" data-quiz-id="${quizForChapter.id}"><span class="btn-icon-inner">${Icons.puzzle}</span> Quiz Yourself</button>` : ''}
+          <button type="button" class="btn-secondary" data-action="mark-complete" data-mark-done-ch="${num}">
+            ${AppStorage.isComplete(chapter.id) ? `<span class="btn-icon-inner">${Icons.refresh}</span> Mark Incomplete` : `<span class="btn-icon-inner">${Icons.starOff}</span> Mark Complete`}
           </button>
         </div>
 
@@ -1501,17 +1512,19 @@ const ContentRenderer = {
           const next = allChs[idx + 1];
           if (!prev && !next) return '';
           return `<div class="chapter-nav-bar">
-            ${prev ? `<button class="chapter-nav-btn chapter-nav-prev" onclick="Navigation.loadChapter('${prev.id}')">
+            ${prev ? `<button type="button" class="chapter-nav-btn chapter-nav-prev" data-action="load-chapter" data-chapter-id="${prev.id}">
               <span class="chapter-nav-arrow">←</span>
               <span class="chapter-nav-label"><span class="chapter-nav-hint">Previous</span><span class="chapter-nav-title">Ch ${prev.number}: ${prev.shortTitle}</span></span>
             </button>` : '<span></span>'}
-            ${next ? `<button class="chapter-nav-btn chapter-nav-next" onclick="Navigation.loadChapter('${next.id}')">
+            ${next ? `<button type="button" class="chapter-nav-btn chapter-nav-next" data-action="load-chapter" data-chapter-id="${next.id}">
               <span class="chapter-nav-label"><span class="chapter-nav-hint">Next</span><span class="chapter-nav-title">Ch ${next.number}: ${next.shortTitle}</span></span>
               <span class="chapter-nav-arrow">→</span>
             </button>` : '<span></span>'}
           </div>`;
         })()}
       </div>`;
+
+    this._bindChapterActions(area, chapter);
 
     // Render math after DOM update
     setTimeout(() => {
@@ -1523,25 +1536,50 @@ const ContentRenderer = {
     }, 50);
   },
 
+  _bindChapterActions(container, chapter) {
+    const chapterNum = chapter.number;
+    container.querySelectorAll('[data-action="open-flashcards"]').forEach(btn => {
+      btn.addEventListener('click', () => Flashcards.open(chapterNum));
+    });
+    container.querySelectorAll('[data-action="open-quiz"]').forEach(btn => {
+      btn.addEventListener('click', () => Quizzes.open(btn.dataset.quizId));
+    });
+    container.querySelectorAll('[data-action="mark-complete"]').forEach(btn => {
+      btn.addEventListener('click', () => this.markDone(chapterNum));
+    });
+    container.querySelectorAll('[data-action="load-chapter"]').forEach(btn => {
+      btn.addEventListener('click', () => Navigation.loadChapter(btn.dataset.chapterId));
+    });
+    const notes = container.querySelector('#chapter-notes');
+    if (notes) {
+      notes.value = AppStorage.getNote(chapter.id);
+      notes.addEventListener('input', () => this.saveNote(chapter.id));
+    }
+  },
+
   markDone(chapterNum) {
     const ch = chaptersData.find(c => c.number === chapterNum);
     if (!ch) return;
-    AppStorage.markComplete(ch.id);
+    const isComplete = AppStorage.isComplete(ch.id);
+    if (isComplete) AppStorage.markIncomplete(ch.id);
+    else AppStorage.markComplete(ch.id);
     Navigation.refresh();
     Progress.update();
-    toast(`<span class="btn-icon-inner">${Icons.check}</span> Chapter marked as complete!`);
-    ContentRenderer._syncMarkDoneButtons(chapterNum);
+    toast(isComplete ? 'Chapter marked as incomplete.' : 'Chapter marked as complete!');
+    ContentRenderer._syncMarkDoneButtons(chapterNum, !isComplete);
   },
 
   // ─── shared helper: update ALL mark-done buttons for a chapter ──────────
-  _syncMarkDoneButtons(chapterNum) {
-    const completedHTML = `<span class="btn-icon-inner">${Icons.check}</span> Completed`;
+  _syncMarkDoneButtons(chapterNum, isComplete) {
+    const buttonHTML = isComplete
+      ? `<span class="btn-icon-inner">${Icons.refresh}</span> Mark Incomplete`
+      : `<span class="btn-icon-inner">${Icons.starOff}</span> Mark Complete`;
     // Hero button
     const heroBtn = document.getElementById('mark-done-btn');
-    if (heroBtn) { heroBtn.innerHTML = completedHTML; }
+    if (heroBtn) { heroBtn.innerHTML = buttonHTML; }
     // Bottom bar button(s) — identified by data attribute
     document.querySelectorAll(`[data-mark-done-ch="${chapterNum}"]`).forEach(btn => {
-      btn.innerHTML = completedHTML;
+      btn.innerHTML = buttonHTML;
     });
   },
 
@@ -1632,49 +1670,56 @@ function renderWelcome() {
       <p class="welcome-sub">Your interactive study companion for the second semester. Track your progress, practice with flashcards, and master each concept step by step.</p>
 
       <div class="welcome-cards">
-        <div class="welcome-card" onclick="Flashcards.open('all')">
+        <button type="button" class="welcome-card" data-action="open-flashcards">
           <div class="wc-icon">${Icons.layers}</div>
           <div class="wc-title">Flashcards</div>
           <div class="wc-desc">${typeof flashcardsData !== 'undefined' ? flashcardsData.length : 0} cards across all chapters</div>
-        </div>
-        <div class="welcome-card" onclick="document.getElementById('dashboard-overlay').classList.remove('hidden')">
+        </button>
+        <button type="button" class="welcome-card" data-action="open-dashboard">
           <div class="wc-icon">${Icons.barChart}</div>
           <div class="wc-title">Dashboard</div>
           <div class="wc-desc">${done}/${total} chapters completed</div>
-        </div>
-        <div class="welcome-card" onclick="document.getElementById('formula-panel').classList.add('open')">
+        </button>
+        <button type="button" class="welcome-card" data-action="open-formulas">
           <div class="wc-icon">∑</div>
           <div class="wc-title">Formulas</div>
           <div class="wc-desc">${typeof formulasData !== 'undefined' ? formulasData.length : 0} key formulas</div>
-        </div>
+        </button>
       </div>
 
       <p style="font-size:.9rem;font-weight:600;color:var(--text-2);margin-bottom:12px">Jump to a chapter →</p>
       <div class="chapters-quick-start">
         ${chaptersData.map(ch => `
-          <div class="quick-chapter" onclick="Navigation.loadChapter('${ch.id}')">
+          <button type="button" class="quick-chapter" data-chapter-id="${ch.id}">
             <div class="quick-ch-num">${ch.number}</div>
             <div>
               <div class="quick-ch-name">${ch.shortTitle}</div>
               <div class="quick-ch-sections">${ch.sections.length} sections</div>
             </div>
             ${AppStorage.isComplete(ch.id) ? `<span class="quick-ch-status"><span class="btn-icon-inner">${Icons.check}</span> Done</span>` : ''}
-          </div>`).join('')}
+          </button>`).join('')}
       </div>
     </div>`;
+
+  area.querySelector('[data-action="open-flashcards"]')?.addEventListener('click', (e) => { e.stopPropagation(); Flashcards.open('all'); });
+  area.querySelector('[data-action="open-dashboard"]')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    Progress.update();
+    document.getElementById('dashboard-overlay')?.classList.remove('hidden');
+    renderDashboard();
+  });
+  area.querySelector('[data-action="open-formulas"]')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.getElementById('formula-panel')?.classList.add('open');
+    renderFormulaPanel();
+  });
+  area.querySelectorAll('.quick-chapter').forEach(btn => {
+    btn.addEventListener('click', () => Navigation.loadChapter(btn.dataset.chapterId));
+  });
 }
 
 // ─── Main init ────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  // Theme
-  const savedTheme = AppStorage.getTheme();
-  if (savedTheme === 'dark') document.body.classList.add('dark');
-
-  document.getElementById('theme-toggle')?.addEventListener('click', () => {
-    const isDark = document.body.classList.toggle('dark');
-    AppStorage.setTheme(isDark ? 'dark' : 'light');
-  });
-
   // Streak
   AppStorage.updateStreak();
 
@@ -1703,6 +1748,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('dashboard-close')?.addEventListener('click', () => {
     document.getElementById('dashboard-overlay')?.classList.add('hidden');
   });
+  document.getElementById('dashboard-panel-close')?.addEventListener('click', () => {
+    document.getElementById('dashboard-overlay')?.classList.add('hidden');
+  });
+  document.getElementById('dashboard-study-flashcards')?.addEventListener('click', () => {
+    document.getElementById('dashboard-overlay')?.classList.add('hidden');
+    Flashcards.open('all');
+  });
   document.getElementById('dashboard-overlay')?.addEventListener('click', e => {
     if (e.target === document.getElementById('dashboard-overlay'))
       document.getElementById('dashboard-overlay').classList.add('hidden');
@@ -1716,6 +1768,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('formula-close')?.addEventListener('click', () => {
     document.getElementById('formula-panel')?.classList.remove('open');
   });
+  document.getElementById('fc-btn')?.addEventListener('click', () => Flashcards.open('all'));
 
   // Sidebar toggle — collapses the column on desktop, opens an overlay drawer on mobile
   const MOBILE_QUERY = window.matchMedia('(max-width: 900px)');
@@ -1729,6 +1782,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Tapping outside the drawer (on the dimmed backdrop) closes it on mobile
   document.getElementById('sidebar-backdrop')?.addEventListener('click', () => {
+    document.querySelector('.sidebar-wrapper')?.classList.remove('mobile-open');
+  });
+
+  // Allow keyboard users to dismiss any open overlay or drawer.
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    Flashcards.close();
+    Quizzes.close();
+    document.getElementById('formula-panel')?.classList.remove('open');
+    document.getElementById('dashboard-overlay')?.classList.add('hidden');
     document.querySelector('.sidebar-wrapper')?.classList.remove('mobile-open');
   });
 
@@ -1776,7 +1839,7 @@ function renderFormulaPanel() {
   const list = document.getElementById('formula-list');
   if (!list || typeof formulasData === 'undefined') return;
   list.innerHTML = formulasData.map(f => `
-    <div class="formula-mini">
+    <div class="formula-mini" data-formula-id="${f.id}">
       <div class="fm-name">${f.chapter ? 'Ch'+f.chapter+' · ' : ''}${f.category} — ${f.name}</div>
       <div class="fm-latex">$$${f.latex}$$</div>
       <div style="font-size:.75rem;color:var(--text-3);margin-top:4px">${f.use}</div>

@@ -4,7 +4,6 @@
 const AppStorage = {
   KEYS: {
     progress:    'calc_progress',
-    theme:       'calc_theme',
     bookmarks:   'calc_bookmarks',
     notes:       'calc_notes',
     quizScores:  'calc_quiz_scores',
@@ -24,10 +23,8 @@ const AppStorage = {
   getProgress()          { return this._get(this.KEYS.progress, {}); },
   setProgress(d)         { this._set(this.KEYS.progress, d); },
   markComplete(chapterId){ const d = this.getProgress(); d[chapterId] = true; this.setProgress(d); },
+  markIncomplete(chapterId) { const d = this.getProgress(); delete d[chapterId]; this.setProgress(d); },
   isComplete(chapterId)  { return !!this.getProgress()[chapterId]; },
-
-  getTheme()             { return this._get(this.KEYS.theme, 'theme-light'); },
-  setTheme(t)            { this._set(this.KEYS.theme, t); },
 
   getBookmarks()         { return this._get(this.KEYS.bookmarks, []); },
   toggleBookmark(id)     {

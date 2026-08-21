@@ -1476,7 +1476,6 @@ const ContentRenderer = {
         <div class="chapter-hero">
           <div class="chapter-number">Chapter ${num}</div>
           <h1>${chapter.shortTitle}</h1>
-          <div class="chapter-sections-list">${chapter.sections.length ? chapter.sections.map(s => `<span class="chapter-section-pill">${s.title}</span>`).join('') : '<span class="chapter-section-pill">Core calculus concepts for MATH1036</span>'}</div>
           <div class="chapter-hero-actions">
             <button type="button" class="btn-hero btn-hero-primary" data-action="open-flashcards"><span class="btn-icon-inner">${Icons.layers}</span> Flashcards</button>
             ${quizBtn}

@@ -578,8 +578,6 @@ body {
 
 .menu-item.active {
   background: var(--surface-2);
-  border-left: 3px solid var(--blue);
-  padding-left: 13px;
   color: var(--blue);
 }
 
@@ -991,7 +989,7 @@ body {
   border-radius: var(--radius);
   padding: 22px 26px;
   margin-bottom: 22px;
-  border-left: 4px solid;
+  border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: var(--shadow);
 }
@@ -1022,7 +1020,6 @@ body {
 }
 
 .card-theorem {
-  border-left-color: var(--blue);
 }
 
 .card-theorem .card-badge {
@@ -1031,7 +1028,6 @@ body {
 }
 
 .card-definition {
-  border-left-color: var(--teal);
 }
 
 .card-definition .card-badge {
@@ -1040,7 +1036,6 @@ body {
 }
 
 .card-example {
-  border-left-color: var(--green);
 }
 
 .card-example .card-badge {
@@ -1050,7 +1045,6 @@ body {
 
 /* ✅ Fixed: yellow bumped to amber-600 (#d97706) — WCAG AA pass (4.6:1 on light) */
 .card-tip {
-  border-left-color: var(--yellow);
 }
 
 .card-tip .card-badge {
@@ -1059,7 +1053,6 @@ body {
 }
 
 .card-warning {
-  border-left-color: var(--red);
 }
 
 .card-warning .card-badge {
@@ -1069,7 +1062,6 @@ body {
 
 /* ✅ exam uses --accent (violet) to break blue monopoly */
 .card-exam {
-  border-left-color: var(--accent);
 }
 
 .card-exam .card-badge {
@@ -1078,7 +1070,6 @@ body {
 }
 
 .card-mistake {
-  border-left-color: var(--red);
 }
 
 .card-mistake .card-badge {
@@ -1087,7 +1078,6 @@ body {
 }
 
 .card-proof {
-  border-left-color: var(--gray);
 }
 
 .card-proof .card-badge {
@@ -1096,7 +1086,6 @@ body {
 }
 
 .card-memory {
-  border-left-color: var(--accent);
 }
 
 .card-memory .card-badge {
@@ -1105,7 +1094,6 @@ body {
 }
 
 .card-worked {
-  border-left-color: var(--green);
 }
 
 .card-worked .card-badge {
@@ -1260,9 +1248,12 @@ body {
   font-size: 1.1rem;
   margin-bottom: 12px;
   min-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.formula-card .formula-latex .katex-display {
+  margin: 0;
 }
 
 .formula-card .formula-use {
@@ -1368,9 +1359,7 @@ h3.section-heading {
   font-weight: 600;
   margin: 28px 0 12px;
   padding-bottom: 6px;
-  padding-left: 12px;
   border-bottom: 1px dashed var(--border);
-  border-left: 3px solid var(--blue);
   color: var(--text-2);
 }
 

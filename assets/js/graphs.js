@@ -304,27 +304,27 @@ const Graphs = (() => {
       cubicLine: {
         top: x => x + 2, topLabel: 'f(x) = x + 2',
         bottom: x => x * x * x, bottomLabel: 'g(x) = x³',
-        a: -1, b: 2, pad: 0.4,
-        exactArea: 9 / 4, exactLatex: '\\tfrac{9}{4}',
-        desc: 'On $[-1,2]$, the line stays above the cubic: ' +
-              '$\\int_{-1}^{2}\\big[(x+2)-x^3\\big]\\,dx = \\tfrac{9}{4}$.',
+        a: -1, b: 1, pad: 0.4,
+        exactArea: 4, exactLatex: '4',
+        desc: 'On $[-1,1]$, the line stays above the cubic (they don\'t cross again until $x \\approx 1.52$): ' +
+              '$\\int_{-1}^{1}\\big[(x+2)-x^3\\big]\\,dx = 4$.',
       },
       expVsLine: {
         top: x => Math.exp(x), topLabel: 'f(x) = eˣ',
         bottom: x => x + 1, bottomLabel: 'g(x) = x + 1',
         a: -1, b: 2, pad: 0.3,
-        exactArea: Math.exp(2) - Math.exp(-1) - 1.5, exactLatex: 'e^2 - e^{-1} - \\tfrac{3}{2}',
+        exactArea: Math.exp(2) - Math.exp(-1) - 4.5, exactLatex: 'e^2 - e^{-1} - \\tfrac{9}{2}',
         desc: 'On $[-1,2]$, $e^x \\geq x+1$ (tangent at $x=0$): ' +
-              '$\\int_{-1}^{2}(e^x - (x+1))\\,dx = e^2 - e^{-1} - \\tfrac{3}{2}$.',
+              '$\\int_{-1}^{2}(e^x - (x+1))\\,dx = e^2 - e^{-1} - \\tfrac{9}{2}$.',
       },
       sinSq: {
         top: x => Math.sin(x), topLabel: 'f(x) = sin x',
         bottom: x => (x / Math.PI) * (x / Math.PI - 1), bottomLabel: 'g(x) = (x/π)(x/π−1)',
         a: 0, b: Math.PI, pad: 0.3,
-        exactArea: 2 + Math.PI * Math.PI / 6, exactLatex: '2 + \\tfrac{\\pi^2}{6}',
+        exactArea: 2 + Math.PI / 6, exactLatex: '2 + \\tfrac{\\pi}{6}',
         desc: 'On $[0,\\pi]$, $\\sin x$ dominates a downward parabola scaled to the interval: ' +
               '$\\int_0^{\\pi}\\!\\left[\\sin x - \\tfrac{x}{\\pi}\\!\\left(\\tfrac{x}{\\pi}-1\\right)\\right]dx \\approx ' +
-              (2 + Math.PI * Math.PI / 6).toFixed(4) + '$.',
+              (2 + Math.PI / 6).toFixed(4) + '$.',
       },
     };
 

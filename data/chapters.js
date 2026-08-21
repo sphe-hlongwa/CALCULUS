@@ -68,10 +68,6 @@ const chaptersData = [
       {
         "id": "ch8-sec4",
         "title": "8.4 Volumes by Slicing"
-      },
-      {
-        "id": "ch8-sec5",
-        "title": "8.5 The Definite Integral as a Function"
       }
     ]
   },
@@ -190,16 +186,8 @@ const chaptersData = [
         "title": "11.4 Power Series"
       },
       {
-        "id": "ch11-sec5",
-        "title": "11.5 Representations of Functions as Power Series"
-      },
-      {
         "id": "ch11-sec6",
         "title": "11.6 Taylor and Maclaurin Series"
-      },
-      {
-        "id": "ch11-sec7",
-        "title": "11.7 Binomial Series"
       }
     ]
   },

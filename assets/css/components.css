@@ -64,7 +64,7 @@
 ::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 
 /* Katex display override */
-.katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; min-width: 0; max-width: 100%; }
 .katex { font-size: 1em; }
 
 /* Mobile responsive */

@@ -3,6 +3,7 @@
  */
 const Navigation = (() => {
   let activeChapterId = null;
+  let contentChapterId = null; // tracks which chapter is actually rendered in #content-area
   let isCollapsed = false;
   let _observer = null;
 
@@ -133,8 +134,9 @@ const Navigation = (() => {
     const ch = (typeof chaptersData !== 'undefined') && chaptersData.find(c => c.id === id);
     if (!ch) return;
 
-    if (activeChapterId !== id) {
+    if (contentChapterId !== id) {
       activeChapterId = id;
+      contentChapterId = id;
       renderDetail(ch);
       ContentRenderer.render(ch);
       setTimeout(() => _attachSectionObserver(), 120);

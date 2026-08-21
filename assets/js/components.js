@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const dashboardOverlay = document.getElementById('dashboard-overlay');
-    const closeDashboardBtn = document.getElementById('close-dashboard');
+    const closeDashboardBtn = document.getElementById('dashboard-close');
 
     // Currently, we don't have a button to open the dashboard, let's add one if needed, or just provide the logic
     window.toggleDashboard = function() {

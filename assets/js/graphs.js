@@ -1,5 +1,5 @@
 /**
- * graphs.js — Interactive Plotly visualizations for all key Calculus concepts
+ * graphs.js - Interactive Plotly visualizations for all key Calculus concepts
  */
 const Graphs = (() => {
 
@@ -114,7 +114,7 @@ const Graphs = (() => {
         exactLatex: '2',
         // non-monotonic: maximum at π/2, so Lower ≠ Left and Upper ≠ Right in general
         desc: (method, exactArea) =>
-          `<strong>Non-monotonic</strong> on $[0,\\pi]$ — increases then decreases, peaking at $x = \\tfrac{\\pi}{2}$. ` +
+          `<strong>Non-monotonic</strong> on $[0,\\pi]$ - increases then decreases, peaking at $x = \\tfrac{\\pi}{2}$. ` +
           `Lower and Upper sums <em>differ</em> from Left and Right sums because the extrema are interior to subintervals. ` +
           `Exact area $= \\int_0^{\\pi} \\sin(x)\\,dx = 2$.`,
       },
@@ -241,7 +241,7 @@ const Graphs = (() => {
           name: mobile ? `Exact ≈ ${cfg.exactArea.toFixed(3)}` : `Exact area = ${latexToPlain(cfg.exactLatex)}` },
       ], {
         ...layout(),
-        title: { text: `${cfg.label} — ${methodLabel(type)} (n = ${n})`,
+        title: { text: `${cfg.label} - ${methodLabel(type)} (n = ${n})`,
                  font: { size: 13, color: getTheme().text } },
         height: 320,
       }, config);
@@ -421,7 +421,7 @@ const Graphs = (() => {
           camera: { eye: { x: 1.6, y: 1.4, z: 0.9 } },
           bgcolor: getTheme().bg,
         },
-        title: { text: `Disk Method: ${cfg.label}, rotated about x-axis — V = ${cfg.volume.toFixed(4)}`,
+        title: { text: `Disk Method: ${cfg.label}, rotated about x-axis - V = ${cfg.volume.toFixed(4)}`,
                  font: { size: 12, color: getTheme().text } },
         margin: { t: 40, b: 10, l: 10, r: 10 },
       }, config);
@@ -503,7 +503,7 @@ const Graphs = (() => {
           camera: { eye: { x: 1.6, y: 1.4, z: 0.9 } },
           bgcolor: getTheme().bg,
         },
-        title: { text: `Washer Method: ${cfg.outerLabel}, ${cfg.innerLabel} on [${a},${b}] — V = ${cfg.volume.toFixed(4)}`,
+        title: { text: `Washer Method: ${cfg.outerLabel}, ${cfg.innerLabel} on [${a},${b}] - V = ${cfg.volume.toFixed(4)}`,
                  font: { size: 12, color: getTheme().text } },
         margin: { t: 40, b: 10, l: 10, r: 10 },
       }, config);
@@ -610,7 +610,7 @@ const Graphs = (() => {
           camera: { eye: { x: 1.5, y: 1.5, z: 1.2 } },
           bgcolor: getTheme().bg,
         },
-        title: { text: `Slicing — ${cfg.label} Cross-Sections · V = ${latexToPlain(cfg.volLatex)} ≈ ${cfg.volume.toFixed(3)}`,
+        title: { text: `Slicing - ${cfg.label} Cross-Sections · V = ${latexToPlain(cfg.volLatex)} ≈ ${cfg.volume.toFixed(3)}`,
                  font: { size: 12, color: getTheme().text } },
         margin: { t: 40, b: 10, l: 10, r: 10 },
       }, config);
@@ -665,7 +665,7 @@ const Graphs = (() => {
       Plotly.react(el, [
         { x: ns, y: partials, mode: 'lines+markers', name: 'Partial sums Sₙ', line: { color: '#3b82f6', width: 2.5 }, marker: { size: 7 } },
         ...limitLine,
-      ], { ...layout(), height: 280, title: { text: `Geometric Series Σ rⁿ, r = ${r.toFixed(2)} — ${limit}`, font: { size: 12, color: getTheme().text } } }, config);
+      ], { ...layout(), height: 280, title: { text: `Geometric Series Σ rⁿ, r = ${r.toFixed(2)} - ${limit}`, font: { size: 12, color: getTheme().text } } }, config);
     }
 
     draw();
@@ -705,7 +705,7 @@ const Graphs = (() => {
       ], {
         ...layout({ yaxis: { range: [-4, 4], gridcolor: getTheme().grid, zerolinecolor: getTheme().line } }),
         height: 300,
-        title: { text: `Maclaurin Series for sin x — degree ${2 * deg + 1}`, font: { size: 12, color: getTheme().text } },
+        title: { text: `Maclaurin Series for sin x - degree ${2 * deg + 1}`, font: { size: 12, color: getTheme().text } },
       }, config);
     }
     draw();
@@ -826,7 +826,7 @@ const Graphs = (() => {
 
       Plotly.react(el, [
         { x: xs, y: ys, fill: 'tozeroy', fillcolor: converges ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.15)', mode: 'lines', line: { color: converges ? '#10b981' : '#ef4444', width: 2.5 }, name: `1/x^${p.toFixed(1)}` },
-      ], { ...layout(), height: 280, title: { text: `∫₁^∞ x⁻ᵖ dx, p=${p.toFixed(1)} — Area = ${area}`, font: { size: 12, color: getTheme().text } } }, config);
+      ], { ...layout(), height: 280, title: { text: `∫₁^∞ x⁻ᵖ dx, p=${p.toFixed(1)} - Area = ${area}`, font: { size: 12, color: getTheme().text } } }, config);
     }
     draw();
     pIn?.addEventListener('input', draw);

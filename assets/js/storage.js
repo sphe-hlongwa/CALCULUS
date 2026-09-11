@@ -1,5 +1,5 @@
 /**
- * storage.js — LocalStorage wrapper for all persistent state
+ * storage.js - LocalStorage wrapper for all persistent state
  */
 const AppStorage = {
   KEYS: {

@@ -1,5 +1,5 @@
 /**
- * search.js — Live search across chapters, formulas, flashcards, quizzes
+ * search.js - Live search across chapters, formulas, flashcards, quizzes
  */
 const Search = (() => {
   let index = null;
@@ -27,7 +27,7 @@ const Search = (() => {
       formulasData.forEach(f => idx.push({ type: 'formula', id: f.id, title: f.name, body: `${f.category} ${f.use}` }));
     }
 
-    // Flashcards — store chapter number for targeted navigation
+    // Flashcards - store chapter number for targeted navigation
     if (typeof flashcardsData !== 'undefined') {
       flashcardsData.forEach(f => idx.push({
         type: 'flashcard',
@@ -38,7 +38,7 @@ const Search = (() => {
       }));
     }
 
-    // Quizzes — index each question individually
+    // Quizzes - index each question individually
     if (typeof quizzesData !== 'undefined') {
       quizzesData.forEach(quiz => {
         quiz.questions.forEach(q => idx.push({

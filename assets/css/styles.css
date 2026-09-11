@@ -1,5 +1,5 @@
 /* ============================================================
-   styles.css — Base layout, typography, CSS variables
+   styles.css - Base layout, typography, CSS variables
    ============================================================ */
 
 /* ── Variables ── */
@@ -1043,7 +1043,7 @@ body {
   color: var(--green);
 }
 
-/* ✅ Fixed: yellow bumped to amber-600 (#d97706) — WCAG AA pass (4.6:1 on light) */
+/* ✅ Fixed: yellow bumped to amber-600 (#d97706) - WCAG AA pass (4.6:1 on light) */
 .card-tip {
 }
 
@@ -1344,7 +1344,7 @@ body {
 }
 
 /* ── Section headings ── */
-/* h2 — major section (e.g. 8.2 The Definite Integral) */
+/* h2 - major section (e.g. 8.2 The Definite Integral) */
 h2.section-heading {
   font-size: 1.5rem;
   font-weight: 700;
@@ -1353,7 +1353,7 @@ h2.section-heading {
   border-bottom: 2px solid var(--border);
 }
 
-/* h3 — subsection (e.g. 8.2.1 The Formal Definition) */
+/* h3 - subsection (e.g. 8.2.1 The Formal Definition) */
 h3.section-heading {
   font-size: 1.1rem;
   font-weight: 600;
@@ -1370,7 +1370,7 @@ h3.section-heading {
   color: var(--blue);
 }
 
-/* Legacy alias — kept so existing code using .subsection-heading still renders */
+/* Legacy alias - kept so existing code using .subsection-heading still renders */
 .subsection-heading {
   font-size: 1.1rem;
   font-weight: 600;

@@ -1,5 +1,5 @@
 /**
- * navigation.js — sidebar TOC and chapter switching
+ * navigation.js - sidebar TOC and chapter switching
  */
 const Navigation = (() => {
   let activeChapterId = null;

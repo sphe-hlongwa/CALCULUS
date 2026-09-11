@@ -1,5 +1,5 @@
 /**
- * progress.js — top bar and sidebar progress tracking
+ * progress.js - top bar and sidebar progress tracking
  */
 const Progress = (() => {
   function update() {

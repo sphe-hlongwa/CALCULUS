@@ -1,5 +1,5 @@
 /**
- * flashcards.js — Flip-card study system
+ * flashcards.js - Flip-card study system
  */
 const Flashcards = (() => {
   const panel   = document.getElementById('flashcard-panel');

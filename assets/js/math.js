@@ -1,5 +1,5 @@
 /**
- * math.js — KaTeX rendering helpers + formula card builder
+ * math.js - KaTeX rendering helpers + formula card builder
  */
 function renderMath(container) {
   if (!container || typeof renderMathInElement === 'undefined') return;

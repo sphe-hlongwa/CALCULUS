@@ -1,5 +1,5 @@
 /**
- * quizzes.js — Interactive quiz panel with scoring
+ * quizzes.js - Interactive quiz panel with scoring
  */
 const Quizzes = (() => {
   const panel   = document.getElementById('quiz-panel');
@@ -36,7 +36,7 @@ const Quizzes = (() => {
       <div style="text-align:center;padding:32px 0">
         <div style="font-size:3rem;margin-bottom:16px">${Icons.puzzle}</div>
         <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:8px">${q.title}</h2>
-        <p style="color:var(--text-2);margin-bottom:28px">${q.questions.length} questions — take your time</p>
+        <p style="color:var(--text-2);margin-bottom:28px">${q.questions.length} questions - take your time</p>
         <button class="btn-primary" id="start-quiz">Start Quiz →</button>
       </div>`;
     if (navRow) navRow.innerHTML = '';

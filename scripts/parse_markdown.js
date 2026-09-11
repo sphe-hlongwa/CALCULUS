@@ -1,6 +1,6 @@
 /**
  * parse_markdown.js
- * Build script — generates the four data/*.js files the app loads offline.
+ * Build script - generates the four data/*.js files the app loads offline.
  * Rich interactive content is authored directly in assets/js/app.js.
  */
 const fs   = require('fs');

@@ -357,7 +357,7 @@ const CHAPTER_CONTENT = {
         </div>
         <div style="flex:1;min-width:180px;background:rgba(16,185,129,.08);border:1.5px solid rgba(16,185,129,.3);border-radius:10px;padding:12px">
           <p style="font-weight:700;color:var(--teal);margin-bottom:6px;display:flex;align-items:center;gap:4px">${Icons.check} Correct</p>
-          <p style="font-size:.85rem">$A_1 + A_2 = \\tfrac{4}{3} + \\tfrac{4}{3} = \\tfrac{8}{3}$</p>
+          <p style="font-size:.85rem">$A_1 + A_2 = \\tfrac{4}{3} + \\tfrac{8}{3} = 4$</p>
         </div>
       </div>
     </div>
@@ -468,6 +468,101 @@ const CHAPTER_CONTENT = {
       <div class="card-badge">${Icons.alertTriangle} Common Mistake - Washer Method</div>
       <div class="math-block">$$\\text{WRONG: } \\pi\\int (f-g)^2\\,dx \\qquad \\text{CORRECT: } \\pi\\int (f^2 - g^2)\\,dx$$</div>
       <p>Always square first, then subtract - never subtract first, then square.</p>
+    </div>
+
+    <h2 id="ch8-sec5" class="section-heading fade-up"><span class="section-num">8.5</span> The Definite Integral as a Function</h2>
+    <div class="prose fade-up">
+      <p>Fix the lower limit and let the <em>upper</em> limit vary: the definite integral $\\displaystyle g(x) = \\int_a^x f(t)\\,dt$ then defines a brand-new function of $x$. The Fundamental Theorem of Calculus <strong>Part 1</strong> reveals the remarkable fact that this accumulation function is an antiderivative of $f$ - the theoretical twin of the evaluation rule (FTC Part 2) you met in §8.2.2.</p>
+    </div>
+
+    <div class="content-card card-theorem fade-up">
+      <div class="card-badge">${Icons.book} Theorem - Fundamental Theorem of Calculus (Part 1)</div>
+      <div class="card-title">The Accumulation Function is an Antiderivative</div>
+      <p>If $f$ is continuous on $[a,b]$, then the function $g$ defined by</p>
+      <div class="math-block">$$g(x) = \\int_a^x f(t)\\,dt, \\qquad a \\leq x \\leq b$$</div>
+      <p>is continuous on $[a,b]$, differentiable on $(a,b)$, and its derivative is $f$ itself:</p>
+      <div class="math-block">$$g'(x) = \\frac{d}{dx}\\int_a^x f(t)\\,dt = f(x)$$</div>
+    </div>
+
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Key Insight - Differentiation undoes Integration</div>
+      <p>FTC Part 1 says the two central operations of calculus are inverses: differentiating the integral of $f$ hands back $f$. The dummy variable $t$ inside the integral is <strong>not</strong> the variable you differentiate by - only the limit $x$ carries the $x$-dependence.</p>
+    </div>
+
+    <div class="content-card card-theorem fade-up">
+      <div class="card-badge">${Icons.book} Extension - Variable Limits (Chain Rule / Leibniz)</div>
+      <p>When the limits are themselves differentiable functions $u(x)$ and $v(x)$, combine FTC Part 1 with the chain rule:</p>
+      <div class="math-block">$$\\frac{d}{dx}\\int_{u(x)}^{v(x)} f(t)\\,dt = f\\big(v(x)\\big)\\,v'(x) - f\\big(u(x)\\big)\\,u'(x)$$</div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 8.5.1</span>
+        <h4>Differentiate $\\displaystyle g(x) = \\int_\\pi^x \\sin(t^2)\\,dt$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Apply FTC Part 1 directly</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>The lower limit $\\pi$ is constant and the upper limit is simply $x$, so $g'(x)$ is just the integrand evaluated at $t = x$:</p>
+            <div class="math-block">$$g'(x) = \\sin(x^2)$$</div>
+            <p>No antiderivative of $\\sin(t^2)$ is needed - that is the power of FTC Part 1.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 8.5.2</span>
+        <h4>Find $\\displaystyle \\frac{d}{dx}\\int_0^{x^3} \\frac{dt}{1+t}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Identify the variable upper limit</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Here $f(t) = \\dfrac{1}{1+t}$, the lower limit is constant, and the upper limit is $v(x) = x^3$ with $v'(x) = 3x^2$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Apply FTC Part 1 with the chain rule</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{d}{dx}\\int_0^{x^3}\\frac{dt}{1+t} = \\frac{1}{1+x^3}\\cdot 3x^2 = \\frac{3x^2}{1+x^3} \\quad\\checkmark$$</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 8.5.3</span>
+        <h4>Find $\\displaystyle \\frac{d}{dx}\\int_x^{2x} \\frac{dt}{1+t^2}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Both limits vary - use the Leibniz form</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>With $f(t) = \\dfrac{1}{1+t^2}$, lower limit $u(x) = x$ (so $u' = 1$) and upper limit $v(x) = 2x$ (so $v' = 2$):</p>
+            <div class="math-block">$$\\frac{d}{dx}\\int_x^{2x}\\frac{dt}{1+t^2} = f(2x)\\cdot 2 - f(x)\\cdot 1$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute and simplify</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$= \\frac{2}{1+(2x)^2} - \\frac{1}{1+x^2} = \\frac{2}{1+4x^2} - \\frac{1}{1+x^2} \\quad\\checkmark$$</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistake - Forgetting the Chain Rule</div>
+      <p>When the upper limit is a function like $x^3$ or $2x$ (not just $x$), you <strong>must</strong> multiply by its derivative. Writing $\\frac{d}{dx}\\int_0^{x^3}\\frac{dt}{1+t} = \\frac{1}{1+x^3}$ - without the $\\times\\,3x^2$ - is the single most common error on this topic.</p>
+    </div>
+
+    <div class="content-card card-exam fade-up">
+      <div class="card-badge">${Icons.target} Exam Tip - FTC Part 1 vs Part 2</div>
+      <p><strong>Part 1</strong> differentiates an integral with a variable limit: the answer is the integrand at the limit (times the limit's derivative). <strong>Part 2</strong> evaluates a definite integral with constant limits: $\\int_a^b f = F(b)-F(a)$. If a question asks for $\\frac{d}{dx}$ of an integral, it is always Part 1.</p>
     </div>
 
     <h2 class="section-heading fade-up"><span class="section-num">★</span> Solved Examples</h2>
@@ -1054,6 +1149,102 @@ const CHAPTER_CONTENT = {
       </div>
     </div>
 
+    <h2 id="ch11-sec5" class="section-heading fade-up"><span class="section-num">11.5</span> Representations of Functions as Power Series</h2>
+    <div class="prose fade-up">
+      <p>Many familiar functions can be rewritten as power series by starting from one master series - the geometric series - and then <strong>substituting</strong>, <strong>differentiating</strong>, or <strong>integrating</strong> term by term. This turns awkward functions into infinite polynomials you can differentiate, integrate, and approximate with ease.</p>
+    </div>
+
+    <div class="content-card card-definition fade-up">
+      <div class="card-badge">${Icons.book} The Master Series - Geometric</div>
+      <p>Every representation in this section is built from the geometric series:</p>
+      <div class="math-block">$$\\frac{1}{1-x} = \\sum_{n=0}^\\infty x^n = 1 + x + x^2 + x^3 + \\cdots, \\qquad |x| < 1$$</div>
+      <p>Wherever you can force a function into the shape $\\dfrac{1}{1-(\\text{something})}$, you can read off its power series at once.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.5.1</span>
+        <h4>Express $\\dfrac{1}{1+x^2}$ as a power series about $0$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Match the geometric shape</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Write the denominator as $1-(\\,\\cdot\\,)$: $\\dfrac{1}{1+x^2} = \\dfrac{1}{1-(-x^2)}$. So the "something" is $-x^2$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute into the master series</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{1}{1+x^2} = \\sum_{n=0}^\\infty (-x^2)^n = \\sum_{n=0}^\\infty (-1)^n x^{2n} = 1 - x^2 + x^4 - x^6 + \\cdots$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">State the interval of convergence</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Convergence requires $|-x^2| < 1$, i.e. $|x| < 1$. Radius $R = 1$, interval $(-1,\\,1)$. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.5.2</span>
+        <h4>Find a power series for $\\dfrac{1}{x+2}$ about $0$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Factor out the constant to expose $1-(\\cdot)$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{1}{x+2} = \\frac{1}{2\\left(1+\\frac{x}{2}\\right)} = \\frac{1}{2}\\cdot\\frac{1}{1-\\left(-\\frac{x}{2}\\right)}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Expand and simplify</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$= \\frac{1}{2}\\sum_{n=0}^\\infty \\left(-\\frac{x}{2}\\right)^n = \\sum_{n=0}^\\infty \\frac{(-1)^n}{2^{n+1}}\\,x^n$$</div>
+            <p>Converges when $\\left|-\\tfrac{x}{2}\\right| < 1$, i.e. $|x| < 2$. Radius $R = 2$. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-theorem fade-up">
+      <div class="card-badge">${Icons.book} Theorem 11.20 - Term-by-Term Differentiation & Integration</div>
+      <p>If $f(x) = \\displaystyle\\sum_{n=0}^\\infty c_n(x-a)^n$ has radius of convergence $R > 0$, then on $(a-R,\\,a+R)$ the function $f$ is differentiable and</p>
+      <div class="math-block">$$f'(x) = \\sum_{n=1}^\\infty n\\,c_n (x-a)^{n-1}, \\qquad \\int f(x)\\,dx = C + \\sum_{n=0}^\\infty \\frac{c_n}{n+1}(x-a)^{n+1}$$</div>
+      <p>Both new series have the <strong>same radius</strong> $R$ (though behaviour at the endpoints may change).</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.5.7</span>
+        <h4>Find a power series for $\\arctan x$ by integrating</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Recognise the derivative</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Since $\\dfrac{d}{dx}\\arctan x = \\dfrac{1}{1+x^2}$, integrate the series from Example 11.5.1 term by term:</p>
+            <div class="math-block">$$\\arctan x = \\int \\frac{dx}{1+x^2} = \\int \\sum_{n=0}^\\infty (-1)^n x^{2n}\\,dx$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Integrate each term ($C = 0$ since $\\arctan 0 = 0$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\arctan x = \\sum_{n=0}^\\infty (-1)^n \\frac{x^{2n+1}}{2n+1} = x - \\frac{x^3}{3} + \\frac{x^5}{5} - \\frac{x^7}{7} + \\cdots$$</div>
+            <p>Radius $R = 1$ (unchanged by integration). $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-exam fade-up">
+      <div class="card-badge">${Icons.target} Exam Tip - Three Moves</div>
+      <p>Almost every "find a power series" problem is one of three moves off the geometric series: <strong>(1) substitute</strong> an expression for $x$ (e.g. $-x^2$, $\\tfrac{x}{2}$); <strong>(2) differentiate</strong> a known series to build $\\tfrac{1}{(1-x)^2}$-type results; <strong>(3) integrate</strong> a known series to build $\\ln$ and $\\arctan$-type results. Always factor out constants first so the denominator reads $1-(\\cdot)$.</p>
+    </div>
+
     <h2 id="ch11-sec6" class="section-heading fade-up"><span class="section-num">11.6</span> Taylor & Maclaurin Series</h2>
 
     <div class="content-card card-theorem fade-up">
@@ -1079,6 +1270,92 @@ const CHAPTER_CONTENT = {
           <span id="taylor-plot-degval">1</span>
         </div>
       </div>
+    </div>
+
+    <h2 id="ch11-sec7" class="section-heading fade-up"><span class="section-num">11.7</span> Binomial Series</h2>
+    <div class="prose fade-up">
+      <p>The Binomial Series generalises the familiar binomial theorem $(1+x)^n$ from whole-number powers to <em>any</em> real exponent $k$. It is the Maclaurin series of $(1+x)^k$ and is the go-to tool for expanding roots and reciprocals such as $\\sqrt{1+x}$ or $\\dfrac{1}{(1+x)^2}$.</p>
+    </div>
+
+    <div class="content-card card-definition fade-up">
+      <div class="card-badge">${Icons.book} Definition - Generalised Binomial Coefficient</div>
+      <p>For any real number $k$ and integer $n \\geq 1$:</p>
+      <div class="math-block">$$\\binom{k}{n} = \\frac{k(k-1)(k-2)\\cdots(k-n+1)}{n!}, \\qquad \\binom{k}{0} = 1$$</div>
+      <p>Unlike the ordinary binomial coefficient, $k$ need not be a positive integer - it may be negative or fractional.</p>
+    </div>
+
+    <div class="content-card card-theorem fade-up">
+      <div class="card-badge">${Icons.book} Theorem 11.22 - The Binomial Series</div>
+      <p>For any $k \\in \\mathbb{R}$ and $|x| < 1$:</p>
+      <div class="math-block">$$(1+x)^k = \\sum_{n=0}^\\infty \\binom{k}{n} x^n = 1 + kx + \\frac{k(k-1)}{2!}x^2 + \\frac{k(k-1)(k-2)}{3!}x^3 + \\cdots$$</div>
+    </div>
+
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} When it Terminates</div>
+      <p>If $k$ is a <strong>non-negative integer</strong>, the factor $(k-n+1)$ eventually hits $0$, every later term vanishes, and the infinite series collapses to the ordinary finite binomial theorem $(1+x)^k$ - valid for <em>all</em> $x$. For any other $k$ the series is genuinely infinite and needs $|x|<1$.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.7.1</span>
+        <h4>Find the Maclaurin series and radius of convergence of $\\dfrac{1}{(1+x)^2}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Rewrite with a real exponent</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>$\\dfrac{1}{(1+x)^2} = (1+x)^{-2}$, so $k = -2$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Compute the coefficients $\\binom{-2}{n}$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\binom{-2}{n} = \\frac{(-2)(-3)(-4)\\cdots\\big(-(n+1)\\big)}{n!} = (-1)^n\\frac{(n+1)!}{n!} = (-1)^n (n+1)$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Assemble the series</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$(1+x)^{-2} = \\sum_{n=0}^\\infty (-1)^n (n+1)\\,x^n = 1 - 2x + 3x^2 - 4x^3 + \\cdots, \\qquad |x| < 1$$</div>
+            <p>This matches differentiating the series for $-\\dfrac{1}{1+x}$ - a neat cross-check with §11.5. Radius $R = 1$. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.7.2</span>
+        <h4>Expand $\\dfrac{1}{\\sqrt{4-x}}$ as a power series about $0$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Factor out the constant to reach $(1+u)^k$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{1}{\\sqrt{4-x}} = \\big(4-x\\big)^{-1/2} = \\Big[4\\big(1-\\tfrac{x}{4}\\big)\\Big]^{-1/2} = \\frac{1}{2}\\left(1-\\frac{x}{4}\\right)^{-1/2}$$</div>
+            <p>Now it is $(1+u)^k$ with $u = -\\dfrac{x}{4}$ and $k = -\\dfrac{1}{2}$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Apply the binomial series (first three terms)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$(1+u)^{-1/2} = 1 - \\tfrac{1}{2}u + \\tfrac{3}{8}u^2 - \\cdots$$</div>
+            <p>Substitute $u = -\\dfrac{x}{4}$, then multiply by $\\dfrac{1}{2}$:</p>
+            <div class="math-block">$$\\frac{1}{\\sqrt{4-x}} = \\frac{1}{2} + \\frac{x}{16} + \\frac{3x^2}{256} + \\cdots$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Radius of convergence</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Need $\\left|-\\dfrac{x}{4}\\right| < 1$, i.e. $|x| < 4$. Radius $R = 4$. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-exam fade-up">
+      <div class="card-badge">${Icons.target} Exam Tip - Get to $(1+u)^k$ First</div>
+      <p>The series only applies in the form $(1+u)^k$ with a leading $1$. For $\\sqrt{a+x}$ or $\\dfrac{1}{(a+x)^m}$, always <strong>factor out $a$</strong> first, expand $(1+u)^k$, then multiply the constant back. Watch signs: $4-x$ gives $u = -\\tfrac{x}{4}$, not $+\\tfrac{x}{4}$.</p>
     </div>
 
     <h2 class="section-heading fade-up"><span class="section-num">★</span> Solved Examples</h2>

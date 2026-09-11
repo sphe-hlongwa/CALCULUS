@@ -798,5 +798,335 @@ const formulasData = [
     "use": "Integrands with sqrt(a2-x2)",
     "variables": "-pi/2 <= theta <= pi/2",
     "mistakes": "Not converting dx and limits"
+  },
+  {
+    "id": "imp-01",
+    "chapter": 10,
+    "category": "Improper Integrals - Type I",
+    "name": "Infinite lower limit",
+    "latex": "\\int_{-\\infty}^b f(x)\\,dx = \\lim_{t\\to-\\infty}\\int_t^b f(x)\\,dx",
+    "use": "Lower limit is −∞",
+    "variables": "",
+    "mistakes": "Converges only if the limit is finite"
+  },
+  {
+    "id": "imp-02",
+    "chapter": 10,
+    "category": "Improper Integrals - Type I",
+    "name": "Both limits infinite",
+    "latex": "\\int_{-\\infty}^\\infty f\\,dx = \\int_{-\\infty}^c f\\,dx + \\int_c^\\infty f\\,dx",
+    "use": "Split at any finite c (often c = 0)",
+    "variables": "c \\in \\mathbb{R}",
+    "mistakes": "Diverges unless BOTH pieces converge separately"
+  },
+  {
+    "id": "imp-03",
+    "chapter": 10,
+    "category": "Improper Integrals - Type II",
+    "name": "Discontinuity at upper endpoint",
+    "latex": "\\int_a^b f(x)\\,dx = \\lim_{t\\to b^-}\\int_a^t f(x)\\,dx",
+    "use": "f blows up as x → b",
+    "variables": "f continuous on [a,b)",
+    "mistakes": "Missing the discontinuity and applying FTC blindly"
+  },
+  {
+    "id": "imp-04",
+    "chapter": 10,
+    "category": "Improper Integrals - Type II",
+    "name": "Discontinuity at lower endpoint",
+    "latex": "\\int_a^b f(x)\\,dx = \\lim_{t\\to a^+}\\int_t^b f(x)\\,dx",
+    "use": "f blows up as x → a",
+    "variables": "f continuous on (a,b]",
+    "mistakes": "Approach the bad endpoint with a one-sided limit"
+  },
+  {
+    "id": "imp-05",
+    "chapter": 10,
+    "category": "Improper Integrals - Convergence",
+    "name": "p-integral at ∞",
+    "latex": "\\int_1^\\infty \\frac{dx}{x^p}\\ \\text{converges} \\iff p > 1",
+    "use": "Benchmark for tails at infinity",
+    "variables": "p > 0",
+    "mistakes": "Opposite condition to the p-integral near 0"
+  },
+  {
+    "id": "imp-06",
+    "chapter": 10,
+    "category": "Improper Integrals - Convergence",
+    "name": "p-integral at 0",
+    "latex": "\\int_0^1 \\frac{dx}{x^p}\\ \\text{converges} \\iff p < 1",
+    "use": "Benchmark for a singularity at 0",
+    "variables": "p > 0",
+    "mistakes": "Sign of the inequality is flipped vs. the tail case"
+  },
+  {
+    "id": "imp-07",
+    "chapter": 10,
+    "category": "Improper Integrals - Convergence",
+    "name": "Comparison Test",
+    "latex": "0 \\le f \\le g:\\quad \\int g\\ \\text{conv} \\Rightarrow \\int f\\ \\text{conv};\\ \\ \\int f\\ \\text{div} \\Rightarrow \\int g\\ \\text{div}",
+    "use": "Bound a hard integrand by a known one",
+    "variables": "f, g \\geq 0",
+    "mistakes": "Inequality must point the correct way for the conclusion"
+  },
+  {
+    "id": "ser-01",
+    "chapter": 11,
+    "category": "Series - Convergence Tests",
+    "name": "nth-Term Divergence Test",
+    "latex": "\\lim_{n\\to\\infty} a_n \\neq 0 \\ \\Rightarrow\\ \\sum a_n\\ \\text{diverges}",
+    "use": "First thing to check on any series",
+    "variables": "",
+    "mistakes": "If the limit IS 0 the test is inconclusive (not proof of convergence)"
+  },
+  {
+    "id": "ser-02",
+    "chapter": 11,
+    "category": "Series - Special Series",
+    "name": "p-series",
+    "latex": "\\sum_{n=1}^\\infty \\frac{1}{n^p}\\ \\text{converges} \\iff p > 1",
+    "use": "Benchmark for comparison tests",
+    "variables": "p > 0",
+    "mistakes": "p = 1 (harmonic) diverges"
+  },
+  {
+    "id": "ser-03",
+    "chapter": 11,
+    "category": "Series - Special Series",
+    "name": "Harmonic series",
+    "latex": "\\sum_{n=1}^\\infty \\frac{1}{n} = \\infty \\quad (\\text{diverges})",
+    "use": "Classic divergent series (p = 1)",
+    "variables": "",
+    "mistakes": "Terms → 0 yet the sum diverges"
+  },
+  {
+    "id": "ser-04",
+    "chapter": 11,
+    "category": "Series - Special Series",
+    "name": "Telescoping sum",
+    "latex": "\\sum_{n=1}^\\infty (b_n - b_{n+1}) = b_1 - \\lim_{n\\to\\infty} b_{n+1}",
+    "use": "Terms cancel in a chain",
+    "variables": "",
+    "mistakes": "Use partial fractions to expose the cancellation"
+  },
+  {
+    "id": "ser-05",
+    "chapter": 11,
+    "category": "Series - Convergence Tests",
+    "name": "Integral Test",
+    "latex": "\\sum_{n=1}^\\infty a_n\\ \\text{and}\\ \\int_1^\\infty f(x)\\,dx\\ \\text{share convergence},\\ a_n=f(n)",
+    "use": "f positive, continuous, decreasing",
+    "variables": "f > 0, decreasing",
+    "mistakes": "The integral's value is NOT the sum's value"
+  },
+  {
+    "id": "ser-06",
+    "chapter": 11,
+    "category": "Series - Convergence Tests",
+    "name": "Direct Comparison Test",
+    "latex": "0 \\le a_n \\le b_n:\\ \\sum b_n\\ \\text{conv} \\Rightarrow \\sum a_n\\ \\text{conv}",
+    "use": "Bound by a known series",
+    "variables": "a_n, b_n \\geq 0",
+    "mistakes": "Inequality must face the right way for the conclusion"
+  },
+  {
+    "id": "ser-07",
+    "chapter": 11,
+    "category": "Series - Convergence Tests",
+    "name": "Limit Comparison Test",
+    "latex": "\\lim_{n\\to\\infty}\\frac{a_n}{b_n} = L,\\ 0 < L < \\infty \\ \\Rightarrow\\ \\text{same behaviour}",
+    "use": "Compare polynomial-ratio terms to a p-series",
+    "variables": "a_n, b_n > 0",
+    "mistakes": "Need L strictly between 0 and ∞"
+  },
+  {
+    "id": "ser-08",
+    "chapter": 11,
+    "category": "Series - Convergence Tests",
+    "name": "Alternating Series Test",
+    "latex": "\\sum (-1)^{n-1} b_n\\ \\text{converges if}\\ b_{n+1}\\le b_n\\ \\text{and}\\ \\lim b_n = 0",
+    "use": "Terms alternate in sign",
+    "variables": "b_n > 0",
+    "mistakes": "Must verify BOTH decreasing and limit 0"
+  },
+  {
+    "id": "ser-09",
+    "chapter": 11,
+    "category": "Series - Error Bounds",
+    "name": "Alternating Series Remainder",
+    "latex": "|R_n| = |S - S_n| \\le b_{n+1}",
+    "use": "Error is at most the first omitted term",
+    "variables": "b_n > 0, decreasing",
+    "mistakes": "Bound uses the NEXT term, not the last kept one"
+  },
+  {
+    "id": "ser-10",
+    "chapter": 11,
+    "category": "Series - Convergence Tests",
+    "name": "Ratio Test",
+    "latex": "L = \\lim_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|:\\ L<1\\ \\text{conv},\\ L>1\\ \\text{div},\\ L=1\\ ?",
+    "use": "Factorials or n-th powers",
+    "variables": "",
+    "mistakes": "L = 1 is inconclusive"
+  },
+  {
+    "id": "ser-11",
+    "chapter": 11,
+    "category": "Series - Convergence Tests",
+    "name": "Root Test",
+    "latex": "L = \\lim_{n\\to\\infty}\\sqrt[n]{|a_n|}:\\ L<1\\ \\text{conv},\\ L>1\\ \\text{div},\\ L=1\\ ?",
+    "use": "Whole term raised to the n-th power",
+    "variables": "",
+    "mistakes": "L = 1 is inconclusive"
+  },
+  {
+    "id": "ser-12",
+    "chapter": 11,
+    "category": "Series - Special Series",
+    "name": "Geometric partial sum",
+    "latex": "s_n = \\sum_{k=0}^{n-1} ar^k = a\\,\\frac{1-r^n}{1-r}",
+    "use": "Finite geometric sum (n terms)",
+    "variables": "r \\neq 1",
+    "mistakes": "Full sum a/(1−r) needs |r|<1 and n→∞"
+  },
+  {
+    "id": "mac-01",
+    "chapter": 11,
+    "category": "Maclaurin Series",
+    "name": "1/(1−x)",
+    "latex": "\\frac{1}{1-x} = \\sum_{n=0}^\\infty x^n = 1 + x + x^2 + \\cdots",
+    "use": "Master series - build others from it",
+    "variables": "|x| < 1,\\ (-1,1)",
+    "mistakes": "Only valid on (−1, 1)"
+  },
+  {
+    "id": "mac-02",
+    "chapter": 11,
+    "category": "Maclaurin Series",
+    "name": "eˣ",
+    "latex": "e^x = \\sum_{n=0}^\\infty \\frac{x^n}{n!} = 1 + x + \\frac{x^2}{2!} + \\cdots",
+    "use": "Exponential expansion",
+    "variables": "x \\in \\mathbb{R},\\ (-\\infty,\\infty)",
+    "mistakes": "Converges for all x"
+  },
+  {
+    "id": "mac-03",
+    "chapter": 11,
+    "category": "Maclaurin Series",
+    "name": "sin x",
+    "latex": "\\sin x = \\sum_{n=0}^\\infty (-1)^n \\frac{x^{2n+1}}{(2n+1)!} = x - \\frac{x^3}{3!} + \\cdots",
+    "use": "Odd powers only",
+    "variables": "x \\in \\mathbb{R}",
+    "mistakes": "Odd exponents; factorial is (2n+1)!"
+  },
+  {
+    "id": "mac-04",
+    "chapter": 11,
+    "category": "Maclaurin Series",
+    "name": "cos x",
+    "latex": "\\cos x = \\sum_{n=0}^\\infty (-1)^n \\frac{x^{2n}}{(2n)!} = 1 - \\frac{x^2}{2!} + \\cdots",
+    "use": "Even powers only",
+    "variables": "x \\in \\mathbb{R}",
+    "mistakes": "Even exponents; factorial is (2n)!"
+  },
+  {
+    "id": "mac-05",
+    "chapter": 11,
+    "category": "Maclaurin Series",
+    "name": "ln(1+x)",
+    "latex": "\\ln(1+x) = \\sum_{n=1}^\\infty (-1)^{n+1}\\frac{x^n}{n} = x - \\frac{x^2}{2} + \\cdots",
+    "use": "Logarithm near 1",
+    "variables": "-1 < x \\le 1,\\ (-1,1]",
+    "mistakes": "Converges at x = 1 but not x = −1; starts at n = 1"
+  },
+  {
+    "id": "mac-06",
+    "chapter": 11,
+    "category": "Maclaurin Series",
+    "name": "arctan x",
+    "latex": "\\arctan x = \\sum_{n=0}^\\infty (-1)^n \\frac{x^{2n+1}}{2n+1} = x - \\frac{x^3}{3} + \\cdots",
+    "use": "From integrating 1/(1+x²)",
+    "variables": "-1 \\le x \\le 1,\\ [-1,1]",
+    "mistakes": "Denominator is 2n+1, not (2n+1)!"
+  },
+  {
+    "id": "mac-07",
+    "chapter": 11,
+    "category": "Maclaurin Series",
+    "name": "Binomial (1+x)^k",
+    "latex": "(1+x)^k = \\sum_{n=0}^\\infty \\binom{k}{n} x^n = 1 + kx + \\frac{k(k-1)}{2!}x^2 + \\cdots",
+    "use": "Roots and reciprocals, any real k",
+    "variables": "|x| < 1",
+    "mistakes": "Get to (1+u)^k form first; terminates only if k is a non-negative integer"
+  },
+  {
+    "id": "pow-01",
+    "chapter": 11,
+    "category": "Power Series",
+    "name": "Radius of convergence",
+    "latex": "R = \\lim_{n\\to\\infty}\\left|\\frac{c_n}{c_{n+1}}\\right| \\quad\\text{(when the limit exists)}",
+    "use": "Find R for ∑ cₙ(x−a)ⁿ",
+    "variables": "",
+    "mistakes": "Always test the endpoints x = a ± R separately"
+  },
+  {
+    "id": "de-01",
+    "chapter": 12,
+    "category": "Differential Equations - Separable",
+    "name": "Separable ODE",
+    "latex": "\\frac{dy}{dx} = g(x)h(y) \\ \\Rightarrow\\ \\int \\frac{dy}{h(y)} = \\int g(x)\\,dx",
+    "use": "Separate variables to opposite sides",
+    "variables": "h(y) \\neq 0",
+    "mistakes": "Add +C once; check constant solutions h(y)=0"
+  },
+  {
+    "id": "de-02",
+    "chapter": 12,
+    "category": "Differential Equations - Linear",
+    "name": "Standard form",
+    "latex": "\\frac{dy}{dx} + P(x)\\,y = Q(x)",
+    "use": "Rewrite before finding the integrating factor",
+    "variables": "",
+    "mistakes": "Coefficient of y' must be 1 first"
+  },
+  {
+    "id": "de-03",
+    "chapter": 12,
+    "category": "Differential Equations - Linear",
+    "name": "Linear solution formula",
+    "latex": "y = \\frac{1}{\\mu(x)}\\left[\\int \\mu(x)Q(x)\\,dx + C\\right],\\quad \\mu = e^{\\int P\\,dx}",
+    "use": "Solve y' + P y = Q",
+    "variables": "\\mu = e^{\\int P\\,dx}",
+    "mistakes": "Note (μy)' = μQ; divide by μ at the end"
+  },
+  {
+    "id": "de-04",
+    "chapter": 12,
+    "category": "Differential Equations - Homogeneous",
+    "name": "Homogeneous substitution",
+    "latex": "y = vx \\ \\Rightarrow\\ \\frac{dy}{dx} = v + x\\frac{dv}{dx}",
+    "use": "Reduces dy/dx = F(y/x) to separable in v",
+    "variables": "v = y/x",
+    "mistakes": "Remember the product rule term x·dv/dx"
+  },
+  {
+    "id": "de-05",
+    "chapter": 12,
+    "category": "Differential Equations - Exact",
+    "name": "Exactness test",
+    "latex": "M\\,dx + N\\,dy = 0 \\ \\text{is exact} \\iff \\frac{\\partial M}{\\partial y} = \\frac{\\partial N}{\\partial x}",
+    "use": "Check before solving as exact",
+    "variables": "",
+    "mistakes": "If not exact, an integrating factor may be needed"
+  },
+  {
+    "id": "de-06",
+    "chapter": 12,
+    "category": "Differential Equations - Exact",
+    "name": "Exact solution",
+    "latex": "F(x,y) = C,\\quad \\text{where } F_x = M,\\ F_y = N",
+    "use": "Integrate M in x, then match N to fix the y-terms",
+    "variables": "",
+    "mistakes": "The 'constant' of integration is a function of y"
   }
 ];

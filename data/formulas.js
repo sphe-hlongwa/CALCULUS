@@ -2,11 +2,7 @@ const formulasData = [
   {
     "id": "int-01",
     "chapter": 8,
-<<<<<<< HEAD
-    "category": "Integration — Power Rule",
-=======
     "category": "Integration - Power Rule",
->>>>>>> master
     "name": "Constant rule",
     "latex": "\\int a\\,dx = ax + C",
     "use": "Integrating a constant",
@@ -16,11 +12,7 @@ const formulasData = [
   {
     "id": "int-02",
     "chapter": 8,
-<<<<<<< HEAD
-    "category": "Integration — Power Rule",
-=======
     "category": "Integration - Power Rule",
->>>>>>> master
     "name": "Power rule",
     "latex": "\\int x^n\\,dx = \\dfrac{x^{n+1}}{n+1} + C",
     "use": "Any polynomial term, $n \\neq -1$",
@@ -30,11 +22,7 @@ const formulasData = [
   {
     "id": "int-03",
     "chapter": 8,
-<<<<<<< HEAD
-    "category": "Integration — Power Rule",
-=======
     "category": "Integration - Power Rule",
->>>>>>> master
     "name": "Linear composition power rule",
     "latex": "\\int (ax+b)^n\\,dx = \\dfrac{(ax+b)^{n+1}}{a(n+1)} + C",
     "use": "Power of a linear expression, n ≠ −1",
@@ -44,11 +32,7 @@ const formulasData = [
   {
     "id": "int-04",
     "chapter": 8,
-<<<<<<< HEAD
-    "category": "Integration — Rational Functions",
-=======
     "category": "Integration - Rational Functions",
->>>>>>> master
     "name": "Reciprocal rule",
     "latex": "\\int \\dfrac{1}{x}\\,dx = \\ln|x| + C",
     "use": "1/x integrand",
@@ -58,11 +42,7 @@ const formulasData = [
   {
     "id": "int-05",
     "chapter": 8,
-<<<<<<< HEAD
-    "category": "Integration — Rational Functions",
-=======
     "category": "Integration - Rational Functions",
->>>>>>> master
     "name": "Reciprocal of linear",
     "latex": "\\int \\dfrac{1}{ax+b}\\,dx = \\dfrac{1}{a}\\ln|ax+b| + C",
     "use": "1/(ax+b) integrand",
@@ -72,29 +52,17 @@ const formulasData = [
   {
     "id": "int-06",
     "chapter": 8,
-<<<<<<< HEAD
-    "category": "Integration — Exponential",
-=======
     "category": "Integration - Exponential",
->>>>>>> master
     "name": "e^x rule",
     "latex": "\\int e^x\\,dx = e^x + C",
     "use": "Standard exponential",
     "variables": "",
-<<<<<<< HEAD
-    "mistakes": "None — the simplest integral"
-=======
     "mistakes": "None - the simplest integral"
->>>>>>> master
   },
   {
     "id": "int-07",
     "chapter": 8,
-<<<<<<< HEAD
-    "category": "Integration — Exponential",
-=======
     "category": "Integration - Exponential",
->>>>>>> master
     "name": "e^(ax+b) rule",
     "latex": "\\int e^{ax+b}\\,dx = \\dfrac{1}{a}e^{ax+b} + C",
     "use": "Exponential with linear exponent",
@@ -104,11 +72,7 @@ const formulasData = [
   {
     "id": "int-08",
     "chapter": 8,
-<<<<<<< HEAD
-    "category": "Integration — Exponential",
-=======
     "category": "Integration - Exponential",
->>>>>>> master
     "name": "General base exponential",
     "latex": "\\int a^{bx+d}\\,dx = \\dfrac{a^{bx+d}}{b\\ln a} + C",
     "use": "Exponential with base a ≠ e",
@@ -118,29 +82,17 @@ const formulasData = [
   {
     "id": "int-09",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "sin x",
     "latex": "\\int \\sin x\\,dx = -\\cos x + C",
     "use": "Basic sine integral",
     "variables": "",
-<<<<<<< HEAD
-    "mistakes": "Sign error — result is negative cos"
-=======
     "mistakes": "Sign error - result is negative cos"
->>>>>>> master
   },
   {
     "id": "int-10",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "sin(ax+b)",
     "latex": "\\int \\sin(ax+b)\\,dx = -\\dfrac{\\cos(ax+b)}{a} + C",
     "use": "Sine with linear argument",
@@ -150,29 +102,17 @@ const formulasData = [
   {
     "id": "int-11",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "cos x",
     "latex": "\\int \\cos x\\,dx = \\sin x + C",
     "use": "Basic cosine integral",
     "variables": "",
-<<<<<<< HEAD
-    "mistakes": "None — positive result"
-=======
     "mistakes": "None - positive result"
->>>>>>> master
   },
   {
     "id": "int-12",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "cos(ax+b)",
     "latex": "\\int \\cos(ax+b)\\,dx = \\dfrac{\\sin(ax+b)}{a} + C",
     "use": "Cosine with linear argument",
@@ -182,11 +122,7 @@ const formulasData = [
   {
     "id": "int-13",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "tan x",
     "latex": "\\int \\tan x\\,dx = \\ln|\\sec x| + C = -\\ln|\\cos x| + C",
     "use": "Tangent integral",
@@ -196,11 +132,7 @@ const formulasData = [
   {
     "id": "int-14",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "cot x",
     "latex": "\\int \\cot x\\,dx = \\ln|\\sin x| + C = -\\ln|\\csc x| + C",
     "use": "Cotangent integral",
@@ -210,11 +142,7 @@ const formulasData = [
   {
     "id": "int-15",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "sec x",
     "latex": "\\int \\sec x\\,dx = \\ln|\\sec x + \\tan x| + C",
     "use": "Secant integral",
@@ -224,11 +152,7 @@ const formulasData = [
   {
     "id": "int-16",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "csc x",
     "latex": "\\int \\csc x\\,dx = \\ln|\\csc x - \\cot x| + C",
     "use": "Cosecant integral",
@@ -238,11 +162,7 @@ const formulasData = [
   {
     "id": "int-17",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "sec x tan x",
     "latex": "\\int \\sec x\\tan x\\,dx = \\sec x + C",
     "use": "Recognise as derivative of sec x",
@@ -252,20 +172,12 @@ const formulasData = [
   {
     "id": "int-18",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration — Trig Functions",
-=======
     "category": "Integration - Trig Functions",
->>>>>>> master
     "name": "csc x cot x",
     "latex": "\\int \\csc x\\cot x\\,dx = -\\csc x + C",
     "use": "Recognise as derivative of -csc x",
     "variables": "",
-<<<<<<< HEAD
-    "mistakes": "Sign error — result is negative csc"
-=======
     "mistakes": "Sign error - result is negative csc"
->>>>>>> master
   },
   {
     "id": "ibp-01",
@@ -273,11 +185,7 @@ const formulasData = [
     "category": "Integration by Parts",
     "name": "IBP formula",
     "latex": "\\int u\\,dv = uv - \\int v\\,du",
-<<<<<<< HEAD
-    "use": "Products of functions — use LIATE to choose u",
-=======
     "use": "Products of functions - use LIATE to choose u",
->>>>>>> master
     "variables": "LIATE: Log, Inverse trig, Algebraic, Trig, Exponential",
     "mistakes": "Wrong choice of u leads to harder integral"
   },
@@ -285,11 +193,7 @@ const formulasData = [
     "id": "ibp-02",
     "chapter": 9,
     "category": "Integration by Parts",
-<<<<<<< HEAD
-    "name": "IBP — three factors",
-=======
     "name": "IBP - three factors",
->>>>>>> master
     "latex": "\\int u\\,v\\,dw = uvw - \\int vw\\,du - \\int uw\\,dv",
     "use": "Triple product integration by parts",
     "variables": "",
@@ -298,68 +202,40 @@ const formulasData = [
   {
     "id": "ibp-03",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration by Parts — Related",
-    "name": "eᵃˣ sin(bx)",
-    "latex": "\\int e^{ax}\\sin(bx)\\,dx = \\dfrac{e^{ax}}{a^2+b^2}\\bigl[a\\sin bx - b\\cos bx\\bigr] + C",
-    "use": "IBP twice — exponential times sine",
-=======
     "category": "Integration by Parts - Related",
     "name": "eᵃˣ sin(bx)",
     "latex": "\\int e^{ax}\\sin(bx)\\,dx = \\dfrac{e^{ax}}{a^2+b^2}\\bigl[a\\sin bx - b\\cos bx\\bigr] + C",
     "use": "IBP twice - exponential times sine",
->>>>>>> master
     "variables": "a^2 + b^2 \\neq 0",
     "mistakes": "Forgetting to divide by a²+b²"
   },
   {
     "id": "ibp-04",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration by Parts — Related",
-    "name": "eᵃˣ cos(bx)",
-    "latex": "\\int e^{ax}\\cos(bx)\\,dx = \\dfrac{e^{ax}}{a^2+b^2}\\bigl[a\\cos bx + b\\sin bx\\bigr] + C",
-    "use": "IBP twice — exponential times cosine",
-=======
     "category": "Integration by Parts - Related",
     "name": "eᵃˣ cos(bx)",
     "latex": "\\int e^{ax}\\cos(bx)\\,dx = \\dfrac{e^{ax}}{a^2+b^2}\\bigl[a\\cos bx + b\\sin bx\\bigr] + C",
     "use": "IBP twice - exponential times cosine",
->>>>>>> master
     "variables": "a^2 + b^2 \\neq 0",
     "mistakes": "Sine version has minus; cosine version has plus"
   },
   {
     "id": "ibp-05",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration by Parts — Related",
-    "name": "xⁿ ln x",
-    "latex": "\\int x^n \\ln x\\,dx = \\dfrac{x^{n+1}}{n+1}\\ln x - \\dfrac{x^{n+1}}{(n+1)^2} + C",
-    "use": "Polynomial times log — set u = ln x",
-=======
     "category": "Integration by Parts - Related",
     "name": "xⁿ ln x",
     "latex": "\\int x^n \\ln x\\,dx = \\dfrac{x^{n+1}}{n+1}\\ln x - \\dfrac{x^{n+1}}{(n+1)^2} + C",
     "use": "Polynomial times log - set u = ln x",
->>>>>>> master
     "variables": "n \\neq -1",
     "mistakes": "Denominator of 2nd term is (n+1)², not n+1"
   },
   {
     "id": "ibp-06",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Integration by Parts — Related",
-    "name": "xⁿ eᵃˣ reduction",
-    "latex": "\\int x^n e^{ax}\\,dx = \\dfrac{x^n e^{ax}}{a} - \\dfrac{n}{a}\\int x^{n-1}e^{ax}\\,dx",
-    "use": "Reduction formula — polynomial times exponential",
-=======
     "category": "Integration by Parts - Related",
     "name": "xⁿ eᵃˣ reduction",
     "latex": "\\int x^n e^{ax}\\,dx = \\dfrac{x^n e^{ax}}{a} - \\dfrac{n}{a}\\int x^{n-1}e^{ax}\\,dx",
     "use": "Reduction formula - polynomial times exponential",
->>>>>>> master
     "variables": "n \\in \\mathbb{Z}^+,\\; a \\neq 0",
     "mistakes": "Apply repeatedly until exponent reaches 0"
   },
@@ -399,11 +275,7 @@ const formulasData = [
     "category": "Reduction Formulas",
     "name": "sin²x",
     "latex": "\\int \\sin^2 x\\,dx = \\dfrac{x}{2} - \\dfrac{\\sin 2x}{4} + C",
-<<<<<<< HEAD
-    "use": "Even power of sine — half-angle identity",
-=======
     "use": "Even power of sine - half-angle identity",
->>>>>>> master
     "variables": "",
     "mistakes": "Coefficient is 1/4 on sin 2x"
   },
@@ -413,11 +285,7 @@ const formulasData = [
     "category": "Reduction Formulas",
     "name": "cos²x",
     "latex": "\\int \\cos^2 x\\,dx = \\dfrac{x}{2} + \\dfrac{\\sin 2x}{4} + C",
-<<<<<<< HEAD
-    "use": "Even power of cosine — half-angle identity",
-=======
     "use": "Even power of cosine - half-angle identity",
->>>>>>> master
     "variables": "",
     "mistakes": "Plus sign (opposite of sin²x)"
   },
@@ -447,11 +315,7 @@ const formulasData = [
     "category": "Reduction Formulas",
     "name": "sinⁿx reduction",
     "latex": "\\int \\sin^n x\\,dx = -\\dfrac{\\sin^{n-1}x\\cos x}{n} + \\dfrac{n-1}{n}\\int \\sin^{n-2}x\\,dx",
-<<<<<<< HEAD
-    "use": "High power of sine — apply repeatedly",
-=======
     "use": "High power of sine - apply repeatedly",
->>>>>>> master
     "variables": "n \\geq 2",
     "mistakes": "Coefficient (n−1)/n on remaining integral"
   },
@@ -461,11 +325,7 @@ const formulasData = [
     "category": "Reduction Formulas",
     "name": "cosⁿx reduction",
     "latex": "\\int \\cos^n x\\,dx = \\dfrac{\\cos^{n-1}x\\sin x}{n} + \\dfrac{n-1}{n}\\int \\cos^{n-2}x\\,dx",
-<<<<<<< HEAD
-    "use": "High power of cosine — apply repeatedly",
-=======
     "use": "High power of cosine - apply repeatedly",
->>>>>>> master
     "variables": "n \\geq 2",
     "mistakes": "Leading term positive (opposite sign from sinⁿ)"
   },
@@ -612,11 +472,7 @@ const formulasData = [
   {
     "id": "tbl-01",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — u²±a²",
-=======
     "category": "Table - u²±a²",
->>>>>>> master
     "name": "1/(u²−a²)",
     "latex": "\\int \\dfrac{du}{u^2-a^2} = \\dfrac{1}{2a}\\ln\\left|\\dfrac{u-a}{u+a}\\right| + C",
     "use": "Difference of squares denominator",
@@ -626,11 +482,7 @@ const formulasData = [
   {
     "id": "tbl-02",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — u²±a²",
-=======
     "category": "Table - u²±a²",
->>>>>>> master
     "name": "1/(a²−u²)",
     "latex": "\\int \\dfrac{du}{a^2-u^2} = \\dfrac{1}{2a}\\ln\\left|\\dfrac{u+a}{u-a}\\right| + C",
     "use": "Flipped denominator variant",
@@ -640,11 +492,7 @@ const formulasData = [
   {
     "id": "tbl-03",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — u²±a²",
-=======
     "category": "Table - u²±a²",
->>>>>>> master
     "name": "1/√(u²±a²)",
     "latex": "\\int \\dfrac{du}{\\sqrt{u^2 \\pm a^2}} = \\ln\\left|u+\\sqrt{u^2 \\pm a^2}\\right| + C",
     "use": "Square-root denominator with ±a²",
@@ -654,29 +502,17 @@ const formulasData = [
   {
     "id": "tbl-04",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — u²±a²",
-=======
     "category": "Table - u²±a²",
->>>>>>> master
     "name": "√(u²±a²)/u²",
     "latex": "\\int \\dfrac{\\sqrt{u^2\\pm a^2}}{u^2}\\,du = -\\dfrac{\\sqrt{u^2\\pm a^2}}{u} + \\ln\\left|u+\\sqrt{u^2\\pm a^2}\\right| + C",
     "use": "√(u²±a²) over u²",
     "variables": "u \\neq 0",
-<<<<<<< HEAD
-    "mistakes": "Two-term result — don't drop either term"
-=======
     "mistakes": "Two-term result - don't drop either term"
->>>>>>> master
   },
   {
     "id": "tbl-05",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — u²±a²",
-=======
     "category": "Table - u²±a²",
->>>>>>> master
     "name": "u²/√(u²±a²)",
     "latex": "\\int \\dfrac{u^2}{\\sqrt{u^2\\pm a^2}}\\,du = \\dfrac{1}{2}\\left[u\\sqrt{u^2\\pm a^2} \\mp a^2\\ln\\left|u+\\sqrt{u^2\\pm a^2}\\right|\\right] + C",
     "use": "u² over √(u²±a²)",
@@ -686,11 +522,7 @@ const formulasData = [
   {
     "id": "tbl-06",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — u²±a²",
-=======
     "category": "Table - u²±a²",
->>>>>>> master
     "name": "1/(u²√(u²±a²))",
     "latex": "\\int \\dfrac{du}{u^2\\sqrt{u^2\\pm a^2}} = \\mp\\dfrac{\\sqrt{u^2\\pm a^2}}{a^2 u} + C",
     "use": "u² × √(u²±a²) in denominator",
@@ -700,11 +532,7 @@ const formulasData = [
   {
     "id": "tbl-07",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — u²±a²",
-=======
     "category": "Table - u²±a²",
->>>>>>> master
     "name": "1/(u²±a²)^(3/2)",
     "latex": "\\int \\dfrac{du}{(u^2\\pm a^2)^{3/2}} = \\dfrac{\\pm u}{a^2\\sqrt{u^2\\pm a^2}} + C",
     "use": "Three-halves power of (u²±a²)",
@@ -714,11 +542,7 @@ const formulasData = [
   {
     "id": "tbl-08",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — √(a²−u²)",
-=======
     "category": "Table - √(a²−u²)",
->>>>>>> master
     "name": "u²/√(a²−u²)",
     "latex": "\\int \\dfrac{u^2}{\\sqrt{a^2-u^2}}\\,du = -\\dfrac{u}{2}\\sqrt{a^2-u^2}+\\dfrac{a^2}{2}\\sin^{-1}\\!\\left(\\tfrac{u}{a}\\right)+C",
     "use": "u² over √(a²−u²)",
@@ -728,29 +552,17 @@ const formulasData = [
   {
     "id": "tbl-09",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — √(a²−u²)",
-=======
     "category": "Table - √(a²−u²)",
->>>>>>> master
     "name": "1/(u²√(a²−u²))",
     "latex": "\\int \\dfrac{du}{u^2\\sqrt{a^2-u^2}} = -\\dfrac{\\sqrt{a^2-u^2}}{a^2 u} + C",
     "use": "u² × √(a²−u²) in denominator",
     "variables": "0 < |u| < a",
-<<<<<<< HEAD
-    "mistakes": "Negative result — don't drop the minus"
-=======
     "mistakes": "Negative result - don't drop the minus"
->>>>>>> master
   },
   {
     "id": "tbl-10",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — √(a²−u²)",
-=======
     "category": "Table - √(a²−u²)",
->>>>>>> master
     "name": "√(a²−u²)/u²",
     "latex": "\\int \\dfrac{\\sqrt{a^2-u^2}}{u^2}\\,du = -\\dfrac{\\sqrt{a^2-u^2}}{u} - \\sin^{-1}\\!\\left(\\tfrac{u}{a}\\right) + C",
     "use": "√(a²−u²) over u²",
@@ -760,11 +572,7 @@ const formulasData = [
   {
     "id": "tbl-20",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — √(a+bu)",
-=======
     "category": "Table - √(a+bu)",
->>>>>>> master
     "name": "u/√(a+bu)",
     "latex": "\\int \\dfrac{u}{\\sqrt{a+bu}}\\,du = \\dfrac{2bu-4a}{3b^2}\\sqrt{a+bu} + C",
     "use": "u over square root of linear",
@@ -774,11 +582,7 @@ const formulasData = [
   {
     "id": "tbl-21",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — √(a+bu)",
-=======
     "category": "Table - √(a+bu)",
->>>>>>> master
     "name": "1/(u√(a+bu)), a>0",
     "latex": "\\int \\dfrac{du}{u\\sqrt{a+bu}} = \\dfrac{1}{\\sqrt{a}}\\ln\\left|\\dfrac{\\sqrt{a+bu}-\\sqrt{a}}{\\sqrt{a+bu}+\\sqrt{a}}\\right| + C",
     "use": "Reciprocal × √(a+bu), a > 0",
@@ -788,11 +592,7 @@ const formulasData = [
   {
     "id": "tbl-22",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — √(a+bu)",
-=======
     "category": "Table - √(a+bu)",
->>>>>>> master
     "name": "√(a+bu)/u (reduction)",
     "latex": "\\int \\dfrac{\\sqrt{a+bu}}{u}\\,du = 2\\sqrt{a+bu} + a\\int \\dfrac{du}{u\\sqrt{a+bu}}",
     "use": "Recursive reduction for √(a+bu)/u",
@@ -802,11 +602,7 @@ const formulasData = [
   {
     "id": "tbl-30",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — 1/(a+bu)",
-=======
     "category": "Table - 1/(a+bu)",
->>>>>>> master
     "name": "u/(a+bu)",
     "latex": "\\int \\dfrac{u}{a+bu}\\,du = \\dfrac{u}{b} - \\dfrac{a}{b^2}\\ln|a+bu| + C",
     "use": "Linear numerator over linear denominator",
@@ -816,11 +612,7 @@ const formulasData = [
   {
     "id": "tbl-31",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — 1/(a+bu)",
-=======
     "category": "Table - 1/(a+bu)",
->>>>>>> master
     "name": "1/(u(a+bu))",
     "latex": "\\int \\dfrac{du}{u(a+bu)} = \\dfrac{1}{a}\\ln\\left|\\dfrac{u}{a+bu}\\right| + C",
     "use": "Partial fractions: 1/(u(a+bu))",
@@ -830,11 +622,7 @@ const formulasData = [
   {
     "id": "tbl-32",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — 1/(a+bu)",
-=======
     "category": "Table - 1/(a+bu)",
->>>>>>> master
     "name": "1/(u²(a+bu))",
     "latex": "\\int \\dfrac{du}{u^2(a+bu)} = \\dfrac{b}{a^2}\\ln\\left|\\dfrac{a+bu}{u}\\right| - \\dfrac{1}{au} + C",
     "use": "u² × (a+bu) in denominator",
@@ -844,11 +632,7 @@ const formulasData = [
   {
     "id": "tbl-33",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — 1/(a+bu)",
-=======
     "category": "Table - 1/(a+bu)",
->>>>>>> master
     "name": "u²/(a+bu)",
     "latex": "\\int \\dfrac{u^2}{a+bu}\\,du = \\dfrac{1}{b}\\!\\left(\\dfrac{u^2}{2}-\\dfrac{au}{b}+\\dfrac{a^2}{b^2}\\ln|a+bu|\\right) + C",
     "use": "Polynomial long division then integrate",
@@ -858,11 +642,7 @@ const formulasData = [
   {
     "id": "tbl-34",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — 1/(a+bu)",
-=======
     "category": "Table - 1/(a+bu)",
->>>>>>> master
     "name": "u²/(a+bu)²",
     "latex": "\\int \\dfrac{u^2}{(a+bu)^2}\\,du = \\dfrac{1}{b^3}\\!\\left[bu - \\dfrac{a^2}{a+bu} - 2a\\ln|a+bu|\\right] + C",
     "use": "Squared linear denominator with u² numerator",
@@ -872,11 +652,7 @@ const formulasData = [
   {
     "id": "tbl-40",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — Quadratic Denominator",
-=======
     "category": "Table - Quadratic Denominator",
->>>>>>> master
     "name": "1/(a+bu+cu²), b²<4ac",
     "latex": "\\int \\dfrac{du}{a+bu+cu^2} = \\dfrac{2}{\\sqrt{4ac-b^2}}\\tan^{-1}\\!\\left(\\dfrac{2cu+b}{\\sqrt{4ac-b^2}}\\right)+C",
     "use": "Irreducible quadratic denominator (b² < 4ac)",
@@ -886,11 +662,7 @@ const formulasData = [
   {
     "id": "tbl-41",
     "chapter": 9,
-<<<<<<< HEAD
-    "category": "Table — Quadratic Denominator",
-=======
     "category": "Table - Quadratic Denominator",
->>>>>>> master
     "name": "1/(a+bu+cu²), b²>4ac",
     "latex": "\\int \\dfrac{du}{a+bu+cu^2} = \\dfrac{1}{\\sqrt{b^2-4ac}}\\ln\\left|\\dfrac{2cu+b-\\sqrt{b^2-4ac}}{2cu+b+\\sqrt{b^2-4ac}}\\right|+C",
     "use": "Quadratic with two real roots (b² > 4ac)",
@@ -1026,8 +798,6 @@ const formulasData = [
     "use": "Integrands with sqrt(a2-x2)",
     "variables": "-pi/2 <= theta <= pi/2",
     "mistakes": "Not converting dx and limits"
-<<<<<<< HEAD
-=======
   },
   {
     "id": "imp-01",
@@ -1358,6 +1128,5 @@ const formulasData = [
     "use": "Integrate M in x, then match N to fix the y-terms",
     "variables": "",
     "mistakes": "The 'constant' of integration is a function of y"
->>>>>>> master
   }
 ];

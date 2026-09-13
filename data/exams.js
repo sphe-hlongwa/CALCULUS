@@ -1319,6 +1319,7 @@ Evaluate each integral.
         solution: `
 Take $u=\\arctan x$, $dv=x\\,dx$. Then
 $$\\int x\\arctan x\\,dx=\\frac{x^2}{2}\\arctan x-\\frac12\\int\\frac{x^2}{1+x^2}dx=\\frac{x^2}{2}\\arctan x-\\frac{x}{2}+\\frac12\\arctan x+C.$$ ✓✓✓
+$$\\int x\\arctan x\\,dx=\\frac{x^2}{2}\\arctan x-\\frac12\\int\\frac{x^2}{1+x^2}dx=\\frac{x^2}{2}\\arctan x-\\frac{x}{2}+\\frac12\\arctan x+C.$$ ✓✓✓
         `
       },
       {

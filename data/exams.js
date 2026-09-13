@@ -23,16 +23,12 @@
  */
 
 const EXAMS = [
-  // ═══════════════════════════════════════════════════════════════
-  // PRACTICE PAPER 1
-  // ═══════════════════════════════════════════════════════════════
-  {
+{
     id: 'paper1',
     label: 'Practice Paper 1',
     date: 'Practice Test A',
-    totalMarks: 44,
-    duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    totalMarks: 52,
+    duration: 60,
     questions: [
       {
         number: 1,
@@ -139,6 +135,31 @@ $$= \\pi\\cdot32\\left(\\frac{1}{3}-\\frac{1}{5}\\right) = \\pi\\cdot32\\cdot\\f
       },
       {
         number: 4,
+        title: 'Proof: Fundamental Theorem of Calculus (Part 2)',
+        section: '§8',
+        marks: 8,
+        prompt: `
+State and prove the Fundamental Theorem of Calculus, Part 2.
+
+**Theorem.** If $f$ is continuous on $[a,b]$ and $F$ is any antiderivative of $f$ on $[a,b]$, then
+$$\\int_a^b f(x)\\,dx = F(b)-F(a).$$
+
+You may use the Mean Value Theorem without proof. (8)
+        `,
+        solution: `
+Partition $[a,b]$ into $n$ subintervals of equal width $\\Delta x=\\dfrac{b-a}{n}$, with endpoints $a=x_0<x_1<\\dots<x_n=b$. ✓
+
+Write $F(b)-F(a)$ as a telescoping sum: $F(b)-F(a)=\\displaystyle\\sum_{i=1}^n\\big[F(x_i)-F(x_{i-1})\\big]$. ✓✓
+
+Since $F$ is continuous on $[x_{i-1},x_i]$ and differentiable on $(x_{i-1},x_i)$, the Mean Value Theorem gives some $c_i\\in(x_{i-1},x_i)$ with $F'(c_i)=\\dfrac{F(x_i)-F(x_{i-1})}{\\Delta x}$, so $F(x_i)-F(x_{i-1})=f(c_i)\\Delta x$. ✓✓
+
+Substituting back gives $F(b)-F(a)=\\displaystyle\\sum_{i=1}^n f(c_i)\\Delta x$, a Riemann sum for $f$ on $[a,b]$. ✓✓
+
+Letting $n\\to\\infty$, the right-hand side converges to $\\displaystyle\\int_a^b f(x)\\,dx$ by definition, so $\\displaystyle\\int_a^b f(x)\\,dx=F(b)-F(a)$. $\\blacksquare$ ✓
+        `
+      },
+      {
+        number: 5,
         title: 'Inverse trigonometric, exponential and logarithmic integrals',
         section: '§9.1',
         marks: 6,
@@ -167,7 +188,7 @@ $$\\int\\frac{2x}{x^2+1}\\,dx = \\ln(x^2+1)+C.$$ ✓
         `
       },
       {
-        number: 5,
+        number: 6,
         title: 'Integration by parts',
         section: '§9.2',
         marks: 6,
@@ -186,7 +207,7 @@ $$\\int x^2e^x\\,dx = x^2e^x-\\big(2xe^x-2e^x\\big)+C = e^x\\left(x^2-2x+2\\righ
         `
       },
       {
-        number: 6,
+        number: 7,
         title: 'Partial fraction decomposition (distinct linear factors)',
         section: '§9.5',
         marks: 6,
@@ -212,9 +233,8 @@ $$\\int\\frac{3x+5}{(x+1)(x+2)}\\,dx = \\int\\left(\\frac{2}{x+1}+\\frac{1}{x+2}
     id: 'paper2',
     label: 'Practice Paper 2',
     date: 'Practice Test B',
-    totalMarks: 44,
-    duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    totalMarks: 52,
+    duration: 60,
     questions: [
       {
         number: 1,
@@ -318,6 +338,27 @@ $$= 125(0.15)^2 = 125(0.0225) = 2.8125\\text{ J}.$$ ✓✓
       },
       {
         number: 4,
+        title: 'Proof: Sum Rule for Definite Integrals',
+        section: '§8',
+        marks: 8,
+        prompt: `
+Using the definition of the definite integral as a limit of Riemann sums, prove the **Sum Rule**:
+$$\\int_a^b\\big[f(x)+g(x)\\big]\\,dx=\\int_a^b f(x)\\,dx+\\int_a^b g(x)\\,dx,$$
+given that $f$ and $g$ are integrable on $[a,b]$. (8)
+        `,
+        solution: `
+By definition, with sample points $x_i^*$ and $\\Delta x=\\dfrac{b-a}{n}$:
+$$\\int_a^b\\big[f(x)+g(x)\\big]\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^n\\big[f(x_i^*)+g(x_i^*)\\big]\\Delta x.$$ ✓✓✓
+
+Distributing $\\Delta x$ and splitting the sum into two sums (valid since both limits exist, as $f,g$ are integrable):
+$$=\\lim_{n\\to\\infty}\\left(\\sum_{i=1}^n f(x_i^*)\\Delta x+\\sum_{i=1}^n g(x_i^*)\\Delta x\\right).$$ ✓✓
+
+By the Sum Law for limits, this splits into two separate limits:
+$$=\\lim_{n\\to\\infty}\\sum_{i=1}^n f(x_i^*)\\Delta x+\\lim_{n\\to\\infty}\\sum_{i=1}^n g(x_i^*)\\Delta x=\\int_a^b f(x)\\,dx+\\int_a^b g(x)\\,dx.\\quad\\blacksquare$$ ✓✓✓
+        `
+      },
+      {
+        number: 5,
         title: 'Inverse trigonometric, exponential and logarithmic integrals',
         section: '§9.1',
         marks: 6,
@@ -347,7 +388,7 @@ $$\\int\\frac{\\sec^2x}{\\tan x}\\,dx = \\ln|\\tan x|+C.$$ ✓
         `
       },
       {
-        number: 5,
+        number: 6,
         title: 'Integration by parts',
         section: '§9.2',
         marks: 6,
@@ -363,7 +404,7 @@ $$= \\frac{x^3}{3}\\ln x - \\frac13\\cdot\\frac{x^3}{3}+C = \\frac{x^3}{3}\\ln x
         `
       },
       {
-        number: 6,
+        number: 7,
         title: 'Partial fraction decomposition (distinct linear factors, plus a bonus)',
         section: '§9.5',
         marks: 6,
@@ -401,9 +442,8 @@ $$\\int\\frac{x^2}{x^2-1}\\,dx = \\int\\left(1+\\frac{1/2}{x-1}-\\frac{1/2}{x+1}
     id: 'paper3',
     label: 'Practice Paper 3',
     date: 'Practice Test C',
-    totalMarks: 44,
-    duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    totalMarks: 52,
+    duration: 60,
     questions: [
       {
         number: 1,
@@ -499,6 +539,31 @@ $$A = \\frac{10}{3}-\\left(-\\frac76\\right) = \\frac{20}{6}+\\frac{7}{6} = \\fr
       },
       {
         number: 4,
+        title: 'Proof: Integrals of Even and Odd Functions',
+        section: '§8',
+        marks: 8,
+        prompt: `
+Suppose $f$ is continuous on $[-a,a]$. Prove that:
+
+**(a)** if $f$ is even ($f(-x)=f(x)$), then $\\displaystyle\\int_{-a}^a f(x)\\,dx=2\\int_0^a f(x)\\,dx$; (4)
+
+**(b)** if $f$ is odd ($f(-x)=-f(x)$), then $\\displaystyle\\int_{-a}^a f(x)\\,dx=0$. (4)
+        `,
+        solution: `
+Split the integral at $0$: $\\displaystyle\\int_{-a}^a f(x)\\,dx=\\int_{-a}^0 f(x)\\,dx+\\int_0^a f(x)\\,dx$. ✓
+
+In the first integral substitute $u=-x$ ($du=-dx$); when $x=-a$, $u=a$, and when $x=0$, $u=0$:
+$$\\int_{-a}^0 f(x)\\,dx=-\\int_a^0 f(-u)\\,du=\\int_0^a f(-x)\\,dx.$$ ✓✓
+
+Hence $\\displaystyle\\int_{-a}^a f(x)\\,dx=\\int_0^a f(-x)\\,dx+\\int_0^a f(x)\\,dx$. ✓
+
+**(a)** If $f$ is even, $f(-x)=f(x)$, so this becomes $2\\displaystyle\\int_0^a f(x)\\,dx$. $\\blacksquare$ ✓✓
+
+**(b)** If $f$ is odd, $f(-x)=-f(x)$, so this becomes $-\\displaystyle\\int_0^a f(x)\\,dx+\\int_0^a f(x)\\,dx=0$. $\\blacksquare$ ✓✓
+        `
+      },
+      {
+        number: 5,
         title: 'Inverse trigonometric, exponential and logarithmic integrals',
         section: '§9.1',
         marks: 6,
@@ -528,7 +593,7 @@ $$\\int\\cot x\\,dx = \\ln|\\sin x|+C.$$ ✓
         `
       },
       {
-        number: 5,
+        number: 6,
         title: 'Integration by parts',
         section: '§9.2',
         marks: 6,
@@ -544,7 +609,7 @@ $$= -\\frac{x\\cos(3x)}{3} + \\frac13\\cdot\\frac{\\sin(3x)}{3}+C = -\\frac{x\\c
         `
       },
       {
-        number: 6,
+        number: 7,
         title: 'Partial fraction decomposition (repeated linear factor)',
         section: '§9.5',
         marks: 6,
@@ -572,9 +637,8 @@ $$\\int\\frac{x^2+1}{x(x-1)^2}\\,dx = \\int\\left(\\frac1x+\\frac{2}{(x-1)^2}\\r
     id: 'paper4',
     label: 'Practice Paper 4',
     date: 'Practice Test D',
-    totalMarks: 44,
-    duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    totalMarks: 52,
+    duration: 60,
     questions: [
       {
         number: 1,
@@ -667,6 +731,27 @@ $$8 = \\frac{4\\pi}{25}(25)\\frac{dh}{dt} = 4\\pi\\frac{dh}{dt} \\;\\Rightarrow\
       },
       {
         number: 4,
+        title: 'Proof: Fundamental Theorem of Calculus (Part 1)',
+        section: '§8',
+        marks: 8,
+        prompt: `
+Let $f$ be continuous on $[a,b]$, and define $\\displaystyle g(x)=\\int_a^x f(t)\\,dt$ for $a\\le x\\le b$. Prove that $g$ is differentiable on $[a,b]$ and $g'(x)=f(x)$.
+
+You may use the Mean Value Theorem for Integrals without proof. (8)
+        `,
+        solution: `
+By the limit definition of the derivative:
+$$g'(x)=\\lim_{h\\to0}\\frac{g(x+h)-g(x)}{h}=\\lim_{h\\to0}\\frac{1}{h}\\int_x^{x+h}f(t)\\,dt.$$ ✓✓✓
+
+By the Mean Value Theorem for Integrals, there is some $c$ between $x$ and $x+h$ with $\\displaystyle\\int_x^{x+h}f(t)\\,dt=f(c)\\cdot h$. ✓✓
+
+Substituting gives $\\displaystyle g'(x)=\\lim_{h\\to0}\\frac{f(c)\\cdot h}{h}=\\lim_{h\\to0}f(c)$. ✓
+
+As $h\\to0$, $c$ is squeezed between $x$ and $x+h$, so $c\\to x$; since $f$ is continuous, $\\displaystyle\\lim_{h\\to0}f(c)=f(x)$, hence $g'(x)=f(x)$. $\\blacksquare$ ✓✓
+        `
+      },
+      {
+        number: 5,
         title: 'Inverse trigonometric, exponential and logarithmic integrals',
         section: '§9.1',
         marks: 6,
@@ -696,7 +781,7 @@ $$\\int\\frac{dx}{x\\ln x} = \\int\\frac{du}{u} = \\ln|\\ln x|+C.$$ ✓
         `
       },
       {
-        number: 5,
+        number: 6,
         title: 'Integration by parts',
         section: '§9.2',
         marks: 6,
@@ -715,7 +800,7 @@ $$\\int\\arctan x\\,dx = x\\arctan x - \\frac12\\ln(1+x^2)+C.$$ ✓
         `
       },
       {
-        number: 6,
+        number: 7,
         title: 'Partial fraction decomposition (three distinct linear factors)',
         section: '§9.5',
         marks: 6,
@@ -743,9 +828,8 @@ $$\\int\\frac{x^2+2x-1}{x(x-1)(x+1)}\\,dx = \\int\\left(\\frac1x+\\frac{1}{x-1}-
     id: 'paper5',
     label: 'Practice Paper 5',
     date: 'Practice Test E',
-    totalMarks: 44,
-    duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    totalMarks: 52,
+    duration: 60,
     questions: [
       {
         number: 1,
@@ -839,6 +923,26 @@ $$= 2\\pi\\left[\\frac{x^4}{4}\\right]_0^2 = 2\\pi(4) = 8\\pi.$$ ✓✓✓
       },
       {
         number: 4,
+        title: 'Proof: Leibniz Rule for Differentiating an Integral',
+        section: '§8',
+        marks: 8,
+        prompt: `
+Let $f$ be continuous on $[a,b]$, and let $u,v$ be differentiable functions with values in $[a,b]$. Using the Fundamental Theorem of Calculus and the Chain Rule, prove that
+$$\\frac{d}{dx}\\left[\\int_{u(x)}^{v(x)} f(t)\\,dt\\right]=f\\big(v(x)\\big)v'(x)-f\\big(u(x)\\big)u'(x).$$ (8)
+        `,
+        solution: `
+Fix a constant $k\\in[a,b]$ and split the integral: $\\displaystyle\\int_{u(x)}^{v(x)}f(t)\\,dt=\\int_k^{v(x)}f(t)\\,dt-\\int_k^{u(x)}f(t)\\,dt$. ✓✓
+
+Define $g(y)=\\displaystyle\\int_k^y f(t)\\,dt$. By the Fundamental Theorem of Calculus (Part 1), $g'(y)=f(y)$. ✓✓
+
+The expression above is $g(v(x))-g(u(x))$, so differentiating with the Chain Rule:
+$$\\frac{d}{dx}\\Big[g(v(x))-g(u(x))\\Big]=g'(v(x))v'(x)-g'(u(x))u'(x).$$ ✓✓
+
+Since $g'=f$, this equals $f(v(x))v'(x)-f(u(x))u'(x)$, as required. $\\blacksquare$ ✓✓
+        `
+      },
+      {
+        number: 5,
         title: 'Inverse trigonometric, exponential and logarithmic integrals',
         section: '§9.1',
         marks: 6,
@@ -868,7 +972,7 @@ $$\\int\\frac{e^x}{e^x+1}\\,dx = \\int\\frac{du}{u} = \\ln(e^x+1)+C.$$ ✓
         `
       },
       {
-        number: 5,
+        number: 6,
         title: 'Integration by parts',
         section: '§9.2',
         prompt: `
@@ -887,7 +991,7 @@ $$I = \\frac{e^x}{2}\\big(\\sin x+\\cos x\\big)+C.$$ ✓✓
         `
       },
       {
-        number: 6,
+        number: 7,
         title: 'Partial fraction decomposition (repeated linear factor)',
         section: '§9.5',
         marks: 6,
@@ -915,9 +1019,8 @@ $$\\int\\frac{x^2+1}{(x+1)^2(x-1)}\\,dx = \\int\\left(\\frac{1/2}{x+1}-\\frac{1}
     id: 'paper6',
     label: 'Practice Paper 6',
     date: 'Practice Test F',
-    totalMarks: 44,
-    duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    totalMarks: 52,
+    duration: 60,
     questions: [
       {
         number: 1,
@@ -1010,6 +1113,26 @@ $$c^2+1=4 \\;\\Rightarrow\\; c^2=3 \\;\\Rightarrow\\; c=\\sqrt3\\quad(\\text{tak
       },
       {
         number: 4,
+        title: 'Proof: Reduction Formula for ∫ secⁿx dx',
+        section: '§9.2',
+        marks: 8,
+        prompt: `
+Prove the reduction formula, valid for $n\\ge2$:
+$$\\int\\sec^n x\\,dx=\\frac{1}{n-1}\\sec^{n-2}x\\tan x+\\frac{n-2}{n-1}\\int\\sec^{n-2}x\\,dx.$$ (8)
+        `,
+        solution: `
+Write $\\displaystyle\\int\\sec^n x\\,dx=\\int\\sec^{n-2}x\\cdot\\sec^2x\\,dx$ and integrate by parts with $u=\\sec^{n-2}x$, $dv=\\sec^2x\\,dx$, so $du=(n-2)\\sec^{n-2}x\\tan x\\,dx$ and $v=\\tan x$. ✓✓
+
+This gives $\\displaystyle\\int\\sec^n x\\,dx=\\sec^{n-2}x\\tan x-(n-2)\\int\\sec^{n-2}x\\tan^2x\\,dx$. ✓✓
+
+Using $\\tan^2x=\\sec^2x-1$:
+$$\\int\\sec^n x\\,dx=\\sec^{n-2}x\\tan x-(n-2)\\int\\sec^n x\\,dx+(n-2)\\int\\sec^{n-2}x\\,dx.$$ ✓✓
+
+Collecting the $\\int\\sec^n x\\,dx$ terms on the left gives $(n-1)\\displaystyle\\int\\sec^n x\\,dx=\\sec^{n-2}x\\tan x+(n-2)\\int\\sec^{n-2}x\\,dx$; dividing by $(n-1)$ completes the proof. $\\blacksquare$ ✓✓
+        `
+      },
+      {
+        number: 5,
         title: 'Inverse trigonometric, exponential and logarithmic integrals',
         section: '§9.1',
         marks: 6,
@@ -1039,7 +1162,7 @@ $$\\int\\tan(2x)\\,dx = \\frac12\\int\\tan u\\,du = -\\frac12\\ln|\\cos(2x)|+C.$
         `
       },
       {
-        number: 5,
+        number: 6,
         title: 'Integration by parts',
         section: '§9.2',
         marks: 6,
@@ -1057,7 +1180,7 @@ $$\\int x^2\\sin x\\,dx = -x^2\\cos x+2x\\sin x+2\\cos x+C.$$ ✓✓
         `
       },
       {
-        number: 6,
+        number: 7,
         title: 'Partial fraction decomposition (irreducible quadratic factor)',
         section: '§9.5',
         marks: 6,
@@ -1087,9 +1210,8 @@ $$\\int\\frac{2x+3}{(x-1)(x^2+4)}\\,dx = \\ln|x-1| - \\frac12\\ln(x^2+4) + \\fra
     id: 'paper7',
     label: 'Practice Paper 7',
     date: 'Practice Test G',
-    totalMarks: 44,
-    duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    totalMarks: 52,
+    duration: 60,
     questions: [
       {
         number: 1,
@@ -1149,7 +1271,27 @@ $$V=\\pi\\int_0^3(3x-x^2)^2dx=\\pi\\int_0^3(9x^2-6x^3+x^4)dx=\\frac{81\\pi}{10}.
         `
       },
       {
-        number: 4, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        number: 4,
+        title: 'Proof: Reduction Formula for ∫ cosⁿx dx',
+        section: '§9.2',
+        marks: 8,
+        prompt: `
+Prove the reduction formula, valid for integers $n\\ge2$:
+$$\\int\\cos^n x\\,dx=\\frac{\\cos^{n-1}x\\sin x}{n}+\\frac{n-1}{n}\\int\\cos^{n-2}x\\,dx.$$ (8)
+        `,
+        solution: `
+Write $\\displaystyle\\int\\cos^n x\\,dx=\\int\\cos^{n-1}x\\cdot\\cos x\\,dx$ and integrate by parts with $u=\\cos^{n-1}x$, $dv=\\cos x\\,dx$, so $du=-(n-1)\\cos^{n-2}x\\sin x\\,dx$ and $v=\\sin x$. ✓✓
+
+This gives $\\displaystyle\\int\\cos^n x\\,dx=\\cos^{n-1}x\\sin x+(n-1)\\int\\cos^{n-2}x\\sin^2x\\,dx$. ✓✓
+
+Using $\\sin^2x=1-\\cos^2x$:
+$$\\int\\cos^n x\\,dx=\\cos^{n-1}x\\sin x+(n-1)\\int\\cos^{n-2}x\\,dx-(n-1)\\int\\cos^n x\\,dx.$$ ✓✓
+
+Collecting the $\\int\\cos^n x\\,dx$ terms on the left gives $n\\displaystyle\\int\\cos^n x\\,dx=\\cos^{n-1}x\\sin x+(n-1)\\int\\cos^{n-2}x\\,dx$; dividing by $n$ completes the proof. $\\blacksquare$ ✓✓
+        `
+      },
+      {
+        number: 5, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
         prompt: `
 Evaluate each integral.
 
@@ -1172,16 +1314,15 @@ Evaluate each integral.
         `
       },
       {
-        number: 5, title: 'Integration by parts with an inverse trigonometric factor', section: '§9.2', marks: 6,
+        number: 6, title: 'Integration by parts with an inverse trigonometric factor', section: '§9.2', marks: 6,
         prompt: `Evaluate $\\displaystyle\\int x\\arctan x\\,dx$.`,
         solution: `
 Take $u=\\arctan x$, $dv=x\\,dx$. Then
-$$\\int x\\arctan x\\,dx=\\frac{x^2}{2}\\arctan x-\\frac12\\int\\frac{x^2}{1+x^2}dx
-=\\frac{x^2}{2}\\arctan x-\\frac{x}{2}+\\frac12\\arctan x+C.$$ ✓✓✓
+$$\\int x\\arctan x\\,dx=\\frac{x^2}{2}\\arctan x-\\frac12\\int\\frac{x^2}{1+x^2}dx=\\frac{x^2}{2}\\arctan x-\\frac{x}{2}+\\frac12\\arctan x+C.$$ ✓✓✓
         `
       },
       {
-        number: 6, title: 'Partial fractions (linear factor and irreducible quadratic)', section: '§9.5', marks: 6,
+        number: 7, title: 'Partial fractions (linear factor and irreducible quadratic)', section: '§9.5', marks: 6,
         prompt: `Evaluate $\\displaystyle\\int\\frac{2x^2+3x+1}{(x+2)(x^2+1)}dx$.`,
         solution: `
 Use $\\dfrac{2x^2+3x+1}{(x+2)(x^2+1)}=\\dfrac{A}{x+2}+\\dfrac{Bx+C}{x^2+1}$. Coefficient matching gives $A=\\frac35$, $B=\\frac75$, $C=\\frac15$. ✓✓
@@ -1195,8 +1336,7 @@ $$\\int\\frac{2x^2+3x+1}{(x+2)(x^2+1)}dx=\\frac35\\ln|x+2|+\\frac7{10}\\ln(x^2+1
   // PRACTICE PAPER 8
   // =====================================================================
   {
-    id: 'paper8', label: 'Practice Paper 8', date: 'Practice Test H', totalMarks: 44, duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    id: 'paper8', label: 'Practice Paper 8', date: 'Practice Test H', totalMarks: 52, duration: 60,
     questions: [
       {
         number: 1, title: 'Curve sketching (exponential decay)', section: '§6.5', marks: 12,
@@ -1238,7 +1378,28 @@ $$A=\\int_{-1}^0(x^3-x)dx+\\int_0^1(x-x^3)dx=2\\int_0^1(x-x^3)dx=\\frac12.$$ ✓
         `
       },
       {
-        number: 4, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        number: 4,
+        title: 'Proof: Formula for ∫ eᵃˣcos(bx) dx',
+        section: '§9.2',
+        marks: 8,
+        prompt: `
+Prove that
+$$\\int e^{ax}\\cos(bx)\\,dx=\\frac{e^{ax}}{a^2+b^2}\\big(a\\cos(bx)+b\\sin(bx)\\big)+C.$$ (8)
+        `,
+        solution: `
+Let $I=\\displaystyle\\int e^{ax}\\cos(bx)\\,dx$. Integrate by parts with $u=e^{ax}$, $dv=\\cos(bx)\\,dx$, so $du=ae^{ax}\\,dx$ and $v=\\frac1b\\sin(bx)$:
+$$I=\\frac1b e^{ax}\\sin(bx)-\\frac{a}{b}\\int e^{ax}\\sin(bx)\\,dx.$$ ✓✓
+
+Integrate $\\displaystyle\\int e^{ax}\\sin(bx)\\,dx$ by parts again with $u=e^{ax}$, $dv=\\sin(bx)\\,dx$, so $du=ae^{ax}\\,dx$ and $v=-\\frac1b\\cos(bx)$:
+$$\\int e^{ax}\\sin(bx)\\,dx=-\\frac1b e^{ax}\\cos(bx)+\\frac{a}{b}I.$$ ✓✓
+
+Substituting back: $I=\\dfrac1b e^{ax}\\sin(bx)+\\dfrac{a}{b^2}e^{ax}\\cos(bx)-\\dfrac{a^2}{b^2}I$. ✓✓
+
+Collecting the $I$ terms on the left gives $\\left(\\dfrac{a^2+b^2}{b^2}\\right)I=\\dfrac{e^{ax}}{b^2}\\big(a\\cos(bx)+b\\sin(bx)\\big)$; multiplying both sides by $\\dfrac{b^2}{a^2+b^2}$ gives $I=\\dfrac{e^{ax}}{a^2+b^2}\\big(a\\cos(bx)+b\\sin(bx)\\big)+C$. $\\blacksquare$ ✓✓
+        `
+      },
+      {
+        number: 5, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
         prompt: `
 Evaluate each integral.
 
@@ -1255,7 +1416,7 @@ Evaluate each integral.
         `
       },
       {
-        number: 5, title: 'Integration by parts with a logarithm', section: '§9.2', marks: 6,
+        number: 6, title: 'Integration by parts with a logarithm', section: '§9.2', marks: 6,
         prompt: `Evaluate $\\displaystyle\\int\\ln(x^2+1)dx$.`,
         solution: `
 Integration by parts with $u=\\ln(x^2+1)$ and $dv=dx$ gives
@@ -1263,7 +1424,7 @@ $$\\int\\ln(x^2+1)dx=x\\ln(x^2+1)-2x+2\\arctan x+C.$$ ✓✓✓
         `
       },
       {
-        number: 6, title: 'Partial fractions (improper fraction)', section: '§9.5', marks: 6,
+        number: 7, title: 'Partial fractions (improper fraction)', section: '§9.5', marks: 6,
         prompt: `Evaluate $\\displaystyle\\int\\frac{x^3+2x^2+5}{x^2+1}dx$.`,
         solution: `
 Long division gives $\\dfrac{x^3+2x^2+5}{x^2+1}=x+2+\\dfrac{-x+3}{x^2+1}$. Therefore the integral is
@@ -1277,8 +1438,7 @@ $$\\frac{x^2}{2}+2x-\\frac12\\ln(x^2+1)+3\\arctan x+C.$$ ✓✓✓
   // PRACTICE PAPER 9
   // =====================================================================
   {
-    id: 'paper9', label: 'Practice Paper 9', date: 'Practice Test I', totalMarks: 44, duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    id: 'paper9', label: 'Practice Paper 9', date: 'Practice Test I', totalMarks: 52, duration: 60,
     questions: [
       {
         number: 1, title: 'Curve sketching (logarithmic quotient)', section: '§6.5', marks: 12,
@@ -1319,7 +1479,28 @@ $$V=\\int_0^h b^2(1-x/h)^2dx=\\frac{b^2h}{3}.$$ ✓✓✓
         `
       },
       {
-        number: 4, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        number: 4,
+        title: 'Proof: Convergence of the p-Integral',
+        section: '§10',
+        marks: 8,
+        prompt: `
+Prove that
+$$\\int_1^\\infty\\frac{1}{x^p}\\,dx=\\frac{1}{p-1}\\quad\\text{if } p>1,$$
+and that the integral diverges if $p\\le1$. (8)
+        `,
+        solution: `
+**Case $p=1$:** $\\displaystyle\\int_1^\\infty\\frac{1}{x}\\,dx=\\lim_{t\\to\\infty}\\big[\\ln t-\\ln1\\big]=\\lim_{t\\to\\infty}\\ln t=\\infty$, so the integral diverges. ✓✓
+
+**Case $p\\ne1$:**
+$$\\int_1^\\infty\\frac{1}{x^p}\\,dx=\\lim_{t\\to\\infty}\\int_1^t x^{-p}\\,dx=\\lim_{t\\to\\infty}\\frac{t^{1-p}-1}{1-p}.$$ ✓✓✓
+
+If $p>1$, then $1-p<0$, so $t^{1-p}=\\dfrac{1}{t^{p-1}}\\to0$ as $t\\to\\infty$; the limit equals $\\dfrac{0-1}{1-p}=\\dfrac{1}{p-1}$, so the integral converges. ✓✓
+
+If $p<1$, then $1-p>0$, so $t^{1-p}\\to\\infty$ as $t\\to\\infty$, and the limit diverges. Combining all cases proves the result. $\\blacksquare$ ✓
+        `
+      },
+      {
+        number: 5, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
         prompt: `
 Evaluate each integral.
 
@@ -1336,7 +1517,7 @@ Evaluate each integral.
         `
       },
       {
-        number: 5, title: 'Integration by parts with a trigonometric polynomial', section: '§9.2', marks: 6,
+        number: 6, title: 'Integration by parts with a trigonometric polynomial', section: '§9.2', marks: 6,
         prompt: `Evaluate $\\displaystyle\\int x^2\\cos(2x)dx$.`,
         solution: `
 Two integrations by parts yield
@@ -1344,7 +1525,7 @@ $$\\int x^2\\cos(2x)dx=\\frac{x^2}{2}\\sin(2x)+\\frac{x}{2}\\cos(2x)-\\frac14\\s
         `
       },
       {
-        number: 6, title: 'Partial fractions (repeated irreducible quadratic)', section: '§9.5', marks: 6,
+        number: 7, title: 'Partial fractions (repeated irreducible quadratic)', section: '§9.5', marks: 6,
         prompt: `Evaluate $\\displaystyle\\int\\frac{x^3+x^2+2x+1}{(x^2+1)^2}dx$.`,
         solution: `
 Use $\\dfrac{Ax+B}{x^2+1}+\\dfrac{Cx+D}{(x^2+1)^2}$; matching coefficients gives $A=B=C=1$, $D=0$. Therefore

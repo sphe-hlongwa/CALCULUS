@@ -1,18 +1,40 @@
 /**
  * math.js - KaTeX rendering helpers + formula card builder
+ *
+ * KaTeX is loaded from index.html. Dynamic views (exams, quizzes, etc.)
+ * are inserted after the initial page render, so they must explicitly
+ * invoke this helper after inserting their HTML.
  */
-function renderMath(container) {
-  if (!container || typeof renderMathInElement === 'undefined') return;
-  renderMathInElement(container, {
-    delimiters: [
-      { left: '$$', right: '$$', display: true },
-      { left: '$',  right: '$',  display: false },
-      { left: '\\(', right: '\\)', display: false },
-      { left: '\\[', right: '\\]', display: true  },
-    ],
-    throwOnError: false,
-    strict: false,
-  });
+function renderMath(container, attempts = 0) {
+  if (!container) return;
+
+  // KaTeX/auto-render can arrive a moment after the app scripts when the
+  // CDN is slow. Retry briefly instead of silently leaving raw $...$ visible.
+  if (typeof renderMathInElement === 'undefined') {
+    if (attempts < 20) {
+      setTimeout(() => renderMath(container, attempts + 1), 100);
+    }
+    return;
+  }
+
+  try {
+    renderMathInElement(container, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$',  right: '$',  display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true  },
+      ],
+      throwOnError: false,
+      strict: false,
+      trust: false,
+      ignoredClasses: ['katex-rendered'],
+    });
+    container.classList.add('katex-rendered');
+  } catch (error) {
+    // Do not break the exam if one expression is malformed.
+    console.warn('KaTeX rendering error:', error);
+  }
 }
 
 function buildFormulaSection(chapterNum) {

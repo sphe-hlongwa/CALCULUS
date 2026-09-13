@@ -7,6 +7,7 @@ const Exams = (() => {
 
   let timerInterval = null;
   let timerEndsAt = null;
+  let isFullscreen = false;
 
   function open() {
     const overlay = document.getElementById('exam-overlay');
@@ -16,12 +17,26 @@ const Exams = (() => {
     renderList();
   }
 
+  function toggleFullscreen(force) {
+    const overlay = document.getElementById('exam-overlay');
+    const shell = overlay?.querySelector('.exam-shell');
+    const btn = document.getElementById('exam-fullscreen-toggle');
+    if (!overlay || !shell || !btn) return;
+
+    isFullscreen = typeof force === 'boolean' ? force : !isFullscreen;
+    overlay.classList.toggle('exam-overlay-fullscreen', isFullscreen);
+    shell.classList.toggle('exam-shell-fullscreen', isFullscreen);
+    btn.innerHTML = (typeof Icons !== 'undefined' ? Icons[isFullscreen ? 'minimize' : 'maximize'] : '');
+    btn.setAttribute('aria-label', isFullscreen ? 'Exit full screen' : 'Full screen');
+  }
+
   function close() {
     const overlay = document.getElementById('exam-overlay');
     if (!overlay) return;
     stopTimer();
     overlay.classList.add('hidden');
     document.body.style.overflow = '';
+    toggleFullscreen(false);
   }
 
   function startTimer(minutes) {
@@ -75,9 +90,6 @@ const Exams = (() => {
             <p class="exam-pick-meta">${paper.totalMarks} marks &middot; ${paper.duration} minutes &middot; ${paper.questions.length} questions</p>
           </div>
         </div>
-        <div class="exam-pick-tags">
-          ${paper.scopeTags.map(t => `<span class="exam-tag">${t}</span>`).join('')}
-        </div>
         <button class="btn-primary exam-start-btn" data-exam-id="${paper.id}">Start Paper &rarr;</button>
       </div>
     `).join('');
@@ -95,7 +107,10 @@ const Exams = (() => {
     });
 
     root.scrollTop = 0;
+    // Render after the new DOM is committed. This is important for dynamic
+    // exam content because KaTeX auto-render only sees the initial document.
     renderMath(root);
+    requestAnimationFrame(() => renderMath(root));
   }
 
   function renderPaper(examId) {
@@ -178,6 +193,7 @@ const Exams = (() => {
         btn.textContent = showing ? 'Show Memo (Solution)' : 'Hide Memo (Solution)';
         if (!showing) {
           renderMath(solEl);
+          requestAnimationFrame(() => renderMath(solEl));
           const q = paper.questions.find(qq => qq.number === Number(btn.dataset.q));
           if (q && q.graph && typeof Graphs !== 'undefined' && Graphs.examCurve) {
             // Wait a tick so the now-visible container has a real layout size.
@@ -188,7 +204,10 @@ const Exams = (() => {
     });
 
     root.scrollTop = 0;
+    // The exam is dynamically inserted, so explicitly typeset both immediately
+    // and on the next frame. The helper also retries if the CDN is still loading.
     renderMath(root);
+    requestAnimationFrame(() => renderMath(root));
     startTimer(paper.duration);
   }
 
@@ -216,12 +235,13 @@ const Exams = (() => {
     return s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   }
 
-  return { open, close, renderList, renderPaper };
+  return { open, close, renderList, renderPaper, toggleFullscreen };
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('exam-btn')?.addEventListener('click', () => Exams.open());
   document.getElementById('exam-close')?.addEventListener('click', () => Exams.close());
+  document.getElementById('exam-fullscreen-toggle')?.addEventListener('click', () => Exams.toggleFullscreen());
   document.getElementById('exam-overlay')?.addEventListener('click', e => {
     if (e.target.id === 'exam-overlay') Exams.close();
   });

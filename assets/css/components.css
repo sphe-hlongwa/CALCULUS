@@ -168,6 +168,9 @@
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-radius .15s ease;
 }
 
 .exam-shell-header {
@@ -176,10 +179,41 @@
   gap: 12px;
   padding: 18px 24px;
   border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 .exam-shell-header h2 { font-size: 1rem; font-weight: 700; flex: 1; }
 
-#exam-content { padding: 24px 28px 48px; max-height: calc(90vh - 60px); overflow-y: auto; }
+.panel-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background .12s ease, color .12s ease;
+}
+.panel-icon-btn:hover { background: var(--border); color: var(--text-1); }
+
+#exam-content { padding: 24px 28px 48px; max-height: calc(90vh - 60px); overflow-y: auto; flex: 1; }
+
+/* ── Full-screen mode ── */
+#exam-overlay.exam-overlay-fullscreen {
+  padding: 0;
+  align-items: stretch;
+}
+.exam-shell.exam-shell-fullscreen {
+  max-width: none;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  border-radius: 0;
+}
+.exam-shell.exam-shell-fullscreen #exam-content {
+  max-height: none;
+}
 
 /* ── Picker view ── */
 .exam-list-header h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }

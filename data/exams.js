@@ -1288,10 +1288,10 @@ Using $\\sin^2x=1-\\cos^2x$:
 $$\\int\\cos^n x\\,dx=\\cos^{n-1}x\\sin x+(n-1)\\int\\cos^{n-2}x\\,dx-(n-1)\\int\\cos^n x\\,dx.$$ ✓✓
 
 Collecting the $\\int\\cos^n x\\,dx$ terms on the left gives $n\\displaystyle\\int\\cos^n x\\,dx=\\cos^{n-1}x\\sin x+(n-1)\\int\\cos^{n-2}x\\,dx$; dividing by $n$ completes the proof. $\\blacksquare$ ✓✓
-        `
-      },
-      {
-        number: 5, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        `,
+     },
+     {
+       number: 5, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
         prompt: `
 Evaluate each integral.
 
@@ -1384,7 +1384,7 @@ $$A=\\int_{-1}^0(x^3-x)dx+\\int_0^1(x-x^3)dx=2\\int_0^1(x-x^3)dx=\\frac12.$$ ✓
         section: '§9.2',
         marks: 8,
         prompt: `
-Prove that
+Let $f$ be integrable on $[a,b]$ and let $c\in[a,b]$. Prove the additivity property
 $$\\int e^{ax}\\cos(bx)\\,dx=\\frac{e^{ax}}{a^2+b^2}\\big(a\\cos(bx)+b\\sin(bx)\\big)+C.$$ (8)
         `,
         solution: `
@@ -1534,5 +1534,469 @@ $$\\int\\frac{x^3+x^2+2x+1}{(x^2+1)^2}dx=\\frac12\\ln(x^2+1)+\\arctan x-\\frac{1
         `
       }
     ]
+  },
+
+  // =====================================================================
+  // PRACTICE PAPER 10
+  // =====================================================================
+  {
+    id: 'paper10', label: 'Practice Paper 10', date: 'Practice Test J', totalMarks: 52, duration: 60,
+    questions: [
+      {
+        number: 1, title: 'Curve sketching (rational function with a slant asymptote)', section: '§6.5', marks: 12,
+        prompt: `
+Let $\\displaystyle f(x)=\\frac{x^2-4x+5}{x-1}$.
+
+**(a)** Find the $x$- and $y$-intercepts of $f$. (2)
+
+**(b)** Use polynomial division to find the vertical and slant asymptotes. (2)
+
+**(c)** Find $f'(x)$ and determine the intervals of increase/decrease and all local extrema. (3)
+
+**(d)** Find $f''(x)$ and determine the concavity. (3)
+
+**(e)** Sketch the graph, showing the asymptotes and stationary points. (2)
+        `,
+        solution: `
+The numerator is $(x-2)^2+1>0$, so there are no $x$-intercepts. The $y$-intercept is $f(0)=-5$. ✓✓
+
+Long division gives
+$$f(x)=x-3+\\frac{2}{x-1}.$$
+Thus $x=1$ is the vertical asymptote and $y=x-3$ is the slant asymptote. ✓✓
+
+From the divided form,
+$$f'(x)=1-\\frac{2}{(x-1)^2}=\\frac{(x-1)^2-2}{(x-1)^2}.$$
+Critical points satisfy $(x-1)^2=2$, so $x=1\\pm\\sqrt2$. The derivative is positive for $|x-1|>\\sqrt2$ and negative for $0<|x-1|<\\sqrt2$. Hence $f$ increases on $(-\\infty,1-\\sqrt2)$ and $(1+\\sqrt2,\\infty)$, and decreases on $(1-\\sqrt2,1)$ and $(1,1+\\sqrt2)$. There is a local maximum at $x=1-\\sqrt2$, with $f=-2-2\\sqrt2$, and a local minimum at $x=1+\\sqrt2$, with $f=-2+2\\sqrt2$. ✓✓✓
+
+$$f''(x)=\\frac{4}{(x-1)^3}.$$
+Therefore $f$ is concave down on $(-\\infty,1)$ and concave up on $(1,\\infty)$; there is no inflection point because $x=1$ is not in the domain. ✓✓
+
+The sketch has no $x$-intercepts, passes through $(0,-5)$, and approaches $x=1$ and $y=x-3$ as described. ✓✓
+        `,
+        graph: {
+          fn: x => (x * x - 4 * x + 5) / (x - 1),
+          domain: [-7, 8],
+          breaks: [1],
+          vAsymptotes: [1],
+          slant: { m: 1, c: -3 },
+          yRange: [-12, 10],
+          intercepts: [{ x: 0, y: -5 }],
+          extrema: [
+            { x: 1 - Math.sqrt(2), y: -2 - 2 * Math.sqrt(2), type: 'max' },
+            { x: 1 + Math.sqrt(2), y: -2 + 2 * Math.sqrt(2), type: 'min' }
+          ],
+          title: 'f(x) = (x²-4x+5)/(x-1)'
+        }
+      },
+      {
+        number: 2, title: 'Optimization — open rectangular box', section: '§6.6', marks: 6,
+        prompt: `An open rectangular box has a square-width base: its length is twice its width. Its volume is $288\\text{ cm}^3$. Find the dimensions that minimise the surface area.` ,
+        solution: `
+Let the width be $x$, the length $2x$, and the height $h$. The volume condition gives $2x^2h=288$, so $h=144/x^2$. ✓
+
+Because the top is open, the surface area is
+$$S(x)=2x^2+2(2xh)+2(xh)=2x^2+\\frac{864}{x}.$$ ✓
+
+$$S'(x)=4x-\\frac{864}{x^2}=0 \\Rightarrow x^3=216 \\Rightarrow x=6.$$ ✓✓
+
+Since $S''(x)=4+1728/x^3>0$, this is a minimum. Then $h=144/36=4$ cm and the length is $12$ cm. The dimensions are **$12\\text{ cm}\\times6\\text{ cm}\\times4\\text{ cm}$**. ✓✓
+        `
+      },
+      {
+        number: 3, title: 'Volume of revolution involving a logarithm', section: '§8', marks: 8,
+        prompt: `Let $R$ be the region bounded by $y=\\ln x$, $y=0$, $x=1$ and $x=e$. Find the volume generated when $R$ is revolved about the $x$-axis.` ,
+        solution: `
+On $[1,e]$, $\\ln x\\ge0$, so the disk radius is $\\ln x$. Hence
+$$V=\\pi\\int_1^e(\\ln x)^2\\,dx.$$ ✓✓
+
+Using integration by parts, $\\displaystyle\\int(\\ln x)^2dx=x\\big[(\\ln x)^2-2\\ln x+2\\big]+C$. Therefore
+$$V=\\pi\\left[x\\big((\\ln x)^2-2\\ln x+2\\big)\\right]_1^e=\\pi(e-2).$$ ✓✓✓
+
+**Volume $=\\pi(e-2)$ cubic units.**
+        `
+      },
+      {
+        number: 4, title: 'Proof: Integration by substitution', section: '§8', marks: 8,
+        prompt: `
+Let $g$ be differentiable on $[a,b]$ and let $f$ be continuous on the range of $g$. Prove the change-of-variables formula
+$$\\int_a^b f\\big(g(x)\\big)g'(x)\\,dx=\\int_{g(a)}^{g(b)}f(u)\\,du.$$ (8)
+        `,
+        solution: `
+Since $f$ is continuous, define $F(u)=\\int_{g(a)}^u f(t)\\,dt$. By the Fundamental Theorem of Calculus, $F'(u)=f(u)$. ✓✓
+
+Apply the Chain Rule to $F(g(x))$:
+$$\\frac{d}{dx}F(g(x))=F'(g(x))g'(x)=f(g(x))g'(x).$$ ✓✓
+
+Thus $F(g(x))$ is an antiderivative of the integrand. The Fundamental Theorem of Calculus gives
+$$\\int_a^b f(g(x))g'(x)\\,dx=F(g(b))-F(g(a))=\\int_{g(a)}^{g(b)}f(u)\\,du.$$ ✓✓✓
+This proves the formula. $\\blacksquare$ ✓
+        `
+      },
+      {
+        number: 5, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        prompt: `
+Evaluate each integral.
+
+**(a)** $\\displaystyle\\int\\frac{dx}{\\sqrt{16-25x^2}}$ (2)
+
+**(b)** $\\displaystyle\\int\\frac{dx}{x^2-4x+8}$ (2)
+
+**(c)** $\\displaystyle\\int3^{2x+1}\\,dx$ (1)
+
+**(d)** $\\displaystyle\\int\\frac{2x-3}{x^2-3x+7}\\,dx$ (1)
+        `,
+        solution: `
+**(a)** $\\displaystyle\\frac15\\arcsin\\!\\left(\\frac{5x}{4}\\right)+C$. ✓✓
+
+**(b)** Since $x^2-4x+8=(x-2)^2+4$,
+$$\\int\\frac{dx}{x^2-4x+8}=\\frac12\\arctan\\!\\left(\\frac{x-2}{2}\\right)+C.$$ ✓✓
+
+**(c)** $\\displaystyle\\int3^{2x+1}dx=\\frac{3^{2x+1}}{2\\ln3}+C$. ✓
+
+**(d)** The numerator is the derivative of the denominator, so the answer is $\\ln|x^2-3x+7|+C$. ✓
+        `
+      },
+      {
+        number: 6, title: 'Integration by parts with exponential and trigonometric factors', section: '§9.2', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int e^{2x}\\sin(3x)\\,dx$.`,
+        solution: `
+Let $I=\\int e^{2x}\\sin(3x)dx$ and $J=\\int e^{2x}\\cos(3x)dx$. Integration by parts gives
+$$I=-\\frac13e^{2x}\\cos(3x)+\\frac23J,$$
+and a second application gives
+$$J=\\frac13e^{2x}\\sin(3x)-\\frac23I.$$ ✓✓✓
+
+Substitution yields $I=-\\frac13e^{2x}\\cos(3x)+\\frac29e^{2x}\\sin(3x)-\\frac49I$, so
+$$I=\\frac{e^{2x}}{13}\\big(2\\sin(3x)-3\\cos(3x)\\big)+C.$$ ✓✓✓
+        `
+      },
+      {
+        number: 7, title: 'Partial fractions (improper fraction with a repeated factor)', section: '§9.5', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int\\frac{2x^3+3x^2+x+4}{x^2(x+1)}\\,dx$.`,
+        solution: `
+Long division gives
+$$\\frac{2x^3+3x^2+x+4}{x^2(x+1)}=2+\\frac{x^2+x+4}{x^2(x+1)}.$$ ✓
+
+Write
+$$\\frac{x^2+x+4}{x^2(x+1)}=\\frac{A}{x}+\\frac{B}{x^2}+\\frac{C}{x+1}.$$
+Then $x^2+x+4=A x(x+1)+B(x+1)+Cx^2$, which gives $A=-3$, $B=4$, $C=4$. ✓✓
+
+Therefore
+$$\\int\\frac{2x^3+3x^2+x+4}{x^2(x+1)}dx=2x-3\\ln|x|-\\frac4x+4\\ln|x+1|+C.$$ ✓✓✓
+        `
+      }
+    ]
+  },
+
+  // =====================================================================
+  // PRACTICE PAPER 11
+  // =====================================================================
+  {
+    id: 'paper11', label: 'Practice Paper 11', date: 'Practice Test K', totalMarks: 52, duration: 60,
+    questions: [
+      {
+        number: 1, title: 'Curve sketching (quintic polynomial)', section: '§6.5', marks: 12,
+        prompt: `
+Let $f(x)=x^5-5x^3$.
+
+**(a)** Find all intercepts and describe the end behaviour. (2)
+
+**(b)** Find $f'(x)$, and hence determine the intervals of increase/decrease and all local extrema. (4)
+
+**(c)** Find $f''(x)$, and hence determine the concavity and points of inflection. (4)
+
+**(d)** Sketch the graph, marking the stationary and inflection points. (2)
+        `,
+        solution: `
+Factor $f(x)=x^3(x^2-5)$, so the intercepts are $x=-\\sqrt5,0,\\sqrt5$ (and the $y$-intercept is $(0,0)$). Since the leading term is $x^5$, $f(x)\\to-\\infty$ as $x\\to-\\infty$ and $f(x)\\to\\infty$ as $x\\to\\infty$. ✓✓
+
+$$f'(x)=5x^4-15x^2=5x^2(x^2-3).$$
+Thus $f'>0$ when $|x|>\\sqrt3$ and $f'<0$ when $0<|x|<\\sqrt3$. The function increases on $(-\\infty,-\\sqrt3)$ and $(\\sqrt3,\\infty)$, and decreases on $(-\\sqrt3,0)$ and $(0,\\sqrt3)$. There is a local maximum at $(-\\sqrt3,6\\sqrt3)$ and a local minimum at $(\\sqrt3,-6\\sqrt3)$. At $x=0$, $f'=0$ but the sign does not change, so it is stationary but not an extremum. ✓✓✓
+
+$$f''(x)=20x^3-30x=10x(2x^2-3).$$
+The inflection points occur at $x=0$ and $x=\\pm\\sqrt{3/2}$. The signs give concave down on $(-\\infty,-\\sqrt{3/2})$ and $(0,\\sqrt{3/2})$, and concave up on $(-\\sqrt{3/2},0)$ and $(\\sqrt{3/2},\\infty)$. Their coordinates are
+$$\\left(-\\sqrt{\\frac32},\\frac{21\\sqrt6}{8}\\right),\\quad(0,0),\\quad\\left(\\sqrt{\\frac32},-\\frac{21\\sqrt6}{8}\\right).$$ ✓✓✓
+
+The sketch follows from the odd symmetry, the three intercepts, the two extrema, and the three inflection points. ✓✓
+        `,
+        graph: {
+          fn: x => Math.pow(x, 5) - 5 * Math.pow(x, 3),
+          domain: [-3.2, 3.2],
+          yRange: [-30, 30],
+          intercepts: [{ x: -Math.sqrt(5), y: 0 }, { x: 0, y: 0 }, { x: Math.sqrt(5), y: 0 }],
+          extrema: [
+            { x: -Math.sqrt(3), y: 6 * Math.sqrt(3), type: 'max' },
+            { x: Math.sqrt(3), y: -6 * Math.sqrt(3), type: 'min' }
+          ],
+          inflection: [
+            { x: -Math.sqrt(1.5), y: 21 * Math.sqrt(6) / 8 },
+            { x: 0, y: 0 },
+            { x: Math.sqrt(1.5), y: -21 * Math.sqrt(6) / 8 }
+          ],
+          title: 'f(x) = x⁵-5x³'
+        }
+      },
+      {
+        number: 2, title: 'Optimization — cylinder inscribed in a sphere', section: '§6.6', marks: 6,
+        prompt: `A right circular cylinder is inscribed in a sphere of radius $R$. Find the radius and height of the cylinder that maximise its volume, in terms of $R$.`,
+        solution: `
+If the cylinder has radius $r$ and height $h$, then $r^2+(h/2)^2=R^2$, so $h=2\\sqrt{R^2-r^2}$. Thus
+$$V(r)=2\\pi r^2\\sqrt{R^2-r^2}.$$ ✓✓
+
+Differentiating (or maximising $V^2$) gives the non-zero critical point $r^2=\\frac23R^2$. Hence
+$$r=R\\sqrt{\\frac23},\\qquad h=2\\sqrt{R^2-\\frac23R^2}=\\frac{2R}{\\sqrt3}.$$ ✓✓
+
+The volume is zero at the endpoints and this interior critical point is therefore the maximum. ✓✓
+        `
+      },
+      {
+        number: 3, title: 'Volume by cylindrical shells', section: '§8', marks: 8,
+        prompt: `Let $R$ be the region bounded by $y=\\ln x$, $y=0$, $x=1$ and $x=e$. Find the volume generated when $R$ is revolved about the $y$-axis.`,
+        solution: `
+Using cylindrical shells, a shell at $x$ has radius $x$ and height $\\ln x$. Therefore
+$$V=2\\pi\\int_1^e x\\ln x\\,dx.$$ ✓✓
+
+Integration by parts gives $\\displaystyle\\int x\\ln x\\,dx=\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}$. Hence
+$$V=2\\pi\\left[\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}\\right]_1^e
+=2\\pi\\left(\\frac{e^2}{4}+\\frac14\\right)=\\frac{\\pi(e^2+1)}{2}.$$ ✓✓✓
+        `
+      },
+      {
+        number: 4, title: 'Proof: Mean Value Theorem for Integrals', section: '§8', marks: 8,
+        prompt: `
+Let $f$ be continuous on $[a,b]$, with $a<b$. Prove that there exists $c\\in[a,b]$ such that
+$$\\int_a^b f(x)\\,dx=f(c)(b-a).$$ (8)
+        `,
+        solution: `
+Because $f$ is continuous on the closed interval $[a,b]$, it attains a minimum $m$ and maximum $M$. Thus $m\\le f(x)\\le M$ for all $x\\in[a,b]$. Integrating preserves the inequalities:
+$$m(b-a)\\le\\int_a^b f(x)\\,dx\\le M(b-a).$$ ✓✓✓
+
+Divide by $b-a>0$ and set $A=\\dfrac1{b-a}\\int_a^b f(x)dx$. Then $m\\le A\\le M$. ✓✓
+
+By the Intermediate Value Theorem, $f$ takes every value between $m$ and $M$, so there is a $c\\in[a,b]$ with $f(c)=A$. Therefore
+$$\\int_a^b f(x)\\,dx=(b-a)f(c).$$
+This proves the result. $\\blacksquare$ ✓✓✓
+        `
+      },
+      {
+        number: 5, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        prompt: `
+Evaluate each integral.
+
+**(a)** $\\displaystyle\\int\\frac{dx}{\\sqrt{9-16x^2}}$ (2)
+
+**(b)** $\\displaystyle\\int\\frac{dx}{4x^2-4x+5}$ (2)
+
+**(c)** $\\displaystyle\\int e^{5-2x}\\,dx$ (1)
+
+**(d)** $\\displaystyle\\int\\frac{\\cos x}{1+\\sin x}\\,dx$ (1)
+        `,
+        solution: `
+**(a)** $\\displaystyle\\frac14\\arcsin\\!\\left(\\frac{4x}{3}\\right)+C$. ✓✓
+
+**(b)** Since $4x^2-4x+5=(2x-1)^2+4$,
+$$\\int\\frac{dx}{4x^2-4x+5}=\\frac14\\arctan\\!\\left(\\frac{2x-1}{2}\\right)+C.$$ ✓✓
+
+**(c)** $\\displaystyle\\int e^{5-2x}dx=-\\frac12e^{5-2x}+C$. ✓
+
+**(d)** With $u=1+\\sin x$, $du=\\cos xdx$, the answer is $\\ln|1+\\sin x|+C$. ✓
+        `
+      },
+      {
+        number: 6, title: 'Integration by parts with a logarithmic factor', section: '§9.2', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int\\frac{\\ln x}{x^2}\\,dx$, for $x>0$.`,
+        solution: `
+Take $u=\\ln x$ and $dv=x^{-2}dx$. Then $du=\\dfrac1x dx$ and $v=-\\dfrac1x$:
+$$\\int\\frac{\\ln x}{x^2}dx=-\\frac{\\ln x}{x}+\\int\\frac{1}{x^2}dx=-\\frac{\\ln x+1}{x}+C.$$ ✓✓✓
+        `
+      },
+      {
+        number: 7, title: 'Partial fractions (three distinct linear factors)', section: '§9.5', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int\\frac{2x^2-x+5}{(x-1)(x+2)(x-3)}\\,dx$.`,
+        solution: `
+Write
+$$\\frac{2x^2-x+5}{(x-1)(x+2)(x-3)}=\\frac{A}{x-1}+\\frac{B}{x+2}+\\frac{C}{x-3}.$$
+Using $x=1,-2,3$ gives $A=-1$, $B=1$, and $C=2$. ✓✓✓
+
+Therefore
+$$\\int\\frac{2x^2-x+5}{(x-1)(x+2)(x-3)}dx=-\\ln|x-1|+\\ln|x+2|+2\\ln|x-3|+C.$$ ✓✓✓
+        `
+      }
+    ]
+  },
+
+  // =====================================================================
+  // PRACTICE PAPER 12
+  // =====================================================================
+  {
+    id: 'paper12', label: 'Practice Paper 12', date: 'Practice Test L', totalMarks: 52, duration: 60,
+    questions: [
+      {
+        number: 1, title: 'Curve sketching (even sextic polynomial)', section: '§6.5', marks: 12,
+        prompt: `
+Let $f(x)=x^6-3x^4$.
+
+**(a)** Find the intercepts and describe the end behaviour. (2)
+
+**(b)** Find $f'(x)$ and determine the intervals of increase/decrease and all local extrema. (4)
+
+**(c)** Find $f''(x)$ and determine the concavity and points of inflection. (4)
+
+**(d)** Sketch the graph, using its symmetry. (2)
+        `,
+        solution: `
+Factor $f(x)=x^4(x^2-3)$, so the intercepts are $x=0$ and $x=\\pm\\sqrt3$; the $y$-intercept is $(0,0)$. Since the leading term is positive and degree six, $f(x)\\to+\\infty$ as $x\\to\\pm\\infty$. The function is even. ✓✓
+
+$$f'(x)=6x^5-12x^3=6x^3(x^2-2).$$
+The sign chart gives decrease on $(-\\infty,-\\sqrt2)$, increase on $(-\\sqrt2,0)$, decrease on $(0,\\sqrt2)$, and increase on $(\\sqrt2,\\infty)$. Thus there are local minima at $(\\pm\\sqrt2,-4)$ and a local maximum at $(0,0)$. ✓✓✓
+
+$$f''(x)=30x^4-36x^2=6x^2(5x^2-6).$$
+The concavity changes at $x=\\pm\\sqrt{6/5}$ (but not at $x=0$, because the sign remains negative on both sides). Hence the graph is concave up for $|x|>\\sqrt{6/5}$ and concave down for $|x|<\\sqrt{6/5}$, with inflection points
+$$\\left(\\pm\\sqrt{\\frac65},-\\frac{324}{125}\\right).$$ ✓✓✓
+
+The sketch is symmetric about the $y$-axis and passes through the listed intercepts and extrema. ✓✓
+        `,
+        graph: {
+          fn: x => Math.pow(x, 6) - 3 * Math.pow(x, 4),
+          domain: [-2.5, 2.5],
+          yRange: [-6, 25],
+          intercepts: [{ x: -Math.sqrt(3), y: 0 }, { x: 0, y: 0 }, { x: Math.sqrt(3), y: 0 }],
+          extrema: [
+            { x: -Math.sqrt(2), y: -4, type: 'min' },
+            { x: 0, y: 0, type: 'max' },
+            { x: Math.sqrt(2), y: -4, type: 'min' }
+          ],
+          inflection: [
+            { x: -Math.sqrt(1.2), y: -324 / 125 },
+            { x: Math.sqrt(1.2), y: -324 / 125 }
+          ],
+          title: 'f(x) = x⁶-3x⁴'
+        }
+      },
+      {
+        number: 2, title: 'Optimization — weighted cylindrical container', section: '§6.6', marks: 6,
+        prompt: `A closed cylindrical container must have volume $500\\pi\\text{ cm}^3$. The cost per square centimetre of the base and top is twice the cost per square centimetre of the curved side. Find the radius and height that minimise the total cost.`,
+        solution: `
+Let the radius be $r$ and height $h$. The volume constraint gives $h=500/r^2$. Taking the side-area cost as one unit, the relative cost is
+$$C(r)=2(2\\pi r^2)+2\\pi rh=4\\pi r^2+\\frac{1000\\pi}{r}.$$ ✓✓
+
+$$C'(r)=8\\pi r-\\frac{1000\\pi}{r^2}=0\\Rightarrow r^3=125\\Rightarrow r=5.$$ ✓✓
+
+Since $C''(r)=8\\pi+2000\\pi/r^3>0$, this is the minimum. The height is $h=500/25=20$ cm. **Radius $5$ cm and height $20$ cm.** ✓✓
+        `
+      },
+      {
+        number: 3, title: 'Hydrostatic force on a triangular plate', section: '§8', marks: 8,
+        prompt: `A vertical triangular plate is submerged in water with its top vertex at the surface and its horizontal base $3$ m below the surface. The triangle has width $3$ m at its base. Using water density $1000\\text{ kg/m}^3$ and $g=9.8\\text{ m/s}^2$, find the hydrostatic force on one face of the plate.`,
+        solution: `
+Measure depth $y$ downward from the surface. At depth $y$, similar triangles give the width $w(y)=y$ (the width grows from $0$ at the vertex to $3$ at $y=3$). A horizontal strip has area $w(y)dy$, pressure $\\rho gy$, and force $dF=\\rho gy\\,w(y)dy$. ✓✓
+
+Therefore
+$$F=1000(9.8)\\int_0^3 y\\cdot y\\,dy=9800\\left[\\frac{y^3}{3}\\right]_0^3=9800(9)=88200\\text{ N}.$$ ✓✓✓
+
+**Hydrostatic force $=88\\,200\\text{ N}$.** ✓✓
+        `
+      },
+      {
+        number: 4, title: 'Proof: Linearity of the definite integral', section: '§8', marks: 8,
+        prompt: `
+Using Riemann sums, prove that for constants $\\alpha,\\beta$ and integrable functions $f,g$,
+$$\\int_a^b\\big[\\alpha f(x)+\\beta g(x)\\big]dx=\\alpha\\int_a^b f(x)dx+\\beta\\int_a^b g(x)dx.$$ (8)
+        `,
+        solution: `
+For a partition with sample points $x_i^*$ and width $\\Delta x$,
+$$\\int_a^b[\\alpha f+\\beta g]dx=\\lim_{n\\to\\infty}\\sum_{i=1}^n[\\alpha f(x_i^*)+\\beta g(x_i^*)]\\Delta x.$$ ✓✓
+
+Distribute $\\Delta x$ and split the finite sum:
+$$=\\lim_{n\\to\\infty}\\left(\\alpha\\sum_{i=1}^nf(x_i^*)\\Delta x+\\beta\\sum_{i=1}^ng(x_i^*)\\Delta x\\right).$$ ✓✓✓
+
+Since both functions are integrable, the limits exist. Pulling out constants and using the sum law for limits gives
+$$=\\alpha\\lim_{n\\to\\infty}\\sum_{i=1}^nf(x_i^*)\\Delta x+\\beta\\lim_{n\\to\\infty}\\sum_{i=1}^ng(x_i^*)\\Delta x
+=\\alpha\\int_a^b f(x)dx+\\beta\\int_a^b g(x)dx.$$ ✓✓✓
+        `
+      },
+      {
+        number: 5, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        prompt: `
+Evaluate each integral.
+
+**(a)** $\\displaystyle\\int\\frac{dx}{x\\sqrt{x^2-16}}$ (2)
+
+**(b)** $\\displaystyle\\int\\frac{dx}{x^2+6x+13}$ (2)
+
+**(c)** $\\displaystyle\\int 4^{-x}\\,dx$ (1)
+
+**(d)** $\\displaystyle\\int\\frac{5x^4}{x^5+2}\\,dx$ (1)
+        `,
+        solution: `
+**(a)** Using $\\displaystyle\\int\\frac{dx}{x\\sqrt{x^2-a^2}}=\\frac1a\\sec^{-1}\\!\\left(\\frac{|x|}{a}\\right)+C$ with $a=4$,
+$$\\frac14\\sec^{-1}\\!\\left(\\frac{|x|}{4}\\right)+C.$$ ✓✓
+
+**(b)** $x^2+6x+13=(x+3)^2+4$, so the integral is $\\displaystyle\\frac12\\arctan\\!\\left(\\frac{x+3}{2}\\right)+C$. ✓✓
+
+**(c)** $\\displaystyle\\int4^{-x}dx=-\\frac{4^{-x}}{\\ln4}+C$. ✓
+
+**(d)** $\\displaystyle\\ln|x^5+2|+C$. ✓
+        `
+      },
+      {
+        number: 6, title: 'Integration by parts', section: '§9.2', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int x\\arctan(3x)\\,dx$.`,
+        solution: `
+Let $u=\\arctan(3x)$ and $dv=x\\,dx$. Then $du=\\dfrac{3}{1+9x^2}dx$ and $v=x^2/2$:
+$$\\int x\\arctan(3x)dx=\\frac{x^2}{2}\\arctan(3x)-\\frac32\\int\\frac{x^2}{1+9x^2}dx.$$ ✓✓
+
+Using $\\dfrac{x^2}{1+9x^2}=\\dfrac19\\left(1-\\dfrac1{1+9x^2}\\right)$ gives
+$$\\int x\\arctan(3x)dx=\\frac{x^2}{2}\\arctan(3x)-\\frac{x}{6}+\\frac1{18}\\arctan(3x)+C.$$ ✓✓✓
+        `
+      },
+      {
+        number: 7, title: 'Partial fractions (repeated linear factor)', section: '§9.5', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int\\frac{x^2+3x+1}{x(x-2)^2}\\,dx$.`,
+        solution: `
+The decomposition is
+$$\\frac{x^2+3x+1}{x(x-2)^2}=\\frac{1/4}{x}+\\frac{3/4}{x-2}+\\frac{11/2}{(x-2)^2}.$$ ✓✓
+
+Integrating term by term,
+$$\\int\\frac{x^2+3x+1}{x(x-2)^2}dx=\\frac14\\ln|x|+\\frac34\\ln|x-2|-\\frac{11}{2(x-2)}+C.$$ ✓✓✓
+        `
+      }
+    ]
   }
 ];
+
+// The final three proof questions use the remaining distinct proofs from the
+// study-guide proof list. This assignment keeps every paper's Question 4 unique.
+EXAMS.find(p => p.id === 'paper10').questions[3] = {
+  number: 4, title: 'Proof: Non-negativity of the definite integral', section: '§8', marks: 8,
+  prompt: `Suppose $f(x)\\ge0$ for all $x\\in[a,b]$. Prove that
+$$\\int_a^b f(x)\\,dx\\ge0.$$ (8)`,
+  solution: `Since $f(x)\\ge0$ on $[a,b]$, every Riemann-sum term satisfies $f(x_i^*)\\ge0$. With $\\Delta x_i\\ge0$,
+$$f(x_i^*)\\Delta x_i\\ge0$$
+for every subinterval. Therefore each Riemann sum is non-negative, and taking the limit gives
+$$\\int_a^b f(x)\\,dx\\ge0.$$ ✓✓✓
+This proves non-negativity. $\\blacksquare$ ✓✓`
+};
+
+EXAMS.find(p => p.id === 'paper11').questions[3] = {
+  number: 4, title: 'Proof: Domination rule for definite integrals', section: '§8', marks: 8,
+  prompt: `Suppose $f(x)\\ge g(x)$ for all $x\\in[a,b]$. Prove that
+$$\\int_a^b f(x)\\,dx\\ge \\int_a^b g(x)\\,dx.$$ (8)`,
+  solution: `Define $h(x)=f(x)-g(x)$. Then $h(x)\\ge0$ on $[a,b]$. By the non-negativity property,
+$$\\int_a^b h(x)\\,dx\\ge0.$$ ✓✓
+Using the difference rule,
+$$\\int_a^b f(x)\\,dx-\\int_a^b g(x)\\,dx\\ge0,$$
+so $\\int_a^b f(x)\\,dx\\ge \\int_a^b g(x)\\,dx$. $\\blacksquare$ ✓✓✓`
+};
+
+EXAMS.find(p => p.id === 'paper12').questions[3] = {
+  number: 4, title: 'Proof: Absolute-value inequality for definite integrals', section: '§8', marks: 8,
+  prompt: `Prove that
+$$\\left|\\int_a^b f(x)\\,dx\\right|\\le \\int_a^b |f(x)|\\,dx.$$ (8)`,
+  solution: `For every $x\\in[a,b]$, we have $f(x)\\le |f(x)|$ and $-f(x)\\le |f(x)|$. Integrating both inequalities gives
+$$\\int_a^b f(x)\\,dx\\le \\int_a^b |f(x)|\\,dx,$$
+and
+$$-\\int_a^b f(x)\\,dx\\le \\int_a^b |f(x)|\\,dx.$$ ✓✓✓
+These two inequalities are equivalent to
+$$\\left|\\int_a^b f(x)\\,dx\\right|\\le \\int_a^b |f(x)|\\,dx.$$ ✓✓
+This proves the absolute-value inequality. $\\blacksquare$ ✓`
+};

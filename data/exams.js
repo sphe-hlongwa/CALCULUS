@@ -32,7 +32,6 @@ const EXAMS = [
     date: 'Practice Test A',
     totalMarks: 44,
     duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
@@ -214,7 +213,6 @@ $$\\int\\frac{3x+5}{(x+1)(x+2)}\\,dx = \\int\\left(\\frac{2}{x+1}+\\frac{1}{x+2}
     date: 'Practice Test B',
     totalMarks: 44,
     duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
@@ -403,7 +401,6 @@ $$\\int\\frac{x^2}{x^2-1}\\,dx = \\int\\left(1+\\frac{1/2}{x-1}-\\frac{1/2}{x+1}
     date: 'Practice Test C',
     totalMarks: 44,
     duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
@@ -574,7 +571,6 @@ $$\\int\\frac{x^2+1}{x(x-1)^2}\\,dx = \\int\\left(\\frac1x+\\frac{2}{(x-1)^2}\\r
     date: 'Practice Test D',
     totalMarks: 44,
     duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
@@ -745,7 +741,6 @@ $$\\int\\frac{x^2+2x-1}{x(x-1)(x+1)}\\,dx = \\int\\left(\\frac1x+\\frac{1}{x-1}-
     date: 'Practice Test E',
     totalMarks: 44,
     duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
@@ -917,7 +912,6 @@ $$\\int\\frac{x^2+1}{(x+1)^2(x-1)}\\,dx = \\int\\left(\\frac{1/2}{x+1}-\\frac{1}
     date: 'Practice Test F',
     totalMarks: 44,
     duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
@@ -1089,7 +1083,6 @@ $$\\int\\frac{2x+3}{(x-1)(x^2+4)}\\,dx = \\ln|x-1| - \\frac12\\ln(x^2+4) + \\fra
     date: 'Practice Test G',
     totalMarks: 44,
     duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
@@ -1176,8 +1169,7 @@ Evaluate each integral.
         prompt: `Evaluate $\\displaystyle\\int x\\arctan x\\,dx$.`,
         solution: `
 Take $u=\\arctan x$, $dv=x\\,dx$. Then
-$$\\int x\\arctan x\\,dx=\\frac{x^2}{2}\\arctan x-\\frac12\\int\\frac{x^2}{1+x^2}dx
-=\\frac{x^2}{2}\\arctan x-\\frac{x}{2}+\\frac12\\arctan x+C.$$ ✓✓✓
+$$\\int x\\arctan x\\,dx=\\frac{x^2}{2}\\arctan x-\\frac12\\int\\frac{x^2}{1+x^2}dx=\\frac{x^2}{2}\\arctan x-\\frac{x}{2}+\\frac12\\arctan x+C.$$ ✓✓✓
         `
       },
       {
@@ -1196,7 +1188,6 @@ $$\\int\\frac{2x^2+3x+1}{(x+2)(x^2+1)}dx=\\frac35\\ln|x+2|+\\frac7{10}\\ln(x^2+1
   // =====================================================================
   {
     id: 'paper8', label: 'Practice Paper 8', date: 'Practice Test H', totalMarks: 44, duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1, title: 'Curve sketching (exponential decay)', section: '§6.5', marks: 12,
@@ -1278,7 +1269,6 @@ $$\\frac{x^2}{2}+2x-\\frac12\\ln(x^2+1)+3\\arctan x+C.$$ ✓✓✓
   // =====================================================================
   {
     id: 'paper9', label: 'Practice Paper 9', date: 'Practice Test I', totalMarks: 44, duration: 44,
-    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1, title: 'Curve sketching (logarithmic quotient)', section: '§6.5', marks: 12,

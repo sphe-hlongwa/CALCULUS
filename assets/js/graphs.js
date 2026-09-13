@@ -832,5 +832,141 @@ const Graphs = (() => {
     pIn?.addEventListener('input', draw);
   }
 
-  return { riemannSum, areaBetweenCurves, diskMethod, washerMethod, slicingMethod, hyperbolicPlot, seriesConvergence, taylorSeries, directionField, improperIntegral };
+  // ── 9. Exam curve-sketching plots ───────────────────────────────────────
+  /** Pretty-print a number for axis/legend labels (trims trailing zeros). */
+  function fmtNum(n) {
+    if (Object.is(n, -0)) n = 0;
+    const r = Math.round(n * 1000) / 1000;
+    if (Number.isInteger(r)) return String(r);
+    return r.toFixed(3).replace(/0+$/, '').replace(/\.$/, '');
+  }
+
+  /**
+   * Render a full curve-sketch plot for a practice-exam question: the
+   * function itself (split into continuous branches around any breaks),
+   * its asymptotes, and the intercepts / extrema / inflection points /
+   * holes found in the memo.
+   *
+   * spec = {
+   *   fn:            x => number,           // required
+   *   domain:        [xMin, xMax],          // required, overall x-window
+   *   breaks:        [x, ...],              // x-values to exclude (asymptotes/holes)
+   *   vAsymptotes:   [x, ...],
+   *   hAsymptote:    number,
+   *   slant:         { m, c },              // y = m*x + c
+   *   yRange:        [yMin, yMax],          // view window; also clips runaway branches
+   *   intercepts:    [{x,y}, ...],
+   *   extrema:       [{x,y,type:'max'|'min'}, ...],
+   *   inflection:    [{x,y}, ...],
+   *   holes:         [{x,y}, ...],
+   *   title:         'f(x) = ...'
+   * }
+   */
+  function examCurve(containerId, spec) {
+    const el = document.getElementById(containerId);
+    if (!el || typeof Plotly === 'undefined' || !spec || typeof spec.fn !== 'function') return;
+    _trackAndResize(el);
+    const t = getTheme();
+
+    const [xMin, xMax] = spec.domain;
+    const yRange = spec.yRange || null;
+    const breaks = (spec.breaks || []).slice().sort((a, b) => a - b);
+    const bounds = [xMin, ...breaks, xMax];
+    const eps = (xMax - xMin) * 0.004;
+    const padOut = yRange ? (yRange[1] - yRange[0]) * 0.2 : Infinity;
+
+    const traces = [];
+    let curveShown = false;
+    for (let i = 0; i < bounds.length - 1; i++) {
+      let segStart = bounds[i];
+      let segEnd = bounds[i + 1];
+      if (i > 0) segStart += eps;
+      if (i < bounds.length - 2) segEnd -= eps;
+      if (segEnd <= segStart) continue;
+
+      const n = 260;
+      const xs = [];
+      const ys = [];
+      for (let k = 0; k <= n; k++) {
+        const x = segStart + (segEnd - segStart) * (k / n);
+        let y;
+        try { y = spec.fn(x); } catch (e) { y = NaN; }
+        if (typeof y !== 'number' || !isFinite(y)) { xs.push(x); ys.push(NaN); continue; }
+        if (yRange && (y < yRange[0] - padOut || y > yRange[1] + padOut)) { xs.push(x); ys.push(NaN); continue; }
+        xs.push(x); ys.push(y);
+      }
+      traces.push({
+        x: xs, y: ys, mode: 'lines',
+        line: { color: '#2563eb', width: 3 },
+        name: spec.title || 'f(x)',
+        legendgroup: 'fn',
+        showlegend: !curveShown,
+        hoverinfo: 'x+y',
+      });
+      curveShown = true;
+    }
+
+    const yLo = yRange ? yRange[0] : Math.min(0, ...traces.flatMap(tr => tr.y.filter(isFinite)));
+    const yHi = yRange ? yRange[1] : Math.max(0, ...traces.flatMap(tr => tr.y.filter(isFinite)));
+
+    (spec.vAsymptotes || []).forEach((vx, idx) => {
+      traces.push({
+        x: [vx, vx], y: [yLo, yHi], mode: 'lines',
+        line: { color: '#ef4444', width: 1.5, dash: 'dash' },
+        name: `x = ${fmtNum(vx)}`, hoverinfo: 'skip',
+      });
+    });
+
+    if (typeof spec.hAsymptote === 'number') {
+      traces.push({
+        x: [xMin, xMax], y: [spec.hAsymptote, spec.hAsymptote], mode: 'lines',
+        line: { color: '#f59e0b', width: 1.5, dash: 'dash' },
+        name: `y = ${fmtNum(spec.hAsymptote)}`, hoverinfo: 'skip',
+      });
+    }
+
+    if (spec.slant) {
+      const { m, c } = spec.slant;
+      const label = `y = ${m === 1 ? '' : fmtNum(m)}x${c === 0 ? '' : (c > 0 ? '+' + fmtNum(c) : fmtNum(c))}`;
+      traces.push({
+        x: [xMin, xMax], y: [m * xMin + c, m * xMax + c], mode: 'lines',
+        line: { color: '#f59e0b', width: 1.5, dash: 'dash' },
+        name: label, hoverinfo: 'skip',
+      });
+    }
+
+    function addPoints(pts, color, symbol, label) {
+      if (!pts || !pts.length) return;
+      traces.push({
+        x: pts.map(p => p.x), y: pts.map(p => p.y),
+        mode: 'markers',
+        marker: { color, size: 9, symbol, line: { color: t.bg, width: 1.5 } },
+        name: label, hoverinfo: 'x+y',
+      });
+    }
+    addPoints(spec.intercepts, '#334155', 'circle', 'Intercept');
+    addPoints((spec.extrema || []).filter(p => p.type === 'max'), '#16a34a', 'triangle-up', 'Local max');
+    addPoints((spec.extrema || []).filter(p => p.type === 'min'), '#dc2626', 'triangle-down', 'Local min');
+    addPoints(spec.inflection, '#7c3aed', 'diamond', 'Inflection point');
+    if (spec.holes && spec.holes.length) {
+      traces.push({
+        x: spec.holes.map(p => p.x), y: spec.holes.map(p => p.y),
+        mode: 'markers',
+        marker: { color: t.bg, size: 8, symbol: 'circle', line: { color: '#334155', width: 2 } },
+        name: 'Hole (removable discontinuity)', hoverinfo: 'x+y',
+      });
+    }
+
+    const mobile = isMobile();
+    Plotly.react(el, traces, {
+      ...layout({
+        xaxis: { gridcolor: t.grid, zerolinecolor: t.line, range: spec.domain, tickfont: { size: mobile ? 9 : 11 } },
+        yaxis: { gridcolor: t.grid, zerolinecolor: t.line, range: yRange || undefined, tickfont: { size: mobile ? 9 : 11 } },
+      }),
+      height: mobile ? 240 : 300,
+      title: spec.title ? { text: spec.title, font: { size: 12, color: t.text } } : undefined,
+    }, config);
+  }
+
+  return { riemannSum, areaBetweenCurves, diskMethod, washerMethod, slicingMethod, hyperbolicPlot, seriesConvergence, taylorSeries, directionField, improperIntegral, examCurve };
 })();

@@ -350,6 +350,27 @@
   margin-bottom: 8px;
 }
 
+.exam-graph-wrap {
+  margin-top: 14px;
+  padding: 10px 10px 4px;
+  background: #fff;
+  border: 1px solid #d7d2bf;
+  border-radius: 8px;
+}
+.exam-graph-caption {
+  font-family: Inter, sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  color: #6b6455;
+  text-align: center;
+  margin-top: 2px;
+}
+.exam-graph { width: 100%; height: 300px; }
+@media (max-width: 640px) {
+  .exam-graph { height: 240px; }
+}
+body.dark .exam-graph-wrap { background: #1e293b; border-color: #334155; }
+
 @media (max-width: 640px) {
   #exam-overlay { padding: 0; }
   .exam-shell { border-radius: 0; min-height: 100vh; }

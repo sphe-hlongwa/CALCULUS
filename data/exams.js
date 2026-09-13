@@ -15,7 +15,7 @@
  * questions — f'(x) and f''(x) must be computed as part of the answer,
  * and the memos show that derivation in full. Optimization and the
  * "integration applications" question deliberately rotate through
- * different problem types across the six papers (not just one
+ * different problem types across the papers (not just one
  * box/related-rate template repeated), and the partial-fractions
  * question rotates through every standard case: distinct linear
  * factors (2 and 3 factors), a repeated linear factor, an irreducible
@@ -30,15 +30,15 @@ const EXAMS = [
     id: 'paper1',
     label: 'Practice Paper 1',
     date: 'Practice Test A',
-    totalMarks: 42,
-    duration: 42,
+    totalMarks: 44,
+    duration: 44,
     scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
         title: 'Curve sketching',
         section: '§6.5',
-        marks: 10,
+        marks: 12,
         prompt: `
 Let $\\displaystyle f(x) = \\frac{x^2 - 4x + 1}{(x-1)^2}$.
 
@@ -49,6 +49,8 @@ Let $\\displaystyle f(x) = \\frac{x^2 - 4x + 1}{(x-1)^2}$.
 **(c)** Find $f'(x)$, and hence determine the intervals on which $f$ is increasing and decreasing, and locate any local extrema. (3)
 
 **(d)** Find $f''(x)$, and hence determine the intervals of concavity and any points of inflection. (3)
+
+**(e)** Using the information from (a)–(d), sketch the graph of $f$. (2)
         `,
         solution: `
 **(a)** $x$-intercepts: solve $x^2-4x+1=0 \\Rightarrow x = \\dfrac{4\\pm\\sqrt{12}}{2} = 2\\pm\\sqrt3$. ✓
@@ -70,7 +72,21 @@ So $f$ is increasing on $(-\\infty,-1)$ and $(1,\\infty)$, decreasing on $(-1,1)
 $$f''(x)=2(x-1)^{-3}+2(x+1)\\cdot(-3)(x-1)^{-4} = 2(x-1)^{-4}\\big[(x-1)-3(x+1)\\big] = \\frac{-4(x+2)}{(x-1)^4}.$$ ✓
 $f''(x)=0$ when $x=-2$. Since $(x-1)^4>0$ always, the sign of $f''$ is the sign of $-(x+2)$: positive for $x<-2$, negative for $x>-2$. ✓
 So $f$ is concave up on $(-\\infty,-2)$ and concave down on $(-2,1)$ and $(1,\\infty)$, with an **inflection point** at $\\left(-2,\\tfrac{13}{9}\\right)$. ✓
-        `
+
+**(e)** See the graph below — it shows the asymptotes $x=1$ and $y=1$, the $x$-intercepts at $2\\pm\\sqrt3$, the local maximum at $(-1,\\tfrac32)$, and the inflection point at $\\left(-2,\\tfrac{13}{9}\\right)$. ✓✓
+        `,
+        graph: {
+          fn: x => (x * x - 4 * x + 1) / ((x - 1) * (x - 1)),
+          domain: [-5, 6],
+          breaks: [1],
+          vAsymptotes: [1],
+          hAsymptote: 1,
+          yRange: [-6, 8],
+          intercepts: [{ x: 2 - Math.sqrt(3), y: 0 }, { x: 2 + Math.sqrt(3), y: 0 }, { x: 0, y: 1 }],
+          extrema: [{ x: -1, y: 1.5, type: 'max' }],
+          inflection: [{ x: -2, y: 13 / 9 }],
+          title: 'f(x) = (x²-4x+1)/(x-1)²'
+        }
       },
       {
         number: 2,
@@ -196,15 +212,15 @@ $$\\int\\frac{3x+5}{(x+1)(x+2)}\\,dx = \\int\\left(\\frac{2}{x+1}+\\frac{1}{x+2}
     id: 'paper2',
     label: 'Practice Paper 2',
     date: 'Practice Test B',
-    totalMarks: 42,
-    duration: 42,
+    totalMarks: 44,
+    duration: 44,
     scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
         title: 'Curve sketching (slant asymptote)',
         section: '§6.5',
-        marks: 10,
+        marks: 12,
         prompt: `
 Let $\\displaystyle f(x) = \\frac{x^2+3}{x-2}$.
 
@@ -215,6 +231,8 @@ Let $\\displaystyle f(x) = \\frac{x^2+3}{x-2}$.
 **(c)** Find $f'(x)$, and hence determine the intervals of increase/decrease and locate any local extrema. (3)
 
 **(d)** Find $f''(x)$, and hence discuss the concavity of $f$. (3)
+
+**(e)** Using the information from (a)–(d), sketch the graph of $f$. (2)
         `,
         solution: `
 **(a)** $x^2+3=0$ has no real solutions, so there are **no $x$-intercepts**. ✓
@@ -234,7 +252,23 @@ So $f$ is decreasing on $(2-\\sqrt7,2)\\cup(2,2+\\sqrt7)$ and increasing on $(-\
 **(d)** Differentiating $f'(x)=(x^2-4x-3)(x-2)^{-2}$ with the quotient rule:
 $$f''(x) = \\frac{(2x-4)(x-2)-2(x^2-4x-3)}{(x-2)^3} = \\frac{14}{(x-2)^3}.$$ ✓✓
 This is negative for $x<2$ and positive for $x>2$ (never zero), so $f$ is **concave down on $(-\\infty,2)$** and **concave up on $(2,\\infty)$**, with no inflection point (only the asymptote at $x=2$). ✓
-        `
+
+**(e)** See the graph below — it shows the vertical asymptote $x=2$, the slant asymptote $y=x+2$, the $y$-intercept, and the local maximum and minimum found in (c). ✓✓
+        `,
+        graph: {
+          fn: x => (x * x + 3) / (x - 2),
+          domain: [-6, 10],
+          breaks: [2],
+          vAsymptotes: [2],
+          slant: { m: 1, c: 2 },
+          yRange: [-8, 16],
+          intercepts: [{ x: 0, y: -1.5 }],
+          extrema: [
+            { x: 2 - Math.sqrt(7), y: 4 - 2 * Math.sqrt(7), type: 'max' },
+            { x: 2 + Math.sqrt(7), y: 4 + 2 * Math.sqrt(7), type: 'min' }
+          ],
+          title: 'f(x) = (x²+3)/(x-2)'
+        }
       },
       {
         number: 2,
@@ -367,15 +401,15 @@ $$\\int\\frac{x^2}{x^2-1}\\,dx = \\int\\left(1+\\frac{1/2}{x-1}-\\frac{1/2}{x+1}
     id: 'paper3',
     label: 'Practice Paper 3',
     date: 'Practice Test C',
-    totalMarks: 42,
-    duration: 42,
+    totalMarks: 44,
+    duration: 44,
     scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
         title: 'Curve sketching (two vertical asymptotes)',
         section: '§6.5',
-        marks: 10,
+        marks: 12,
         prompt: `
 Let $\\displaystyle f(x) = \\frac{x^2-9}{x^2-4}$.
 
@@ -386,6 +420,8 @@ Let $\\displaystyle f(x) = \\frac{x^2-9}{x^2-4}$.
 **(c)** Find $f'(x)$, and hence determine the intervals of increase/decrease and any local extrema. (3)
 
 **(d)** Find $f''(x)$, and hence discuss the concavity of $f$. (3)
+
+**(e)** Using the information from (a)–(d), sketch the graph of $f$. (2)
         `,
         solution: `
 **(a)** $x^2-9=0 \\Rightarrow x=\\pm3$. ✓
@@ -403,7 +439,20 @@ $f'<0$ for $x<0$ and $f'>0$ for $x>0$ (on the domain), so $f$ is decreasing on $
 $$f''(x)=10(x^2-4)^{-2}+10x\\cdot(-2)(x^2-4)^{-3}(2x) = 10(x^2-4)^{-3}\\big[(x^2-4)-4x^2\\big] = \\frac{-10(3x^2+4)}{(x^2-4)^3}.$$ ✓✓
 Since $3x^2+4>0$ always, the sign of $f''$ is opposite to the sign of $(x^2-4)$: $f''>0$ when $|x|<2$ and $f''<0$ when $|x|>2$.
 So $f$ is **concave up on $(-2,2)$** and **concave down on $(-\\infty,-2)$ and $(2,\\infty)$**; there are no inflection points (sign changes only occur at the asymptotes). ✓
-        `
+
+**(e)** See the graph below — it shows the even symmetry, the two vertical asymptotes $x=\\pm2$, the horizontal asymptote $y=1$, and the local minimum at $(0,\\tfrac94)$. ✓✓
+        `,
+        graph: {
+          fn: x => (x * x - 9) / (x * x - 4),
+          domain: [-6, 6],
+          breaks: [-2, 2],
+          vAsymptotes: [-2, 2],
+          hAsymptote: 1,
+          yRange: [-6, 8],
+          intercepts: [{ x: -3, y: 0 }, { x: 3, y: 0 }, { x: 0, y: 2.25 }],
+          extrema: [{ x: 0, y: 2.25, type: 'min' }],
+          title: 'f(x) = (x²-9)/(x²-4)'
+        }
       },
       {
         number: 2,
@@ -523,15 +572,15 @@ $$\\int\\frac{x^2+1}{x(x-1)^2}\\,dx = \\int\\left(\\frac1x+\\frac{2}{(x-1)^2}\\r
     id: 'paper4',
     label: 'Practice Paper 4',
     date: 'Practice Test D',
-    totalMarks: 42,
-    duration: 42,
+    totalMarks: 44,
+    duration: 44,
     scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
         title: 'Curve sketching (polynomial)',
         section: '§6.5',
-        marks: 10,
+        marks: 12,
         prompt: `
 Let $f(x) = x^4-4x^3$.
 
@@ -542,6 +591,8 @@ Let $f(x) = x^4-4x^3$.
 **(c)** Find $f'(x)$, and hence determine the intervals of increase/decrease and any local extrema. Comment on what happens at $x=0$. (4)
 
 **(d)** Find $f''(x)$, and hence determine the intervals of concavity and any points of inflection. (3)
+
+**(e)** Using the information from (a)–(d), sketch the graph of $f$. (2)
         `,
         solution: `
 **(a)** $f(x)=x^3(x-4)=0 \\Rightarrow x=0$ (a repeated root) or $x=4$. $y$-intercept: $f(0)=0$. ✓✓
@@ -555,7 +606,18 @@ So $f$ is decreasing on $(-\\infty,3)$ and increasing on $(3,\\infty)$, with a *
 **(d)** $f''(x)=12x^2-24x=12x(x-2)$. ✓✓
 Sign chart on $(-\\infty,0),(0,2),(2,\\infty)$: $f''>0,\\;f''<0,\\;f''>0$.
 So $f$ is concave up on $(-\\infty,0)$ and $(2,\\infty)$, concave down on $(0,2)$, with **inflection points** at $(0,0)$ and $(2,-16)$. (Interestingly, $x=0$ is simultaneously a stationary point and an inflection point.) ✓
-        `
+
+**(e)** See the graph below — it shows the $x$-intercepts at $0$ and $4$, the local minimum at $(3,-27)$, and the inflection points at $(0,0)$ and $(2,-16)$. ✓✓
+        `,
+        graph: {
+          fn: x => Math.pow(x, 4) - 4 * Math.pow(x, 3),
+          domain: [-1.5, 5],
+          yRange: [-30, 30],
+          intercepts: [{ x: 0, y: 0 }, { x: 4, y: 0 }],
+          extrema: [{ x: 3, y: -27, type: 'min' }],
+          inflection: [{ x: 0, y: 0 }, { x: 2, y: -16 }],
+          title: 'f(x) = x⁴-4x³'
+        }
       },
       {
         number: 2,
@@ -681,15 +743,15 @@ $$\\int\\frac{x^2+2x-1}{x(x-1)(x+1)}\\,dx = \\int\\left(\\frac1x+\\frac{1}{x-1}-
     id: 'paper5',
     label: 'Practice Paper 5',
     date: 'Practice Test E',
-    totalMarks: 42,
-    duration: 42,
+    totalMarks: 44,
+    duration: 44,
     scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
         title: 'Curve sketching (removable discontinuity)',
         section: '§6.5',
-        marks: 10,
+        marks: 12,
         prompt: `
 Let $\\displaystyle f(x) = \\frac{(x-3)(x+1)}{(x-3)(x-1)}$.
 
@@ -700,6 +762,8 @@ Let $\\displaystyle f(x) = \\frac{(x-3)(x+1)}{(x-3)(x-1)}$.
 **(c)** Find $f'(x)$ (using the simplified form), and hence determine the intervals of increase/decrease and any local extrema. (3)
 
 **(d)** Find $f''(x)$, and hence discuss the concavity of $f$. (2)
+
+**(e)** Using the information from (a)–(d), sketch the graph of $f$, marking the hole clearly. (2)
         `,
         solution: `
 **(a)** The domain excludes $x=1$ and $x=3$ (where the original denominator is zero). For $x\\ne3$, the factor $(x-3)$ cancels: $f(x)=\\dfrac{x+1}{x-1}$ for $x\\ne1,3$. ✓
@@ -715,7 +779,20 @@ This is negative everywhere it is defined, so $f$ is **decreasing on $(-\\infty,
 **(d)** Differentiating $g'(x)=-2(x-1)^{-2}$:
 $$g''(x) = 4(x-1)^{-3} = \\frac{4}{(x-1)^3}.$$ ✓
 Negative for $x<1$ (concave down), positive for $x>1$ (concave up); no inflection point (only the asymptote at $x=1$). ✓
-        `
+
+**(e)** See the graph below — it shows the vertical asymptote $x=1$, the horizontal asymptote $y=1$, the intercepts, and the hole at $(3,2)$. ✓✓
+        `,
+        graph: {
+          fn: x => (x + 1) / (x - 1),
+          domain: [-6, 8],
+          breaks: [1],
+          vAsymptotes: [1],
+          hAsymptote: 1,
+          yRange: [-6, 8],
+          intercepts: [{ x: -1, y: 0 }, { x: 0, y: -1 }],
+          holes: [{ x: 3, y: 2 }],
+          title: 'f(x) = (x+1)/(x-1), hole at x=3'
+        }
       },
       {
         number: 2,
@@ -838,15 +915,15 @@ $$\\int\\frac{x^2+1}{(x+1)^2(x-1)}\\,dx = \\int\\left(\\frac{1/2}{x+1}-\\frac{1}
     id: 'paper6',
     label: 'Practice Paper 6',
     date: 'Practice Test F',
-    totalMarks: 42,
-    duration: 42,
+    totalMarks: 44,
+    duration: 44,
     scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
     questions: [
       {
         number: 1,
         title: 'Curve sketching (restricted domain)',
         section: '§6.5',
-        marks: 10,
+        marks: 12,
         prompt: `
 Let $f(x) = x\\sqrt{9-x^2}$.
 
@@ -857,6 +934,8 @@ Let $f(x) = x\\sqrt{9-x^2}$.
 **(c)** Find $f'(x)$, and hence determine the intervals of increase/decrease and any local extrema. (3)
 
 **(d)** Find $f''(x)$, and hence determine the concavity of $f$ and any points of inflection. (3)
+
+**(e)** Using the information from (a)–(d), sketch the graph of $f$ over its domain. (2)
         `,
         solution: `
 **(a)** We need $9-x^2\\ge0$, so the domain is $[-3,3]$. $f(x)=0$ when $x=0$ or $9-x^2=0$, i.e. $x=0,\\pm3$; these are both the $x$-intercepts and (at $x=0$) the $y$-intercept. ✓✓
@@ -873,7 +952,21 @@ So $f$ increases on $\\left(-\\tfrac{3\\sqrt2}{2},\\tfrac{3\\sqrt2}{2}\\right)$ 
 $$f''(x) = \\frac{x(2x^2-27)}{(9-x^2)^{3/2}}.$$ ✓✓
 On $(-3,3)$, $2x^2-27<0$ always (since $x^2\\le9<13.5$) and $(9-x^2)^{3/2}>0$, so the sign of $f''$ is opposite to the sign of $x$: $f''>0$ for $x<0$ and $f''<0$ for $x>0$.
 So $f$ is **concave up on $(-3,0)$** and **concave down on $(0,3)$**, with an **inflection point at $(0,0)$**. ✓
-        `
+
+**(e)** See the graph below — it shows the odd symmetry over the closed domain $[-3,3]$, the local max/min at $x=\\pm\\tfrac{3\\sqrt2}{2}$, and the inflection point at the origin. ✓✓
+        `,
+        graph: {
+          fn: x => x * Math.sqrt(Math.max(0, 9 - x * x)),
+          domain: [-3, 3],
+          yRange: [-5, 5],
+          intercepts: [{ x: -3, y: 0 }, { x: 0, y: 0 }, { x: 3, y: 0 }],
+          extrema: [
+            { x: 3 * Math.SQRT2 / 2, y: 4.5, type: 'max' },
+            { x: -3 * Math.SQRT2 / 2, y: -4.5, type: 'min' }
+          ],
+          inflection: [{ x: 0, y: 0 }],
+          title: 'f(x) = x√(9-x²)'
+        }
       },
       {
         number: 2,
@@ -982,6 +1075,280 @@ Comparing constant terms: $3=4A-C \\Rightarrow C=4(1)-3=1$. ✓✓
 $$\\frac{2x+3}{(x-1)(x^2+4)} = \\frac{1}{x-1}+\\frac{-x+1}{x^2+4} = \\frac{1}{x-1}-\\frac{x}{x^2+4}+\\frac{1}{x^2+4}.$$
 
 $$\\int\\frac{2x+3}{(x-1)(x^2+4)}\\,dx = \\ln|x-1| - \\frac12\\ln(x^2+4) + \\frac12\\arctan\\!\\left(\\frac{x}{2}\\right)+C.$$ ✓✓
+        `
+      }
+    ]
+  },
+
+  // =====================================================================
+  // PRACTICE PAPER 7
+  // =====================================================================
+  {
+    id: 'paper7',
+    label: 'Practice Paper 7',
+    date: 'Practice Test G',
+    totalMarks: 44,
+    duration: 44,
+    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    questions: [
+      {
+        number: 1,
+        title: 'Curve sketching (odd rational function with slant asymptote)',
+        section: '§6.5', marks: 12,
+        prompt: `
+Let $\\displaystyle f(x)=\\frac{x^3-3x}{x^2-1}$.
+
+**(a)** Find the domain, all intercepts, and any symmetry of $f$. (2)
+
+**(b)** Find the vertical and slant asymptotes. (2)
+
+**(c)** Find $f'(x)$, and hence determine the intervals of increase/decrease and any local extrema. (3)
+
+**(d)** Find $f''(x)$, and hence determine the concavity and points of inflection. (3)
+
+**(e)** Using the information from (a)–(d), sketch the graph of $f$. (2)
+        `,
+        solution: `
+**(a)** The domain is $\\mathbb R\\setminus\\{-1,1\\}$. The numerator is $x(x^2-3)$, so the $x$-intercepts are $x=-\\sqrt3,0,\\sqrt3$; the $y$-intercept is $(0,0)$. Since $f(-x)=-f(x)$, $f$ is odd. ✓✓
+
+**(b)** The denominator vanishes at $x=\\pm1$ and neither factor cancels, so $x=-1$ and $x=1$ are vertical asymptotes. Division gives $f(x)=x-\\dfrac{2x}{x^2-1}$, so the slant asymptote is $y=x$. ✓✓
+
+**(c)** $f'(x)=1+\\dfrac{2(x^2+1)}{(x^2-1)^2}=\\dfrac{x^4+2x^2+3}{(x^2-1)^2}$. This is positive wherever defined, so $f$ is increasing on $(-\\infty,-1)$, $(-1,1)$ and $(1,\\infty)$, with no local extrema. ✓✓
+
+**(d)** $f''(x)=-\\dfrac{4x(x^2+3)}{(x^2-1)^3}$. Thus $f$ is concave down on $(-\\infty,-1)$ and $(0,1)$, and concave up on $(-1,0)$ and $(1,\\infty)$. The only inflection point is $(0,0)$. ✓✓
+
+**(e)** See the graph below — it shows the odd symmetry, the vertical asymptotes $x=\\pm1$, the slant asymptote $y=x$, the three $x$-intercepts, and the inflection point at the origin. ✓✓
+        `,
+        graph: {
+          fn: x => (x * x * x - 3 * x) / (x * x - 1),
+          domain: [-6, 6],
+          breaks: [-1, 1],
+          vAsymptotes: [-1, 1],
+          slant: { m: 1, c: 0 },
+          yRange: [-10, 10],
+          intercepts: [{ x: -Math.sqrt(3), y: 0 }, { x: 0, y: 0 }, { x: Math.sqrt(3), y: 0 }],
+          inflection: [{ x: 0, y: 0 }],
+          title: 'f(x) = (x³-3x)/(x²-1)'
+        }
+      },
+      {
+        number: 2, title: 'Optimization — closed cylinder with fixed surface area', section: '§6.6', marks: 6,
+        prompt: `A closed cylindrical container has total surface area $300\\pi\\text{ cm}^2$. Find the radius and height that maximise its volume, and give the maximum volume.`,
+        solution: `
+The constraint $2\\pi r^2+2\\pi rh=300\\pi$ gives $h=\\dfrac{150-r^2}{r}$. Hence $V(r)=150\\pi r-\\pi r^3$. ✓✓
+
+$V'(r)=150\\pi-3\\pi r^2=0$ gives $r=5\\sqrt2$. Since $V''(r)=-6\\pi r<0$, this is a maximum. The constraint gives $h=10\\sqrt2$ cm, and $V_{\\max}=500\\sqrt2\\pi\\text{ cm}^3$. ✓✓✓
+        `
+      },
+      {
+        number: 3, title: 'Volume of revolution (disk method)', section: '§8', marks: 8,
+        prompt: `Let $R$ be the region between $y=3x-x^2$ and the $x$-axis. Find the volume generated when $R$ is revolved about the $x$-axis.`,
+        solution: `
+The intersections are $x=0$ and $x=3$, and the disk radius is $3x-x^2$. ✓✓
+$$V=\\pi\\int_0^3(3x-x^2)^2dx=\\pi\\int_0^3(9x^2-6x^3+x^4)dx=\\frac{81\\pi}{10}.$$ ✓✓✓
+        `
+      },
+      {
+        number: 4, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        prompt: `
+Evaluate each integral.
+
+**(a)** $\\displaystyle\\int\\frac{dx}{9x^2+12x+13}$ (2)
+
+**(b)** $\\displaystyle\\int\\frac{dx}{\\sqrt{49-9x^2}}$ (2)
+
+**(c)** $\\displaystyle\\int 7^{2x-1}dx$ (1)
+
+**(d)** $\\displaystyle\\int\\frac{2x+1}{x^2+x+5}dx$ (1)
+        `,
+        solution: `
+**(a)** $9x^2+12x+13=(3x+2)^2+9$, so the answer is $\\frac13\\arctan\\left(\\frac{3x+2}{3}\\right)+C$. ✓✓
+
+**(b)** $\\displaystyle\\frac13\\arcsin\\left(\\frac{3x}{7}\\right)+C$. ✓✓
+
+**(c)** $\\displaystyle\\frac{7^{2x-1}}{2\\ln7}+C$. ✓
+
+**(d)** $\\ln|x^2+x+5|+C$. ✓
+        `
+      },
+      {
+        number: 5, title: 'Integration by parts with an inverse trigonometric factor', section: '§9.2', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int x\\arctan x\\,dx$.`,
+        solution: `
+Take $u=\\arctan x$, $dv=x\\,dx$. Then
+$$\\int x\\arctan x\\,dx=\\frac{x^2}{2}\\arctan x-\\frac12\\int\\frac{x^2}{1+x^2}dx
+=\\frac{x^2}{2}\\arctan x-\\frac{x}{2}+\\frac12\\arctan x+C.$$ ✓✓✓
+        `
+      },
+      {
+        number: 6, title: 'Partial fractions (linear factor and irreducible quadratic)', section: '§9.5', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int\\frac{2x^2+3x+1}{(x+2)(x^2+1)}dx$.`,
+        solution: `
+Use $\\dfrac{2x^2+3x+1}{(x+2)(x^2+1)}=\\dfrac{A}{x+2}+\\dfrac{Bx+C}{x^2+1}$. Coefficient matching gives $A=\\frac35$, $B=\\frac75$, $C=\\frac15$. ✓✓
+$$\\int\\frac{2x^2+3x+1}{(x+2)(x^2+1)}dx=\\frac35\\ln|x+2|+\\frac7{10}\\ln(x^2+1)+\\frac15\\arctan x+C.$$ ✓✓
+        `
+      }
+    ]
+  },
+
+  // =====================================================================
+  // PRACTICE PAPER 8
+  // =====================================================================
+  {
+    id: 'paper8', label: 'Practice Paper 8', date: 'Practice Test H', totalMarks: 44, duration: 44,
+    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    questions: [
+      {
+        number: 1, title: 'Curve sketching (exponential decay)', section: '§6.5', marks: 12,
+        prompt: `Let $f(x)=xe^{-x}$. Find the intercepts, end behaviour, asymptotes, intervals of increase/decrease, local extrema, concavity and point of inflection, and hence sketch the graph of $f$.`,
+        solution: `
+$f(0)=0$, so the only intercept is $(0,0)$. As $x\\to\\infty$, $f(x)\\to0^+$; as $x\\to-\\infty$, $f(x)\\to-\\infty$. There is no vertical asymptote and $y=0$ is a right-hand horizontal asymptote. ✓✓
+
+$f'(x)=e^{-x}(1-x)$, so $f$ increases on $(-\\infty,1)$ and decreases on $(1,\\infty)$, with local maximum $(1,e^{-1})$. ✓✓
+
+$f''(x)=e^{-x}(x-2)$, so it is concave down on $(-\\infty,2)$ and concave up on $(2,\\infty)$, with inflection point $(2,2e^{-2})$. ✓✓
+
+The graph below shows the intercept at the origin, the local maximum, the inflection point, and the horizontal asymptote $y=0$ as $x\\to\\infty$. ✓✓
+        `,
+        graph: {
+          fn: x => x * Math.exp(-x),
+          domain: [-1.5, 6],
+          hAsymptote: 0,
+          yRange: [-4, 2],
+          intercepts: [{ x: 0, y: 0 }],
+          extrema: [{ x: 1, y: Math.exp(-1), type: 'max' }],
+          inflection: [{ x: 2, y: 2 * Math.exp(-2) }],
+          title: 'f(x) = xe⁻ˣ'
+        }
+      },
+      {
+        number: 2, title: 'Optimization — rectangular box with a fixed volume', section: '§6.6', marks: 6,
+        prompt: `A closed rectangular box has volume $500\\text{ cm}^3$. Its length is twice its width. Find the dimensions that minimise its surface area.`,
+        solution: `
+Let width $=x$, length $=2x$, height $=h$. Then $h=250/x^2$ and $S=4x^2+1500/x$. ✓✓
+$S'(x)=0$ gives $x^3=375/2$. Since $S''(x)>0$, this is a minimum. With $a=\\sqrt[3]{375/2}$, the dimensions are $a\\times2a\\times4a$ cm. ✓✓✓
+        `
+      },
+      {
+        number: 3, title: 'Area between crossing curves', section: '§8', marks: 8,
+        prompt: `Find the total area enclosed between $y=x$ and $y=x^3$ for $-1\\le x\\le1$.`,
+        solution: `
+The curves cross at $x=-1,0,1$, so split at $0$:
+$$A=\\int_{-1}^0(x^3-x)dx+\\int_0^1(x-x^3)dx=2\\int_0^1(x-x^3)dx=\\frac12.$$ ✓✓✓
+        `
+      },
+      {
+        number: 4, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        prompt: `
+Evaluate each integral.
+
+**(a)** $\\displaystyle\\int\\frac{dx}{\\sqrt{36-x^2}}$ (2)
+
+**(b)** $\\displaystyle\\int\\frac{dx}{9x^2+18x+13}$ (2)
+
+**(c)** $\\displaystyle\\int e^{3-4x}dx$ (1)
+
+**(d)** $\\displaystyle\\int\\frac{\\cos x}{2+\\sin x}dx$ (1)
+        `,
+        solution: `
+**(a)** $\\arcsin(x/6)+C$. **(b)** $9x^2+18x+13=9(x+1)^2+4$, so the answer is $\\frac16\\arctan\\left(\\frac{3(x+1)}{2}\\right)+C$. **(c)** $-\\frac14e^{3-4x}+C$. **(d)** $\\ln|2+\\sin x|+C$. ✓✓✓
+        `
+      },
+      {
+        number: 5, title: 'Integration by parts with a logarithm', section: '§9.2', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int\\ln(x^2+1)dx$.`,
+        solution: `
+Integration by parts with $u=\\ln(x^2+1)$ and $dv=dx$ gives
+$$\\int\\ln(x^2+1)dx=x\\ln(x^2+1)-2x+2\\arctan x+C.$$ ✓✓✓
+        `
+      },
+      {
+        number: 6, title: 'Partial fractions (improper fraction)', section: '§9.5', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int\\frac{x^3+2x^2+5}{x^2+1}dx$.`,
+        solution: `
+Long division gives $\\dfrac{x^3+2x^2+5}{x^2+1}=x+2+\\dfrac{-x+3}{x^2+1}$. Therefore the integral is
+$$\\frac{x^2}{2}+2x-\\frac12\\ln(x^2+1)+3\\arctan x+C.$$ ✓✓✓
+        `
+      }
+    ]
+  },
+
+  // =====================================================================
+  // PRACTICE PAPER 9
+  // =====================================================================
+  {
+    id: 'paper9', label: 'Practice Paper 9', date: 'Practice Test I', totalMarks: 44, duration: 44,
+    scopeTags: ['§6.5 Curve sketching', '§6.6 Optimization', '§8 Integration applications', '§9.1 Inverse trig / exp / log integrals', '§9.2 Integration by parts', '§9.5 Partial fractions'],
+    questions: [
+      {
+        number: 1, title: 'Curve sketching (logarithmic quotient)', section: '§6.5', marks: 12,
+        prompt: `Let $\\displaystyle f(x)=\\frac{\\ln x}{x}$, with $x>0$. Find the intercepts, asymptotes, intervals of increase/decrease, local extrema, concavity and point of inflection, and hence sketch the graph of $f$.`,
+        solution: `
+The domain is $(0,\\infty)$ and the only intercept is $(1,0)$. As $x\\to0^+$, $f\\to-\\infty$, so $x=0$ is vertical; as $x\\to\\infty$, $f\\to0$, so $y=0$ is horizontal. ✓✓
+
+$f'(x)=(1-\\ln x)/x^2$, hence increase on $(0,e)$ and decrease on $(e,\\infty)$, with local maximum $(e,1/e)$. Also $f''(x)=(2\\ln x-3)/x^3$, so concave down on $(0,e^{3/2})$, concave up on $(e^{3/2},\\infty)$, with inflection $\\left(e^{3/2},3/(2e^{3/2})\\right)$. ✓✓✓
+
+The graph below shows the vertical asymptote at $x=0$, the $x$-intercept at $1$, the local maximum, and the inflection point. ✓✓
+        `,
+        graph: {
+          fn: x => Math.log(x) / x,
+          domain: [-0.5, 12],
+          breaks: [0],
+          vAsymptotes: [0],
+          hAsymptote: 0,
+          yRange: [-4, 1],
+          intercepts: [{ x: 1, y: 0 }],
+          extrema: [{ x: Math.E, y: 1 / Math.E, type: 'max' }],
+          inflection: [{ x: Math.pow(Math.E, 1.5), y: 3 / (2 * Math.pow(Math.E, 1.5)) }],
+          title: 'f(x) = ln(x)/x'
+        }
+      },
+      {
+        number: 2, title: 'Optimization — rectangle inscribed in an ellipse', section: '§6.6', marks: 6,
+        prompt: `A rectangle is centred at the origin with sides parallel to the axes and vertices on $\\displaystyle\\frac{x^2}{25}+\\frac{y^2}{9}=1$. Find the dimensions of maximum area.`,
+        solution: `
+For a first-quadrant vertex, $y=3\\sqrt{1-x^2/25}$ and $A=4xy$. Maximising $A^2$ gives $x^2=25/2$, so $x=5/\\sqrt2$ and $y=3/\\sqrt2$. Therefore width $=5\\sqrt2$, height $=3\\sqrt2$, and maximum area $=30$. ✓✓✓
+        `
+      },
+      {
+        number: 3, title: 'Volume by slicing', section: '§8', marks: 8,
+        prompt: `A pyramid has height $h$ and a square base of side length $b$. At height $x$ above the base, a cross-section parallel to the base is a square. Find its volume by integrating the cross-sectional areas.`,
+        solution: `
+Similar triangles give cross-section side $b(1-x/h)$ and area $A(x)=b^2(1-x/h)^2$. Thus
+$$V=\\int_0^h b^2(1-x/h)^2dx=\\frac{b^2h}{3}.$$ ✓✓✓
+        `
+      },
+      {
+        number: 4, title: 'Inverse trigonometric, exponential and logarithmic integrals', section: '§9.1', marks: 6,
+        prompt: `
+Evaluate each integral.
+
+**(a)** $\\displaystyle\\int\\frac{dx}{16+4x^2}$ (2)
+
+**(b)** $\\displaystyle\\int\\frac{dx}{\\sqrt{1-9x^2}}$ (2)
+
+**(c)** $\\displaystyle\\int2^{x+1}dx$ (1)
+
+**(d)** $\\displaystyle\\int\\frac{3x^2-1}{x^3-x+4}dx$ (1)
+        `,
+        solution: `
+**(a)** $\\frac18\\arctan(x/2)+C$. **(b)** $\\frac13\\arcsin(3x)+C$. **(c)** $\\frac{2^{x+1}}{\\ln2}+C$. **(d)** $\\ln|x^3-x+4|+C$. ✓✓✓
+        `
+      },
+      {
+        number: 5, title: 'Integration by parts with a trigonometric polynomial', section: '§9.2', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int x^2\\cos(2x)dx$.`,
+        solution: `
+Two integrations by parts yield
+$$\\int x^2\\cos(2x)dx=\\frac{x^2}{2}\\sin(2x)+\\frac{x}{2}\\cos(2x)-\\frac14\\sin(2x)+C.$$ ✓✓✓
+        `
+      },
+      {
+        number: 6, title: 'Partial fractions (repeated irreducible quadratic)', section: '§9.5', marks: 6,
+        prompt: `Evaluate $\\displaystyle\\int\\frac{x^3+x^2+2x+1}{(x^2+1)^2}dx$.`,
+        solution: `
+Use $\\dfrac{Ax+B}{x^2+1}+\\dfrac{Cx+D}{(x^2+1)^2}$; matching coefficients gives $A=B=C=1$, $D=0$. Therefore
+$$\\int\\frac{x^3+x^2+2x+1}{(x^2+1)^2}dx=\\frac12\\ln(x^2+1)+\\arctan x-\\frac{1}{2(x^2+1)}+C.$$ ✓✓✓
         `
       }
     ]

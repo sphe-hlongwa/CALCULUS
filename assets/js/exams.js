@@ -1,6 +1,6 @@
 /**
  * exams.js — Practice Exams feature
- * Renders an exam picker (3 papers) and a printable, memo-style exam
+ * Renders an exam picker and a printable, memo-style exam
  * paper view, styled after the official MATH1036 class test layout.
  */
 const Exams = (() => {
@@ -85,7 +85,7 @@ const Exams = (() => {
     root.innerHTML = `
       <div class="exam-list-header">
         <h2>Practice Exams</h2>
-        <p class="exam-list-sub">Three full-length practice papers covering the announced test scope: curve sketching, optimization, integration applications, and the integration-technique sections (inverse trig / exponential / logarithmic integrals, integration by parts, partial fractions). Each question includes a full worked memo.</p>
+        <p class="exam-list-sub">${EXAMS.length} full-length practice papers covering the announced test scope: curve sketching, optimization, integration applications, and the integration-technique sections (inverse trig / exponential / logarithmic integrals, integration by parts, partial fractions). Each question includes a full worked memo.</p>
       </div>
       <div class="exam-pick-grid">${cards}</div>
     `;
@@ -118,6 +118,11 @@ const Exams = (() => {
         <div class="exam-solution hidden" id="exam-sol-${q.number}">
           <div class="exam-solution-label">MEMO — Question ${q.number}</div>
           ${mdish(q.solution)}
+          ${q.graph ? `
+          <div class="exam-graph-wrap">
+            <div class="exam-graph" id="exam-graph-${paper.id}-${q.number}"></div>
+            <div class="exam-graph-caption">Graph of ${q.graph.title || 'f(x)'}</div>
+          </div>` : ''}
         </div>
       </div>
     `).join('');
@@ -171,7 +176,14 @@ const Exams = (() => {
         const showing = !solEl.classList.contains('hidden');
         solEl.classList.toggle('hidden');
         btn.textContent = showing ? 'Show Memo (Solution)' : 'Hide Memo (Solution)';
-        if (!showing) renderMath(solEl);
+        if (!showing) {
+          renderMath(solEl);
+          const q = paper.questions.find(qq => qq.number === Number(btn.dataset.q));
+          if (q && q.graph && typeof Graphs !== 'undefined' && Graphs.examCurve) {
+            // Wait a tick so the now-visible container has a real layout size.
+            requestAnimationFrame(() => Graphs.examCurve(`exam-graph-${paper.id}-${q.number}`, q.graph));
+          }
+        }
       });
     });
 

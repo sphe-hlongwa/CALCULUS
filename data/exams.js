@@ -52,7 +52,15 @@ Let $\\displaystyle f(x) = \\frac{x^2 - 4x + 1}{(x-1)^2}$.
 **(a)** $f(x)=0$ requires the numerator to vanish, so solve $x^2-4x+1=0$ by the quadratic formula: $x=\\dfrac{4\\pm\\sqrt{16-4}}{2}=\\dfrac{4\\pm2\\sqrt3}{2}=2\\pm\\sqrt3$. Neither root is $1$, so both are genuine **$x$-intercepts**: $2-\\sqrt3\\approx0.27$, $2+\\sqrt3\\approx3.73$. ✓
 
 $y$-intercept: $f(0)=\\dfrac{0-0+1}{(0-1)^2}=\\dfrac11=1$, the point $(0,1)$. ✓
+**(a)** $f(x)=0$ requires the numerator to vanish, so solve $x^2-4x+1=0$ by the quadratic formula: $x=\\dfrac{4\\pm\\sqrt{16-4}}{2}=\\dfrac{4\\pm2\\sqrt3}{2}=2\\pm\\sqrt3$. Neither root is $1$, so both are genuine **$x$-intercepts**: $2-\\sqrt3\\approx0.27$, $2+\\sqrt3\\approx3.73$. ✓
 
+$y$-intercept: $f(0)=\\dfrac{0-0+1}{(0-1)^2}=\\dfrac11=1$, the point $(0,1)$. ✓
+
+**(b)** Numerator and denominator have equal degree, so divide by $x^2$:
+$$\\lim_{x\\to\\pm\\infty}f(x)=\\lim_{x\\to\\pm\\infty}\\frac{1-4/x+1/x^2}{1-2/x+1/x^2}=\\frac11=1.$$
+Hence $y=1$ is a **horizontal asymptote**, approached from below as $x\\to\\infty$ and from above as $x\\to-\\infty$. ✓
+
+The denominator vanishes only at $x=1$, where the numerator is $1-4+1=-2\\neq0$, so $x=1$ is a **vertical asymptote**; as $(x-1)^2>0$ there, $f(x)\\to-\\infty$ as $x\\to1^{\\pm}$. ✓
 **(b)** Numerator and denominator have equal degree, so divide by $x^2$:
 $$\\lim_{x\\to\\pm\\infty}f(x)=\\lim_{x\\to\\pm\\infty}\\frac{1-4/x+1/x^2}{1-2/x+1/x^2}=\\frac11=1.$$
 Hence $y=1$ is a **horizontal asymptote**, approached from below as $x\\to\\infty$ and from above as $x\\to-\\infty$. ✓
@@ -62,7 +70,12 @@ The denominator vanishes only at $x=1$, where the numerator is $1-4+1=-2\\neq0$,
 **(c)** By the quotient rule, with $u=x^2-4x+1$, $u'=2x-4$, $v=(x-1)^2$, $v'=2(x-1)$:
 $$f'(x)=\\frac{(2x-4)(x-1)^2-(x^2-4x+1)\\cdot2(x-1)}{(x-1)^4}=\\frac{(2x-4)(x-1)-2(x^2-4x+1)}{(x-1)^3},$$
 cancelling one factor $(x-1)$. Expanding, $(2x^2-6x+4)-(2x^2-8x+2)=2x+2$, so $f'(x)=\\dfrac{2(x+1)}{(x-1)^3}$. ✓
+$$f'(x)=\\frac{(2x-4)(x-1)^2-(x^2-4x+1)\\cdot2(x-1)}{(x-1)^4}=\\frac{(2x-4)(x-1)-2(x^2-4x+1)}{(x-1)^3},$$
+cancelling one factor $(x-1)$. Expanding, $(2x^2-6x+4)-(2x^2-8x+2)=2x+2$, so $f'(x)=\\dfrac{2(x+1)}{(x-1)^3}$. ✓
 
+$f'(x)=0$ only at $x=-1$; $f'$ is undefined at $x=1$, which is outside the domain. Sign chart on $(-\\infty,-1),(-1,1),(1,\\infty)$ with test values $x=-2,0,2$: $f'(-2)=\\tfrac{2}{27}>0$, $f'(0)=-2<0$, $f'(2)=6>0$. ✓
+
+So $f$ **increases on $(-\\infty,-1)$ and $(1,\\infty)$** and **decreases on $(-1,1)$**. The sign changes $+$ to $-$ at $x=-1$, so the First Derivative Test gives a **local maximum** $\\left(-1,\\tfrac32\\right)$, as $f(-1)=\\dfrac{1+4+1}{4}=\\dfrac32$; no local minimum. ✓
 $f'(x)=0$ only at $x=-1$; $f'$ is undefined at $x=1$, which is outside the domain. Sign chart on $(-\\infty,-1),(-1,1),(1,\\infty)$ with test values $x=-2,0,2$: $f'(-2)=\\tfrac{2}{27}>0$, $f'(0)=-2<0$, $f'(2)=6>0$. ✓
 
 So $f$ **increases on $(-\\infty,-1)$ and $(1,\\infty)$** and **decreases on $(-1,1)$**. The sign changes $+$ to $-$ at $x=-1$, so the First Derivative Test gives a **local maximum** $\\left(-1,\\tfrac32\\right)$, as $f(-1)=\\dfrac{1+4+1}{4}=\\dfrac32$; no local minimum. ✓
@@ -74,7 +87,17 @@ since $(x-1)-3(x+1)=-2x-4$. ✓
 $f''(x)=0$ only at $x=-2$, and as $(x-1)^4>0$ for $x\\neq1$, $f''$ takes the sign of $-(x+2)$. Sign chart on $(-\\infty,-2),(-2,1),(1,\\infty)$ with test values $x=-3,0,2$: $f''(-3)=\\tfrac1{64}>0$, $f''(0)=-8<0$, $f''(2)=-16<0$. ✓
 
 So $f$ is **concave up on $(-\\infty,-2)$** and **concave down on $(-2,1)$ and $(1,\\infty)$**. Concavity changes only at $x=-2$, which lies in the domain, giving the **inflection point** $\\left(-2,\\tfrac{13}9\\right)$, since $f(-2)=\\dfrac{4+8+1}{9}=\\dfrac{13}9$; none at $x=1$, where $f$ is undefined. This confirms (c), as $f''(-1)=-\\tfrac14<0$. ✓
+**(d)** Write $f'(x)=2(x+1)(x-1)^{-3}$ and use the product rule, with $u=2(x+1)$, $u'=2$, $v=(x-1)^{-3}$, $v'=-3(x-1)^{-4}$:
+$$f''(x)=2(x-1)^{-3}-6(x+1)(x-1)^{-4}=2(x-1)^{-4}\\big[(x-1)-3(x+1)\\big]=\\frac{-4(x+2)}{(x-1)^4},$$
+since $(x-1)-3(x+1)=-2x-4$. ✓
 
+$f''(x)=0$ only at $x=-2$, and as $(x-1)^4>0$ for $x\\neq1$, $f''$ takes the sign of $-(x+2)$. Sign chart on $(-\\infty,-2),(-2,1),(1,\\infty)$ with test values $x=-3,0,2$: $f''(-3)=\\tfrac1{64}>0$, $f''(0)=-8<0$, $f''(2)=-16<0$. ✓
+
+So $f$ is **concave up on $(-\\infty,-2)$** and **concave down on $(-2,1)$ and $(1,\\infty)$**. Concavity changes only at $x=-2$, which lies in the domain, giving the **inflection point** $\\left(-2,\\tfrac{13}9\\right)$, since $f(-2)=\\dfrac{4+8+1}{9}=\\dfrac{13}9$; none at $x=1$, where $f$ is undefined. This confirms (c), as $f''(-1)=-\\tfrac14<0$. ✓
+
+**(e)** See the graph below — it shows the asymptotes $x=1$ and $y=1$, the $x$-intercepts $2\\pm\\sqrt3$ and the $y$-intercept $(0,1)$. ✓
+
+The left branch enters just above $y=1$, bends through $\\left(-2,\\tfrac{13}9\\right)$, peaks at $\\left(-1,\\tfrac32\\right)$, then falls through $2-\\sqrt3$ to $-\\infty$; the right branch climbs from $-\\infty$, crosses at $2+\\sqrt3$ and flattens onto $y=1$. ✓
 **(e)** See the graph below — it shows the asymptotes $x=1$ and $y=1$, the $x$-intercepts $2\\pm\\sqrt3$ and the $y$-intercept $(0,1)$. ✓
 
 The left branch enters just above $y=1$, bends through $\\left(-2,\\tfrac{13}9\\right)$, peaks at $\\left(-1,\\tfrac32\\right)$, then falls through $2-\\sqrt3$ to $-\\infty$; the right branch climbs from $-\\infty$, crosses at $2+\\sqrt3$ and flattens onto $y=1$. ✓
@@ -105,17 +128,29 @@ Find the dimensions that minimize the amount of material used (i.e. minimize the
         solution: `
 **Constraint.** The base is a square of side $x$ and the height is $h$, so the volume condition $x^2h=4000$ gives
 $$h=\\frac{4000}{x^2},\\qquad x>0.$$ ✓
+**Constraint.** The base is a square of side $x$ and the height is $h$, so the volume condition $x^2h=4000$ gives
+$$h=\\frac{4000}{x^2},\\qquad x>0.$$ ✓
 
+**Objective.** The box is open-topped, so the material consists of one square base plus four rectangular sides of dimensions $x\\times h$:
+$$S=x^2+4xh=x^2+4x\\cdot\\frac{4000}{x^2}=x^2+\\frac{16000}{x}.$$ ✓
 **Objective.** The box is open-topped, so the material consists of one square base plus four rectangular sides of dimensions $x\\times h$:
 $$S=x^2+4xh=x^2+4x\\cdot\\frac{4000}{x^2}=x^2+\\frac{16000}{x}.$$ ✓
 
 Differentiating $S(x)=x^2+16000x^{-1}$ term by term with the power rule:
 $$S'(x)=2x-\\frac{16000}{x^2}.$$ ✓
+Differentiating $S(x)=x^2+16000x^{-1}$ term by term with the power rule:
+$$S'(x)=2x-\\frac{16000}{x^2}.$$ ✓
 
+Setting $S'(x)=0$ and multiplying through by $x^2$ (valid since $x>0$): $2x^3-16000=0\\;\\Rightarrow\\;x^3=8000\\;\\Rightarrow\\;x=\\sqrt[3]{8000}=20$, the only critical number on $(0,\\infty)$. ✓
 Setting $S'(x)=0$ and multiplying through by $x^2$ (valid since $x>0$): $2x^3-16000=0\\;\\Rightarrow\\;x^3=8000\\;\\Rightarrow\\;x=\\sqrt[3]{8000}=20$, the only critical number on $(0,\\infty)$. ✓
 
 Differentiating again, $S''(x)=2+\\dfrac{32000}{x^3}$, so $S''(20)=2+\\dfrac{32000}{8000}=2+4=6>0$. By the second-derivative test $x=20$ is a **local minimum**, and being the only critical number on $(0,\\infty)$ it is the absolute minimum. ✓
+Differentiating again, $S''(x)=2+\\dfrac{32000}{x^3}$, so $S''(20)=2+\\dfrac{32000}{8000}=2+4=6>0$. By the second-derivative test $x=20$ is a **local minimum**, and being the only critical number on $(0,\\infty)$ it is the absolute minimum. ✓
 
+Back-substituting: $h=\\dfrac{4000}{20^2}=\\dfrac{4000}{400}=10$, and
+$$S(20)=20^2+\\frac{16000}{20}=400+800=1200.$$ ✓
+
+**Base $20\\text{ cm}\\times20\\text{ cm}$, height $10\\text{ cm}$, minimum surface area $1200\\text{ cm}^2$.**
 Back-substituting: $h=\\dfrac{4000}{20^2}=\\dfrac{4000}{400}=10$, and
 $$S(20)=20^2+\\frac{16000}{20}=400+800=1200.$$ ✓
 
@@ -146,7 +181,21 @@ $$V=\\pi\\left[\\frac{4x^3}{3}-\\frac{x^5}{5}\\right]_0^2=\\pi\\left[\\left(\\fr
 
 Taking out the common factor $32$ and using $\\dfrac13-\\dfrac15=\\dfrac{5-3}{15}=\\dfrac{2}{15}$:
 $$V=32\\pi\\cdot\\frac{2}{15}=\\frac{64\\pi}{15}.$$ ✓
+**Limits of integration.** The curves meet where $2x=x^2$, i.e. $x^2-2x=0\\;\\Rightarrow\\;x(x-2)=0\\;\\Rightarrow\\;x=0$ or $x=2$. Both satisfy $x\\ge0$, so $R$ sits over $0\\le x\\le2$. ✓
 
+On $(0,2)$ the line lies above the parabola — at the test value $x=1$, $2(1)=2>1=1^2$ — so a vertical strip revolved about the $x$-axis sweeps out a **washer**, not a disc. ✓
+
+Its outer radius is the distance from the axis to the line, $R(x)=2x$, its inner radius is the distance to the parabola, $r(x)=x^2$, and its thickness is $dx$, giving cross-sectional area $\\pi\\left[R(x)^2-r(x)^2\\right]$. ✓
+
+$$V=\\pi\\int_0^2\\Big[(2x)^2-\\left(x^2\\right)^2\\Big]dx=\\pi\\int_0^2\\left(4x^2-x^4\\right)dx.$$ ✓✓
+
+Antidifferentiating term by term with the power rule and evaluating:
+$$V=\\pi\\left[\\frac{4x^3}{3}-\\frac{x^5}{5}\\right]_0^2=\\pi\\left[\\left(\\frac{4\\cdot8}{3}-\\frac{32}{5}\\right)-\\left(0-0\\right)\\right]=\\pi\\left(\\frac{32}{3}-\\frac{32}{5}\\right).$$ ✓✓
+
+Taking out the common factor $32$ and using $\\dfrac13-\\dfrac15=\\dfrac{5-3}{15}=\\dfrac{2}{15}$:
+$$V=32\\pi\\cdot\\frac{2}{15}=\\frac{64\\pi}{15}.$$ ✓
+
+**Volume $=\\dfrac{64\\pi}{15}\\approx13.40$ cubic units.**
 **Volume $=\\dfrac{64\\pi}{15}\\approx13.40$ cubic units.**
         `
       },
@@ -165,10 +214,16 @@ You may use the Mean Value Theorem without proof. (8)
         `,
         solution: `
 Partition $[a,b]$ into $n$ subintervals of equal width $\\Delta x=\\dfrac{b-a}{n}$ by the points $a=x_0< x_1<\\dots< x_n=b$, where $x_i=a+i\\,\\Delta x$. ✓
+Partition $[a,b]$ into $n$ subintervals of equal width $\\Delta x=\\dfrac{b-a}{n}$ by the points $a=x_0< x_1<\\dots< x_n=b$, where $x_i=a+i\\,\\Delta x$. ✓
 
 Insert and cancel the interior values $F(x_1),\\dots,F(x_{n-1})$, so that $F(b)-F(a)$ becomes a telescoping sum:
 $$F(b)-F(a)=F(x_n)-F(x_0)=\\sum_{i=1}^{n}\\big[F(x_i)-F(x_{i-1})\\big].$$ ✓✓
+Insert and cancel the interior values $F(x_1),\\dots,F(x_{n-1})$, so that $F(b)-F(a)$ becomes a telescoping sum:
+$$F(b)-F(a)=F(x_n)-F(x_0)=\\sum_{i=1}^{n}\\big[F(x_i)-F(x_{i-1})\\big].$$ ✓✓
 
+Fix $i$. Since $F$ is an antiderivative of $f$ on $[a,b]$ it is differentiable there, hence continuous on $[x_{i-1},x_i]$ and differentiable on $(x_{i-1},x_i)$ — exactly the hypotheses of the **Mean Value Theorem**. So there exists $c_i\\in(x_{i-1},x_i)$ with
+$$F'(c_i)=\\frac{F(x_i)-F(x_{i-1})}{x_i-x_{i-1}}=\\frac{F(x_i)-F(x_{i-1})}{\\Delta x}.$$
+Since $F'=f$, this rearranges to $F(x_i)-F(x_{i-1})=f(c_i)\\,\\Delta x$. ✓✓
 Fix $i$. Since $F$ is an antiderivative of $f$ on $[a,b]$ it is differentiable there, hence continuous on $[x_{i-1},x_i]$ and differentiable on $(x_{i-1},x_i)$ — exactly the hypotheses of the **Mean Value Theorem**. So there exists $c_i\\in(x_{i-1},x_i)$ with
 $$F'(c_i)=\\frac{F(x_i)-F(x_{i-1})}{x_i-x_{i-1}}=\\frac{F(x_i)-F(x_{i-1})}{\\Delta x}.$$
 Since $F'=f$, this rearranges to $F(x_i)-F(x_{i-1})=f(c_i)\\,\\Delta x$. ✓✓
@@ -176,7 +231,12 @@ Since $F'=f$, this rearranges to $F(x_i)-F(x_{i-1})=f(c_i)\\,\\Delta x$. ✓✓
 Substituting this into the telescoping sum,
 $$F(b)-F(a)=\\sum_{i=1}^{n}f(c_i)\\,\\Delta x,$$
 which is precisely a Riemann sum for $f$ on $[a,b]$ with sample point $c_i$ in the $i$th subinterval. Note that the left-hand side is a fixed number, independent of $n$. ✓✓
+Substituting this into the telescoping sum,
+$$F(b)-F(a)=\\sum_{i=1}^{n}f(c_i)\\,\\Delta x,$$
+which is precisely a Riemann sum for $f$ on $[a,b]$ with sample point $c_i$ in the $i$th subinterval. Note that the left-hand side is a fixed number, independent of $n$. ✓✓
 
+Because $f$ is continuous on $[a,b]$ it is integrable there, so its Riemann sums converge to $\\displaystyle\\int_a^b f(x)\\,dx$ as $n\\to\\infty$ for **any** choice of sample points — in particular the $c_i$ above. Letting $n\\to\\infty$,
+$$F(b)-F(a)=\\lim_{n\\to\\infty}\\sum_{i=1}^{n}f(c_i)\\,\\Delta x=\\int_a^b f(x)\\,dx.\\qquad\\blacksquare$$ ✓
 Because $f$ is continuous on $[a,b]$ it is integrable there, so its Riemann sums converge to $\\displaystyle\\int_a^b f(x)\\,dx$ as $n\\to\\infty$ for **any** choice of sample points — in particular the $c_i$ above. Letting $n\\to\\infty$,
 $$F(b)-F(a)=\\lim_{n\\to\\infty}\\sum_{i=1}^{n}f(c_i)\\,\\Delta x=\\int_a^b f(x)\\,dx.\\qquad\\blacksquare$$ ✓
         `
@@ -202,12 +262,20 @@ Evaluate each of the following integrals.
         solution: `
 **(a)** This is the standard inverse-sine form $\\displaystyle\\int\\frac{dx}{\\sqrt{a^2-x^2}}=\\arcsin\\!\\left(\\frac{x}{a}\\right)+C$, here with $a^2=9$, so $a=3$. ✓
 $$\\int\\frac{dx}{\\sqrt{9-x^2}}=\\arcsin\\!\\left(\\frac{x}{3}\\right)+C.$$ ✓
+**(a)** This is the standard inverse-sine form $\\displaystyle\\int\\frac{dx}{\\sqrt{a^2-x^2}}=\\arcsin\\!\\left(\\frac{x}{a}\\right)+C$, here with $a^2=9$, so $a=3$. ✓
+$$\\int\\frac{dx}{\\sqrt{9-x^2}}=\\arcsin\\!\\left(\\frac{x}{3}\\right)+C.$$ ✓
 
 **(b)** The quadratic is irreducible, so complete the square: $x^2+4x+13=(x^2+4x+4)+9=(x+2)^2+9$. ✓
 
 Now use $\\displaystyle\\int\\frac{du}{u^2+a^2}=\\frac1a\\arctan\\!\\left(\\frac{u}{a}\\right)+C$ with the substitution $u=x+2$, $du=dx$, and $a=3$:
 $$\\int\\frac{dx}{(x+2)^2+9}=\\frac13\\arctan\\!\\left(\\frac{x+2}{3}\\right)+C.$$ ✓
+**(b)** The quadratic is irreducible, so complete the square: $x^2+4x+13=(x^2+4x+4)+9=(x+2)^2+9$. ✓
 
+Now use $\\displaystyle\\int\\frac{du}{u^2+a^2}=\\frac1a\\arctan\\!\\left(\\frac{u}{a}\\right)+C$ with the substitution $u=x+2$, $du=dx$, and $a=3$:
+$$\\int\\frac{dx}{(x+2)^2+9}=\\frac13\\arctan\\!\\left(\\frac{x+2}{3}\\right)+C.$$ ✓
+
+**(c)** Let $u=-3x$, so $du=-3\\,dx$ and $dx=-\\tfrac13\\,du$:
+$$\\int e^{-3x}\\,dx=-\\frac13\\int e^{u}\\,du=-\\frac13e^{u}+C=-\\frac13e^{-3x}+C.$$ ✓
 **(c)** Let $u=-3x$, so $du=-3\\,dx$ and $dx=-\\tfrac13\\,du$:
 $$\\int e^{-3x}\\,dx=-\\frac13\\int e^{u}\\,du=-\\frac13e^{u}+C=-\\frac13e^{-3x}+C.$$ ✓
 
@@ -233,10 +301,20 @@ The integrand is a polynomial times an exponential, so integrate by parts with $
 
 **First application.** Let $u=x^2$, $dv=e^x\\,dx$, so $du=2x\\,dx$ and $v=\\int e^x\\,dx=e^x$. Then $uv-\\int v\\,du$ gives
 $$\\int x^2e^x\\,dx=x^2e^x-\\int 2xe^x\\,dx.$$ ✓✓
+The integrand is a polynomial times an exponential, so integrate by parts with $u$ the polynomial; each application lowers its degree by one, so two are needed.
+
+**First application.** Let $u=x^2$, $dv=e^x\\,dx$, so $du=2x\\,dx$ and $v=\\int e^x\\,dx=e^x$. Then $uv-\\int v\\,du$ gives
+$$\\int x^2e^x\\,dx=x^2e^x-\\int 2xe^x\\,dx.$$ ✓✓
 
 **Second application**, on $\\displaystyle\\int 2xe^x\\,dx$: let $u=2x$, $dv=e^x\\,dx$, so $du=2\\,dx$ and $v=e^x$. Then
 $$\\int 2xe^x\\,dx=2xe^x-\\int 2e^x\\,dx=2xe^x-2e^x.$$ ✓✓
+**Second application**, on $\\displaystyle\\int 2xe^x\\,dx$: let $u=2x$, $dv=e^x\\,dx$, so $du=2\\,dx$ and $v=e^x$. Then
+$$\\int 2xe^x\\,dx=2xe^x-\\int 2e^x\\,dx=2xe^x-2e^x.$$ ✓✓
 
+Substituting back, minding the sign on the bracket, and factoring out $e^x$:
+$$\\int x^2e^x\\,dx=x^2e^x-\\left(2xe^x-2e^x\\right)+C=e^x\\left(x^2-2x+2\\right)+C.$$ ✓✓
+
+Check: $\\dfrac{d}{dx}\\left[e^x\\left(x^2-2x+2\\right)\\right]=e^x\\left(x^2-2x+2\\right)+e^x(2x-2)=x^2e^x$.
 Substituting back, minding the sign on the bracket, and factoring out $e^x$:
 $$\\int x^2e^x\\,dx=x^2e^x-\\left(2xe^x-2e^x\\right)+C=e^x\\left(x^2-2x+2\\right)+C.$$ ✓✓
 
@@ -252,6 +330,20 @@ Check: $\\dfrac{d}{dx}\\left[e^x\\left(x^2-2x+2\\right)\\right]=e^x\\left(x^2-2x
 Evaluate $\\displaystyle \\int \\frac{3x+5}{(x+1)(x+2)}\\,dx$.
         `,
         solution: `
+The denominator is already factorised into two **distinct linear factors**, and the numerator has lower degree than the denominator, so no division is needed. The decomposition carries one constant over each factor:
+$$\\frac{3x+5}{(x+1)(x+2)}=\\frac{A}{x+1}+\\frac{B}{x+2}.$$ ✓
+
+Multiplying both sides by $(x+1)(x+2)$ clears the denominators and leaves an identity valid for every $x$:
+$$3x+5=A(x+2)+B(x+1).$$ ✓
+
+Setting $x=-1$ kills the $B$ term: $\\;-3+5=2=A(1)\\;\\Rightarrow\\;A=2$. ✓
+
+Setting $x=-2$ kills the $A$ term: $\\;-6+5=-1=B(-1)\\;\\Rightarrow\\;B=1$. ✓
+
+Checking against the coefficients of $x$: $A+B=2+1=3$, matching the $3x$ on the left, as required.
+
+Integrating term by term, each piece having the standard form $\\displaystyle\\int\\frac{dx}{x-k}=\\ln|x-k|+C$:
+$$\\int\\frac{3x+5}{(x+1)(x+2)}\\,dx=\\int\\left(\\frac{2}{x+1}+\\frac{1}{x+2}\\right)dx=2\\ln|x+1|+\\ln|x+2|+C.$$ ✓✓
 The denominator is already factorised into two **distinct linear factors**, and the numerator has lower degree than the denominator, so no division is needed. The decomposition carries one constant over each factor:
 $$\\frac{3x+5}{(x+1)(x+2)}=\\frac{A}{x+1}+\\frac{B}{x+2}.$$ ✓
 
@@ -303,13 +395,25 @@ Let $\\displaystyle f(x) = \\frac{x^2+3}{x-2}$.
 **(a)** The domain is every $x\\neq2$. An $x$-intercept needs the numerator to vanish, but $x^2+3\\ge3>0$ for every real $x$, so $x^2+3=0$ has no real solution: $f$ has **no $x$-intercepts**. ✓
 
 $y$-intercept: $f(0)=\\dfrac{0^2+3}{0-2}=\\dfrac{3}{-2}=-\\dfrac32$, giving the point $\\left(0,-\\dfrac32\\right)$. ✓
+**(a)** The domain is every $x\\neq2$. An $x$-intercept needs the numerator to vanish, but $x^2+3\\ge3>0$ for every real $x$, so $x^2+3=0$ has no real solution: $f$ has **no $x$-intercepts**. ✓
 
+$y$-intercept: $f(0)=\\dfrac{0^2+3}{0-2}=\\dfrac{3}{-2}=-\\dfrac32$, giving the point $\\left(0,-\\dfrac32\\right)$. ✓
+
+**(b)** Dividing $x^2+3$ by $x-2$ gives quotient $x+2$ and remainder $7$, since $(x-2)(x+2)+7=(x^2-4)+7=x^2+3$. Hence
+$$f(x)=x+2+\\frac{7}{x-2}.$$ ✓
+
+At $x=2$ the denominator vanishes while the remainder is $7\\neq0$, so $x=2$ is a **vertical asymptote**: $f\\to-\\infty$ as $x\\to2^-$ and $f\\to+\\infty$ as $x\\to2^+$. Since $\\dfrac{7}{x-2}\\to0$ as $x\\to\\pm\\infty$, the curve settles onto the **slant asymptote** $y=x+2$. ✓
 **(b)** Dividing $x^2+3$ by $x-2$ gives quotient $x+2$ and remainder $7$, since $(x-2)(x+2)+7=(x^2-4)+7=x^2+3$. Hence
 $$f(x)=x+2+\\frac{7}{x-2}.$$ ✓
 
 At $x=2$ the denominator vanishes while the remainder is $7\\neq0$, so $x=2$ is a **vertical asymptote**: $f\\to-\\infty$ as $x\\to2^-$ and $f\\to+\\infty$ as $x\\to2^+$. Since $\\dfrac{7}{x-2}\\to0$ as $x\\to\\pm\\infty$, the curve settles onto the **slant asymptote** $y=x+2$. ✓
 
 **(c)** By the quotient rule, with $u=x^2+3$, $u'=2x$, $v=x-2$, $v'=1$:
+$$f'(x)=\\frac{2x(x-2)-(x^2+3)(1)}{(x-2)^2}=\\frac{2x^2-4x-x^2-3}{(x-2)^2}=\\frac{x^2-4x-3}{(x-2)^2}.$$ ✓✓
+
+$f'(x)=0$ requires the numerator to vanish: $x^2-4x-3=0\\;\\Rightarrow\\;x=\\dfrac{4\\pm\\sqrt{16+12}}{2}=\\dfrac{4\\pm2\\sqrt7}{2}=2\\pm\\sqrt7\\approx-0.65$ and $4.65$.
+
+The denominator $(x-2)^2>0$ on the domain, so $f'$ carries the sign of the upward parabola $x^2-4x-3$. Sign chart on $(-\\infty,2-\\sqrt7),\\,(2-\\sqrt7,2),\\,(2,2+\\sqrt7),\\,(2+\\sqrt7,\\infty)$ with test values $x=-1,0,3,6$: $f'=\\tfrac29>0,\\;-\\tfrac34<0,\\;-6<0,\\;\\tfrac{9}{16}>0$. So $f$ is **increasing on $(-\\infty,2-\\sqrt7)$ and $(2+\\sqrt7,\\infty)$** and **decreasing on $(2-\\sqrt7,2)$ and $(2,2+\\sqrt7)$**, with a **local maximum** at $x=2-\\sqrt7$, $f=4-2\\sqrt7\\approx-1.29$, and a **local minimum** at $x=2+\\sqrt7$, $f=4+2\\sqrt7\\approx9.29$. ✓
 $$f'(x)=\\frac{2x(x-2)-(x^2+3)(1)}{(x-2)^2}=\\frac{2x^2-4x-x^2-3}{(x-2)^2}=\\frac{x^2-4x-3}{(x-2)^2}.$$ ✓✓
 
 $f'(x)=0$ requires the numerator to vanish: $x^2-4x-3=0\\;\\Rightarrow\\;x=\\dfrac{4\\pm\\sqrt{16+12}}{2}=\\dfrac{4\\pm2\\sqrt7}{2}=2\\pm\\sqrt7\\approx-0.65$ and $4.65$.
@@ -323,7 +427,17 @@ Expanding the numerator: $(2x^2-8x+8)-(2x^2-8x-6)=14$, so
 $$f''(x)=\\frac{14}{(x-2)^3}.$$ ✓
 
 Since $14>0$, $f''$ is never zero and takes the sign of $(x-2)^3$: negative for $x<2$ (e.g. $f''(0)=-\\tfrac74$), positive for $x>2$ (e.g. $f''(3)=14$). So $f$ is **concave down on $(-\\infty,2)$** and **concave up on $(2,\\infty)$**, with **no point of inflection**, since the only sign change is at $x=2$, excluded from the domain. This confirms (c) by the second-derivative test: $f''(2-\\sqrt7)=-\\tfrac{2\\sqrt7}{7}<0$ (maximum) and $f''(2+\\sqrt7)=\\tfrac{2\\sqrt7}{7}>0$ (minimum). ✓
+**(d)** Differentiating $f'(x)=\\dfrac{x^2-4x-3}{(x-2)^2}$ by the quotient rule, with $u=x^2-4x-3$, $u'=2x-4$, $v=(x-2)^2$, $v'=2(x-2)$, then cancelling one factor of $(x-2)$:
+$$f''(x)=\\frac{(2x-4)(x-2)^2-2(x-2)(x^2-4x-3)}{(x-2)^4}=\\frac{(2x-4)(x-2)-2(x^2-4x-3)}{(x-2)^3}.$$ ✓
 
+Expanding the numerator: $(2x^2-8x+8)-(2x^2-8x-6)=14$, so
+$$f''(x)=\\frac{14}{(x-2)^3}.$$ ✓
+
+Since $14>0$, $f''$ is never zero and takes the sign of $(x-2)^3$: negative for $x<2$ (e.g. $f''(0)=-\\tfrac74$), positive for $x>2$ (e.g. $f''(3)=14$). So $f$ is **concave down on $(-\\infty,2)$** and **concave up on $(2,\\infty)$**, with **no point of inflection**, since the only sign change is at $x=2$, excluded from the domain. This confirms (c) by the second-derivative test: $f''(2-\\sqrt7)=-\\tfrac{2\\sqrt7}{7}<0$ (maximum) and $f''(2+\\sqrt7)=\\tfrac{2\\sqrt7}{7}>0$ (minimum). ✓
+
+**(e)** See the graph below — it shows the vertical asymptote $x=2$, the slant asymptote $y=x+2$, the $y$-intercept $\\left(0,-\\tfrac32\\right)$, and no $x$-intercepts. ✓
+
+The left branch rises to the local maximum $\\left(2-\\sqrt7,\\,4-2\\sqrt7\\right)$ before plunging to $-\\infty$ at the asymptote; the right branch falls from $+\\infty$ to the local minimum $\\left(2+\\sqrt7,\\,4+2\\sqrt7\\right)$, then climbs along $y=x+2$. ✓
 **(e)** See the graph below — it shows the vertical asymptote $x=2$, the slant asymptote $y=x+2$, the $y$-intercept $\\left(0,-\\tfrac32\\right)$, and no $x$-intercepts. ✓
 
 The left branch rises to the local maximum $\\left(2-\\sqrt7,\\,4-2\\sqrt7\\right)$ before plunging to $-\\infty$ at the asymptote; the right branch falls from $+\\infty$ to the local minimum $\\left(2+\\sqrt7,\\,4+2\\sqrt7\\right)$, then climbs along $y=x+2$. ✓
@@ -355,18 +469,29 @@ A farmer wants to fence a rectangular field bordering a straight river; no fence
 Let $x$ be the length in metres of each of the two sides perpendicular to the river, and $y$ the length of the single side parallel to it. No fence runs along the river, so only three sides consume the $800$ m:
 $$2x+y=800\\;\\Rightarrow\\;y=800-2x,$$
 and both lengths must be positive, which restricts $x$ to $0< x<400$. ✓
+Let $x$ be the length in metres of each of the two sides perpendicular to the river, and $y$ the length of the single side parallel to it. No fence runs along the river, so only three sides consume the $800$ m:
+$$2x+y=800\\;\\Rightarrow\\;y=800-2x,$$
+and both lengths must be positive, which restricts $x$ to $0< x<400$. ✓
 
+Using the constraint to write the objective in one variable, the area to be maximised is
+$$A(x)=xy=x(800-2x)=800x-2x^2,\\qquad 0< x<400.$$ ✓
 Using the constraint to write the objective in one variable, the area to be maximised is
 $$A(x)=xy=x(800-2x)=800x-2x^2,\\qquad 0< x<400.$$ ✓
 
 Differentiating and setting the derivative to zero to find the critical point:
 $$A'(x)=800-4x=0\\;\\Rightarrow\\;4x=800\\;\\Rightarrow\\;x=200.$$ ✓
+Differentiating and setting the derivative to zero to find the critical point:
+$$A'(x)=800-4x=0\\;\\Rightarrow\\;4x=800\\;\\Rightarrow\\;x=200.$$ ✓
 
+$A''(x)=-4<0$ for every $x$, so by the second-derivative test $x=200$ is a **local maximum**; since $A$ is a downward parabola vanishing at both endpoints $A(0)=A(400)=0$, this is the absolute maximum on the interval. ✓
 $A''(x)=-4<0$ for every $x$, so by the second-derivative test $x=200$ is a **local maximum**; since $A$ is a downward parabola vanishing at both endpoints $A(0)=A(400)=0$, this is the absolute maximum on the interval. ✓
 
 Back-substituting into the constraint, $y=800-2(200)=800-400=400$ m, and
 $$A(200)=200\\times400=80\\,000\\text{ m}^2.$$ ✓✓
+Back-substituting into the constraint, $y=800-2(200)=800-400=400$ m, and
+$$A(200)=200\\times400=80\\,000\\text{ m}^2.$$ ✓✓
 
+**Dimensions $200\\text{ m}$ (each side perpendicular to the river) $\\times\\;400\\text{ m}$ (the side parallel to the river); maximum area $80\\,000\\text{ m}^2$.**
 **Dimensions $200\\text{ m}$ (each side perpendicular to the river) $\\times\\;400\\text{ m}$ (the side parallel to the river); maximum area $80\\,000\\text{ m}^2$.**
         `
       },
@@ -383,15 +508,26 @@ Using Hooke's Law, $F(x) = kx$ (where $x$ is the displacement from natural lengt
         solution: `
 Measure the displacement $x$ from the natural length. Stretching the spring from $0.2$ m to $0.3$ m is a displacement of $x=0.3-0.2=0.1$ m, and holding it there requires $25$ N, so Hooke's Law $F(x)=kx$ gives
 $$25=k(0.1)\\;\\Rightarrow\\;k=\\frac{25}{0.1}=250\\text{ N/m},\\qquad\\text{so } F(x)=250x.$$ ✓✓
+Measure the displacement $x$ from the natural length. Stretching the spring from $0.2$ m to $0.3$ m is a displacement of $x=0.3-0.2=0.1$ m, and holding it there requires $25$ N, so Hooke's Law $F(x)=kx$ gives
+$$25=k(0.1)\\;\\Rightarrow\\;k=\\frac{25}{0.1}=250\\text{ N/m},\\qquad\\text{so } F(x)=250x.$$ ✓✓
 
 A length of $0.35$ m corresponds to a displacement of $x=0.35-0.2=0.15$ m, so the spring is stretched from $x=0$ (natural length) to $x=0.15$. ✓
+A length of $0.35$ m corresponds to a displacement of $x=0.35-0.2=0.15$ m, so the spring is stretched from $x=0$ (natural length) to $x=0.15$. ✓
 
+The force is not constant, so the work is the integral of force over displacement, $W=\\displaystyle\\int_a^b F(x)\\,dx$:
+$$W=\\int_0^{0.15}250x\\,dx.$$ ✓✓
 The force is not constant, so the work is the integral of force over displacement, $W=\\displaystyle\\int_a^b F(x)\\,dx$:
 $$W=\\int_0^{0.15}250x\\,dx.$$ ✓✓
 
 Antidifferentiating $250x$ by the power rule gives $250\\cdot\\dfrac{x^2}{2}=125x^2$:
 $$W=\\left[125x^2\\right]_0^{0.15}.$$ ✓
+Antidifferentiating $250x$ by the power rule gives $250\\cdot\\dfrac{x^2}{2}=125x^2$:
+$$W=\\left[125x^2\\right]_0^{0.15}.$$ ✓
 
+Substituting the limits and subtracting:
+$$W=125(0.15)^2-125(0)^2=125(0.0225)=2.8125.$$ ✓✓
+
+**Work done $=2.8125\\text{ J}$.**
 Substituting the limits and subtracting:
 $$W=125(0.15)^2-125(0)^2=125(0.0225)=2.8125.$$ ✓✓
 
@@ -409,6 +545,19 @@ $$\\int_a^b\\big[f(x)+g(x)\\big]\\,dx=\\int_a^b f(x)\\,dx+\\int_a^b g(x)\\,dx,$$
 given that $f$ and $g$ are integrable on $[a,b]$. (8)
         `,
         solution: `
+Partition $[a,b]$ into $n$ subintervals of equal width $\\Delta x=\\dfrac{b-a}{n}$ and choose a sample point $x_i^*$ in the $i$-th subinterval $[x_{i-1},x_i]$. By the definition of the definite integral, any function $h$ integrable on $[a,b]$ satisfies
+$$\\int_a^b h(x)\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^n h(x_i^*)\\,\\Delta x.$$ ✓✓
+
+Applying this definition with $h=f+g$, so that $h(x_i^*)=f(x_i^*)+g(x_i^*)$:
+$$\\int_a^b\\big[f(x)+g(x)\\big]\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^n\\big[f(x_i^*)+g(x_i^*)\\big]\\Delta x.$$ ✓
+
+Inside the sum, distribute $\\Delta x$ over the bracket, then split the sum. This regrouping is legitimate because the sum is **finite**: addition is associative and commutative, so the $f$-terms and the $g$-terms may be collected separately.
+$$\\sum_{i=1}^n\\big[f(x_i^*)+g(x_i^*)\\big]\\Delta x=\\sum_{i=1}^n f(x_i^*)\\Delta x+\\sum_{i=1}^n g(x_i^*)\\Delta x.$$ ✓✓
+
+Both $f$ and $g$ are integrable on $[a,b]$, so each of the two limits $\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n f(x_i^*)\\Delta x$ and $\\displaystyle\\lim_{n\\to\\infty}\\sum_{i=1}^n g(x_i^*)\\Delta x$ exists, with values $\\int_a^b f(x)\\,dx$ and $\\int_a^b g(x)\\,dx$ respectively. ✓
+
+Existence of both limits is precisely the hypothesis of the **Sum Law for limits**, which therefore lets the limit of the sum be written as the sum of the limits:
+$$=\\lim_{n\\to\\infty}\\sum_{i=1}^n f(x_i^*)\\Delta x+\\lim_{n\\to\\infty}\\sum_{i=1}^n g(x_i^*)\\Delta x=\\int_a^b f(x)\\,dx+\\int_a^b g(x)\\,dx.\\quad\\blacksquare$$ ✓✓
 Partition $[a,b]$ into $n$ subintervals of equal width $\\Delta x=\\dfrac{b-a}{n}$ and choose a sample point $x_i^*$ in the $i$-th subinterval $[x_{i-1},x_i]$. By the definition of the definite integral, any function $h$ integrable on $[a,b]$ satisfies
 $$\\int_a^b h(x)\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^n h(x_i^*)\\,\\Delta x.$$ ✓✓
 
@@ -445,12 +594,20 @@ Evaluate each of the following integrals.
         solution: `
 **(a)** Write $16x^2=(4x)^2$ and substitute $u=4x$, so $du=4\\,dx$ and $dx=\\tfrac14\\,du$: ✓
 $$\\int\\frac{dx}{\\sqrt{1-(4x)^2}}=\\frac14\\int\\frac{du}{\\sqrt{1-u^2}}=\\frac14\\arcsin u+C=\\frac14\\arcsin(4x)+C.$$ ✓
+**(a)** Write $16x^2=(4x)^2$ and substitute $u=4x$, so $du=4\\,dx$ and $dx=\\tfrac14\\,du$: ✓
+$$\\int\\frac{dx}{\\sqrt{1-(4x)^2}}=\\frac14\\int\\frac{du}{\\sqrt{1-u^2}}=\\frac14\\arcsin u+C=\\frac14\\arcsin(4x)+C.$$ ✓
 
 **(b)** Complete the square: $x^2-6x+13=(x^2-6x+9)+4=(x-3)^2+2^2$. ✓
 
 With $\\displaystyle\\int\\frac{dx}{x^2+a^2}=\\frac1a\\arctan\\frac{x}{a}+C$, here shifted by $3$ and with $a=2$:
 $$\\int\\frac{dx}{(x-3)^2+4}=\\frac12\\arctan\\!\\left(\\frac{x-3}{2}\\right)+C.$$ ✓
+**(b)** Complete the square: $x^2-6x+13=(x^2-6x+9)+4=(x-3)^2+2^2$. ✓
 
+With $\\displaystyle\\int\\frac{dx}{x^2+a^2}=\\frac1a\\arctan\\frac{x}{a}+C$, here shifted by $3$ and with $a=2$:
+$$\\int\\frac{dx}{(x-3)^2+4}=\\frac12\\arctan\\!\\left(\\frac{x-3}{2}\\right)+C.$$ ✓
+
+**(c)** By the standard rule $\\displaystyle\\int a^x\\,dx=\\frac{a^x}{\\ln a}+C$ with $a=5$:
+$$\\int5^x\\,dx=\\frac{5^x}{\\ln5}+C.$$ ✓
 **(c)** By the standard rule $\\displaystyle\\int a^x\\,dx=\\frac{a^x}{\\ln a}+C$ with $a=5$:
 $$\\int5^x\\,dx=\\frac{5^x}{\\ln5}+C.$$ ✓
 
@@ -473,10 +630,15 @@ Evaluate $\\displaystyle \\int x^2 \\ln x\\,dx$.
         `,
         solution: `
 The integrand is a logarithm times a power, so use integration by parts, $\\displaystyle\\int u\\,dv=uv-\\int v\\,du$, taking as $u$ the factor that simplifies on differentiation: let $u=\\ln x$, $dv=x^2\\,dx$, so that $du=\\dfrac1x\\,dx$ and $v=\\dfrac{x^3}{3}$. ✓✓
+The integrand is a logarithm times a power, so use integration by parts, $\\displaystyle\\int u\\,dv=uv-\\int v\\,du$, taking as $u$ the factor that simplifies on differentiation: let $u=\\ln x$, $dv=x^2\\,dx$, so that $du=\\dfrac1x\\,dx$ and $v=\\dfrac{x^3}{3}$. ✓✓
 
 Substituting these four pieces, and noting that the new integrand simplifies since $\\dfrac{x^3}{3}\\cdot\\dfrac1x=\\dfrac{x^2}{3}$:
 $$\\int x^2\\ln x\\,dx=\\frac{x^3}{3}\\ln x-\\int\\frac{x^3}{3}\\cdot\\frac1x\\,dx=\\frac{x^3}{3}\\ln x-\\frac13\\int x^2\\,dx.$$ ✓✓
+Substituting these four pieces, and noting that the new integrand simplifies since $\\dfrac{x^3}{3}\\cdot\\dfrac1x=\\dfrac{x^2}{3}$:
+$$\\int x^2\\ln x\\,dx=\\frac{x^3}{3}\\ln x-\\int\\frac{x^3}{3}\\cdot\\frac1x\\,dx=\\frac{x^3}{3}\\ln x-\\frac13\\int x^2\\,dx.$$ ✓✓
 
+The remaining integral is elementary, $\\displaystyle\\int x^2\\,dx=\\frac{x^3}{3}$, so
+$$\\int x^2\\ln x\\,dx=\\frac{x^3}{3}\\ln x-\\frac13\\cdot\\frac{x^3}{3}+C=\\frac{x^3}{3}\\ln x-\\frac{x^3}{9}+C.$$ ✓✓
 The remaining integral is elementary, $\\displaystyle\\int x^2\\,dx=\\frac{x^3}{3}$, so
 $$\\int x^2\\ln x\\,dx=\\frac{x^3}{3}\\ln x-\\frac13\\cdot\\frac{x^3}{3}+C=\\frac{x^3}{3}\\ln x-\\frac{x^3}{9}+C.$$ ✓✓
         `
@@ -499,7 +661,20 @@ $$\\frac{x+7}{(x-2)(x+1)}=\\frac{A}{x-2}+\\frac{B}{x+1}.$$ ✓
 
 Multiplying both sides by $(x-2)(x+1)$ clears the denominators and gives an identity valid for every $x$:
 $$x+7=A(x+1)+B(x-2).$$ ✓
+**(a)** Factor the denominator: $x^2-x-2=(x-2)(x+1)$, two **distinct linear factors**, and the fraction is proper (degree $1$ over degree $2$), so partial fractions apply directly. ✓
 
+Each distinct linear factor contributes one term with a constant numerator, so assume
+$$\\frac{x+7}{(x-2)(x+1)}=\\frac{A}{x-2}+\\frac{B}{x+1}.$$ ✓
+
+Multiplying both sides by $(x-2)(x+1)$ clears the denominators and gives an identity valid for every $x$:
+$$x+7=A(x+1)+B(x-2).$$ ✓
+
+Setting $x=2$ kills the $B$ term: $\\;2+7=A(3)\\;\\Rightarrow\\;9=3A\\;\\Rightarrow\\;A=3$. ✓
+
+Setting $x=-1$ kills the $A$ term: $\\;-1+7=B(-3)\\;\\Rightarrow\\;6=-3B\\;\\Rightarrow\\;B=-2$. ✓
+
+Integrating term by term with $\\displaystyle\\int\\frac{dx}{x-k}=\\ln|x-k|$:
+$$\\int\\frac{x+7}{x^2-x-2}\\,dx=\\int\\left(\\frac{3}{x-2}-\\frac{2}{x+1}\\right)dx=3\\ln|x-2|-2\\ln|x+1|+C.$$ ✓
 Setting $x=2$ kills the $B$ term: $\\;2+7=A(3)\\;\\Rightarrow\\;9=3A\\;\\Rightarrow\\;A=3$. ✓
 
 Setting $x=-1$ kills the $A$ term: $\\;-1+7=B(-3)\\;\\Rightarrow\\;6=-3B\\;\\Rightarrow\\;B=-2$. ✓
@@ -509,7 +684,13 @@ $$\\int\\frac{x+7}{x^2-x-2}\\,dx=\\int\\left(\\frac{3}{x-2}-\\frac{2}{x+1}\\righ
 
 **(b)** [Bonus question]. Numerator and denominator both have degree $2$, so the fraction is **improper** and partial fractions cannot be applied until the degree is reduced. Divide by adding and subtracting $1$ in the numerator:
 $$\\frac{x^2}{x^2-1}=\\frac{(x^2-1)+1}{x^2-1}=1+\\frac{1}{x^2-1}.$$ ✓
+**(b)** [Bonus question]. Numerator and denominator both have degree $2$, so the fraction is **improper** and partial fractions cannot be applied until the degree is reduced. Divide by adding and subtracting $1$ in the numerator:
+$$\\frac{x^2}{x^2-1}=\\frac{(x^2-1)+1}{x^2-1}=1+\\frac{1}{x^2-1}.$$ ✓
 
+Now decompose the proper remainder over $x^2-1=(x-1)(x+1)$. Writing $\\dfrac{1}{(x-1)(x+1)}=\\dfrac{A}{x-1}+\\dfrac{B}{x+1}$ and clearing denominators gives $1=A(x+1)+B(x-1)$. Setting $x=1$: $1=2A\\Rightarrow A=\\tfrac12$; setting $x=-1$: $1=-2B\\Rightarrow B=-\\tfrac12$. ✓
+
+Integrating the constant term and the two logarithmic terms:
+$$\\int\\frac{x^2}{x^2-1}\\,dx=\\int\\left(1+\\frac{1/2}{x-1}-\\frac{1/2}{x+1}\\right)dx=x+\\frac12\\ln|x-1|-\\frac12\\ln|x+1|+C.$$ ✓
 Now decompose the proper remainder over $x^2-1=(x-1)(x+1)$. Writing $\\dfrac{1}{(x-1)(x+1)}=\\dfrac{A}{x-1}+\\dfrac{B}{x+1}$ and clearing denominators gives $1=A(x+1)+B(x-1)$. Setting $x=1$: $1=2A\\Rightarrow A=\\tfrac12$; setting $x=-1$: $1=-2B\\Rightarrow B=-\\tfrac12$. ✓
 
 Integrating the constant term and the two logarithmic terms:
@@ -551,7 +732,15 @@ Let $\\displaystyle f(x) = \\frac{x^2-9}{x^2-4}$.
 **(a)** A quotient is zero where its numerator vanishes: $x^2-9=0\\;\\Rightarrow\\;x=\\pm3$. At both roots the denominator is $9-4=5\\neq0$, so the **$x$-intercepts** are $(-3,0)$ and $(3,0)$. ✓
 
 $y$-intercept: $f(0)=\\dfrac{-9}{-4}=\\dfrac94$, i.e. the point $\\left(0,\\tfrac94\\right)$. ✓
+**(a)** A quotient is zero where its numerator vanishes: $x^2-9=0\\;\\Rightarrow\\;x=\\pm3$. At both roots the denominator is $9-4=5\\neq0$, so the **$x$-intercepts** are $(-3,0)$ and $(3,0)$. ✓
 
+$y$-intercept: $f(0)=\\dfrac{-9}{-4}=\\dfrac94$, i.e. the point $\\left(0,\\tfrac94\\right)$. ✓
+
+**(b)** The denominator factorises as $x^2-4=(x-2)(x+2)$, vanishing at $x=\\pm2$, where the numerator is $4-9=-5\\neq0$, so neither is a removable hole and $x=\\pm2$ are **vertical asymptotes**. Here $f\\to+\\infty$ as $x\\to-2^+$ and $x\\to2^-$, and $f\\to-\\infty$ as $x\\to-2^-$ and $x\\to2^+$. ✓
+
+Numerator and denominator have equal degree, so divide both by $x^2$:
+$$\\lim_{x\\to\\pm\\infty}\\frac{x^2-9}{x^2-4}=\\lim_{x\\to\\pm\\infty}\\frac{1-9/x^2}{1-4/x^2}=\\frac{1-0}{1-0}=1,$$
+so $y=1$ is the **horizontal asymptote**, approached from below ($f(10)=\\tfrac{91}{96}<1$). ✓
 **(b)** The denominator factorises as $x^2-4=(x-2)(x+2)$, vanishing at $x=\\pm2$, where the numerator is $4-9=-5\\neq0$, so neither is a removable hole and $x=\\pm2$ are **vertical asymptotes**. Here $f\\to+\\infty$ as $x\\to-2^+$ and $x\\to2^-$, and $f\\to-\\infty$ as $x\\to-2^-$ and $x\\to2^+$. ✓
 
 Numerator and denominator have equal degree, so divide both by $x^2$:
@@ -562,13 +751,25 @@ so $y=1$ is the **horizontal asymptote**, approached from below ($f(10)=\\tfrac{
 $$f'(x)=\\frac{2x(x^2-4)-(x^2-9)(2x)}{(x^2-4)^2}=\\frac{2x\\big[(x^2-4)-(x^2-9)\\big]}{(x^2-4)^2}=\\frac{2x\\cdot5}{(x^2-4)^2}=\\frac{10x}{(x^2-4)^2}.$$ ✓✓
 
 $f'(x)=0\\;\\Rightarrow\\;x=0$; $f'$ is undefined only at $x=\\pm2$, outside the domain. The denominator is a square, hence positive, so $f'$ carries the sign of $x$. Sign chart on $(-\\infty,-2),(-2,0),(0,2),(2,\\infty)$ with test values $x=-3,-1,1,3$: $f'=-\\tfrac65,\\;-\\tfrac{10}{9},\\;\\tfrac{10}{9},\\;\\tfrac65$. So $f$ is **decreasing on $(-\\infty,-2)$ and $(-2,0)$** and **increasing on $(0,2)$ and $(2,\\infty)$**, with a **local minimum** at $x=0$, $f(0)=\\tfrac94$. ✓
+**(c)** Note $f(-x)=\\dfrac{(-x)^2-9}{(-x)^2-4}=f(x)$, so $f$ is **even**, symmetric about the $y$-axis. By the quotient rule, with $u=x^2-9$, $u'=2x$, $v=x^2-4$, $v'=2x$:
+$$f'(x)=\\frac{2x(x^2-4)-(x^2-9)(2x)}{(x^2-4)^2}=\\frac{2x\\big[(x^2-4)-(x^2-9)\\big]}{(x^2-4)^2}=\\frac{2x\\cdot5}{(x^2-4)^2}=\\frac{10x}{(x^2-4)^2}.$$ ✓✓
+
+$f'(x)=0\\;\\Rightarrow\\;x=0$; $f'$ is undefined only at $x=\\pm2$, outside the domain. The denominator is a square, hence positive, so $f'$ carries the sign of $x$. Sign chart on $(-\\infty,-2),(-2,0),(0,2),(2,\\infty)$ with test values $x=-3,-1,1,3$: $f'=-\\tfrac65,\\;-\\tfrac{10}{9},\\;\\tfrac{10}{9},\\;\\tfrac65$. So $f$ is **decreasing on $(-\\infty,-2)$ and $(-2,0)$** and **increasing on $(0,2)$ and $(2,\\infty)$**, with a **local minimum** at $x=0$, $f(0)=\\tfrac94$. ✓
 
 **(d)** Write $f'(x)=10x(x^2-4)^{-2}$ and use the product rule, with $u=10x$, $u'=10$, $v=(x^2-4)^{-2}$, $v'=-2(x^2-4)^{-3}(2x)$ (chain rule):
 $$f''(x)=10(x^2-4)^{-2}-40x^2(x^2-4)^{-3}=10(x^2-4)^{-3}\\big[(x^2-4)-4x^2\\big]=\\frac{-10(3x^2+4)}{(x^2-4)^3},$$
 since $(x^2-4)-4x^2=-3x^2-4$. ✓✓
 
 Since $3x^2+4>0$, the numerator is always negative, so $f''$ never vanishes and takes the sign opposite to $x^2-4$. Sign chart on $(-\\infty,-2),(-2,2),(2,\\infty)$ with test values $x=-3,0,3$: $f''=-\\tfrac{62}{25},\\;\\tfrac58,\\;-\\tfrac{62}{25}$. So $f$ is **concave up on $(-2,2)$** and **concave down on $(-\\infty,-2)$ and on $(2,\\infty)$**, with **no points of inflection**, since $f''$ changes sign only at $x=\\pm2$, where $f$ is undefined. This confirms (c): $f''(0)=\\tfrac58>0$, a minimum by the second-derivative test. ✓
+**(d)** Write $f'(x)=10x(x^2-4)^{-2}$ and use the product rule, with $u=10x$, $u'=10$, $v=(x^2-4)^{-2}$, $v'=-2(x^2-4)^{-3}(2x)$ (chain rule):
+$$f''(x)=10(x^2-4)^{-2}-40x^2(x^2-4)^{-3}=10(x^2-4)^{-3}\\big[(x^2-4)-4x^2\\big]=\\frac{-10(3x^2+4)}{(x^2-4)^3},$$
+since $(x^2-4)-4x^2=-3x^2-4$. ✓✓
 
+Since $3x^2+4>0$, the numerator is always negative, so $f''$ never vanishes and takes the sign opposite to $x^2-4$. Sign chart on $(-\\infty,-2),(-2,2),(2,\\infty)$ with test values $x=-3,0,3$: $f''=-\\tfrac{62}{25},\\;\\tfrac58,\\;-\\tfrac{62}{25}$. So $f$ is **concave up on $(-2,2)$** and **concave down on $(-\\infty,-2)$ and on $(2,\\infty)$**, with **no points of inflection**, since $f''$ changes sign only at $x=\\pm2$, where $f$ is undefined. This confirms (c): $f''(0)=\\tfrac58>0$, a minimum by the second-derivative test. ✓
+
+**(e)** See the graph below — it shows the even symmetry, the vertical asymptotes $x=\\pm2$, the horizontal asymptote $y=1$ approached from below, and the intercepts $(\\pm3,0)$ and $\\left(0,\\tfrac94\\right)$. ✓
+
+The middle branch falls from $+\\infty$ to the minimum $\\left(0,\\tfrac94\\right)$ and back to $+\\infty$; the right branch climbs from $-\\infty$ at $x=2^+$ through $(3,0)$ onto $y=1$, and the left branch mirrors it. ✓
 **(e)** See the graph below — it shows the even symmetry, the vertical asymptotes $x=\\pm2$, the horizontal asymptote $y=1$ approached from below, and the intercepts $(\\pm3,0)$ and $\\left(0,\\tfrac94\\right)$. ✓
 
 The middle branch falls from $+\\infty$ to the minimum $\\left(0,\\tfrac94\\right)$ and back to $+\\infty$; the right branch climbs from $-\\infty$ at $x=2^+$ through $(3,0)$ onto $y=1$, and the left branch mirrors it. ✓
@@ -595,20 +796,34 @@ A closed cylindrical can (top and bottom included) must hold a volume of $1000\\
         `,
         solution: `
 Let $r$ be the radius and $h$ the height of the can, both in cm, with $r>0$.
+Let $r$ be the radius and $h$ the height of the can, both in cm, with $r>0$.
 
+**Constraint.** The cylinder's volume is fixed at $\\pi r^2h=1000$, so
+$$h=\\frac{1000}{\\pi r^2}.$$ ✓
 **Constraint.** The cylinder's volume is fixed at $\\pi r^2h=1000$, so
 $$h=\\frac{1000}{\\pi r^2}.$$ ✓
 
 **Objective.** A closed can has two circular ends of area $\\pi r^2$ each together with a curved side of area $2\\pi rh$, so $S=2\\pi r^2+2\\pi rh$. Using the constraint to eliminate $h$ leaves a function of the single variable $r$:
 $$S(r)=2\\pi r^2+2\\pi r\\cdot\\frac{1000}{\\pi r^2}=2\\pi r^2+\\frac{2000}{r},\\qquad r>0.$$ ✓
+**Objective.** A closed can has two circular ends of area $\\pi r^2$ each together with a curved side of area $2\\pi rh$, so $S=2\\pi r^2+2\\pi rh$. Using the constraint to eliminate $h$ leaves a function of the single variable $r$:
+$$S(r)=2\\pi r^2+2\\pi r\\cdot\\frac{1000}{\\pi r^2}=2\\pi r^2+\\frac{2000}{r},\\qquad r>0.$$ ✓
 
+**Critical point.** Differentiating term by term, with $\\dfrac{d}{dr}\\left(2000r^{-1}\\right)=-2000r^{-2}$:
+$$S'(r)=4\\pi r-\\frac{2000}{r^2}=0\\;\\Rightarrow\\;4\\pi r^3=2000\\;\\Rightarrow\\;r^3=\\frac{500}{\\pi}\\;\\Rightarrow\\;r=\\sqrt[3]{\\frac{500}{\\pi}}\\approx5.42\\text{ cm}.$$ ✓✓
 **Critical point.** Differentiating term by term, with $\\dfrac{d}{dr}\\left(2000r^{-1}\\right)=-2000r^{-2}$:
 $$S'(r)=4\\pi r-\\frac{2000}{r^2}=0\\;\\Rightarrow\\;4\\pi r^3=2000\\;\\Rightarrow\\;r^3=\\frac{500}{\\pi}\\;\\Rightarrow\\;r=\\sqrt[3]{\\frac{500}{\\pi}}\\approx5.42\\text{ cm}.$$ ✓✓
 
 **Justification.** Differentiating again, $S''(r)=4\\pi+\\dfrac{4000}{r^3}$, and at the critical point $r^3=\\dfrac{500}{\\pi}$ gives
 $$S''=4\\pi+\\frac{4000}{500/\\pi}=4\\pi+8\\pi=12\\pi>0,$$
 so by the second-derivative test this critical point is a **minimum**; as it is the only critical number on $r>0$, the minimum is absolute. ✓
+**Justification.** Differentiating again, $S''(r)=4\\pi+\\dfrac{4000}{r^3}$, and at the critical point $r^3=\\dfrac{500}{\\pi}$ gives
+$$S''=4\\pi+\\frac{4000}{500/\\pi}=4\\pi+8\\pi=12\\pi>0,$$
+so by the second-derivative test this critical point is a **minimum**; as it is the only critical number on $r>0$, the minimum is absolute. ✓
 
+**Back-substitute.** Using $\\pi r^3=500$,
+$$h=\\frac{1000}{\\pi r^2}=\\frac{2\\left(\\pi r^3\\right)}{\\pi r^2}=2r\\approx10.84\\text{ cm}.$$ ✓
+
+**The minimizing can has $r=\\sqrt[3]{500/\\pi}\\approx5.42\\text{ cm}$ and $h=2r\\approx10.84\\text{ cm}$** (the height equals the diameter), giving a minimum surface area of about $554\\text{ cm}^2$.
 **Back-substitute.** Using $\\pi r^3=500$,
 $$h=\\frac{1000}{\\pi r^2}=\\frac{2\\left(\\pi r^3\\right)}{\\pi r^2}=2r\\approx10.84\\text{ cm}.$$ ✓
 
@@ -635,7 +850,24 @@ $$A=\\int_{-1}^{2}\\big[(y+2)-y^2\\big]\\,dy.$$ ✓
 
 Antidifferentiating term by term with the power rule:
 $$A=\\left[\\frac{y^2}{2}+2y-\\frac{y^3}{3}\\right]_{-1}^{2}.$$ ✓
+Both curves give $x$ in terms of $y$, so integrate with respect to $y$ — the region is then a single strip needing no splitting.
 
+**Intersections.** Setting the two expressions for $x$ equal gives $y^2=y+2$, i.e. $y^2-y-2=0$, which factorises as $(y-2)(y+1)=0$, so the curves meet at $y=-1$ and $y=2$ — the points $(1,-1)$ and $(4,2)$. ✓✓
+
+**Which curve lies to the right?** Test $y=0$: the line gives $x=2$, the parabola $x=0$, and $2>0$, so $x=y+2$ lies to the right of $x=y^2$ throughout $-1< y<2$. ✓
+
+A horizontal strip at height $y$ therefore has width $(y+2)-y^2$ and thickness $dy$:
+$$A=\\int_{-1}^{2}\\big[(y+2)-y^2\\big]\\,dy.$$ ✓
+
+Antidifferentiating term by term with the power rule:
+$$A=\\left[\\frac{y^2}{2}+2y-\\frac{y^3}{3}\\right]_{-1}^{2}.$$ ✓
+
+At $y=2$: $\\dfrac{4}{2}+4-\\dfrac{8}{3}=2+4-\\dfrac83=\\dfrac{18-8}{3}=\\dfrac{10}{3}$. ✓
+
+At $y=-1$: $\\dfrac12-2+\\dfrac13=\\dfrac{3}{6}-\\dfrac{12}{6}+\\dfrac{2}{6}=-\\dfrac76$. ✓
+
+Subtracting the lower value from the upper:
+$$A=\\frac{10}{3}-\\left(-\\frac76\\right)=\\frac{20}{6}+\\frac{7}{6}=\\frac{27}{6}=\\frac92.$$ ✓
 At $y=2$: $\\dfrac{4}{2}+4-\\dfrac{8}{3}=2+4-\\dfrac83=\\dfrac{18-8}{3}=\\dfrac{10}{3}$. ✓
 
 At $y=-1$: $\\dfrac12-2+\\dfrac13=\\dfrac{3}{6}-\\dfrac{12}{6}+\\dfrac{2}{6}=-\\dfrac76$. ✓
@@ -661,18 +893,31 @@ Suppose $f$ is continuous on $[-a,a]$. Prove that:
         solution: `
 Since $f$ is continuous on $[-a,a]$ it is integrable there and on every subinterval, so the additivity property of the definite integral lets us split at $0$:
 $$\\int_{-a}^{a}f(x)\\,dx=\\int_{-a}^{0}f(x)\\,dx+\\int_{0}^{a}f(x)\\,dx.$$ ✓
+Since $f$ is continuous on $[-a,a]$ it is integrable there and on every subinterval, so the additivity property of the definite integral lets us split at $0$:
+$$\\int_{-a}^{a}f(x)\\,dx=\\int_{-a}^{0}f(x)\\,dx+\\int_{0}^{a}f(x)\\,dx.$$ ✓
 
+Transform the first integral by the substitution $u=-x$, so that $du=-\\,dx$, i.e. $dx=-\\,du$, and the limits change with it: $x=-a\\;\\Rightarrow\\;u=a$, and $x=0\\;\\Rightarrow\\;u=0$. Then
+$$\\int_{-a}^{0}f(x)\\,dx=\\int_{a}^{0}f(-u)\\,(-du)=-\\int_{a}^{0}f(-u)\\,du=\\int_{0}^{a}f(-u)\\,du,$$
+the last step reversing the limits, which changes the sign. The name of the variable of integration is immaterial, so this equals $\\displaystyle\\int_{0}^{a}f(-x)\\,dx$. ✓✓
 Transform the first integral by the substitution $u=-x$, so that $du=-\\,dx$, i.e. $dx=-\\,du$, and the limits change with it: $x=-a\\;\\Rightarrow\\;u=a$, and $x=0\\;\\Rightarrow\\;u=0$. Then
 $$\\int_{-a}^{0}f(x)\\,dx=\\int_{a}^{0}f(-u)\\,(-du)=-\\int_{a}^{0}f(-u)\\,du=\\int_{0}^{a}f(-u)\\,du,$$
 the last step reversing the limits, which changes the sign. The name of the variable of integration is immaterial, so this equals $\\displaystyle\\int_{0}^{a}f(-x)\\,dx$. ✓✓
 
 Substituting this back gives the identity on which both parts rest:
 $$\\int_{-a}^{a}f(x)\\,dx=\\int_{0}^{a}f(-x)\\,dx+\\int_{0}^{a}f(x)\\,dx.$$ ✓
+Substituting this back gives the identity on which both parts rest:
+$$\\int_{-a}^{a}f(x)\\,dx=\\int_{0}^{a}f(-x)\\,dx+\\int_{0}^{a}f(x)\\,dx.$$ ✓
 
 **(a)** If $f$ is even then $f(-x)=f(x)$ for every $x\\in[-a,a]$, so the two integrands are identical and the right-hand side is the sum of two equal integrals:
 $$\\int_{-a}^{a}f(x)\\,dx=\\int_{0}^{a}f(x)\\,dx+\\int_{0}^{a}f(x)\\,dx=2\\int_{0}^{a}f(x)\\,dx,$$
 which is the required result. $\\blacksquare$ ✓✓
+**(a)** If $f$ is even then $f(-x)=f(x)$ for every $x\\in[-a,a]$, so the two integrands are identical and the right-hand side is the sum of two equal integrals:
+$$\\int_{-a}^{a}f(x)\\,dx=\\int_{0}^{a}f(x)\\,dx+\\int_{0}^{a}f(x)\\,dx=2\\int_{0}^{a}f(x)\\,dx,$$
+which is the required result. $\\blacksquare$ ✓✓
 
+**(b)** If $f$ is odd then $f(-x)=-f(x)$ for every $x\\in[-a,a]$, so the first integrand is the negative of the second. Continuity guarantees that $\\displaystyle\\int_{0}^{a}f(x)\\,dx$ is a finite number, so the two terms cancel by the Sum Law:
+$$\\int_{-a}^{a}f(x)\\,dx=\\int_{0}^{a}\\big(-f(x)\\big)\\,dx+\\int_{0}^{a}f(x)\\,dx=-\\int_{0}^{a}f(x)\\,dx+\\int_{0}^{a}f(x)\\,dx=0,$$
+so the whole integral vanishes. $\\blacksquare$ ✓✓
 **(b)** If $f$ is odd then $f(-x)=-f(x)$ for every $x\\in[-a,a]$, so the first integrand is the negative of the second. Continuity guarantees that $\\displaystyle\\int_{0}^{a}f(x)\\,dx$ is a finite number, so the two terms cancel by the Sum Law:
 $$\\int_{-a}^{a}f(x)\\,dx=\\int_{0}^{a}\\big(-f(x)\\big)\\,dx+\\int_{0}^{a}f(x)\\,dx=-\\int_{0}^{a}f(x)\\,dx+\\int_{0}^{a}f(x)\\,dx=0,$$
 so the whole integral vanishes. $\\blacksquare$ ✓✓
@@ -699,12 +944,20 @@ Evaluate each of the following integrals.
         solution: `
 **(a)** Rewrite the radicand as a difference of squares, $25-4x^2=25-(2x)^2$, and substitute $u=2x$, so $du=2\\,dx$ and $dx=\\tfrac12\\,du$. With the standard form $\\displaystyle\\int\\frac{du}{\\sqrt{a^2-u^2}}=\\arcsin\\frac{u}{a}+C$ and $a=5$:
 $$\\int\\frac{dx}{\\sqrt{25-(2x)^2}}=\\frac12\\int\\frac{du}{\\sqrt{25-u^2}}=\\frac12\\arcsin\\!\\left(\\frac u5\\right)+C=\\frac12\\arcsin\\!\\left(\\frac{2x}{5}\\right)+C.$$ ✓✓
+**(a)** Rewrite the radicand as a difference of squares, $25-4x^2=25-(2x)^2$, and substitute $u=2x$, so $du=2\\,dx$ and $dx=\\tfrac12\\,du$. With the standard form $\\displaystyle\\int\\frac{du}{\\sqrt{a^2-u^2}}=\\arcsin\\frac{u}{a}+C$ and $a=5$:
+$$\\int\\frac{dx}{\\sqrt{25-(2x)^2}}=\\frac12\\int\\frac{du}{\\sqrt{25-u^2}}=\\frac12\\arcsin\\!\\left(\\frac u5\\right)+C=\\frac12\\arcsin\\!\\left(\\frac{2x}{5}\\right)+C.$$ ✓✓
 
 **(b)** The discriminant is $16-32<0$, so complete the square: $4x^2+4x+2=\\left(4x^2+4x+1\\right)+1=(2x+1)^2+1$. ✓
 
 Let $u=2x+1$, $du=2\\,dx$, and use $\\displaystyle\\int\\frac{du}{u^2+1}=\\arctan u+C$:
 $$\\int\\frac{dx}{(2x+1)^2+1}=\\frac12\\int\\frac{du}{u^2+1}=\\frac12\\arctan u+C=\\frac12\\arctan(2x+1)+C.$$ ✓
+**(b)** The discriminant is $16-32<0$, so complete the square: $4x^2+4x+2=\\left(4x^2+4x+1\\right)+1=(2x+1)^2+1$. ✓
 
+Let $u=2x+1$, $du=2\\,dx$, and use $\\displaystyle\\int\\frac{du}{u^2+1}=\\arctan u+C$:
+$$\\int\\frac{dx}{(2x+1)^2+1}=\\frac12\\int\\frac{du}{u^2+1}=\\frac12\\arctan u+C=\\frac12\\arctan(2x+1)+C.$$ ✓
+
+**(c)** Using $\\displaystyle\\int e^{kx}dx=\\frac1k e^{kx}+C$ with $k=\\tfrac13$ (so $\\tfrac1k=3$):
+$$\\int 3e^{x/3}\\,dx=3\\cdot3e^{x/3}+C=9e^{x/3}+C.$$ ✓
 **(c)** Using $\\displaystyle\\int e^{kx}dx=\\frac1k e^{kx}+C$ with $k=\\tfrac13$ (so $\\tfrac1k=3$):
 $$\\int 3e^{x/3}\\,dx=3\\cdot3e^{x/3}+C=9e^{x/3}+C.$$ ✓
 
@@ -729,10 +982,19 @@ Evaluate $\\displaystyle \\int x\\sin(3x)\\,dx$.
 The integrand is a polynomial times a trigonometric function, so use integration by parts, $\\displaystyle\\int u\\,dv=uv-\\int v\\,du$, taking the polynomial as $u$ because differentiating it removes the $x$ factor entirely.
 
 Let $u=x$ and $dv=\\sin(3x)\\,dx$, so that $du=dx$ and $v=\\displaystyle\\int\\sin(3x)\\,dx=-\\frac{\\cos(3x)}{3}$. ✓✓
+The integrand is a polynomial times a trigonometric function, so use integration by parts, $\\displaystyle\\int u\\,dv=uv-\\int v\\,du$, taking the polynomial as $u$ because differentiating it removes the $x$ factor entirely.
+
+Let $u=x$ and $dv=\\sin(3x)\\,dx$, so that $du=dx$ and $v=\\displaystyle\\int\\sin(3x)\\,dx=-\\frac{\\cos(3x)}{3}$. ✓✓
 
 Substituting these four pieces into the by-parts formula:
 $$\\int x\\sin(3x)\\,dx=uv-\\int v\\,du=-\\frac{x\\cos(3x)}{3}-\\int\\left(-\\frac{\\cos(3x)}{3}\\right)dx=-\\frac{x\\cos(3x)}{3}+\\frac13\\int\\cos(3x)\\,dx.$$ ✓✓
+Substituting these four pieces into the by-parts formula:
+$$\\int x\\sin(3x)\\,dx=uv-\\int v\\,du=-\\frac{x\\cos(3x)}{3}-\\int\\left(-\\frac{\\cos(3x)}{3}\\right)dx=-\\frac{x\\cos(3x)}{3}+\\frac13\\int\\cos(3x)\\,dx.$$ ✓✓
 
+The remaining integral is elementary, $\\displaystyle\\int\\cos(3x)\\,dx=\\frac{\\sin(3x)}{3}$, so
+$$\\int x\\sin(3x)\\,dx=-\\frac{x\\cos(3x)}{3}+\\frac13\\cdot\\frac{\\sin(3x)}{3}+C=-\\frac{x\\cos(3x)}{3}+\\frac{\\sin(3x)}{9}+C.$$ ✓✓
+
+Check by differentiating the answer with the product and chain rules: $-\\tfrac13\\big[\\cos(3x)-3x\\sin(3x)\\big]+\\tfrac13\\cos(3x)=x\\sin(3x)$, which recovers the original integrand exactly.
 The remaining integral is elementary, $\\displaystyle\\int\\cos(3x)\\,dx=\\frac{\\sin(3x)}{3}$, so
 $$\\int x\\sin(3x)\\,dx=-\\frac{x\\cos(3x)}{3}+\\frac13\\cdot\\frac{\\sin(3x)}{3}+C=-\\frac{x\\cos(3x)}{3}+\\frac{\\sin(3x)}{9}+C.$$ ✓✓
 
@@ -753,7 +1015,20 @@ $$\\frac{x^2+1}{x(x-1)^2}=\\frac{A}{x}+\\frac{B}{x-1}+\\frac{C}{(x-1)^2}.$$ ✓
 
 Multiplying both sides by $x(x-1)^2$ clears the denominators and leaves an identity valid for every $x$:
 $$x^2+1=A(x-1)^2+Bx(x-1)+Cx.$$ ✓
+The denominator is already factorised as $x(x-1)^2$: a distinct linear factor $x$ and a **repeated** linear factor $(x-1)^2$, which needs one term for each power up to the second. The degree of the numerator is less than that of the denominator, so no division is needed and the correct form is
+$$\\frac{x^2+1}{x(x-1)^2}=\\frac{A}{x}+\\frac{B}{x-1}+\\frac{C}{(x-1)^2}.$$ ✓
 
+Multiplying both sides by $x(x-1)^2$ clears the denominators and leaves an identity valid for every $x$:
+$$x^2+1=A(x-1)^2+Bx(x-1)+Cx.$$ ✓
+
+Setting $x=0$ kills the $B$ and $C$ terms: $\\;0+1=A(-1)^2\\;\\Rightarrow\\;A=1$. ✓
+
+Setting $x=1$ kills the $A$ and $B$ terms: $\\;1+1=C(1)\\;\\Rightarrow\\;C=2$. ✓
+
+Comparing the coefficients of $x^2$, the right-hand side expands to $(A+B)x^2+\\cdots$, so $\\;1=A+B\\;\\Rightarrow\\;B=1-1=0$, and the middle term is absent. ✓
+
+Integrating term by term, using $\\displaystyle\\int\\frac{dx}{x}=\\ln|x|$ and the repeated factor giving $\\displaystyle\\int(x-1)^{-2}dx=-\\frac{1}{x-1}$:
+$$\\int\\frac{x^2+1}{x(x-1)^2}\\,dx=\\int\\left(\\frac1x+\\frac{2}{(x-1)^2}\\right)dx=\\ln|x|-\\frac{2}{x-1}+C.$$ ✓
 Setting $x=0$ kills the $B$ and $C$ terms: $\\;0+1=A(-1)^2\\;\\Rightarrow\\;A=1$. ✓
 
 Setting $x=1$ kills the $A$ and $B$ terms: $\\;1+1=C(1)\\;\\Rightarrow\\;C=2$. ✓
@@ -1531,6 +1806,7 @@ $$2\\pi r^2+2\\pi rh=300\\pi \\;\\Rightarrow\\; r^2+rh=150 \\;\\Rightarrow\\; h=
 
 Substituting into the volume to get a function of $r$ alone:
 $$V(r)=\\pi r^2h=\\pi r^2\\cdot\\frac{150-r^2}{r}=150\\pi r-\\pi r^3,\\qquad 0< r<\\sqrt{150}.$$ ✓
+$$V(r)=\\pi r^2h=\\pi r^2\\cdot\\frac{150-r^2}{r}=150\\pi r-\\pi r^3,\\qquad 0< r<\\sqrt{150}.$$ ✓
 
 $$V'(r)=150\\pi-3\\pi r^2=0 \\;\\Rightarrow\\; r^2=50 \\;\\Rightarrow\\; r=5\\sqrt2\\ \\text{cm}\\ \\ (r>0).$$ ✓✓
 
@@ -1766,6 +2042,9 @@ $$A=\\frac14+\\frac14=\\frac12.$$ ✓
 Using integration by parts, prove that
 $$\\int e^{ax}\\cos(bx)\\,dx=\\frac{e^{ax}}{a^2+b^2}\\big(a\\cos(bx)+b\\sin(bx)\\big)+C,$$
 where $a$ and $b$ are non-zero constants. (8)
+Using integration by parts, prove that
+$$\\int e^{ax}\\cos(bx)\\,dx=\\frac{e^{ax}}{a^2+b^2}\\big(a\\cos(bx)+b\\sin(bx)\\big)+C,$$
+where $a$ and $b$ are non-zero constants. (8)
         `,
         solution: `
 Let $I=\\displaystyle\\int e^{ax}\\cos(bx)\\,dx$, and assume $b\\neq0$ (if $b=0$ the claim collapses to the elementary $\\int e^{ax}\\,dx=\\dfrac{e^{ax}}{a}+C$, which the stated right-hand side also returns).
@@ -1911,12 +2190,14 @@ Let $(x,y)$ be the vertex in the first quadrant, with $x,y>0$. By symmetry about
 
 The constraint is the ellipse: $\\dfrac{y^2}{9}=1-\\dfrac{x^2}{25}\\;\\Rightarrow\\;y=3\\sqrt{1-\\dfrac{x^2}{25}}$ (taking $y>0$). Substituting to one variable,
 $$A(x)=4x\\cdot3\\sqrt{1-\\frac{x^2}{25}}=12x\\sqrt{1-\\frac{x^2}{25}},\\qquad 0< x<5.$$ ✓
+$$A(x)=4x\\cdot3\\sqrt{1-\\frac{x^2}{25}}=12x\\sqrt{1-\\frac{x^2}{25}},\\qquad 0< x<5.$$ ✓
 
 Since $A>0$, maximising $A$ is equivalent to maximising the square-root-free function
 $$S(x)=A(x)^2=144x^2\\left(1-\\frac{x^2}{25}\\right)=144x^2-\\frac{144}{25}x^4.$$ ✓
 
 $$S'(x)=288x-\\frac{576}{25}x^3=\\frac{288x}{25}\\left(25-2x^2\\right)=0\\;\\Rightarrow\\;x^2=\\frac{25}{2}\\;\\Rightarrow\\;x=\\frac{5}{\\sqrt2}=\\frac{5\\sqrt2}{2}.$$ ✓
 
+For $0< x<\\tfrac{5}{\\sqrt2}$ we have $25-2x^2>0$, so $S'>0$ (e.g. $S'(1)\\approx265$); for $\\tfrac{5}{\\sqrt2}< x<5$ we have $25-2x^2<0$, so $S'<0$ (e.g. $S'(4)\\approx-323$). The sign change $+\\to-$ confirms a **maximum**. ✓
 For $0< x<\\tfrac{5}{\\sqrt2}$ we have $25-2x^2>0$, so $S'>0$ (e.g. $S'(1)\\approx265$); for $\\tfrac{5}{\\sqrt2}< x<5$ we have $25-2x^2<0$, so $S'<0$ (e.g. $S'(4)\\approx-323$). The sign change $+\\to-$ confirms a **maximum**. ✓
 
 Then $y=3\\sqrt{1-\\dfrac{25/2}{25}}=3\\sqrt{\\dfrac12}=\\dfrac{3}{\\sqrt2}$, so the width is $2x=5\\sqrt2$, the height is $2y=3\\sqrt2$, and
@@ -2342,6 +2623,7 @@ By the product rule, with the chain rule giving $\\dfrac{d}{dr}\\left(R^2-r^2\\r
 $$V'(r)=4\\pi r\\sqrt{R^2-r^2}-\\frac{2\\pi r^3}{\\sqrt{R^2-r^2}}=\\frac{2\\pi r\\left[2\\left(R^2-r^2\\right)-r^2\\right]}{\\sqrt{R^2-r^2}}=\\frac{2\\pi r\\left(2R^2-3r^2\\right)}{\\sqrt{R^2-r^2}}.$$ ✓✓
 
 For $0< r< R$ the factors $2\\pi r$ and $\\sqrt{R^2-r^2}$ are positive, so $V'(r)=0 \\;\\Rightarrow\\; 2R^2-3r^2=0 \\;\\Rightarrow\\; r^2=\\dfrac23R^2$, giving $r=R\\sqrt{\\dfrac23}=\\dfrac{\\sqrt6}{3}R$ and
+For $0< r< R$ the factors $2\\pi r$ and $\\sqrt{R^2-r^2}$ are positive, so $V'(r)=0 \\;\\Rightarrow\\; 2R^2-3r^2=0 \\;\\Rightarrow\\; r^2=\\dfrac23R^2$, giving $r=R\\sqrt{\\dfrac23}=\\dfrac{\\sqrt6}{3}R$ and
 $$h=2\\sqrt{R^2-\\tfrac23R^2}=2\\sqrt{\\tfrac13R^2}=\\frac{2R}{\\sqrt3}=\\frac{2\\sqrt3}{3}R.$$ ✓
 
 Justification: the sign of $V'$ is the sign of $2R^2-3r^2$, which is positive for $r<\\frac{\\sqrt6}{3}R$ (e.g. $V'>0$ at $r=\\tfrac12R$) and negative for $r>\\frac{\\sqrt6}{3}R$ (e.g. $V'<0$ at $r=\\tfrac9{10}R$); since also $V(0)=V(R)=0$, this interior critical point gives the **absolute maximum**. ✓
@@ -2374,6 +2656,7 @@ $$=2\\pi\\left(\\frac{e^2}{4}+\\frac14\\right)=\\frac{\\pi\\left(e^2+1\\right)}{
       {
         number: 4, title: 'Proof: Mean Value Theorem for Integrals', section: '§8', marks: 8,
         prompt: `
+Let $f$ be continuous on $[a,b]$, with $a< b$. Prove that there exists $c\\in[a,b]$ such that
 Let $f$ be continuous on $[a,b]$, with $a< b$. Prove that there exists $c\\in[a,b]$ such that
 $$\\int_a^b f(x)\\,dx=f(c)(b-a).$$ (8)
         `,
@@ -2667,6 +2950,7 @@ EXAMS.find(p => p.id === 'paper10').questions[3] = {
   prompt: `Suppose $f(x)\\ge0$ for all $x\\in[a,b]$. Prove that
 $$\\int_a^b f(x)\\,dx\\ge0.$$ (8)`,
   solution: `
+Let $a=x_0< x_1<\\dots< x_n=b$ partition $[a,b]$ into $n$ subintervals of width $\\Delta x_i=x_i-x_{i-1}$, with sample points $x_i^*\\in[x_{i-1},x_i]$. By the **definition of the definite integral** as a limit of Riemann sums,
 Let $a=x_0< x_1<\\dots< x_n=b$ partition $[a,b]$ into $n$ subintervals of width $\\Delta x_i=x_i-x_{i-1}$, with sample points $x_i^*\\in[x_{i-1},x_i]$. By the **definition of the definite integral** as a limit of Riemann sums,
 $$\\int_a^b f(x)\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^n f(x_i^*)\\,\\Delta x_i.$$ ✓✓
 

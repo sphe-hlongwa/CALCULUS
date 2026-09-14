@@ -34,6 +34,7 @@ const Exams = (() => {
     const overlay = document.getElementById('exam-overlay');
     if (!overlay) return;
     stopTimer();
+    document.getElementById('exam-timer-bar')?.classList.add('hidden');
     overlay.classList.add('hidden');
     document.body.style.overflow = '';
     toggleFullscreen(false);
@@ -78,6 +79,7 @@ const Exams = (() => {
 
   function renderList() {
     stopTimer();
+    document.getElementById('exam-timer-bar')?.classList.add('hidden');
     const root = document.getElementById('exam-content');
     if (!root || typeof EXAMS === 'undefined') return;
 
@@ -145,15 +147,6 @@ const Exams = (() => {
     root.innerHTML = `
       <div class="exam-toolbar">
         <button class="exam-back-btn" id="exam-back-btn">&larr; All Practice Papers</button>
-        <div class="exam-timer-bar" id="exam-timer-bar">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="13" r="8" />
-            <path d="M12 9v4l2.5 2.5" />
-            <path d="M9 1h6" />
-          </svg>
-          <span id="exam-timer-text">${String(paper.duration).padStart(2, '0')}:00</span>
-        </div>
       </div>
 
       <div class="exam-paper">
@@ -208,6 +201,13 @@ const Exams = (() => {
     // and on the next frame. The helper also retries if the CDN is still loading.
     renderMath(root);
     requestAnimationFrame(() => renderMath(root));
+
+    const timerBar = document.getElementById('exam-timer-bar');
+    const timerText = document.getElementById('exam-timer-text');
+    if (timerBar && timerText) {
+      timerBar.classList.remove('hidden', 'exam-timer-low');
+      timerText.textContent = `${String(paper.duration).padStart(2, '0')}:00`;
+    }
     startTimer(paper.duration);
   }
 

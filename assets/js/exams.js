@@ -8,13 +8,36 @@ const Exams = (() => {
   let timerInterval = null;
   let timerEndsAt = null;
   let isFullscreen = false;
+  let currentSessionId = null;
+
+  // Exam sessions shown on the landing screen. Each session points at an
+  // array of papers defined in data/. To add the November papers, fill in
+  // NOVEMBER_EXAMS in data/exams-november.js (same format as EXAMS).
+  function getSessions() {
+    return [
+      {
+        id: 'september',
+        label: 'September Exams',
+        blurb: 'Practice papers for the September assessment: curve sketching, optimization, integration applications, and the integration-technique sections.',
+        papers: (typeof EXAMS !== 'undefined') ? EXAMS : []
+      },
+      {
+        id: 'november',
+        label: 'November Exams',
+        blurb: 'Three 2-hour, 90-mark papers laid out like the MATH1036 November 2024 exam: a multiple-choice Section A and guided written Section B questions on integration techniques, improper integrals, series, power series, differential equations and volumes.',
+        papers: (typeof NOVEMBER_EXAMS !== 'undefined') ? NOVEMBER_EXAMS : []
+      }
+    ];
+  }
+  function getSession(id) { return getSessions().find(x => x.id === id); }
+  function currentPapers() { return (getSession(currentSessionId) || {}).papers || []; }
 
   function open() {
     const overlay = document.getElementById('exam-overlay');
     if (!overlay) return;
     overlay.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-    renderList();
+    renderSessions();
   }
 
   function toggleFullscreen(force) {
@@ -77,13 +100,75 @@ const Exams = (() => {
     bar.classList.toggle('exam-timer-low', totalSeconds <= 60);
   }
 
-  function renderList() {
+  function renderSessions() {
+    stopTimer();
+    currentSessionId = null;
+    document.getElementById('exam-timer-bar')?.classList.add('hidden');
+    const root = document.getElementById('exam-content');
+    if (!root) return;
+
+    const cards = getSessions().map((sess, i) => {
+      const n = sess.papers.length;
+      const meta = n
+        ? `${n} practice paper${n === 1 ? '' : 's'}`
+        : 'Coming soon';
+      return `
+      <div class="exam-pick-card fade-up" style="animation-delay:${i * 60}ms" data-session-id="${sess.id}">
+        <div class="exam-pick-top">
+          <span class="exam-pick-num">${i + 1}</span>
+          <div>
+            <h3>${sess.label}</h3>
+            <p class="exam-pick-meta">${meta}</p>
+          </div>
+        </div>
+        <p class="exam-session-blurb">${sess.blurb}</p>
+        <button class="btn-primary exam-start-btn" data-session-id="${sess.id}">${n ? 'Open &rarr;' : 'View &rarr;'}</button>
+      </div>`;
+    }).join('');
+
+    root.innerHTML = `
+      <div class="exam-list-header">
+        <h2>Practice Exams</h2>
+        <p class="exam-list-sub">Choose which set of exams you want to practise.</p>
+      </div>
+      <div class="exam-pick-grid">${cards}</div>
+    `;
+
+    root.querySelectorAll('[data-session-id]').forEach(el => {
+      el.addEventListener('click', () => renderList(el.dataset.sessionId));
+    });
+
+    root.scrollTop = 0;
+    renderMath(root);
+    requestAnimationFrame(() => renderMath(root));
+  }
+
+  function renderList(sessionId) {
     stopTimer();
     document.getElementById('exam-timer-bar')?.classList.add('hidden');
     const root = document.getElementById('exam-content');
-    if (!root || typeof EXAMS === 'undefined') return;
+    if (!root) return;
+    if (typeof sessionId === 'string') currentSessionId = sessionId;
+    const sess = getSession(currentSessionId);
+    if (!sess) { renderSessions(); return; }
+    const papers = sess.papers;
 
-    const cards = EXAMS.map((paper, i) => `
+    if (!papers.length) {
+      root.innerHTML = `
+        <div class="exam-toolbar">
+          <button class="exam-back-btn" id="exam-sessions-back">&larr; All Exams</button>
+        </div>
+        <div class="exam-list-header">
+          <h2>${sess.label}</h2>
+          <p class="exam-list-sub">The ${sess.label.toLowerCase()} haven't been added yet. Check back soon.</p>
+        </div>
+      `;
+      root.querySelector('#exam-sessions-back').addEventListener('click', renderSessions);
+      root.scrollTop = 0;
+      return;
+    }
+
+    const cards = papers.map((paper, i) => `
       <div class="exam-pick-card fade-up" style="animation-delay:${i * 60}ms" data-exam-id="${paper.id}">
         <div class="exam-pick-top">
           <span class="exam-pick-num">${i + 1}</span>
@@ -97,13 +182,17 @@ const Exams = (() => {
     `).join('');
 
     root.innerHTML = `
+      <div class="exam-toolbar">
+        <button class="exam-back-btn" id="exam-sessions-back">&larr; All Exams</button>
+      </div>
       <div class="exam-list-header">
-        <h2>Practice Exams</h2>
-        <p class="exam-list-sub">${EXAMS.length} full-length practice papers covering the announced test scope: curve sketching, optimization, integration applications, and the integration-technique sections (inverse trig / exponential / logarithmic integrals, integration by parts, partial fractions). Each question includes a full worked memo.</p>
+        <h2>${sess.label}</h2>
+        <p class="exam-list-sub">${papers.length} full-length practice papers. ${sess.blurb} Each question includes a full worked memo.</p>
       </div>
       <div class="exam-pick-grid">${cards}</div>
     `;
 
+    root.querySelector('#exam-sessions-back').addEventListener('click', renderSessions);
     root.querySelectorAll('[data-exam-id]').forEach(el => {
       el.addEventListener('click', () => renderPaper(el.dataset.examId));
     });
@@ -116,24 +205,24 @@ const Exams = (() => {
   }
 
   function renderPaper(examId) {
-    const paper = EXAMS.find(p => p.id === examId);
+    const paper = currentPapers().find(p => p.id === examId);
     const root = document.getElementById('exam-content');
     if (!paper || !root) return;
 
     const marksRows = paper.questions.map(q =>
-      `<tr><td>${q.number}</td><td class="exam-marks-cell">${q.marks}</td></tr>`
+      `<tr><td>${q.label || q.number}</td><td class="exam-marks-cell">${q.marks}</td></tr>`
     ).join('');
 
     const questionsHtml = paper.questions.map(q => `
       <div class="exam-question" id="exam-q-${q.number}">
         <div class="exam-question-head">
-          <h3>Question ${q.number} <span class="exam-q-section">${q.section}</span> <span class="exam-q-marks">[${q.marks}]</span></h3>
+          <h3>${q.label ? 'Question ' + q.label : 'Question ' + q.number} <span class="exam-q-section">${q.section}</span> <span class="exam-q-marks">[${q.marks}]</span></h3>
           <div class="exam-q-title">${q.title}</div>
         </div>
         <div class="exam-prompt">${mdish(q.prompt)}</div>
         <button class="exam-reveal-btn" data-q="${q.number}">Show Memo (Solution)</button>
         <div class="exam-solution hidden" id="exam-sol-${q.number}">
-          <div class="exam-solution-label">MEMO — Question ${q.number}</div>
+          <div class="exam-solution-label">MEMO — Question ${q.label || q.number}</div>
           ${mdish(q.solution)}
           ${q.graph ? `
           <div class="exam-graph-wrap">
@@ -146,7 +235,7 @@ const Exams = (() => {
 
     root.innerHTML = `
       <div class="exam-toolbar">
-        <button class="exam-back-btn" id="exam-back-btn">&larr; All Practice Papers</button>
+        <button class="exam-back-btn" id="exam-back-btn">&larr; ${(getSession(currentSessionId) || {}).label || 'All Practice Papers'}</button>
       </div>
 
       <div class="exam-paper">
@@ -154,17 +243,12 @@ const Exams = (() => {
           <p class="exam-cover-eyebrow">UNIVERSITY-STYLE PRACTICE PAPER · SELF-STUDY USE ONLY</p>
           <p class="exam-cover-line">SCHOOL OF MATHEMATICS</p>
           <h1 class="exam-cover-title">MATH1036</h1>
-          <h2 class="exam-cover-subtitle">${paper.date.toUpperCase()} — CALCULUS TEST</h2>
+          <h2 class="exam-cover-subtitle">${paper.date.toUpperCase()} — ${paper.kind || 'CALCULUS TEST'}</h2>
           <p class="exam-cover-marks"><strong>Marks:</strong> ${paper.totalMarks} marks in ${paper.duration} minutes</p>
 
           <div class="exam-instructions">
             <p><strong>INSTRUCTIONS:</strong></p>
-            <ul>
-              <li>Show all workings.</li>
-              <li>No calculators are allowed.</li>
-              <li>Attempt every question; partial credit is given for correct method.</li>
-              <li>Use the &ldquo;Show Memo&rdquo; button under each question to check your solution once you have attempted it.</li>
-            </ul>
+            <ul>${(paper.instructions || ['Show all workings.','No calculators are allowed.','Attempt every question; partial credit is given for correct method.','Use the “Show Memo” button under each question to check your solution once you have attempted it.']).map(t => `<li>${t}</li>`).join('')}</ul>
           </div>
 
           <table class="exam-marks-table">
@@ -177,7 +261,7 @@ const Exams = (() => {
       </div>
     `;
 
-    root.querySelector('#exam-back-btn').addEventListener('click', renderList);
+    root.querySelector('#exam-back-btn').addEventListener('click', () => renderList(currentSessionId));
     root.querySelectorAll('.exam-reveal-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const solEl = document.getElementById('exam-sol-' + btn.dataset.q);
@@ -235,7 +319,7 @@ const Exams = (() => {
     return s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   }
 
-  return { open, close, renderList, renderPaper, toggleFullscreen };
+  return { open, close, renderSessions, renderList, renderPaper, toggleFullscreen };
 })();
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -1975,34 +1975,28 @@ $$=b^2h\\left[\\frac{u^3}{3}\\right]_0^1=b^2h\\left(\\frac13-0\\right)=\\frac{b^
       },
       {
         number: 4,
-        title: 'Proof: Convergence of the p-Integral',
-        section: '§10',
+        title: 'Proof: Integration by parts formula for definite integrals',
+        section: '§8',
         marks: 8,
         prompt: `
-Prove that
-$$\\int_1^\\infty\\frac{1}{x^p}\\,dx=\\frac{1}{p-1}\\quad\\text{if } p>1,$$
-and that the integral diverges if $p\\le1$. (8)
+Suppose $u$ and $v$ have continuous derivatives on $[a,b]$. Prove that
+$$\\int_a^b u(x)\\,v'(x)\\,dx=\\Big[u(x)\\,v(x)\\Big]_a^b-\\int_a^b v(x)\\,u'(x)\\,dx.$$ (8)
         `,
         solution: `
-By the **definition of an improper integral on an unbounded interval**, $\\dfrac{1}{x^p}$ is continuous on $[1,t]$ for every $t>1$, and
-$$\\int_1^\\infty\\frac{1}{x^p}\\,dx=\\lim_{t\\to\\infty}\\int_1^t x^{-p}\\,dx,$$
-the integral converging exactly when this limit exists as a finite number. ✓
+Since $u$ and $v$ are differentiable on $[a,b]$, the **Product Rule** applies to the function $uv$:
+$$\\frac{d}{dx}\\big[u(x)v(x)\\big]=u'(x)\\,v(x)+u(x)\\,v'(x).$$ ✓✓
 
-**Case $p=1$.** An antiderivative of $\\dfrac1x$ on $[1,t]$ is $\\ln x$, so by the Fundamental Theorem of Calculus (Part 2),
-$$\\int_1^t\\frac{1}{x}\\,dx=\\Big[\\ln x\\Big]_1^t=\\ln t-\\ln1=\\ln t.$$ ✓
+Because $u',v'$ are continuous and $u,v$ are continuous (being differentiable), the functions $u'v$ and $uv'$ are continuous on $[a,b]$, hence integrable there. Rearranging the Product Rule,
+$$u(x)\\,v'(x)=\\frac{d}{dx}\\big[u(x)v(x)\\big]-u'(x)\\,v(x).$$ ✓
 
-Since $\\ln t\\to\\infty$ as $t\\to\\infty$, the limit is not finite and the integral **diverges**. ✓
+Integrate both sides over $[a,b]$ and use the **difference rule** (linearity) for definite integrals:
+$$\\int_a^b u(x)\\,v'(x)\\,dx=\\int_a^b\\frac{d}{dx}\\big[u(x)v(x)\\big]\\,dx-\\int_a^b u'(x)\\,v(x)\\,dx.$$ ✓✓
 
-**Case $p\\ne1$.** By the power rule, $\\dfrac{d}{dx}\\!\\left(\\dfrac{x^{1-p}}{1-p}\\right)=x^{-p}$ (legitimate because $1-p\\ne0$), so by the Fundamental Theorem of Calculus (Part 2),
-$$\\int_1^t x^{-p}\\,dx=\\left[\\frac{x^{1-p}}{1-p}\\right]_1^t=\\frac{t^{1-p}-1}{1-p}.$$ ✓✓
+The derivative $\\dfrac{d}{dx}[uv]=u'v+uv'$ is continuous on $[a,b]$, and $uv$ is an antiderivative of it. By the **Fundamental Theorem of Calculus (Part 2)**,
+$$\\int_a^b\\frac{d}{dx}\\big[u(x)v(x)\\big]\\,dx=u(b)v(b)-u(a)v(a)=\\Big[u(x)v(x)\\Big]_a^b.$$ ✓✓
 
-If $p>1$ then $1-p<0$, so $t^{1-p}=\\dfrac{1}{t^{\\,p-1}}$ with $p-1>0$; the denominator increases without bound and $t^{1-p}\\to0$ as $t\\to\\infty$. ✓
-
-Hence the limit exists and is finite:
-$$\\int_1^\\infty\\frac{1}{x^p}\\,dx=\\lim_{t\\to\\infty}\\frac{t^{1-p}-1}{1-p}=\\frac{0-1}{1-p}=\\frac{-1}{1-p}=\\frac{1}{p-1},$$
-so the integral **converges** to $\\dfrac{1}{p-1}$ when $p>1$. ✓
-
-If $p<1$ then $1-p>0$, so $t^{1-p}\\to\\infty$ as $t\\to\\infty$ and therefore $\\dfrac{t^{1-p}-1}{1-p}\\to\\infty$: the integral **diverges**. Together with the case $p=1$, the integral diverges for every $p\\le1$ and equals $\\dfrac{1}{p-1}$ for $p>1$. $\\blacksquare$ ✓
+Substituting this into the previous display gives
+$$\\int_a^b u(x)\\,v'(x)\\,dx=\\Big[u(x)\\,v(x)\\Big]_a^b-\\int_a^b v(x)\\,u'(x)\\,dx.\\qquad\\blacksquare$$ ✓
         `
       },
       {

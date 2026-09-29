@@ -244,6 +244,7 @@
   display: flex; align-items: center; justify-content: center;
 }
 .exam-pick-top h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 2px; }
+.exam-session-blurb { font-size: .88rem; color: var(--text-2); line-height: 1.5; margin: 0; }
 .exam-pick-meta { font-size: .82rem; color: var(--text-3); }
 
 .exam-pick-tags { display: flex; flex-wrap: wrap; gap: 6px; }

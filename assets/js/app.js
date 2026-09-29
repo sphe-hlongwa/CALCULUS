@@ -1945,36 +1945,74 @@ function renderWelcome() {
       <div class="welcome-title">CALCULUS I</div>
       <p class="welcome-sub">Your interactive study companion for the second semester. Track your progress, practice with flashcards, and master each concept step by step.</p>
 
-      <div class="welcome-cards">
-        <button type="button" class="welcome-card" data-action="open-flashcards">
-          <div class="wc-icon">${Icons.layers}</div>
-          <div class="wc-title">Flashcards</div>
-          <div class="wc-desc">${typeof flashcardsData !== 'undefined' ? flashcardsData.length : 0} cards across all chapters</div>
-        </button>
-        <button type="button" class="welcome-card" data-action="open-dashboard">
-          <div class="wc-icon">${Icons.barChart}</div>
-          <div class="wc-title">Dashboard</div>
-          <div class="wc-desc">${done}/${total} chapters completed</div>
-        </button>
-        <button type="button" class="welcome-card" data-action="open-formulas">
-          <div class="wc-icon">∑</div>
-          <div class="wc-title">Formulas</div>
-          <div class="wc-desc">${typeof formulasData !== 'undefined' ? formulasData.length : 0} key formulas</div>
-        </button>
+      <div class="welcome-carousel-wrap">
+        <div class="welcome-carousel" id="welcome-carousel" role="region" aria-roledescription="carousel"
+          aria-label="Study tools" tabindex="0">
+          <div class="welcome-carousel__stage">
+            <div class="welcome-carousel__ring">
+              <button type="button" class="welcome-carousel__card welcome-card" data-carousel-index="0"
+                data-carousel-label="Flashcards" data-action="open-flashcards">
+                <div class="wc-icon">${Icons.layers}</div>
+                <div class="wc-title">Flashcards</div>
+                <div class="wc-desc">${typeof flashcardsData !== 'undefined' ? flashcardsData.length : 0} cards across all chapters</div>
+              </button>
+              <button type="button" class="welcome-carousel__card welcome-card" data-carousel-index="1"
+                data-carousel-label="Formulas" data-action="open-formulas">
+                <div class="wc-icon">∑</div>
+                <div class="wc-title">Formulas</div>
+                <div class="wc-desc">${typeof formulasData !== 'undefined' ? formulasData.length : 0} key formulas</div>
+              </button>
+              <button type="button" class="welcome-carousel__card welcome-card" data-carousel-index="2"
+                data-carousel-label="Dashboard" data-action="open-dashboard">
+                <div class="wc-icon">${Icons.barChart}</div>
+                <div class="wc-title">Dashboard</div>
+                <div class="wc-desc">${done}/${total} chapters completed</div>
+              </button>
+              <button type="button" class="welcome-carousel__card welcome-card" data-carousel-index="3"
+                data-carousel-label="Practice Exams" data-action="open-exams">
+                <div class="wc-icon">${Icons.target}</div>
+                <div class="wc-title">Practice Exams</div>
+                <div class="wc-desc">Timed papers and exam practice</div>
+              </button>
+            </div>
+          </div>
+          <div class="welcome-carousel__caption" aria-live="polite"></div>
+        </div>
+        <div class="welcome-carousel__controls" aria-label="Study tools carousel controls">
+          <button type="button" class="welcome-carousel__arrow" data-carousel-action="previous" aria-label="Previous card">‹</button>
+          <div class="welcome-carousel__dots">
+            <button type="button" class="welcome-carousel__dot" aria-label="Show Flashcards"></button>
+            <button type="button" class="welcome-carousel__dot" aria-label="Show Formulas"></button>
+            <button type="button" class="welcome-carousel__dot" aria-label="Show Dashboard"></button>
+            <button type="button" class="welcome-carousel__dot" aria-label="Show Practice Exams"></button>
+          </div>
+          <button type="button" class="welcome-carousel__arrow" data-carousel-action="next" aria-label="Next card">›</button>
+        </div>
       </div>
 
-      <p style="font-size:.9rem;font-weight:600;color:var(--text-2);margin-bottom:12px">Jump to a chapter →</p>
-      <div class="chapters-quick-start">
-        ${chaptersData.map(ch => `
-          <button type="button" class="quick-chapter" data-chapter-id="${ch.id}">
-            <div class="quick-ch-num">${ch.number}</div>
-            <div>
-              <div class="quick-ch-name">${ch.shortTitle}</div>
-              <div class="quick-ch-sections">${ch.sections.length} sections</div>
-            </div>
-            ${AppStorage.isComplete(ch.id) ? `<span class="quick-ch-status"><span class="btn-icon-inner">${Icons.check}</span> Done</span>` : ''}
-          </button>`).join('')}
+      <div class="topics-folder-wrap">
+        <p style="font-size:.9rem;font-weight:600;color:var(--text-2);margin:0 0 4px">Explore topics</p>
+        <div class="folder-float" id="topics-folder" role="region" aria-label="Course topics" tabindex="0"
+          data-trigger="click">
+          <div class="folder-float__items" aria-label="Topic choices">
+            ${chaptersData.map(ch => `
+              <button type="button" class="folder-float__item" data-value="${ch.id}" tabindex="-1" aria-hidden="true">
+                ${ch.number}. ${ch.shortTitle}
+              </button>`).join('')}
+          </div>
+          <div class="folder-float__folder">
+            <span class="folder-float__back" aria-hidden="true"></span>
+            <span class="folder-float__paper" aria-hidden="true"></span>
+            <span class="folder-float__front" aria-hidden="true">
+              <span class="folder-float__label">Course topics</span>
+              <span class="folder-float__sub">${chaptersData.length} chapters</span>
+            </span>
+            <button type="button" class="folder-float__trigger" aria-expanded="false" aria-label="Open course topics"></button>
+          </div>
+        </div>
+        <p class="topics-folder-hint">Touch or click the folder, then choose a topic</p>
       </div>
+
     </div>`;
 
   area.querySelector('[data-action="open-flashcards"]')?.addEventListener('click', (e) => { e.stopPropagation(); Flashcards.open('all'); });
@@ -1989,9 +2027,17 @@ function renderWelcome() {
     document.getElementById('formula-panel')?.classList.add('open');
     renderFormulaPanel();
   });
-  area.querySelectorAll('.quick-chapter').forEach(btn => {
-    btn.addEventListener('click', () => Navigation.loadChapter(btn.dataset.chapterId));
+  area.querySelector('[data-action="open-exams"]')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (typeof Exams !== 'undefined') Exams.open();
   });
+  window.CircularCarousel?.init(document.getElementById('welcome-carousel'));
+  const topicsFolder = document.getElementById('topics-folder');
+  topicsFolder?.addEventListener('folderfloatselect', event => {
+    const chapterId = event.detail?.value;
+    if (chapterId) Navigation.loadChapter(chapterId);
+  });
+  window.FolderFloat?.init(topicsFolder);
 }
 
 // ─── Main init ────────────────────────────────────────────────────────────

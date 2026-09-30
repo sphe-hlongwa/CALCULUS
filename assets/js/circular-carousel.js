@@ -49,8 +49,7 @@
     const isVisible = card => getComputedStyle(card).display !== 'none';
 
     const setRadius = () => {
-      // offsetWidth ignores 3D transforms; getBoundingClientRect() shrinks/grows with the card's rotation.
-      const width = cards[0].offsetWidth || 220;
+      const width = cards[0].getBoundingClientRect().width || 220;
       const spacing = cards.length > realCount
         ? 28
         : Math.max(34, Math.min(76, root.clientWidth * 0.1));
@@ -198,11 +197,7 @@
       if (Math.abs(delta) > 35) step(delta > 0 ? -1 : 1);
     });
     root.addEventListener('pointercancel', () => { pointerStart = null; });
-    let resizeTimer = 0;
-    window.addEventListener('resize', () => {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(layout, 80);
-    }, { passive: true });
+    window.addEventListener('resize', layout, { passive: true });
 
     layout();
     restart();

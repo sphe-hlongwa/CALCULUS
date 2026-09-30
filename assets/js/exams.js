@@ -18,12 +18,14 @@ const Exams = (() => {
       {
         id: 'september',
         label: 'September Exams',
+        cardBlurb: 'Curve sketching, optimization and integration.',
         blurb: 'Practice papers for the September assessment: curve sketching, optimization, integration applications, and the integration-technique sections.',
         papers: (typeof EXAMS !== 'undefined') ? EXAMS : []
       },
       {
         id: 'november',
         label: 'November Exams',
+        cardBlurb: 'Three 2-hour, 90-mark papers in the November 2024 format.',
         blurb: 'Three 2-hour, 90-mark papers laid out like the MATH1036 November 2024 exam: a multiple-choice Section A and guided written Section B questions on integration techniques, improper integrals, series, power series, differential equations and volumes.',
         papers: (typeof NOVEMBER_EXAMS !== 'undefined') ? NOVEMBER_EXAMS : []
       },
@@ -32,6 +34,7 @@ const Exams = (() => {
         label: 'Tutorial Quiz Test 4',
         unit: 'test',
         startLabel: 'Start Test',
+        cardBlurb: 'Improper integrals plus sequences and series.',
         blurb: 'Each test mixes both chapters in one paper: Section A on improper integrals (Chapter 10) and Section B on sequences and series (Chapter 11).',
         listIntro: 'Three distinct 40-mark test papers.',
         papers: (typeof TUTORIAL_QUIZ_TESTS !== 'undefined') ? TUTORIAL_QUIZ_TESTS : []
@@ -122,7 +125,7 @@ const Exams = (() => {
         ? `${n} ${sess.unit ? sess.unit : 'practice paper'}${n === 1 ? '' : 's'}`
         : 'Coming soon';
       return `
-      <div class="exam-pick-card fade-up" style="animation-delay:${i * 60}ms" data-session-id="${sess.id}">
+      <div class="exam-pick-card fade-up" style="animation-delay:${i * 60}ms" data-session-id="${sess.id}" role="button" tabindex="0">
         <div class="exam-pick-top">
           <span class="exam-pick-num">${i + 1}</span>
           <div>
@@ -130,8 +133,8 @@ const Exams = (() => {
             <p class="exam-pick-meta">${meta}</p>
           </div>
         </div>
-        <p class="exam-session-blurb">${sess.blurb}</p>
-        <button class="btn-primary exam-start-btn" data-session-id="${sess.id}">${n ? 'Open &rarr;' : 'View &rarr;'}</button>
+        <p class="exam-session-blurb">${sess.cardBlurb || sess.blurb}</p>
+        <span class="exam-start-link">${n ? 'Open' : 'View'} <span aria-hidden="true">&rarr;</span></span>
       </div>`;
     }).join('');
 
@@ -143,8 +146,12 @@ const Exams = (() => {
       <div class="exam-pick-grid">${cards}</div>
     `;
 
-    root.querySelectorAll('[data-session-id]').forEach(el => {
-      el.addEventListener('click', () => renderList(el.dataset.sessionId));
+    root.querySelectorAll('.exam-pick-card').forEach(el => {
+      const open = () => renderList(el.dataset.sessionId);
+      el.addEventListener('click', open);
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
     });
 
     root.scrollTop = 0;
@@ -178,7 +185,7 @@ const Exams = (() => {
     }
 
     const cards = papers.map((paper, i) => `
-      <div class="exam-pick-card fade-up" style="animation-delay:${i * 60}ms" data-exam-id="${paper.id}">
+      <div class="exam-pick-card fade-up" style="animation-delay:${i * 60}ms" data-exam-id="${paper.id}" role="button" tabindex="0">
         <div class="exam-pick-top">
           <span class="exam-pick-num">${i + 1}</span>
           <div>
@@ -187,7 +194,7 @@ const Exams = (() => {
           </div>
         </div>
         ${paper.topics ? `<p class="exam-session-blurb">${paper.topics}</p>` : ''}
-        <button class="btn-primary exam-start-btn" data-exam-id="${paper.id}">${sess.startLabel || 'Start Paper'} &rarr;</button>
+        <span class="exam-start-link">${sess.startLabel || 'Start Paper'} <span aria-hidden="true">&rarr;</span></span>
       </div>
     `).join('');
 
@@ -203,8 +210,12 @@ const Exams = (() => {
     `;
 
     root.querySelector('#exam-sessions-back').addEventListener('click', renderSessions);
-    root.querySelectorAll('[data-exam-id]').forEach(el => {
-      el.addEventListener('click', () => renderPaper(el.dataset.examId));
+    root.querySelectorAll('.exam-pick-card').forEach(el => {
+      const open = () => renderPaper(el.dataset.examId);
+      el.addEventListener('click', open);
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
     });
 
     root.scrollTop = 0;

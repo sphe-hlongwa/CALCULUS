@@ -12,7 +12,7 @@ const TUTORIAL_QUIZ_TESTS = [
 {
     id: "tqt4-test1",
     label: "Test 1",
-    topics: "Section A: classifying improper integrals, Type I (upper limit) and Type II (endpoint discontinuity). Section B: sequences, absolute vs conditional convergence, radius of convergence.",
+    topics: "Improper integrals (Type I, II) and sequences, series, power series.",
     date: "Tutorial Quiz Test 4 · Test 1",
     kind: 'IMPROPER INTEGRALS & SEQUENCES AND SERIES',
     totalMarks: 40,
@@ -145,7 +145,7 @@ Interval of convergence: $$\boxed{[-1,\,5)}.$$ ✓
 {
     id: "tqt4-test2",
     label: "Test 2",
-    topics: "Section A: Type I (lower limit) and Type II (interior discontinuity). Section B: monotonic sequences, divergence and geometric tests, p-series and integral test, power series.",
+    topics: "More Type I and II cases, sequence tests, p-series, power series.",
     date: "Tutorial Quiz Test 4 · Test 2",
     kind: 'IMPROPER INTEGRALS & SEQUENCES AND SERIES',
     totalMarks: 40,
@@ -284,7 +284,7 @@ Interval of convergence: $$\boxed{\left[-\tfrac14,\ \tfrac14\right)}.$$ ✓
 {
     id: "tqt4-test3",
     label: "Test 3",
-    topics: "Section A: Type I (both limits) and doubly improper integrals. Section B: comparison tests, alternating series test, ratio and root tests.",
+    topics: "Doubly improper integrals and comparison, alternating, ratio and root tests.",
     date: "Tutorial Quiz Test 4 · Test 3",
     kind: 'IMPROPER INTEGRALS & SEQUENCES AND SERIES',
     totalMarks: 40,

@@ -40,6 +40,11 @@ const Navigation = (() => {
     if (toggleBtn && !toggleBtn.dataset.navigationBound) {
       toggleBtn.dataset.navigationBound = 'true';
       toggleBtn.addEventListener('click', () => {
+        // On mobile the panel lives in an overlay drawer: the arrow closes the drawer
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          document.querySelector('.sidebar-wrapper')?.classList.remove('mobile-open');
+          return;
+        }
         isCollapsed = !isCollapsed;
         document.getElementById('sidebar-detail')?.classList.toggle('collapsed', isCollapsed);
         document.querySelector('.app-shell')?.classList.toggle('detail-collapsed', isCollapsed);

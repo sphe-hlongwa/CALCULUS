@@ -660,59 +660,62 @@ body {
   font-weight: 600;
 }
 
-/* Collapsed state handling for detail sidebar */
-.sidebar-detail.collapsed .sidebar-brand-name,
-.sidebar-detail.collapsed .sidebar-section-title,
-.sidebar-detail.collapsed .sidebar-search input,
-.sidebar-detail.collapsed .menu-section-title,
-.sidebar-detail.collapsed .menu-item-label,
-.sidebar-detail.collapsed .menu-item-chevron,
-.sidebar-detail.collapsed .user-text,
-.sidebar-detail.collapsed .user-more-btn,
-.sidebar-detail.collapsed .submenu {
-  display: none;
-}
+/* Collapsed (icon-only) state handling for detail sidebar - desktop only.
+   On mobile the drawer opens/closes as a whole instead. */
+@media (min-width: 901px) {
+  .sidebar-detail.collapsed .sidebar-brand-name,
+  .sidebar-detail.collapsed .sidebar-section-title,
+  .sidebar-detail.collapsed .sidebar-search input,
+  .sidebar-detail.collapsed .menu-section-title,
+  .sidebar-detail.collapsed .menu-item-label,
+  .sidebar-detail.collapsed .menu-item-chevron,
+  .sidebar-detail.collapsed .user-text,
+  .sidebar-detail.collapsed .user-more-btn,
+  .sidebar-detail.collapsed .submenu {
+    display: none;
+  }
 
-.sidebar-detail.collapsed .sidebar-brand {
-  display: none;
-}
+  .sidebar-detail.collapsed .sidebar-brand {
+    display: none;
+  }
 
-.sidebar-detail.collapsed .sidebar-section-title-wrap {
-  justify-content: center;
-}
+  .sidebar-detail.collapsed .sidebar-section-title-wrap {
+    justify-content: center;
+  }
 
-.sidebar-detail.collapsed .sidebar-search {
-  width: 40px;
-  justify-content: center;
-  padding: 0;
-}
+  .sidebar-detail.collapsed .sidebar-search {
+    width: 40px;
+    justify-content: center;
+    padding: 0;
+  }
 
-.sidebar-detail.collapsed .sidebar-search svg {
-  margin: 0;
-}
+  .sidebar-detail.collapsed .sidebar-search svg {
+    margin: 0;
+  }
 
-.sidebar-detail.collapsed .menu-item {
-  width: 40px;
-  padding: 0;
-  justify-content: center;
-  margin: 0 auto;
-}
+  .sidebar-detail.collapsed .menu-item {
+    width: 40px;
+    padding: 0;
+    justify-content: center;
+    margin: 0 auto;
+  }
 
-.sidebar-detail.collapsed .menu-item-icon {
-  margin: 0;
-}
+  .sidebar-detail.collapsed .menu-item-icon {
+    margin: 0;
+  }
 
-.sidebar-detail.collapsed .sidebar-progress-container {
-  display: none;
-}
+  .sidebar-detail.collapsed .sidebar-progress-container {
+    display: none;
+  }
 
-.sidebar-detail.collapsed .sidebar-footer-user {
-  justify-content: center;
-  padding: 8px 0;
-}
+  .sidebar-detail.collapsed .sidebar-footer-user {
+    justify-content: center;
+    padding: 8px 0;
+  }
 
-.sidebar-detail.collapsed .sidebar-collapse-btn svg {
-  transform: rotate(90deg) !important;
+  .sidebar-detail.collapsed .sidebar-collapse-btn svg {
+    transform: rotate(90deg) !important;
+  }
 }
 
 /* TOC */

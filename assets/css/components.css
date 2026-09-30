@@ -90,8 +90,8 @@
 
   /* Detail panel should never be collapsed to icon-only on mobile -
      the drawer already hides/shows the whole thing */
-  .sidebar-detail { max-width: 264px; }
-  .sidebar-detail.collapsed { max-width: 264px; }
+  .sidebar-detail,
+  .sidebar-detail.collapsed { max-width: none; }
 
   #sidebar-backdrop {
     display: none;
@@ -216,47 +216,55 @@
 }
 
 /* ── Picker view ── */
-.exam-list-header h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
-.exam-list-sub { color: var(--text-2); font-size: .92rem; line-height: 1.55; max-width: 720px; margin-bottom: 26px; }
+.exam-list-header h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -.01em; margin-bottom: 6px; }
+.exam-list-sub { color: var(--text-2); font-size: .92rem; line-height: 1.55; max-width: 720px; margin-bottom: 28px; }
 
-.exam-pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.exam-pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; align-items: stretch; }
 
 .exam-pick-card {
   background: var(--surface-2);
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 20px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition: border-color .2s, transform .2s;
+  gap: 16px;
+  cursor: pointer;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
 }
-.exam-pick-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.exam-pick-card:hover,
+.exam-pick-card:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  outline: none;
+}
 
-.exam-pick-top { display: flex; align-items: flex-start; gap: 12px; }
+.exam-pick-top { display: flex; align-items: center; gap: 14px; }
 .exam-pick-num {
   flex-shrink: 0;
-  width: 34px; height: 34px;
+  width: 36px; height: 36px;
   border-radius: 10px;
-  background: var(--accent);
-  color: #0f0f0f;
+  background: rgba(62, 166, 255, .14);
+  color: var(--accent);
   font-weight: 800;
   display: flex; align-items: center; justify-content: center;
 }
-.exam-pick-top h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 2px; }
-.exam-session-blurb { font-size: .88rem; color: var(--text-2); line-height: 1.5; margin: 0; }
-.exam-pick-meta { font-size: .82rem; color: var(--text-3); }
+.exam-pick-top h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.25; margin: 0 0 2px; }
+.exam-pick-meta { font-size: .8rem; color: var(--text-3); margin: 0; }
+.exam-session-blurb { font-size: .88rem; color: var(--text-2); line-height: 1.55; margin: 0; }
 
-.exam-pick-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.exam-tag {
-  font-size: .72rem;
+.exam-start-link {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: .88rem;
   font-weight: 600;
-  color: var(--text-2);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 4px 10px;
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: space-between;
 }
+.exam-start-link span { transition: transform .2s; }
+.exam-pick-card:hover .exam-start-link span { transform: translateX(3px); }
 
 .exam-start-btn { margin-top: auto; width: 100%; justify-content: center; }
 

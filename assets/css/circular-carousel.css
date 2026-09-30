@@ -4,12 +4,12 @@
 }
 
 .welcome-carousel {
-  --carousel-card-width: 220px;
-  --carousel-card-height: 178px;
+  --carousel-card-width: clamp(140px, 44vw, 180px);
+  --carousel-card-height: 140px;
   position: relative;
-  height: 300px;
+  height: 305px;
   overflow: hidden;
-  perspective: 1250px;
+  perspective: 1100px;
   outline: none;
   touch-action: pan-y;
 }
@@ -24,7 +24,7 @@
   inset: 0;
   display: grid;
   place-items: center;
-  transform: rotateX(-5deg) translateY(-8px);
+  transform: rotateX(-7deg) translateY(-6px);
   transform-style: preserve-3d;
 }
 
@@ -44,10 +44,10 @@
   width: var(--carousel-card-width);
   min-height: var(--carousel-card-height);
   margin: 0;
-  backface-visibility: hidden;
+  backface-visibility: visible;
+  transition: border-color 250ms ease; /* opacity/brightness are driven per frame by circular-carousel.js */
   transform-style: preserve-3d;
   transform: rotateY(var(--carousel-angle)) translateZ(var(--carousel-radius));
-  transition: opacity 350ms ease, filter 350ms ease, border-color 250ms ease;
 }
 
 .welcome-carousel__card.welcome-card {
@@ -56,7 +56,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 14px;
   border-width: 1.5px;
   box-shadow: var(--shadow-md);
 }
@@ -144,11 +144,34 @@
   outline-offset: 3px;
 }
 
-@media (max-width: 600px) {
+/* Compact type so the card text fits the smaller phone cards */
+.welcome-carousel__card .wc-icon { margin-bottom: 4px; }
+.welcome-carousel__card .wc-title { font-size: .8rem; }
+.welcome-carousel__card .wc-desc { font-size: .7rem; }
+
+/* Desktop: bigger cards and a wider cylinder (phones/tablets keep the compact size above) */
+@media (min-width: 901px) {
+  .welcome-carousel__card.welcome-card {
+    padding: 20px;
+  }
+
+  .welcome-carousel-wrap {
+    width: min(100%, 1040px);
+  }
+
   .welcome-carousel {
-    --carousel-card-width: min(220px, 66vw);
-    --carousel-card-height: 170px;
-    height: 278px;
+    --carousel-card-width: 300px;
+    --carousel-card-height: 190px;
+    height: 380px;
+    perspective: 1900px;
+  }
+
+  .welcome-carousel__card .wc-icon { margin-bottom: 8px; }
+  .welcome-carousel__card .wc-title { font-size: .88rem; }
+  .welcome-carousel__card .wc-desc { font-size: .78rem; }
+
+  .welcome-carousel__caption {
+    bottom: 0;
   }
 }
 

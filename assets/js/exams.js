@@ -26,6 +26,15 @@ const Exams = (() => {
         label: 'November Exams',
         blurb: 'Three 2-hour, 90-mark papers laid out like the MATH1036 November 2024 exam: a multiple-choice Section A and guided written Section B questions on integration techniques, improper integrals, series, power series, differential equations and volumes.',
         papers: (typeof NOVEMBER_EXAMS !== 'undefined') ? NOVEMBER_EXAMS : []
+      },
+      {
+        id: 'tutorial-quiz-4',
+        label: 'Tutorial Quiz Test 4',
+        unit: 'test',
+        startLabel: 'Start Test',
+        blurb: 'Each test mixes both chapters in one paper: Section A on improper integrals (Chapter 10) and Section B on sequences and series (Chapter 11).',
+        listIntro: 'Three distinct 40-mark test papers.',
+        papers: (typeof TUTORIAL_QUIZ_TESTS !== 'undefined') ? TUTORIAL_QUIZ_TESTS : []
       }
     ];
   }
@@ -110,7 +119,7 @@ const Exams = (() => {
     const cards = getSessions().map((sess, i) => {
       const n = sess.papers.length;
       const meta = n
-        ? `${n} practice paper${n === 1 ? '' : 's'}`
+        ? `${n} ${sess.unit ? sess.unit : 'practice paper'}${n === 1 ? '' : 's'}`
         : 'Coming soon';
       return `
       <div class="exam-pick-card fade-up" style="animation-delay:${i * 60}ms" data-session-id="${sess.id}">
@@ -177,7 +186,8 @@ const Exams = (() => {
             <p class="exam-pick-meta">${paper.totalMarks} marks &middot; ${paper.duration} minutes &middot; ${paper.questions.length} questions</p>
           </div>
         </div>
-        <button class="btn-primary exam-start-btn" data-exam-id="${paper.id}">Start Paper &rarr;</button>
+        ${paper.topics ? `<p class="exam-session-blurb">${paper.topics}</p>` : ''}
+        <button class="btn-primary exam-start-btn" data-exam-id="${paper.id}">${sess.startLabel || 'Start Paper'} &rarr;</button>
       </div>
     `).join('');
 
@@ -187,7 +197,7 @@ const Exams = (() => {
       </div>
       <div class="exam-list-header">
         <h2>${sess.label}</h2>
-        <p class="exam-list-sub">${papers.length} full-length practice papers. ${sess.blurb} Each question includes a full worked memo.</p>
+        <p class="exam-list-sub">${sess.listIntro ? sess.listIntro + ' ' : papers.length + ' full-length practice papers. '}${sess.blurb} Each question includes a full worked memo.</p>
       </div>
       <div class="exam-pick-grid">${cards}</div>
     `;

@@ -1548,7 +1548,6 @@ $$2\\pi r^2+2\\pi rh=300\\pi \\;\\Rightarrow\\; r^2+rh=150 \\;\\Rightarrow\\; h=
 
 Substituting into the volume to get a function of $r$ alone:
 $$V(r)=\\pi r^2h=\\pi r^2\\cdot\\frac{150-r^2}{r}=150\\pi r-\\pi r^3,\\qquad 0< r<\\sqrt{150}.$$ ✓
-$$V(r)=\\pi r^2h=\\pi r^2\\cdot\\frac{150-r^2}{r}=150\\pi r-\\pi r^3,\\qquad 0< r<\\sqrt{150}.$$ ✓
 
 $$V'(r)=150\\pi-3\\pi r^2=0 \\;\\Rightarrow\\; r^2=50 \\;\\Rightarrow\\; r=5\\sqrt2\\ \\text{cm}\\ \\ (r>0).$$ ✓✓
 
@@ -1784,9 +1783,6 @@ $$A=\\frac14+\\frac14=\\frac12.$$ ✓
 Using integration by parts, prove that
 $$\\int e^{ax}\\cos(bx)\\,dx=\\frac{e^{ax}}{a^2+b^2}\\big(a\\cos(bx)+b\\sin(bx)\\big)+C,$$
 where $a$ and $b$ are non-zero constants. (8)
-Using integration by parts, prove that
-$$\\int e^{ax}\\cos(bx)\\,dx=\\frac{e^{ax}}{a^2+b^2}\\big(a\\cos(bx)+b\\sin(bx)\\big)+C,$$
-where $a$ and $b$ are non-zero constants. (8)
         `,
         solution: `
 Let $I=\\displaystyle\\int e^{ax}\\cos(bx)\\,dx$, and assume $b\\neq0$ (if $b=0$ the claim collapses to the elementary $\\int e^{ax}\\,dx=\\dfrac{e^{ax}}{a}+C$, which the stated right-hand side also returns).
@@ -1932,14 +1928,12 @@ Let $(x,y)$ be the vertex in the first quadrant, with $x,y>0$. By symmetry about
 
 The constraint is the ellipse: $\\dfrac{y^2}{9}=1-\\dfrac{x^2}{25}\\;\\Rightarrow\\;y=3\\sqrt{1-\\dfrac{x^2}{25}}$ (taking $y>0$). Substituting to one variable,
 $$A(x)=4x\\cdot3\\sqrt{1-\\frac{x^2}{25}}=12x\\sqrt{1-\\frac{x^2}{25}},\\qquad 0< x<5.$$ ✓
-$$A(x)=4x\\cdot3\\sqrt{1-\\frac{x^2}{25}}=12x\\sqrt{1-\\frac{x^2}{25}},\\qquad 0< x<5.$$ ✓
 
 Since $A>0$, maximising $A$ is equivalent to maximising the square-root-free function
 $$S(x)=A(x)^2=144x^2\\left(1-\\frac{x^2}{25}\\right)=144x^2-\\frac{144}{25}x^4.$$ ✓
 
 $$S'(x)=288x-\\frac{576}{25}x^3=\\frac{288x}{25}\\left(25-2x^2\\right)=0\\;\\Rightarrow\\;x^2=\\frac{25}{2}\\;\\Rightarrow\\;x=\\frac{5}{\\sqrt2}=\\frac{5\\sqrt2}{2}.$$ ✓
 
-For $0< x<\\tfrac{5}{\\sqrt2}$ we have $25-2x^2>0$, so $S'>0$ (e.g. $S'(1)\\approx265$); for $\\tfrac{5}{\\sqrt2}< x<5$ we have $25-2x^2<0$, so $S'<0$ (e.g. $S'(4)\\approx-323$). The sign change $+\\to-$ confirms a **maximum**. ✓
 For $0< x<\\tfrac{5}{\\sqrt2}$ we have $25-2x^2>0$, so $S'>0$ (e.g. $S'(1)\\approx265$); for $\\tfrac{5}{\\sqrt2}< x<5$ we have $25-2x^2<0$, so $S'<0$ (e.g. $S'(4)\\approx-323$). The sign change $+\\to-$ confirms a **maximum**. ✓
 
 Then $y=3\\sqrt{1-\\dfrac{25/2}{25}}=3\\sqrt{\\dfrac12}=\\dfrac{3}{\\sqrt2}$, so the width is $2x=5\\sqrt2$, the height is $2y=3\\sqrt2$, and
@@ -2393,7 +2387,6 @@ $$=2\\pi\\left(\\frac{e^2}{4}+\\frac14\\right)=\\frac{\\pi\\left(e^2+1\\right)}{
         number: 4, title: 'Proof: Mean Value Theorem for Integrals', section: '§8', marks: 8,
         prompt: `
 Let $f$ be continuous on $[a,b]$, with $a< b$. Prove that there exists $c\\in[a,b]$ such that
-Let $f$ be continuous on $[a,b]$, with $a< b$. Prove that there exists $c\\in[a,b]$ such that
 $$\\int_a^b f(x)\\,dx=f(c)(b-a).$$ (8)
         `,
         solution: `
@@ -2686,7 +2679,6 @@ EXAMS.find(p => p.id === 'paper10').questions[3] = {
   prompt: `Suppose $f(x)\\ge0$ for all $x\\in[a,b]$. Prove that
 $$\\int_a^b f(x)\\,dx\\ge0.$$ (8)`,
   solution: `
-Let $a=x_0< x_1<\\dots< x_n=b$ partition $[a,b]$ into $n$ subintervals of width $\\Delta x_i=x_i-x_{i-1}$, with sample points $x_i^*\\in[x_{i-1},x_i]$. By the **definition of the definite integral** as a limit of Riemann sums,
 Let $a=x_0< x_1<\\dots< x_n=b$ partition $[a,b]$ into $n$ subintervals of width $\\Delta x_i=x_i-x_{i-1}$, with sample points $x_i^*\\in[x_{i-1},x_i]$. By the **definition of the definite integral** as a limit of Riemann sums,
 $$\\int_a^b f(x)\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^n f(x_i^*)\\,\\Delta x_i.$$ ✓✓
 

@@ -36,7 +36,7 @@ const Exams = (() => {
         startLabel: 'Start Test',
         cardBlurb: 'Improper integrals plus sequences and series.',
         blurb: 'Each test mixes both chapters in one paper: Section A on improper integrals (Chapter 10) and Section B on sequences and series (Chapter 11).',
-        listIntro: 'Three distinct 40-mark test papers.',
+        listIntro: 'Six distinct 40-mark test papers.',
         papers: (typeof TUTORIAL_QUIZ_TESTS !== 'undefined') ? TUTORIAL_QUIZ_TESTS : []
       }
     ];

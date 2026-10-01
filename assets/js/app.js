@@ -1941,9 +1941,11 @@ function renderWelcome() {
 
   area.innerHTML = `
     <div id="welcome-screen">
-      <div class="welcome-icon">${Icons.book}</div>
-      <div class="welcome-title">CALCULUS I</div>
-      <p class="welcome-sub">Your interactive study companion for the second semester. Track your progress, practice with flashcards, and master each concept step by step.</p>
+      <div class="welcome-hero">
+        <img class="welcome-hands" src="assets/img/hands.png" alt="" aria-hidden="true" draggable="false">
+        <div class="welcome-icon">${Icons.book}</div>
+        <h1 class="welcome-title">CALCULUS I</h1>
+      </div>
 
       <div class="welcome-carousel-wrap">
         <div class="welcome-carousel" id="welcome-carousel" role="region" aria-roledescription="carousel"

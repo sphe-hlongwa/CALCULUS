@@ -15,9 +15,37 @@
   display: flex; flex-direction: column; align-items: center;
   padding: 32px 32px 60px; text-align: center;
 }
-.welcome-icon { font-size: 4rem; margin-bottom: 20px; }
-.welcome-title { font-size: 2.2rem; font-weight: 800; color: var(--text); margin-bottom: 12px; }
-.welcome-sub { font-size: 1.05rem; color: var(--text-2); max-width: 520px; margin-bottom: 32px; }
+/* Hero: hands reach toward the book icon; icon sits at the exact centre of the stage */
+.welcome-hero {
+  position: relative; width: 100%; max-width: 1100px;
+  height: clamp(360px, 50vw, 520px); margin-bottom: 8px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 14%, #000 86%, transparent 100%);
+}
+.welcome-hands {
+  position: absolute; left: 50%; top: 50%;
+  width: max(116%, 700px); max-width: none; height: auto;
+  /* shift so the gap between the fingertips (53.7% / 50.2% of the image) lands on the stage centre */
+  transform: translate(-53.7%, -50.2%);
+  pointer-events: none; user-select: none;
+}
+.welcome-icon {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; color: var(--text);
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, .35));
+}
+.welcome-icon svg { width: clamp(30px, 4.2vw, 44px); height: auto; }
+.welcome-title {
+  position: absolute; left: 0; right: 0; top: calc(50% + clamp(104px, 15vw, 172px));
+  margin: 0; text-align: center;
+  font-family: 'Bodoni Moda', 'Didot', 'Bodoni 72', 'Playfair Display', Georgia, serif;
+  font-weight: 500; font-size: clamp(2.2rem, 7.4vw, 4.6rem); line-height: 1;
+  letter-spacing: .06em; text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 25%, #a9a9a9 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: #fff;
+}
 .welcome-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 660px; margin-bottom: 32px; }
 .welcome-card {
   background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius);
@@ -41,6 +69,13 @@
 .quick-ch-name { font-size: .9rem; font-weight: 600; flex: 1; }
 .quick-ch-sections { font-size: .75rem; color: var(--text-3); }
 .quick-ch-status { font-size: .8rem; color: var(--green); }
+
+/* Phones/tablets: let the hero and carousel run edge to edge (no side margins clipping them) */
+@media (max-width: 900px) {
+  #welcome-screen { padding-left: 0; padding-right: 0; }
+  .welcome-hero { max-width: none; -webkit-mask-image: none; mask-image: none; }
+  .welcome-carousel-wrap { width: 100%; }
+}
 
 /* Confidence chip */
 .confidence-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }

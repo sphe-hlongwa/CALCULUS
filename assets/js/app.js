@@ -1943,7 +1943,25 @@ function renderWelcome() {
     <div id="welcome-screen">
       <div class="welcome-hero">
         <img class="welcome-hands" src="assets/img/hands.png" alt="" aria-hidden="true" draggable="false">
-        <div class="welcome-icon">${Icons.book}</div>
+        <div class="welcome-icon" aria-hidden="true">
+          <svg class="infinity-glow" viewBox="0 0 120 70" overflow="visible" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <defs>
+              <filter id="inf-blur-lg" x="-40%" y="-80%" width="180%" height="260%"><feGaussianBlur stdDeviation="6"/></filter>
+              <filter id="inf-blur-md" x="-40%" y="-80%" width="180%" height="260%"><feGaussianBlur stdDeviation="2.6"/></filter>
+              <filter id="inf-blur-sm" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation=".7"/></filter>
+              <linearGradient id="inf-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffffff" stop-opacity=".78"/>
+                <stop offset=".5" stop-color="#ffffff" stop-opacity=".95"/>
+                <stop offset="1" stop-color="#ffffff" stop-opacity="1"/>
+              </linearGradient>
+            </defs>
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path class="inf-halo" d="M60 35 C 73 9, 111 9, 111 35 C 111 61, 73 61, 60 35 C 47 9, 9 9, 9 35 C 9 61, 47 61, 60 35 Z" stroke="#fff" stroke-width="12" filter="url(#inf-blur-lg)" opacity=".55"/>
+              <path d="M60 35 C 73 9, 111 9, 111 35 C 111 61, 73 61, 60 35 C 47 9, 9 9, 9 35 C 9 61, 47 61, 60 35 Z" stroke="#fff" stroke-width="8" filter="url(#inf-blur-md)" opacity=".7"/>
+              <path d="M60 35 C 73 9, 111 9, 111 35 C 111 61, 73 61, 60 35 C 47 9, 9 9, 9 35 C 9 61, 47 61, 60 35 Z" stroke="url(#inf-grad)" stroke-width="5.5" filter="url(#inf-blur-sm)"/>
+            </g>
+          </svg>
+        </div>
         <h1 class="welcome-title">CALCULUS I</h1>
       </div>
 

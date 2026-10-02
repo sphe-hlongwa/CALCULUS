@@ -451,9 +451,19 @@ body.dark .exam-graph-wrap { background: #1e293b; border-color: #334155; }
 
 @media (max-width: 640px) {
   #exam-overlay { padding: 0; }
-  .exam-shell { border-radius: 0; min-height: 100vh; }
-  .exam-cover, .exam-questions { padding-left: 18px; padding-right: 18px; }
+  .exam-shell { border-radius: 0; min-height: 100vh; border-left: none; border-right: none; }
+  .exam-shell-header { padding: 12px 14px; }
+
+  /* Give the paper the full width: minimal gutter around it */
+  #exam-content { padding: 8px 6px 32px; }
+  .exam-toolbar { margin-bottom: 4px; padding: 0 6px; }
+
+  .exam-paper { border-radius: 8px; }
+  .exam-cover { padding: 20px 14px 18px; }
+  .exam-questions { padding: 4px 14px 24px; }
   .exam-cover-title { font-size: 1.5rem; }
+  .exam-cover-subtitle { font-size: 1rem; }
+  .exam-question { padding: 16px 0; }
 }
 
 /* ── Exam countdown timer ── */

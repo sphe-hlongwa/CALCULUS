@@ -134,7 +134,11 @@ body {
   padding: 0 24px;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  z-index: 100;
+  /* Must sit above the sidebar (400 / 450 on mobile) so the search dropdown,
+     which lives inside the topbar's stacking context, is never covered.
+     Kept below side panels (500) and overlays (800+). */
+  position: relative;
+  z-index: 460;
 }
 
 .topbar-logo {

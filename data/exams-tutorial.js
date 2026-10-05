@@ -1,7 +1,7 @@
 /**
  * data/exams-tutorial.js — Tutorial Quiz Test 4
  *
- * Six distinct 40-mark / 50-minute test papers (Tests 1-3, then Tests 4-6). Every paper mixes both chapters:
+ * Nine distinct 40-mark / 50-minute test papers (Tests 1-9). Every paper mixes both chapters:
  *   Section A  Improper integrals (Chapter 10)        questions A1, A2, ...
  *   Section B  Sequences and series (Chapter 11)      questions B1, B2, ...
  *
@@ -775,6 +775,365 @@ Interval of convergence: $$\boxed{[-2,\,0]}.$$
 **(ii)** Put $y=x^{2}$: convergence iff $x^{2}\lt3$, i.e. $|x|\lt\sqrt3$, so $R=\boxed{\sqrt3}$. ✓
 
 **(iii)** Put $y=x-5$: convergence iff $|x-5|\lt3$; the centre moves to $5$ but the radius is unchanged, $R=\boxed{3}$. ✓
+        `
+      }
+    ]
+  },
+{
+    id: "tqt4-test7",
+    label: "Test 7",
+    topics: "Comparison tests, ratio test and absolute convergence",
+    date: "Tutorial Quiz Test 4 · Test 7",
+    kind: 'IMPROPER INTEGRALS & SEQUENCES AND SERIES',
+    totalMarks: 40,
+    duration: 50,
+    instructions: [
+      'Section A (Chapter 10): improper integrals. [13 marks]',
+      'Section B (Chapter 11): sequences and series. [27 marks]',
+      'Answer ALL questions and show ALL workings. Write improper integrals as limits, and name each series test you use.',
+      'No calculators are allowed.',
+      'You have 50 minutes in total.',
+      'Use the “Show Memo” button under each question to check your solution once you have attempted it.'
+    ],
+    questions: [
+      {
+        number: 1, label: "A1", title: "An exponential substitution and a square-root endpoint", section: "Section A · Improper integrals · Type I / II", marks: 7,
+        prompt: String.raw`
+Evaluate each integral, or show that it diverges.
+
+**(a)** $\displaystyle\int_0^{\infty}\frac{dx}{e^{x}+e^{-x}}$ [3]
+
+**(b)** $\displaystyle\int_0^{3}\frac{x}{\sqrt{9-x^{2}}}\,dx$ [4]
+        `,
+        solution: String.raw`
+**(a)** Type I. Multiply top and bottom by $e^{x}$: $$\frac{1}{e^{x}+e^{-x}}=\frac{e^{x}}{e^{2x}+1}.$$ ✓ With $u=e^{x}$, $du=e^{x}dx$, an antiderivative is $\arctan(e^{x})$. ✓ Then $$\int_0^{t}\frac{dx}{e^{x}+e^{-x}}=\arctan(e^{t})-\arctan1=\arctan(e^{t})-\frac\pi4\to\frac\pi2-\frac\pi4.$$ ✓ The integral converges to $$\boxed{\frac\pi4}.$$
+
+**(b)** Type II: the integrand is unbounded as $x\to3^-$. ✓ With $u=9-x^{2}$, $du=-2x\,dx$: $$\int\frac{x}{\sqrt{9-x^{2}}}dx=-\sqrt{9-x^{2}}.$$ ✓✓ Then $$\int_0^{t}\frac{x}{\sqrt{9-x^{2}}}dx=-\sqrt{9-t^{2}}+3\to0+3\quad\text{as }t\to3^-.$$ ✓ The integral converges to $$\boxed{3}.$$ ✓
+        `
+      },
+      {
+        number: 2, label: "A2", title: "Comparison tests for improper integrals", section: "Section A · Improper integrals · Comparison", marks: 6,
+        prompt: String.raw`
+Determine whether each integral converges or diverges. Name the test you use.
+
+**(a)** $\displaystyle\int_1^{\infty}\frac{x}{x^{3}+1}\,dx$ [3]
+
+**(b)** $\displaystyle\int_0^{1}\frac{dx}{\sin x}$ [3]
+        `,
+        solution: String.raw`
+**(a)** For $x\ge1$ we have $x^{3}+1\gt x^{3}$, so $$0\lt\frac{x}{x^{3}+1}\lt\frac{x}{x^{3}}=\frac{1}{x^{2}}.$$ ✓ The integral $\displaystyle\int_1^{\infty}x^{-2}dx$ converges ($p=2\gt1$). ✓ By the **Comparison Test** the given integral **converges**. ✓
+
+**(b)** The integrand is unbounded as $x\to0^+$ (Type II). For $0\lt x\le1$ we have $0\lt\sin x\le x$, so $$\frac{1}{\sin x}\ge\frac1x\gt0.$$ ✓ The integral $\displaystyle\int_0^{1}\frac{dx}{x}$ diverges ($p=1$). ✓ By the **Comparison Test** the given integral **diverges**. ✓
+        `
+      },
+      {
+        number: 3, label: "B1", title: "Limits of sequences", section: "Section B · Sequences · Limit techniques", marks: 6,
+        prompt: String.raw`
+Determine whether each sequence converges. If it does, find the limit.
+
+**(a)** $a_n=n^{1/n}$ [2]
+
+**(b)** $a_n=\sin\dfrac{n\pi}{2}$ [2]
+
+**(c)** $a_n=\dfrac{3n+1}{\sqrt{n^{2}+4}}$ [2]
+        `,
+        solution: String.raw`
+**(a)** Write $a_n=e^{(\ln n)/n}$. By L'Hôpital, $$\lim_{x\to\infty}\frac{\ln x}{x}=\lim_{x\to\infty}\frac{1/x}{1}=0.$$ ✓ Since $e^{x}$ is continuous, $a_n\to e^{0}=\boxed{1}$. ✓
+
+**(b)** The terms are $1,\,0,\,-1,\,0,\,1,\,0,\,-1,\,0,\ldots$ ✓ The subsequence $a_{4k+1}=1$ tends to $1$, while the subsequence $a_{2k}=0$ tends to $0$. Two subsequences with different limits, so the sequence **diverges**. ✓
+
+**(c)** Divide the top and bottom by $n$ (note $\sqrt{n^{2}+4}=n\sqrt{1+4/n^{2}}$ for $n\gt0$): $$a_n=\frac{3+1/n}{\sqrt{1+4/n^{2}}}\to\frac{3+0}{\sqrt{1+0}}=\boxed{3}.$$ ✓✓
+        `
+      },
+      {
+        number: 4, label: "B2", title: "Geometric series, ratio test and comparison", section: "Section B · Series · Geometric, ratio and comparison tests", marks: 7,
+        prompt: String.raw`
+**(a)** Find the sum of $\displaystyle\sum_{n=0}^{\infty}\frac{2^{n+1}+(-1)^{n}}{5^{n}}$. [3]
+
+**(b)** Use the Ratio Test to decide whether $\displaystyle\sum_{n=1}^{\infty}\frac{3^{n}}{n\,2^{n}}$ converges. [2]
+
+**(c)** Show that $\displaystyle\sum_{n=1}^{\infty}\frac{\ln n}{n^{2}}$ converges. You may use the fact that $\ln n\le\sqrt n$ for all $n\ge1$. [2]
+        `,
+        solution: String.raw`
+**(a)** Split into two geometric series: $$\sum_{n=0}^{\infty}\frac{2^{n+1}+(-1)^{n}}{5^{n}}=2\sum_{n=0}^{\infty}\left(\frac25\right)^{n}+\sum_{n=0}^{\infty}\left(-\frac15\right)^{n}.$$ ✓ Both have $|r|\lt1$, so they converge: $$2\cdot\frac{1}{1-2/5}+\frac{1}{1+1/5}=\frac{10}{3}+\frac56.$$ ✓ The sum is $\dfrac{20}{6}+\dfrac56=\boxed{\dfrac{25}{6}}$. ✓
+
+**(b)** With $a_n=\dfrac{3^{n}}{n\,2^{n}}$: $$\frac{a_{n+1}}{a_n}=\frac{3^{n+1}}{(n+1)2^{n+1}}\cdot\frac{n\,2^{n}}{3^{n}}=\frac32\cdot\frac{n}{n+1}\to\frac32.$$ ✓ Since $\dfrac32\gt1$, the series **diverges** by the Ratio Test. ✓
+
+**(c)** Using $\ln n\le\sqrt n$, $$0\le\frac{\ln n}{n^{2}}\le\frac{\sqrt n}{n^{2}}=\frac{1}{n^{3/2}}.$$ ✓ The $p$-series $\sum n^{-3/2}$ converges ($p=\tfrac32\gt1$), so the series **converges** by the Comparison Test. ✓
+        `
+      },
+      {
+        number: 5, label: "B3", title: "Absolute vs conditional convergence", section: "Section B · Series · AST, comparison", marks: 7,
+        prompt: String.raw`
+**(a)** Show that $\displaystyle\sum_{n=2}^{\infty}\frac{(-1)^{n}\ln n}{n}$ is conditionally convergent. [4]
+
+**(b)** Show that $\displaystyle\sum_{n=1}^{\infty}\frac{\sin n}{n^{2}}$ is absolutely convergent. [3]
+        `,
+        solution: String.raw`
+**(a)** Let $b_n=\dfrac{\ln n}{n}\gt0$ and $f(x)=\dfrac{\ln x}{x}$. Then $$f'(x)=\frac{1-\ln x}{x^{2}}\lt0\quad\text{for }x\gt e,$$ so $b_n$ is decreasing for $n\ge3$. ✓ By L'Hôpital, $\dfrac{\ln x}{x}\to0$, so $b_n\to0$. ✓ By the **AST** the series converges (the first term does not affect convergence). ✓
+
+For absolute convergence: when $n\ge3$, $\ln n\ge1$, so $$\frac{\ln n}{n}\ge\frac1n.$$ Since $\sum\dfrac1n$ diverges, $\sum b_n$ diverges by Direct Comparison. Hence the series is **conditionally convergent**. ✓
+
+**(b)** Since $|\sin n|\le1$, $$\left|\frac{\sin n}{n^{2}}\right|\le\frac{1}{n^{2}}.$$ ✓ The $p$-series $\sum\dfrac1{n^{2}}$ converges ($p=2\gt1$). ✓ By Direct Comparison $\sum\left|\dfrac{\sin n}{n^{2}}\right|$ converges, so the series is **absolutely convergent**. ✓
+        `
+      },
+      {
+        number: 6, label: "B4", title: "Interval of convergence and a power series for a function", section: "Section B · Power series", marks: 7,
+        prompt: String.raw`
+**(a)** Find the interval of convergence of $$\sum_{n=0}^{\infty}\frac{(x+1)^{n}}{2n+1}.$$ [4]
+
+**(b)** Use the geometric series to write $\dfrac{x}{1+x^{3}}$ as a power series about $0$, and state where it is valid. Hence write down a power series for $\displaystyle\int\frac{x}{1+x^{3}}\,dx$. [3]
+        `,
+        solution: String.raw`
+**(a)** Ratio Test: $$\left|\frac{a_{n+1}}{a_n}\right|=\frac{|x+1|^{n+1}}{2n+3}\cdot\frac{2n+1}{|x+1|^{n}}=|x+1|\cdot\frac{2n+1}{2n+3}\to|x+1|.$$ ✓ Convergence needs $|x+1|\lt1$, so $R=1$ and $-2\lt x\lt0$. ✓
+
+**Endpoints:** at $x=0$ the series is $\displaystyle\sum\frac{1}{2n+1}$. Comparing with $\sum\dfrac1n$: $\displaystyle\lim_{n\to\infty}\frac{1/(2n+1)}{1/n}=\frac12\gt0$, so it **diverges** (Limit Comparison). ✓ At $x=-2$ it is $\displaystyle\sum\frac{(-1)^{n}}{2n+1}$; $\dfrac{1}{2n+1}$ decreases to $0$, so it **converges** by the AST. ✓
+
+Interval of convergence: $$\boxed{[-2,\,0)}.$$
+
+**(b)** $\dfrac{1}{1+x^{3}}=\dfrac{1}{1-(-x^{3})}=\displaystyle\sum_{n=0}^{\infty}(-1)^{n}x^{3n}$, valid when $|-x^{3}|\lt1$, i.e. $|x|\lt1$. Multiplying by $x$: $$\frac{x}{1+x^{3}}=\sum_{n=0}^{\infty}(-1)^{n}x^{3n+1},\qquad |x|\lt1.$$ ✓✓ Integrating term by term (same radius $R=1$): $$\int\frac{x}{1+x^{3}}dx=C+\sum_{n=0}^{\infty}\frac{(-1)^{n}x^{3n+2}}{3n+2}.$$ ✓
+        `
+      }
+    ]
+  },
+{
+    id: "tqt4-test8",
+    label: "Test 8",
+    topics: "Partial fractions, integral test and series strategy",
+    date: "Tutorial Quiz Test 4 · Test 8",
+    kind: 'IMPROPER INTEGRALS & SEQUENCES AND SERIES',
+    totalMarks: 40,
+    duration: 50,
+    instructions: [
+      'Section A (Chapter 10): improper integrals. [13 marks]',
+      'Section B (Chapter 11): sequences and series. [27 marks]',
+      'Answer ALL questions and show ALL workings. Write improper integrals as limits, and name each series test you use.',
+      'No calculators are allowed.',
+      'You have 50 minutes in total.',
+      'Use the “Show Memo” button under each question to check your solution once you have attempted it.'
+    ],
+    questions: [
+      {
+        number: 1, label: "A1", title: "Partial fractions and a divergent exponential integral", section: "Section A · Improper integrals · Type I / II", marks: 7,
+        prompt: String.raw`
+Evaluate each integral, or show that it diverges.
+
+**(a)** $\displaystyle\int_2^{\infty}\frac{dx}{x^{2}-1}$ [4]
+
+**(b)** $\displaystyle\int_0^{1}\frac{dx}{e^{x}-1}$ [3]
+        `,
+        solution: String.raw`
+**(a)** Type I. Partial fractions: $$\frac{1}{x^{2}-1}=\frac12\left(\frac{1}{x-1}-\frac{1}{x+1}\right).$$ ✓✓ For $x\gt1$ an antiderivative is $\dfrac12\ln\dfrac{x-1}{x+1}$. Then $$\int_2^{t}\frac{dx}{x^{2}-1}=\frac12\left[\ln\frac{t-1}{t+1}-\ln\frac13\right].$$ ✓ As $t\to\infty$, $\dfrac{t-1}{t+1}\to1$, so $\ln\dfrac{t-1}{t+1}\to0$. The integral converges to $$\boxed{\frac12\ln3}.$$ ✓
+
+**(b)** Type II: $e^{x}-1\to0^+$ as $x\to0^+$, so the integrand is unbounded at $0$. ✓ Write $\dfrac{1}{e^{x}-1}=\dfrac{e^{-x}}{1-e^{-x}}$; an antiderivative is $\ln\left(1-e^{-x}\right)$. ✓ Then $$\int_t^{1}\frac{dx}{e^{x}-1}=\ln\left(1-e^{-1}\right)-\ln\left(1-e^{-t}\right).$$ As $t\to0^+$, $1-e^{-t}\to0^+$, so $-\ln\left(1-e^{-t}\right)\to+\infty$. The integral **diverges**. ✓
+        `
+      },
+      {
+        number: 2, label: "A2", title: "Comparison with known integrals", section: "Section A · Improper integrals · Comparison", marks: 6,
+        prompt: String.raw`
+Use the Comparison Test to show that each integral converges.
+
+**(a)** $\displaystyle\int_1^{\infty}e^{-x^{2}}\,dx$ [3]
+
+**(b)** $\displaystyle\int_0^{1}\frac{dx}{x+\sqrt x}$ [3]
+        `,
+        solution: String.raw`
+**(a)** For $x\ge1$ we have $x^{2}\ge x$, so $-x^{2}\le-x$ and $$0\lt e^{-x^{2}}\le e^{-x}.$$ ✓ Now $\displaystyle\int_1^{\infty}e^{-x}dx=\lim_{t\to\infty}\left(e^{-1}-e^{-t}\right)=e^{-1}$ converges. ✓ By the Comparison Test, $\displaystyle\int_1^{\infty}e^{-x^{2}}dx$ **converges**. ✓
+
+**(b)** The integrand is unbounded as $x\to0^+$ (Type II). For $0\lt x\le1$, $x+\sqrt x\ge\sqrt x$, so $$0\lt\frac{1}{x+\sqrt x}\le\frac{1}{\sqrt x}.$$ ✓ Also $\displaystyle\int_0^{1}x^{-1/2}dx$ converges because $p=\tfrac12\lt1$ (it equals $2$). ✓ By the Comparison Test the given integral **converges**. ✓
+        `
+      },
+      {
+        number: 3, label: "B1", title: "Monotone sequences and a logarithmic limit", section: "Section B · Sequences · Monotone bounded, limit techniques", marks: 6,
+        prompt: String.raw`
+**(a)** Let $a_n=\dfrac{n}{2^{n}}$. Show that $(a_n)$ is decreasing and bounded below, explain why it converges, and find its limit. [3]
+
+**(b)** Find $\displaystyle\lim_{n\to\infty}\frac{\ln(n^{2}+1)}{\ln n}$. [3]
+        `,
+        solution: String.raw`
+**(a)** Each term is positive and $$\frac{a_{n+1}}{a_n}=\frac{n+1}{2^{n+1}}\cdot\frac{2^{n}}{n}=\frac{n+1}{2n}\le1\quad\text{for }n\ge1,$$ so $(a_n)$ is decreasing. ✓ It is bounded below by $0$, so by the Monotone Convergence Theorem it **converges**. ✓ To find the limit, use L'Hôpital on $\dfrac{x}{2^{x}}$: $$\lim_{x\to\infty}\frac{x}{2^{x}}=\lim_{x\to\infty}\frac{1}{2^{x}\ln2}=\boxed{0}.$$ ✓
+
+**(b)** The form is $\dfrac\infty\infty$. By L'Hôpital, $$\lim_{x\to\infty}\frac{\ln(x^{2}+1)}{\ln x}=\lim_{x\to\infty}\frac{2x/(x^{2}+1)}{1/x}.$$ ✓✓ Simplifying, $$\frac{2x/(x^{2}+1)}{1/x}=\frac{2x^{2}}{x^{2}+1}\to\boxed{2}.$$ ✓
+        `
+      },
+      {
+        number: 4, label: "B2", title: "Choosing the right convergence test", section: "Section B · Series · Comparison, integral and limit comparison tests", marks: 7,
+        prompt: String.raw`
+Determine whether each series converges or diverges. Name the test you use.
+
+**(a)** $\displaystyle\sum_{n=1}^{\infty}\frac{1}{3^{n}+n}$ [2]
+
+**(b)** $\displaystyle\sum_{n=1}^{\infty}n\,e^{-n^{2}}$ [3]
+
+**(c)** $\displaystyle\sum_{n=1}^{\infty}\frac{n}{\sqrt{n^{5}+1}}$ [2]
+        `,
+        solution: String.raw`
+**(a)** $0\lt\dfrac{1}{3^{n}+n}\le\dfrac{1}{3^{n}}$, and $\sum\left(\dfrac13\right)^{n}$ is a convergent geometric series ($r=\tfrac13$). ✓ By the **Comparison Test** the series **converges**. ✓
+
+**(b)** Let $f(x)=x\,e^{-x^{2}}$. It is positive and continuous on $[1,\infty)$, and $f'(x)=(1-2x^{2})e^{-x^{2}}\lt0$ for $x\ge1$, so $f$ is decreasing. ✓ Then $$\int_1^{t}x\,e^{-x^{2}}dx=\left[-\frac12e^{-x^{2}}\right]_1^{t}=\frac12e^{-1}-\frac12e^{-t^{2}}\to\frac{1}{2e}.$$ ✓ The integral converges, so the series **converges** by the **Integral Test**. ✓
+
+**(c)** Let $a_n=\dfrac{n}{\sqrt{n^{5}+1}}$ and $b_n=\dfrac{1}{n^{3/2}}$. Then $$\frac{a_n}{b_n}=\frac{n^{5/2}}{\sqrt{n^{5}+1}}=\frac{1}{\sqrt{1+n^{-5}}}\to1.$$ ✓ Since $\sum n^{-3/2}$ converges ($p=\tfrac32\gt1$), the series **converges** by the **Limit Comparison Test**. ✓
+        `
+      },
+      {
+        number: 5, label: "B3", title: "Geometric series", section: "Section B · Series · Geometric series", marks: 7,
+        prompt: String.raw`
+**(a)** Express the repeating decimal $0.1\overline{27}=0.1272727\ldots$ as a fraction in lowest terms. [3]
+
+**(b)** For which values of $x$ does $\displaystyle\sum_{n=0}^{\infty}(2x-1)^{n}$ converge? Find its sum for those values of $x$. [4]
+        `,
+        solution: String.raw`
+**(a)** Write $$0.1\overline{27}=\frac1{10}+\left(\frac{27}{1000}+\frac{27}{100\,000}+\cdots\right).$$ ✓ The bracket is a geometric series with first term $\dfrac{27}{1000}$ and ratio $\dfrac1{100}$, so its sum is $$\frac{27/1000}{1-1/100}=\frac{27}{1000}\cdot\frac{100}{99}=\frac{3}{110}.$$ ✓ Therefore $$0.1\overline{27}=\frac{11}{110}+\frac{3}{110}=\frac{14}{110}=\boxed{\frac{7}{55}}.$$ ✓
+
+**(b)** This is a geometric series with ratio $r=2x-1$. It converges if and only if $|2x-1|\lt1$, i.e. $-1\lt2x-1\lt1$, so $$\boxed{0\lt x\lt1}.$$ ✓✓ For these $x$ the sum is $$\frac{1}{1-(2x-1)}=\frac{1}{2-2x}=\boxed{\frac{1}{2(1-x)}}.$$ ✓✓
+        `
+      },
+      {
+        number: 6, label: "B4", title: "Radius and interval of convergence", section: "Section B · Power series", marks: 7,
+        prompt: String.raw`
+**(a)** Find the interval of convergence of $$\sum_{n=1}^{\infty}\frac{(-1)^{n}(x-1)^{n}}{n^{2}\,4^{n}}.$$ [4]
+
+**(b)** Find the radius of convergence of $\displaystyle\sum_{n=1}^{\infty}n^{n}x^{n}$. [3]
+        `,
+        solution: String.raw`
+**(a)** Ratio Test: $$\left|\frac{a_{n+1}}{a_n}\right|=\frac{|x-1|}{4}\cdot\frac{n^{2}}{(n+1)^{2}}\to\frac{|x-1|}{4}.$$ ✓ Convergence needs $|x-1|\lt4$, so $R=4$ and $-3\lt x\lt5$. ✓
+
+**Endpoints:** at $x=5$ the series is $\displaystyle\sum\frac{(-1)^{n}4^{n}}{n^{2}4^{n}}=\sum\frac{(-1)^{n}}{n^{2}}$, which converges absolutely ($p=2$). ✓ At $x=-3$ we have $(x-1)^{n}=(-4)^{n}$, so the terms are $\dfrac{(-1)^{n}(-4)^{n}}{n^{2}4^{n}}=\dfrac{1}{n^{2}}$, which converges. ✓
+
+Interval of convergence: $$\boxed{[-3,\,5]}.$$
+
+**(b)** Root Test: $$\sqrt[n]{|n^{n}x^{n}|}=n|x|\to\infty\quad\text{for every }x\ne0.$$ ✓✓ The series therefore diverges for all $x\ne0$ and converges only at $x=0$, so $$\boxed{R=0}.$$ ✓
+        `
+      }
+    ]
+  },
+{
+    id: "tqt4-test9",
+    label: "Test 9",
+    topics: "Absolute-value and logarithmic integrals, power series representations",
+    date: "Tutorial Quiz Test 4 · Test 9",
+    kind: 'IMPROPER INTEGRALS & SEQUENCES AND SERIES',
+    totalMarks: 40,
+    duration: 50,
+    instructions: [
+      'Section A (Chapter 10): improper integrals. [13 marks]',
+      'Section B (Chapter 11): sequences and series. [27 marks]',
+      'Answer ALL questions and show ALL workings. Write improper integrals as limits, and name each series test you use.',
+      'No calculators are allowed.',
+      'You have 50 minutes in total.',
+      'Use the “Show Memo” button under each question to check your solution once you have attempted it.'
+    ],
+    questions: [
+      {
+        number: 1, label: "A1", title: "An absolute-value integrand and a logarithmic Type II integral", section: "Section A · Improper integrals · Type I / II", marks: 7,
+        prompt: String.raw`
+Evaluate each integral, or show that it diverges.
+
+**(a)** $\displaystyle\int_{-\infty}^{\infty}e^{-|x|}\,dx$ [3]
+
+**(b)** $\displaystyle\int_0^{1}\frac{\ln x}{\sqrt x}\,dx$ [4]
+        `,
+        solution: String.raw`
+**(a)** Both limits are infinite and $|x|$ changes form at $0$, so split there. ✓ $$\int_{-\infty}^{0}e^{x}dx=\lim_{s\to-\infty}\left(1-e^{s}\right)=1,\qquad\int_0^{\infty}e^{-x}dx=\lim_{t\to\infty}\left(1-e^{-t}\right)=1.$$ ✓ Both converge, so $$\int_{-\infty}^{\infty}e^{-|x|}dx=1+1=\boxed{2}.$$ ✓
+
+**(b)** Type II at $x=0$, since $\ln x\to-\infty$. Integrate by parts with $u=\ln x$, $dv=x^{-1/2}dx$: $$\int\frac{\ln x}{\sqrt x}dx=2\sqrt x\ln x-\int\frac{2}{\sqrt x}dx=2\sqrt x\ln x-4\sqrt x.$$ ✓✓ Then $$\int_t^{1}\frac{\ln x}{\sqrt x}dx=-4-\left(2\sqrt t\ln t-4\sqrt t\right).$$ ✓ As $t\to0^+$, $\sqrt t\to0$ and $\sqrt t\ln t=\dfrac{\ln t}{t^{-1/2}}\to\dfrac{1/t}{-\frac12t^{-3/2}}=-2\sqrt t\to0$. The integral converges to $$\boxed{-4}.$$ ✓
+        `
+      },
+      {
+        number: 2, label: "A2", title: "A logarithmic p-integral and a comparison", section: "Section A · Improper integrals · Parameter and comparison", marks: 6,
+        prompt: String.raw`
+**(a)** Determine all real values of $p$ for which $\displaystyle\int_2^{\infty}\frac{dx}{x(\ln x)^{p}}$ converges. [4]
+
+**(b)** Show that $\displaystyle\int_1^{\infty}\frac{dx}{\sqrt{x^{3}+x}}$ converges. [2]
+        `,
+        solution: String.raw`
+**(a)** Substitute $u=\ln x$, $du=\dfrac{dx}{x}$: $$\int_2^{t}\frac{dx}{x(\ln x)^{p}}=\int_{\ln2}^{\ln t}u^{-p}du.$$ ✓
+
+**Case $p=1$:** the integral equals $\ln(\ln t)-\ln(\ln2)\to\infty$, so it **diverges**. ✓
+
+**Case $p\ne1$:** the integral equals $\displaystyle\frac{(\ln t)^{1-p}-(\ln2)^{1-p}}{1-p}$. If $p\gt1$, then $(\ln t)^{1-p}\to0$ and the integral converges to $\dfrac{(\ln2)^{1-p}}{p-1}$. If $p\lt1$, then $(\ln t)^{1-p}\to\infty$ and it diverges. ✓
+
+Hence the integral converges if and only if $$\boxed{p\gt1}.$$ ✓
+
+**(b)** For $x\ge1$, $\sqrt{x^{3}+x}\ge\sqrt{x^{3}}=x^{3/2}$, so $$0\lt\frac{1}{\sqrt{x^{3}+x}}\le\frac{1}{x^{3/2}}.$$ ✓ Since $\displaystyle\int_1^{\infty}x^{-3/2}dx$ converges ($p=\tfrac32\gt1$), the given integral **converges** by the Comparison Test. ✓
+        `
+      },
+      {
+        number: 3, label: "B1", title: "Limits of sequences", section: "Section B · Sequences · Limit techniques", marks: 6,
+        prompt: String.raw`
+Determine whether each sequence converges. If it does, find the limit.
+
+**(a)** $a_n=\dfrac{(2n+1)!}{(2n-1)!}$ [2]
+
+**(b)** $a_n=\dfrac{\ln n}{\sqrt n}$ [2]
+
+**(c)** $a_n=\dfrac{\arctan n}{n}$ [2]
+        `,
+        solution: String.raw`
+**(a)** Cancel the common factorial: $(2n+1)!=(2n+1)(2n)(2n-1)!$, so $$a_n=(2n+1)(2n)=4n^{2}+2n.$$ ✓ This tends to $\infty$, so the sequence **diverges**. ✓
+
+**(b)** Type $\dfrac\infty\infty$; apply L'Hôpital to $\dfrac{\ln x}{\sqrt x}$: $$\lim_{x\to\infty}\frac{1/x}{\frac12x^{-1/2}}=\lim_{x\to\infty}\frac{2}{\sqrt x}=\boxed{0}.$$ ✓✓
+
+**(c)** For every $n\ge1$, $0\lt\arctan n\lt\dfrac\pi2$, so $$0\lt\frac{\arctan n}{n}\lt\frac{\pi}{2n}.$$ ✓ Both bounds tend to $0$, so by the Squeeze Theorem the limit is $\boxed{0}$. ✓
+        `
+      },
+      {
+        number: 4, label: "B2", title: "Divergence, ratio and root tests", section: "Section B · Series · Divergence, ratio and root tests", marks: 7,
+        prompt: String.raw`
+Determine whether each series converges or diverges. Name the test you use.
+
+**(a)** $\displaystyle\sum_{n=1}^{\infty}n\sin\frac1n$ [2]
+
+**(b)** $\displaystyle\sum_{n=1}^{\infty}\frac{3^{n}\,n!}{(2n)!}$ [3]
+
+**(c)** $\displaystyle\sum_{n=1}^{\infty}\left(\arctan n\right)^{n}$ [2]
+        `,
+        solution: String.raw`
+**(a)** With $h=\dfrac1n\to0^+$: $$\lim_{n\to\infty}n\sin\frac1n=\lim_{h\to0^+}\frac{\sin h}{h}=1\ne0.$$ ✓ By the **Divergence Test** the series **diverges**. ✓
+
+**(b)** With $a_n=\dfrac{3^{n}\,n!}{(2n)!}$: $$\frac{a_{n+1}}{a_n}=\frac{3^{n+1}(n+1)!}{(2n+2)!}\cdot\frac{(2n)!}{3^{n}\,n!}=\frac{3(n+1)}{(2n+2)(2n+1)}=\frac{3}{2(2n+1)}.$$ ✓✓ This tends to $0$. Since $0\lt1$, the series **converges** by the Ratio Test. ✓
+
+**(c)** Root Test: $$\sqrt[n]{|a_n|}=\arctan n\to\frac\pi2\gt1.$$ ✓ Hence the series **diverges**. ✓
+        `
+      },
+      {
+        number: 5, label: "B3", title: "Power series by differentiation", section: "Section B · Power series · Representations of functions", marks: 7,
+        prompt: String.raw`
+**(a)** Write $\dfrac{1}{2+x}$ as a power series about $0$ and state its radius of convergence. [3]
+
+**(b)** Differentiate your series term by term to obtain a power series for $\dfrac{1}{(2+x)^{2}}$. Hence find the exact value of $$\sum_{n=1}^{\infty}\frac{(-1)^{n+1}\,n}{2^{n+1}}.$$ [4]
+        `,
+        solution: String.raw`
+**(a)** $$\frac{1}{2+x}=\frac12\cdot\frac{1}{1+x/2}=\frac12\sum_{n=0}^{\infty}\left(-\frac x2\right)^{n}=\sum_{n=0}^{\infty}\frac{(-1)^{n}x^{n}}{2^{n+1}}.$$ ✓✓ The geometric series converges when $\left|\dfrac x2\right|\lt1$, so $$\boxed{R=2}.$$ ✓
+
+**(b)** Since $\dfrac{d}{dx}\dfrac{1}{2+x}=-\dfrac{1}{(2+x)^{2}}$, differentiating the series gives $$-\frac{1}{(2+x)^{2}}=\sum_{n=1}^{\infty}\frac{(-1)^{n}n\,x^{n-1}}{2^{n+1}},$$ so $$\frac{1}{(2+x)^{2}}=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}n\,x^{n-1}}{2^{n+1}},\qquad|x|\lt2.$$ ✓✓ The radius is unchanged. Now $x=1$ lies inside the interval, and $\dfrac{1}{(2+1)^{2}}=\dfrac19$, so $$\sum_{n=1}^{\infty}\frac{(-1)^{n+1}n}{2^{n+1}}=\boxed{\frac19}.$$ ✓✓
+        `
+      },
+      {
+        number: 6, label: "B4", title: "Interval of convergence and radius reasoning", section: "Section B · Power series", marks: 7,
+        prompt: String.raw`
+**(a)** Find the interval of convergence of $$\sum_{n=1}^{\infty}\frac{n\,(x-3)^{n}}{4^{n}}.$$ [4]
+
+**(b)** The power series $\displaystyle\sum_{n=0}^{\infty}c_n(x-2)^{n}$ converges at $x=5$ and diverges at $x=-4$. For each statement, say whether it must be true, must be false, or cannot be determined, giving a reason. [3]
+
+**(i)** The series converges at $x=0$.
+**(ii)** The series converges at $x=7$.
+**(iii)** The series converges at $x=9$.
+        `,
+        solution: String.raw`
+**(a)** Ratio Test: $$\left|\frac{a_{n+1}}{a_n}\right|=\frac{(n+1)|x-3|^{n+1}}{4^{n+1}}\cdot\frac{4^{n}}{n\,|x-3|^{n}}=\frac{|x-3|}{4}\cdot\frac{n+1}{n}\to\frac{|x-3|}{4}.$$ ✓ Convergence needs $|x-3|\lt4$, so $R=4$ and $-1\lt x\lt7$. ✓
+
+**Endpoints:** at $x=7$ the series is $\displaystyle\sum n$, whose terms tend to $\infty$, so it **diverges** (Divergence Test). ✓ At $x=-1$ it is $\displaystyle\sum(-1)^{n}n$, whose terms do not tend to $0$, so it **diverges** (Divergence Test). ✓
+
+Interval of convergence: $$\boxed{(-1,\,7)}.$$
+
+**(b)** The centre is $2$. Convergence at $x=5$ (distance $3$ from the centre) means $R\ge3$. Divergence at $x=-4$ (distance $6$) means $R\le6$. So $3\le R\le6$. ✓
+
+**(i)** $x=0$ is at distance $2\lt3\le R$, so the series **must converge**. ✓
+
+**(ii)** $x=7$ is at distance $5$, which lies between $3$ and $6$, so convergence **cannot be determined** (it depends on whether $R\gt5$). ✓
+
+**(iii)** $x=9$ is at distance $7\gt6\ge R$, so the series **must diverge**; the statement is **false**. ✓
         `
       }
     ]

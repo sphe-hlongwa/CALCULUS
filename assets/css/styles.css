@@ -1026,23 +1026,14 @@ body {
   color: var(--text-2);
 }
 
-.card-theorem {
-}
-
 .card-theorem .card-badge {
   background: rgba(255, 0, 0, .12);
   color: var(--blue);
 }
 
-.card-definition {
-}
-
 .card-definition .card-badge {
   background: rgba(20, 184, 166, .12);
   color: var(--teal);
-}
-
-.card-example {
 }
 
 .card-example .card-badge {
@@ -1051,15 +1042,9 @@ body {
 }
 
 /* ✅ Fixed: yellow bumped to amber-600 (#d97706) - WCAG AA pass (4.6:1 on light) */
-.card-tip {
-}
-
 .card-tip .card-badge {
   background: rgba(251, 240, 101, .12);
   color: var(--yellow);
-}
-
-.card-warning {
 }
 
 .card-warning .card-badge {
@@ -1068,15 +1053,9 @@ body {
 }
 
 /* ✅ exam uses --accent (violet) to break blue monopoly */
-.card-exam {
-}
-
 .card-exam .card-badge {
   background: rgba(62, 166, 255, .12);
   color: var(--accent);
-}
-
-.card-mistake {
 }
 
 .card-mistake .card-badge {
@@ -1084,23 +1063,14 @@ body {
   color: var(--red);
 }
 
-.card-proof {
-}
-
 .card-proof .card-badge {
   background: rgba(107, 114, 128, .12);
   color: var(--gray);
 }
 
-.card-memory {
-}
-
 .card-memory .card-badge {
   background: rgba(62, 166, 255, .12);
   color: var(--accent);
-}
-
-.card-worked {
 }
 
 .card-worked .card-badge {
@@ -1370,8 +1340,8 @@ h3.section-heading {
   color: var(--text-2);
 }
 
-/* Fallback: plain .section-heading without a tag selector stays large (for ★ headings etc.) */
-.section-heading {}
+/* Note: a plain .section-heading (no tag selector) intentionally has no base rules;
+   the h2/h3 variants above carry the sizing. */
 
 .section-heading .section-num {
   color: var(--blue);

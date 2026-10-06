@@ -144,6 +144,10 @@ const chaptersData = [
       {
         "id": "ch10-sec2",
         "title": "10.2 Type II: Infinite Discontinuities"
+      },
+      {
+        "id": "ch10-sec3",
+        "title": "10.3 Doubly Improper Integrals"
       }
     ]
   },

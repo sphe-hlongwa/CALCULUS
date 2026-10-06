@@ -881,14 +881,100 @@ const CHAPTER_CONTENT = {
     <h2 id="ch10-sec1" class="section-heading fade-up"><span class="section-num">10.1</span> Type I: Infinite Interval of Integration</h2>
 
     <div class="prose fade-up">
-      <p>An improper integral arises when either the interval of integration is unbounded, or the integrand is unbounded within the interval. In both cases we replace the problematic limit with a variable and take the limit.</p>
+      <p>An integral is <strong>improper</strong> if its interval of integration is infinite (<strong>Type I</strong>) or if the integrand has an infinite discontinuity somewhere on the interval (<strong>Type II</strong>). If both happen, it is <strong>doubly improper</strong> (&sect;10.3). In every case the idea is the same: replace the troublesome point by a variable, integrate normally, then take a limit. The integral <strong>converges</strong> if the limit exists and is finite; otherwise it <strong>diverges</strong>.</p>
     </div>
 
     <div class="content-card card-definition fade-up">
-      <div class="card-badge">${Icons.book} Definition - Type I (Infinite Interval)</div>
+      <div class="card-badge">${Icons.book} Definition - Type I, Case 1 (Upper Limit Infinite)</div>
       <div class="math-block">$$\\int_a^\\infty f(x)\\,dx = \\lim_{t\\to\\infty}\\int_a^t f(x)\\,dx$$</div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 10.1.1</span>
+        <h4>Evaluate $\\displaystyle\\int_1^\\infty \\frac{1}{x^2}\\,dx$ <span style="font-weight:500;color:var(--text-3)">&mdash; Case 1</span></h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Replace $\\infty$ with $t$ and integrate</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\lim_{t\\to\\infty}\\int_1^t x^{-2}\\,dx = \\lim_{t\\to\\infty}\\left[-\\frac{1}{x}\\right]_1^t$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Evaluate at bounds</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$= \\lim_{t\\to\\infty}\\left(-\\frac{1}{t} + 1\\right) = 0 + 1 = 1$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclusion</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">The integral <strong>converges</strong> to $1$. ✓</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-definition fade-up">
+      <div class="card-badge">${Icons.book} Definition - Type I, Case 2 (Lower Limit Infinite)</div>
       <div class="math-block">$$\\int_{-\\infty}^b f(x)\\,dx = \\lim_{t\\to-\\infty}\\int_t^b f(x)\\,dx$$</div>
-      <p>The integral <strong>converges</strong> if the limit exists and is finite; otherwise it <strong>diverges</strong>.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 10.1.2</span>
+        <h4>Evaluate $\\displaystyle\\int_{-\\infty}^{0} e^{2x}\\,dx$ <span style="font-weight:500;color:var(--text-3)">&mdash; Case 2</span></h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Replace $-\\infty$ with $t$ and integrate</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{t\\to-\\infty}\\int_t^0 e^{2x}\\,dx = \\lim_{t\\to-\\infty}\\left[\\frac{e^{2x}}{2}\\right]_t^0$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Evaluate and take the limit</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$= \\lim_{t\\to-\\infty}\\left(\\frac{1}{2}-\\frac{e^{2t}}{2}\\right) = \\frac12 - 0 = \\frac12$$</div>
+            <p>As $t\\to-\\infty$, $e^{2t}\\to 0$. The integral <strong>converges</strong> to $\\frac12$. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-definition fade-up">
+      <div class="card-badge">${Icons.book} Definition - Type I, Case 3 (Both Limits Infinite)</div>
+      <div class="math-block">$$\\int_{-\\infty}^{\\infty} f(x)\\,dx = \\int_{-\\infty}^{c} f(x)\\,dx + \\int_{c}^{\\infty} f(x)\\,dx$$</div>
+      <p>Split at an arbitrary constant $c$ (any convenient value gives the same answer). The whole integral converges only if <strong>both</strong> pieces converge independently; if either diverges, the whole thing diverges.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 10.1.3</span>
+        <h4>Evaluate $\\displaystyle\\int_{-\\infty}^{\\infty}\\frac{1}{1+x^2}\\,dx$ <span style="font-weight:500;color:var(--text-3)">&mdash; Case 3</span></h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Both limits are infinite: split at any convenient point (here $0$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\int_{-\\infty}^{\\infty}\\frac{dx}{1+x^2} = \\int_{-\\infty}^{0}\\frac{dx}{1+x^2} + \\int_{0}^{\\infty}\\frac{dx}{1+x^2}$$</div>
+            <p>The whole integral converges only if <em>both</em> pieces converge.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Right piece: replace $\\infty$ with $t$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{t\\to\\infty}\\Big[\\arctan x\\Big]_0^t = \\frac{\\pi}{2} - 0 = \\frac{\\pi}{2}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Left piece: replace $-\\infty$ with $s$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{s\\to-\\infty}\\Big[\\arctan x\\Big]_s^0 = 0 - \\left(-\\frac{\\pi}{2}\\right) = \\frac{\\pi}{2}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Add the pieces</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\int_{-\\infty}^{\\infty}\\frac{dx}{1+x^2} = \\frac{\\pi}{2} + \\frac{\\pi}{2} = \\pi \\quad\\checkmark$$</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="viz-card fade-up">
@@ -911,31 +997,181 @@ const CHAPTER_CONTENT = {
 
     <div class="worked-example fade-up">
       <div class="worked-example-header">
-        <span class="ex-badge">Worked Example 10.1.1</span>
-        <h4>Evaluate $\\displaystyle\\int_1^\\infty \\frac{1}{x^2}\\,dx$</h4>
+        <span class="ex-badge">Worked Example 10.1.4</span>
+        <h4>Does $\\displaystyle\\int_1^\\infty \\frac{1}{x}\\,dx$ converge? <span style="font-weight:500;color:var(--text-3)">&mdash; Case 1, divergent</span></h4>
       </div>
       <div class="steps-container">
-        <div class="step-item">
+        <div class="step-item open revealed">
           <div class="step-header"><div class="step-num">1</div><div class="step-label">Replace $\\infty$ with $t$ and integrate</div><div class="step-chevron">▶</div></div>
-          <div class="step-body">$$\\lim_{t\\to\\infty}\\int_1^t x^{-2}\\,dx = \\lim_{t\\to\\infty}\\left[-\\frac{1}{x}\\right]_1^t$$</div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{t\\to\\infty}\\int_1^t \\frac{1}{x}\\,dx = \\lim_{t\\to\\infty}\\Big[\\ln|x|\\Big]_1^t$$</div>
+          </div>
         </div>
-        <div class="step-item">
-          <div class="step-header"><div class="step-num">2</div><div class="step-label">Evaluate at bounds</div><div class="step-chevron">▶</div></div>
-          <div class="step-body">$$= \\lim_{t\\to\\infty}\\left(-\\frac{1}{t} + 1\\right) = 0 + 1 = 1$$</div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Evaluate and take the limit</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$= \\lim_{t\\to\\infty}(\\ln t - \\ln 1) = \\lim_{t\\to\\infty}\\ln t = \\infty$$</div>
+          </div>
         </div>
-        <div class="step-item">
+        <div class="step-item open revealed">
           <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclusion</div><div class="step-chevron">▶</div></div>
-          <div class="step-body">The integral <strong>converges</strong> to $1$. ✓</div>
+          <div class="step-body">
+            <p>The limit is infinite, so the integral <strong>diverges</strong>. Here $p = 1$, the borderline case of the $p$-integral test. Compare with Worked Example 10.1.1: both $\\frac{1}{x}$ and $\\frac{1}{x^2}$ shrink to $0$, but $\\frac{1}{x}$ shrinks too slowly for the total area to stay finite.</p>
+          </div>
         </div>
       </div>
     </div>
 
     <h2 id="ch10-sec2" class="section-heading fade-up"><span class="section-num">10.2</span> Type II: Infinite Discontinuities</h2>
 
+    <div class="prose fade-up">
+      <p>Here the integrand blows up at a point of $[a,b]$. We stay away from the bad point with a one-sided limit. Which case you are in depends on <em>where</em> the discontinuity sits.</p>
+    </div>
+
     <div class="content-card card-definition fade-up">
-      <div class="card-badge">${Icons.book} Definition - Type II (Discontinuous Integrand)</div>
-      <p>If $f$ has a vertical asymptote at $x = c$ where $a \\leq c \\leq b$:</p>
-      <div class="math-block">$$\\int_a^b f(x)\\,dx = \\lim_{t\\to c^-}\\int_a^t f(x)\\,dx + \\lim_{t\\to c^+}\\int_t^b f(x)\\,dx$$</div>
+      <div class="card-badge">${Icons.book} Definition - Type II, Case 1 (Discontinuity at the Upper Endpoint $b$)</div>
+      <div class="math-block">$$\\int_a^b f(x)\\,dx = \\lim_{t\\to b^-}\\int_a^t f(x)\\,dx$$</div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 10.2.1</span>
+        <h4>Evaluate $\\displaystyle\\int_0^4 \\frac{dx}{\\sqrt{4-x}}$ <span style="font-weight:500;color:var(--text-3)">&mdash; Case 1</span></h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">The integrand blows up at $x=4$ (upper endpoint): approach it from the left</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{t\\to 4^-}\\int_0^t (4-x)^{-1/2}\\,dx = \\lim_{t\\to 4^-}\\Big[-2\\sqrt{4-x}\\Big]_0^t$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Evaluate and take the limit</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$= \\lim_{t\\to 4^-}\\left(-2\\sqrt{4-t}+2\\sqrt4\\right) = 0+4 = 4$$</div>
+            <p>The integral <strong>converges</strong> to $4$. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-definition fade-up">
+      <div class="card-badge">${Icons.book} Definition - Type II, Case 2 (Discontinuity at the Lower Endpoint $a$)</div>
+      <div class="math-block">$$\\int_a^b f(x)\\,dx = \\lim_{t\\to a^+}\\int_t^b f(x)\\,dx$$</div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 10.2.2</span>
+        <h4>Does $\\displaystyle\\int_0^1 \\frac{1}{x}\\,dx$ converge? <span style="font-weight:500;color:var(--text-3)">&mdash; Case 2</span></h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Spot the problem: $\\frac{1}{x}$ blows up at the endpoint $x=0$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Stay away from the bad point by starting at $t$ and letting $t\\to 0^+$:</p>
+            <div class="math-block">$$\\lim_{t\\to 0^+}\\int_t^1 \\frac{dx}{x} = \\lim_{t\\to 0^+}\\Big[\\ln x\\Big]_t^1$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Evaluate and take the limit</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$= \\lim_{t\\to 0^+}(\\ln 1 - \\ln t) = \\lim_{t\\to 0^+}(-\\ln t) = \\infty$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclusion</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>The integral <strong>diverges</strong>. For a Type II integral with the problem at $0$, $\\int_0^1 x^{-p}\\,dx$ converges when $p<1$ and diverges when $p\\geq 1$ (the reverse of Type I). Example 10.2 below has $p=\\tfrac12$ and converges.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-definition fade-up">
+      <div class="card-badge">${Icons.book} Definition - Type II, Case 3 (Discontinuity at an Interior Point $c\\in(a,b)$)</div>
+      <div class="math-block">$$\\int_a^b f(x)\\,dx = \\int_a^c f(x)\\,dx + \\int_c^b f(x)\\,dx = \\lim_{t\\to c^-}\\int_a^t f(x)\\,dx + \\lim_{t\\to c^+}\\int_t^b f(x)\\,dx$$</div>
+      <p>You <strong>must</strong> split at $c$. If either piece diverges, the entire integral diverges.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 10.2.3</span>
+        <h4>Evaluate $\\displaystyle\\int_0^2 \\frac{dx}{(x-1)^2}$ if it converges <span style="font-weight:500;color:var(--text-3)">&mdash; Case 3</span></h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">The discontinuity $x=1$ lies <em>inside</em> $[0,2]$: split there</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Applying the Fundamental Theorem straight through, $\\left[-\\frac{1}{x-1}\\right]_0^2 = -2$, is wrong: a positive function cannot have a negative area. Split at $x=1$:</p>
+            <div class="math-block">$$\\int_0^2 \\frac{dx}{(x-1)^2} = \\int_0^1 \\frac{dx}{(x-1)^2} + \\int_1^2 \\frac{dx}{(x-1)^2}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Left piece: approach $1$ from the left ($t\\to 1^-$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{t\\to 1^-}\\left[-\\frac{1}{x-1}\\right]_0^t = \\lim_{t\\to 1^-}\\left(-\\frac{1}{t-1} - 1\\right) = \\infty$$</div>
+            <p>As $t\\to 1^-$, $t-1$ is a tiny <em>negative</em> number, so $-\\frac{1}{t-1}\\to +\\infty$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclusion</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>One divergent piece is enough: the whole integral <strong>diverges</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="ch10-sec3" class="section-heading fade-up"><span class="section-num">10.3</span> Doubly Improper Integrals</h2>
+
+    <div class="content-card card-definition fade-up">
+      <div class="card-badge">${Icons.book} Definition - Doubly Improper (Type I and Type II Together)</div>
+      <p>An integral is doubly improper when it has an infinite limit of integration <em>and</em> an infinite discontinuity on the domain, e.g. $\\int_0^\\infty f(x)\\,dx$ where $f$ blows up at $x=0$.</p>
+      <p>Split the interval so that <strong>each piece has only one problem</strong>, then treat each piece with the matching Type I or Type II case:</p>
+      <div class="math-block">$$\\int_0^\\infty f(x)\\,dx = \\underbrace{\\int_0^{c} f(x)\\,dx}_{\\text{Type II at } 0} + \\underbrace{\\int_c^\\infty f(x)\\,dx}_{\\text{Type I}}, \\qquad c>0$$</div>
+      <p>The whole integral converges only if <strong>every</strong> piece converges.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 10.3.1</span>
+        <h4>Evaluate $\\displaystyle\\int_0^\\infty \\frac{dx}{\\sqrt{x}\\,(1+x)}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Identify both problems</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>The upper limit is $\\infty$ (Type I) and the integrand blows up at $x=0$ (Type II). Split at $c=1$:</p>
+            <div class="math-block">$$\\int_0^\\infty \\frac{dx}{\\sqrt x(1+x)} = \\int_0^1 \\frac{dx}{\\sqrt x(1+x)} + \\int_1^\\infty \\frac{dx}{\\sqrt x(1+x)}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Find an antiderivative with $u=\\sqrt x$, $dx=2u\\,du$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\int\\frac{dx}{\\sqrt x(1+x)} = \\int\\frac{2u\\,du}{u(1+u^2)} = 2\\arctan u = 2\\arctan\\sqrt x$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">First piece (Type II at $0$): $t\\to 0^+$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{t\\to0^+}\\Big[2\\arctan\\sqrt x\\Big]_t^1 = 2\\cdot\\frac{\\pi}{4}-0 = \\frac{\\pi}{2}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Second piece (Type I): $s\\to\\infty$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{s\\to\\infty}\\Big[2\\arctan\\sqrt x\\Big]_1^s = 2\\cdot\\frac{\\pi}{2}-2\\cdot\\frac{\\pi}{4} = \\frac{\\pi}{2}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">5</div><div class="step-label">Add the pieces</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\int_0^\\infty \\frac{dx}{\\sqrt x(1+x)} = \\frac{\\pi}{2}+\\frac{\\pi}{2} = \\pi \\quad\\checkmark$$</div>
+            <p>Both pieces converged, so the doubly improper integral <strong>converges</strong>. Had either diverged, so would the whole.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <h2 class="section-heading fade-up"><span class="section-num">★</span> Solved Examples</h2>
@@ -1001,9 +1237,61 @@ const CHAPTER_CONTENT = {
       <p>A <strong>sequence</strong> is an ordered list of numbers $\\{a_1, a_2, a_3, \\ldots\\} = \\{a_n\\}_{n=1}^\\infty$. It <strong>converges</strong> to $L$ if $\\lim_{n\\to\\infty} a_n = L$ (finite). Otherwise it diverges.</p>
     </div>
 
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.1.1</span>
+        <h4>Do $a_n = \\dfrac{3n^2+1}{n^2+n}$ and $b_n = (-1)^n$ converge?</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">(a) Divide top and bottom by the highest power, $n^2$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$a_n = \\frac{3 + \\frac{1}{n^2}}{1 + \\frac{1}{n}} \\;\\longrightarrow\\; \\frac{3+0}{1+0} = 3$$</div>
+            <p>The limit is finite, so $\\{a_n\\}$ <strong>converges</strong> to $3$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">(b) List the first few terms</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$b_n:\\; -1,\\; 1,\\; -1,\\; 1,\\; \\ldots$$</div>
+            <p>The terms keep jumping between $-1$ and $1$ and never settle, so $\\lim b_n$ does not exist: $\\{b_n\\}$ <strong>diverges</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="content-card card-theorem fade-up">
       <div class="card-badge">${Icons.book} Squeeze Theorem for Sequences</div>
       <p>If $a_n \\leq b_n \\leq c_n$ for all $n$ and $\\lim a_n = \\lim c_n = L$, then $\\lim b_n = L$.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.1.2</span>
+        <h4>Find $\\displaystyle\\lim_{n\\to\\infty}\\frac{\\sin n}{n}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Trap $\\sin n$ between known bounds</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Since $-1\\leq \\sin n\\leq 1$, dividing by $n>0$ gives</p>
+            <div class="math-block">$$-\\frac{1}{n}\\leq \\frac{\\sin n}{n}\\leq \\frac{1}{n}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Check that both outer sequences have the same limit</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{n\\to\\infty}\\left(-\\frac{1}{n}\\right) = 0 \\qquad\\text{and}\\qquad \\lim_{n\\to\\infty}\\frac{1}{n} = 0$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Apply the Squeeze Theorem</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{n\\to\\infty}\\frac{\\sin n}{n} = 0 \\quad\\checkmark$$</div>
+            <p>Plugging in fails because $\\sin n$ has no limit on its own; the squeeze works because the denominator $n$ crushes the bounded numerator.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <h2 id="ch11-sec2" class="section-heading fade-up"><span class="section-num">11.2</span> Series</h2>
@@ -1013,6 +1301,34 @@ const CHAPTER_CONTENT = {
       <div class="card-title">Infinite Series & Partial Sums</div>
       <div class="math-block">$$\\sum_{n=1}^\\infty a_n = \\lim_{N\\to\\infty} S_N \\quad \\text{where } S_N = \\sum_{n=1}^N a_n$$</div>
       <p>The series converges if and only if the sequence of partial sums $\\{S_N\\}$ converges.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.2.1</span>
+        <h4>Find the sum of $\\displaystyle\\sum_{n=1}^\\infty \\frac{1}{n(n+1)}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Split the general term with partial fractions</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{1}{n(n+1)} = \\frac{1}{n} - \\frac{1}{n+1}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Write out the partial sum $S_N$: almost everything cancels</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$S_N = \\left(1-\\tfrac12\\right)+\\left(\\tfrac12-\\tfrac13\\right)+\\cdots+\\left(\\tfrac1N-\\tfrac1{N+1}\\right) = 1 - \\frac{1}{N+1}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Take the limit of the partial sums</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\sum_{n=1}^\\infty \\frac{1}{n(n+1)} = \\lim_{N\\to\\infty}S_N = \\lim_{N\\to\\infty}\\left(1-\\frac{1}{N+1}\\right) = 1 \\quad\\checkmark$$</div>
+            <p>This is exactly the definition above: the series equals the limit of its partial sums.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="content-card card-theorem fade-up">
@@ -1033,6 +1349,34 @@ const CHAPTER_CONTENT = {
       </div>
     </div>
 
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.2.2</span>
+        <h4>Find $\\displaystyle\\sum_{n=1}^\\infty \\frac{2^{n+1}}{5^n}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Rewrite the term in the form $a r^n$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{2^{n+1}}{5^n} = 2\\cdot\\frac{2^n}{5^n} = 2\\left(\\frac{2}{5}\\right)^n$$</div>
+            <p>So the common ratio is $r = \\frac{2}{5}$, and $|r|<1$, so the series converges.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Find the first term (the sum starts at $n=1$, not $n=0$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$a = \\frac{2^{1+1}}{5^1} = \\frac{4}{5}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Apply $\\dfrac{\\text{first term}}{1-r}$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\sum_{n=1}^\\infty \\frac{2^{n+1}}{5^n} = \\frac{4/5}{1-2/5} = \\frac{4/5}{3/5} = \\frac{4}{3} \\quad\\checkmark$$</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h2 id="ch11-sec3" class="section-heading fade-up"><span class="section-num">11.3</span> Convergence Tests</h2>
     <h3 id="ch11-sec3-1" class="section-heading fade-up"><span class="section-num">11.3.1</span> The Integral Test</h3>
     
@@ -1043,6 +1387,34 @@ const CHAPTER_CONTENT = {
       <div class="card-badge">${Icons.target} Remainder Estimate</div>
       <div class="math-block">$$\\int_{n+1}^\\infty f(x)\\,dx \\leq R_n \\leq \\int_n^\\infty f(x)\\,dx \\quad \\text{where } R_n = S - S_n$$</div>
     </div>
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.1.1</span>
+        <h4>Use the Integral Test on $\\displaystyle\\sum_{n=1}^\\infty \\frac{1}{n^2+1}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Choose $f$ with $f(n)=a_n$ and check its conditions</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>$f(x) = \\dfrac{1}{x^2+1}$ is continuous and positive on $[1,\\infty)$, and decreasing because the denominator keeps growing.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Test the improper integral (Chapter 10 at work)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\int_1^\\infty \\frac{dx}{x^2+1} = \\lim_{t\\to\\infty}\\Big[\\arctan x\\Big]_1^t = \\frac{\\pi}{2} - \\frac{\\pi}{4} = \\frac{\\pi}{4}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclude</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>The integral converges, so the series <strong>converges</strong>. $\\checkmark$</p>
+            <p>Careful: $\\frac{\\pi}{4}$ is <em>not</em> the sum of the series. The Integral Test only tells you whether it converges.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch11-sec3-2" class="section-heading fade-up"><span class="section-num">11.3.2</span> The Comparison Test</h3>
     
     <div class="content-card card-theorem fade-up">
@@ -1055,6 +1427,63 @@ const CHAPTER_CONTENT = {
       <p><strong>2. Limit Comparison Test:</strong> If $a_n > 0, b_n > 0$ and $\\displaystyle\\lim_{n \\to \\infty} \\frac{a_n}{b_n} = L$ where $0 < L < \\infty$:</p>
       <p>Both series $\\sum a_n$ and $\\sum b_n$ either both converge or both diverge.</p>
     </div>
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.2.1</span>
+        <h4>Does $\\displaystyle\\sum_{n=1}^\\infty \\frac{1}{2^n+1}$ converge? (Direct Comparison)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Compare with a simpler series</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>A bigger denominator means a smaller fraction, so $$\\frac{1}{2^n+1} < \\frac{1}{2^n}$$</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Is the bigger series known?</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>$\\sum \\frac{1}{2^n}$ is geometric with $r=\\frac12$, $|r|<1$, so it converges.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclude</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Our positive series is smaller than a convergent one, so it <strong>converges</strong> by the Direct Comparison Test. $\\checkmark$</p>
+            <p>Direction matters: being <em>smaller</em> than a convergent series proves convergence; being smaller than a divergent one proves nothing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.2.2</span>
+        <h4>Does $\\displaystyle\\sum_{n=1}^\\infty \\frac{2n+1}{n^2+3}$ converge? (Limit Comparison)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Pick $b_n$ from the dominant terms</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>The top behaves like $2n$ and the bottom like $n^2$, so $a_n$ behaves like $\\frac{1}{n}$:</p>
+            <div class="math-block">$$a_n = \\frac{2n+1}{n^2+3}, \\qquad b_n = \\frac{1}{n}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Compute $\\lim a_n/b_n$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{n\\to\\infty}\\frac{(2n+1)\\,n}{n^2+3} = \\lim_{n\\to\\infty}\\frac{2n^2+n}{n^2+3} = 2$$</div>
+            <p>Since $0<2<\\infty$, both series do the same thing.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Decide using $\\sum b_n$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>$\\sum\\frac{1}{n}$ is the harmonic series ($p$-series with $p=1$), which diverges. So $\\sum\\frac{2n+1}{n^2+3}$ <strong>diverges</strong>. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch11-sec3-3" class="section-heading fade-up"><span class="section-num">11.3.3</span> Alternating Series</h3>
     
     <div class="content-card card-theorem fade-up">
@@ -1066,6 +1495,40 @@ const CHAPTER_CONTENT = {
       </ol>
       <p><strong>Estimation Theorem:</strong> $|R_n| = |S - S_n| \\leq b_{n+1}$.</p>
     </div>
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.3.1</span>
+        <h4>Does $\\displaystyle\\sum_{n=1}^\\infty \\frac{(-1)^{n-1}}{\\sqrt{n}}$ converge?</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Identify $b_n$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>The series has the form $\\sum(-1)^{n-1}b_n$ with $b_n = \\dfrac{1}{\\sqrt n} > 0$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Condition 1: is $b_n$ decreasing?</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\sqrt{n+1} > \\sqrt{n} \\;\\Longrightarrow\\; b_{n+1} = \\frac{1}{\\sqrt{n+1}} < \\frac{1}{\\sqrt n} = b_n \\quad\\checkmark$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Condition 2: does $b_n\\to 0$?</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{n\\to\\infty}\\frac{1}{\\sqrt n} = 0 \\quad\\checkmark$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Conclude</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Both conditions hold, so the series <strong>converges</strong> by the Alternating Series Test.</p>
+            <p>Note that $\\sum\\frac{1}{\\sqrt n}$ on its own diverges ($p=\\frac12$). The series converges only because the alternating signs cancel. The next subsection gives this a name.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch11-sec3-4" class="section-heading fade-up"><span class="section-num">11.3.4</span> Absolute Convergence and the Ratio and Root Tests</h3>
     
     <div class="content-card card-theorem fade-up">
@@ -1077,6 +1540,61 @@ const CHAPTER_CONTENT = {
         <li><strong>$L = 1$:</strong> Test is <em>inconclusive</em> (use another test).</li>
       </ul>
     </div>
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.4.1</span>
+        <h4>Test $\\displaystyle\\sum_{n=0}^\\infty \\frac{(-1)^n\\,2^n}{n!}$ for absolute convergence (Ratio Test)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Form $\\left|\\dfrac{a_{n+1}}{a_n}\\right|$ (the absolute value removes the $(-1)^n$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\left|\\frac{a_{n+1}}{a_n}\\right| = \\frac{2^{n+1}}{(n+1)!}\\cdot\\frac{n!}{2^n} = \\frac{2}{n+1}$$</div>
+            <p>Because $(n+1)! = (n+1)\\cdot n!$, the factorials collapse. That is why factorials call for the Ratio Test.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Take the limit</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$L = \\lim_{n\\to\\infty}\\frac{2}{n+1} = 0 < 1$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclude</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>By the Ratio Test the series <strong>converges absolutely</strong>, so it also converges. $\\checkmark$ (It sums to $e^{-2}$.)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.4.2</span>
+        <h4>Test $\\displaystyle\\sum_{n=1}^\\infty \\left(\\frac{2n+1}{3n+4}\\right)^n$ (Root Test)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">The whole term is raised to the $n$: take $\\sqrt[n]{|a_n|}$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\sqrt[n]{|a_n|} = \\sqrt[n]{\\left(\\frac{2n+1}{3n+4}\\right)^n} = \\frac{2n+1}{3n+4}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Take the limit</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$L = \\lim_{n\\to\\infty}\\frac{2n+1}{3n+4} = \\frac{2}{3} < 1$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclude</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>By the Root Test the series <strong>converges absolutely</strong>. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch11-sec3-5" class="section-heading fade-up"><span class="section-num">11.3.5</span> Strategy for Testing Series</h3>
     
     <div class="content-card card-tip fade-up">
@@ -1097,6 +1615,28 @@ const CHAPTER_CONTENT = {
       <p>If $\\lim_{n\\to\\infty} a_n \\neq 0$, then $\\sum a_n$ diverges. <em>Note: if the limit IS 0, the test is inconclusive (e.g., harmonic series).</em></p>
     </div>
 
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.5.1</span>
+        <h4>Does $\\displaystyle\\sum_{n=1}^\\infty \\frac{n^2+1}{2n^2+3}$ converge? (Divergence Test)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Strategy step 1: look at $\\lim a_n$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\lim_{n\\to\\infty}\\frac{n^2+1}{2n^2+3} = \\frac{1}{2} \\neq 0$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Conclude</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>The terms do not approach $0$, so the series <strong>diverges</strong>. $\\checkmark$</p>
+            <p>The converse is false: $\\sum\\frac{1}{n}$ has $a_n\\to 0$ yet still diverges, so a limit of $0$ tells you nothing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="content-card card-exam fade-up">
       <div class="card-badge">${Icons.target} Exam Tip - Test Selection</div>
       <div style="display:grid;gap:8px;margin-top:8px;font-size:.85rem">
@@ -1105,6 +1645,42 @@ const CHAPTER_CONTENT = {
         <div style="background:var(--surface-2);border-left:3px solid var(--green);border-radius:8px;padding:10px"><strong>Alternating signs:</strong> Use <strong>Alternating Series Test</strong>.</div>
         <div style="background:var(--surface-2);border-left:3px solid var(--yellow);border-radius:8px;padding:10px"><strong>Looks like a known convergent series:</strong> Use <strong>Comparison or Limit Comparison</strong>.</div>
         <div style="background:var(--surface-2);border-left:3px solid var(--teal);border-radius:8px;padding:10px"><strong>Can integrate $f(x)$:</strong> Use <strong>Integral Test</strong>.</div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.5.2</span>
+        <h4>Choose a test, then apply it: (a) $\\displaystyle\\sum_{n=1}^\\infty\\frac{(-1)^n}{n+1}$ &nbsp; (b) $\\displaystyle\\sum_{n=1}^\\infty\\frac{n+1}{n^3+2n}$ &nbsp; (c) $\\displaystyle\\sum_{n=1}^\\infty\\frac{3^n}{n!}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">First check $a_n\\to 0$ for all three</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>(a) $\\frac{1}{n+1}\\to 0$, (b) $\\frac{n+1}{n^3+2n}\\to 0$, (c) $\\frac{3^n}{n!}\\to 0$. The Divergence Test is silent, so let the <em>form</em> of $a_n$ pick the test.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">(a) Alternating signs: Alternating Series Test</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>$b_n = \\dfrac{1}{n+1}$ is decreasing and tends to $0$, so (a) <strong>converges</strong>.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">(b) Ratio of polynomials in $n$: Limit Comparison with a $p$-series</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Degree $1$ over degree $3$ means it behaves like $\\frac{1}{n^2}$:</p>
+            <div class="math-block">$$\\lim_{n\\to\\infty}\\frac{(n+1)/(n^3+2n)}{1/n^2} = \\lim_{n\\to\\infty}\\frac{n^3+n^2}{n^3+2n} = 1$$</div>
+            <p>$\\sum\\frac{1}{n^2}$ converges ($p=2$), so (b) <strong>converges</strong>.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">(c) Factorial: Ratio Test</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{3^{n+1}/(n+1)!}{3^n/n!} = \\frac{3}{n+1} \\;\\longrightarrow\\; 0 < 1$$</div>
+            <p>So (c) <strong>converges absolutely</strong>. $\\checkmark$</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1219,6 +1795,36 @@ const CHAPTER_CONTENT = {
 
     <div class="worked-example fade-up">
       <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.5.3</span>
+        <h4>Find a power series for $\\dfrac{1}{(1-x)^2}$ by differentiating</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Spot the derivative</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{d}{dx}\\left[\\frac{1}{1-x}\\right] = \\frac{1}{(1-x)^2}$$</div>
+            <p>So differentiate the master geometric series term by term.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Differentiate each term</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{d}{dx}\\sum_{n=0}^\\infty x^n = \\sum_{n=1}^\\infty n\\,x^{n-1} = 1 + 2x + 3x^2 + 4x^3 + \\cdots$$</div>
+            <p>The constant term $1$ differentiates to $0$, so the sum now starts at $n=1$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Re-index and state the radius</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{1}{(1-x)^2} = \\sum_{n=0}^\\infty (n+1)\\,x^n, \\qquad R = 1$$</div>
+            <p>Differentiation does not change the radius. Replacing $x$ by $-x$ gives $\\frac{1}{(1+x)^2} = \\sum(-1)^n(n+1)x^n$, matching Worked Example 11.7.1. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
         <span class="ex-badge">Worked Example 11.5.7</span>
         <h4>Find a power series for $\\arctan x$ by integrating</h4>
       </div>
@@ -1253,10 +1859,73 @@ const CHAPTER_CONTENT = {
       <p>When $a = 0$ this is the <strong>Maclaurin series</strong>.</p>
     </div>
 
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.6.1</span>
+        <h4>Find the Taylor series of $f(x)=\\dfrac{1}{x}$ centered at $a=1$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Build a derivative table and evaluate each at $a=1$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$f=x^{-1},\\; f(1)=1 \\qquad f'=-x^{-2},\\; f'(1)=-1 \\qquad f''=2x^{-3},\\; f''(1)=2 \\qquad f'''=-6x^{-4},\\; f'''(1)=-6$$</div>
+            <p>The pattern is $f^{(n)}(1) = (-1)^n\\,n!$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Divide by $n!$ to get each coefficient</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{f^{(n)}(1)}{n!} = \\frac{(-1)^n\\,n!}{n!} = (-1)^n$$</div>
+            <p>The factorials cancel, leaving coefficients $1,-1,1,-1,\\ldots$</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Assemble the series in powers of $(x-1)$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{1}{x} = \\sum_{n=0}^\\infty (-1)^n (x-1)^n = 1 - (x-1) + (x-1)^2 - (x-1)^3 + \\cdots$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Sanity check</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Since $\\frac{1}{x} = \\frac{1}{1+(x-1)}$, this is a geometric series with ratio $-(x-1)$, so it converges for $|x-1|<1$, i.e. $0 < x < 2$. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="content-card card-theorem fade-up">
       <div class="card-badge">${Icons.book} Important Maclaurin Series</div>
       <div class="math-block">$$e^x = \\sum_{n=0}^\\infty \\frac{x^n}{n!} \\qquad \\sin x = \\sum_{n=0}^\\infty (-1)^n\\frac{x^{2n+1}}{(2n+1)!} \\qquad \\cos x = \\sum_{n=0}^\\infty (-1)^n \\frac{x^{2n}}{(2n)!}$$</div>
       <div class="math-block">$$\\frac{1}{1-x} = \\sum_{n=0}^\\infty x^n,\\; |x|<1 \\qquad \\ln(1+x) = \\sum_{n=1}^\\infty (-1)^{n+1}\\frac{x^n}{n},\\; |x|<1$$</div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.6.2</span>
+        <h4>Use the Maclaurin series of $\\cos x$ to find $\\displaystyle\\lim_{x\\to 0}\\frac{1-\\cos x}{x^2}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Write the series from the list above</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\cos x = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\cdots$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Compute $1-\\cos x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$1-\\cos x = \\frac{x^2}{2} - \\frac{x^4}{24} + \\cdots$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Divide by $x^2$ and let $x\\to 0$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{1-\\cos x}{x^2} = \\frac{1}{2} - \\frac{x^2}{24} + \\cdots \\;\\longrightarrow\\; \\frac{1}{2} \\quad\\checkmark$$</div>
+            <p>This agrees with L&rsquo;H&ocirc;pital&rsquo;s Rule but shows <em>why</em>: every higher power of $x$ vanishes, leaving only the leading coefficient.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="viz-card fade-up">
@@ -1458,6 +2127,48 @@ const CHAPTER_CONTENT = {
       <div class="dt-result" id="dt-ode-exact">→ <strong>Exact ODE</strong> (§12.4): Find potential function $F(x,y)$ where $F_x = M, F_y = N$, solution is $F(x,y)=C$.</div>
     </div>
 
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example: Choosing a Method</span>
+        <h4>Which method applies? (a) $\\frac{dy}{dx}=x^2y$ &nbsp; (b) $y'+3y=e^{-x}$ &nbsp; (c) $(2xy+3)\\,dx+(x^2+4y)\\,dy=0$ &nbsp; (d) $\\frac{dy}{dx}=\\frac{x^2+y^2}{xy}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">(a) Can the $x$&rsquo;s and $y$&rsquo;s be pulled apart?</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{dy}{dx}=x^2\\,y \\;\\Longrightarrow\\; \\frac{dy}{y}=x^2\\,dx$$</div>
+            <p>Yes: <strong>Separable</strong> (&sect;12.1).</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">(b) Is it of the form $y'+P(x)y=Q(x)$?</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Already in that form with $P=3$ and $Q=e^{-x}$: <strong>Linear</strong> (&sect;12.3), integrating factor $\\mu=e^{3x}$. It is not separable, because $y'=e^{-x}-3y$ cannot be factored as $g(x)h(y)$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">(c) Compare $M_y$ with $N_x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$M=2xy+3 \\Rightarrow M_y=2x \\qquad N=x^2+4y \\Rightarrow N_x=2x$$</div>
+            <p>Equal: <strong>Exact</strong> (&sect;12.4).</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">(d) Divide through to see whether only $y/x$ appears</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{x^2+y^2}{xy}=\\frac{1+(y/x)^2}{y/x}$$</div>
+            <p>A function of $y/x$ alone: <strong>Homogeneous</strong> (&sect;12.2), substitute $v=y/x$.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">5</div><div class="step-label">If more than one type fits</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <p>Pick the quickest: separable first, then linear, then exact, then homogeneous (the order in the Exam Tip below).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h2 id="ch12-sec1" class="section-heading fade-up"><span class="section-num">12.1</span> Separable ODEs</h2>
 
     <div class="worked-example fade-up">
@@ -1487,6 +2198,41 @@ const CHAPTER_CONTENT = {
       <div class="card-badge">${Icons.book} Method - Substitution $v = y/x$</div>
       <p>If $\\frac{dy}{dx} = F\\left(\\frac{y}{x}\\right)$, then let $v = \\frac{y}{x}$, which means $y = vx$. Then $\\frac{dy}{dx} = v + x\\frac{dv}{dx}$.</p>
       <p>Substitute this in to get a <strong>separable</strong> ODE in terms of $v$ and $x$.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 12.2.1</span>
+        <h4>Solve $\\dfrac{dy}{dx}=\\dfrac{x+y}{x}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Check that it depends only on $y/x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\frac{dy}{dx}=\\frac{x+y}{x}=1+\\frac{y}{x}$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute $y=vx$, so $\\dfrac{dy}{dx}=v+x\\dfrac{dv}{dx}$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$v+x\\frac{dv}{dx}=1+v \\;\\Longrightarrow\\; x\\frac{dv}{dx}=1$$</div>
+            <p>The $v$ on each side cancels, leaving a separable equation.</p>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Separate and integrate</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$dv=\\frac{dx}{x} \\;\\Longrightarrow\\; v=\\ln|x|+C$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Substitute back $v=y/x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$y=x\\big(\\ln|x|+C\\big) \\quad\\checkmark$$</div>
+            <p>Check: $y'=\\ln|x|+C+1$ and $\\frac{x+y}{x}=1+\\ln|x|+C$.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="worked-example fade-up">
@@ -1529,6 +2275,40 @@ const CHAPTER_CONTENT = {
       <div class="math-block">$$\\mu(x) = e^{\\int P(x)\\,dx}$$</div>
       <div class="math-block">$$\\text{Solution: } \\quad y = \\frac{1}{\\mu(x)}\\int \\mu(x)Q(x)\\,dx$$</div>
       <p><em>Why it works</em>: Multiplying through by $\\mu$ makes the left side a perfect derivative: $\\frac{d}{dx}[\\mu y] = \\mu Q$.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 12.3.1</span>
+        <h4>Solve $y'+\\dfrac{2}{x}\\,y=x$ for $x>0$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Read off $P$ and $Q$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$P(x)=\\frac{2}{x}, \\qquad Q(x)=x$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Compute the integrating factor</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$\\mu=e^{\\int \\frac{2}{x}\\,dx}=e^{2\\ln x}=e^{\\ln x^2}=x^2$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Multiply through: the left side becomes a perfect derivative</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$x^2y'+2xy=x^3 \\;\\Longrightarrow\\; \\frac{d}{dx}\\big[x^2y\\big]=x^3$$</div>
+          </div>
+        </div>
+        <div class="step-item open revealed">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Integrate and solve for $y$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">
+            <div class="math-block">$$x^2y=\\frac{x^4}{4}+C \\;\\Longrightarrow\\; \\boxed{y=\\frac{x^2}{4}+\\frac{C}{x^2}}$$</div>
+            <p>Check: $y'=\\frac{x}{2}-\\frac{2C}{x^3}$ and $\\frac{2}{x}y=\\frac{x}{2}+\\frac{2C}{x^3}$, which add to $x$. $\\checkmark$</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="viz-card fade-up">

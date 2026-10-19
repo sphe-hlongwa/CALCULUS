@@ -2135,7 +2135,7 @@ It also shows the stationary points from (c): the local maximum $\\left(1-\\sqrt
       },
       {
         number: 2, title: 'Optimization — open rectangular box', section: '§6.6', marks: 6,
-        prompt: `An open rectangular box has a square-width base: its length is twice its width. Its volume is $288\\text{ cm}^3$. Find the dimensions that minimise the surface area.` ,
+        prompt: `An open rectangular box has a rectangular base whose length is twice its width. Its volume is $288\\text{ cm}^3$. Find the dimensions that minimise the surface area.` ,
         solution: `
 Let the width be $x$ cm, the length $2x$ cm and the height $h$ cm. The volume constraint gives
 $$V=(2x)(x)h=2x^2h=288\\;\\Rightarrow\\;h=\\frac{288}{2x^2}=\\frac{144}{x^2}.$$ ✓
@@ -2352,7 +2352,6 @@ $$V(r)=\\pi r^2\\cdot2\\sqrt{R^2-r^2}=2\\pi r^2\\left(R^2-r^2\\right)^{1/2}.$$ �
 By the product rule, with the chain rule giving $\\dfrac{d}{dr}\\left(R^2-r^2\\right)^{1/2}=-r\\left(R^2-r^2\\right)^{-1/2}$:
 $$V'(r)=4\\pi r\\sqrt{R^2-r^2}-\\frac{2\\pi r^3}{\\sqrt{R^2-r^2}}=\\frac{2\\pi r\\left[2\\left(R^2-r^2\\right)-r^2\\right]}{\\sqrt{R^2-r^2}}=\\frac{2\\pi r\\left(2R^2-3r^2\\right)}{\\sqrt{R^2-r^2}}.$$ ✓✓
 
-For $0< r< R$ the factors $2\\pi r$ and $\\sqrt{R^2-r^2}$ are positive, so $V'(r)=0 \\;\\Rightarrow\\; 2R^2-3r^2=0 \\;\\Rightarrow\\; r^2=\\dfrac23R^2$, giving $r=R\\sqrt{\\dfrac23}=\\dfrac{\\sqrt6}{3}R$ and
 For $0< r< R$ the factors $2\\pi r$ and $\\sqrt{R^2-r^2}$ are positive, so $V'(r)=0 \\;\\Rightarrow\\; 2R^2-3r^2=0 \\;\\Rightarrow\\; r^2=\\dfrac23R^2$, giving $r=R\\sqrt{\\dfrac23}=\\dfrac{\\sqrt6}{3}R$ and
 $$h=2\\sqrt{R^2-\\tfrac23R^2}=2\\sqrt{\\tfrac13R^2}=\\frac{2R}{\\sqrt3}=\\frac{2\\sqrt3}{3}R.$$ ✓
 

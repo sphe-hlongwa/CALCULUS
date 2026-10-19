@@ -2715,6 +2715,7 @@ function initGraphsForChapter(num) {
 function renderWelcome() {
   const area = document.getElementById('content-area');
   if (!area || typeof chaptersData === 'undefined') return;
+  window.CircularCarousel?.destroy?.(area.querySelector('#welcome-carousel'));
   const prog = AppStorage.getProgress();
   const done = Object.keys(prog).length;
   const total = chaptersData.length;

@@ -124,6 +124,11 @@
   outline: none;
 }
 
+.folder-float__trigger:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent);
+  outline-offset: 2px;
+}
+
 .folder-float[data-open] .folder-float__front {
   transform: perspective(600px) rotateX(calc(-1 * var(--ff-angle)));
 }

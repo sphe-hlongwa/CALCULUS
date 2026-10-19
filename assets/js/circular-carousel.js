@@ -9,6 +9,12 @@
 (function () {
   'use strict';
 
+  const controllers = new WeakMap();
+
+  function destroyCircularCarousel(root) {
+    controllers.get(root)?.();
+  }
+
   function initCircularCarousel(root) {
     if (!root || root.dataset.carouselReady === 'true') return;
 
@@ -25,11 +31,13 @@
     const realCount = originals.length;
 
     // Far-side repeats of every card.
+    const originalByClone = new WeakMap();
     const clones = originals.map(card => {
       const clone = card.cloneNode(true);
       clone.dataset.carouselClone = 'true';
       clone.setAttribute('aria-hidden', 'true');
       clone.setAttribute('tabindex', '-1');
+      originalByClone.set(clone, card);
       ring.appendChild(clone);
       return clone;
     });
@@ -44,6 +52,9 @@
     let lastFrame = 0;
     let pointerStart = null;
     let forwarding = false;
+    let disposed = false;
+    let pointerWithinScope = scope.matches(':hover');
+    let focusWithinScope = scope.contains(document.activeElement);
 
     const stepAngle = () => 360 / cards.length;
     const isVisible = card => getComputedStyle(card).display !== 'none';
@@ -131,9 +142,17 @@
       lastFrame = 0;
     };
 
+    const dispose = () => {
+      if (disposed) return;
+      disposed = true;
+      stop();
+      window.removeEventListener('resize', layout);
+      controllers.delete(root);
+    };
+
     const restart = () => {
       stop();
-      if (reduced) return;
+      if (disposed || reduced || pointerWithinScope || focusWithinScope) return;
       animationFrame = window.requestAnimationFrame(function drift(timestamp) {
         if (!lastFrame) lastFrame = timestamp;
         const elapsed = Math.min(48, timestamp - lastFrame);
@@ -160,9 +179,10 @@
       if (index !== active) {
         update(index);
         restart();
-      } else if (card.dataset.carouselClone === 'true') {
-        // The repeat on the far side behaves exactly like the real card.
-        const original = originals[index % realCount];
+      }
+      if (card.dataset.carouselClone === 'true') {
+        const original = originalByClone.get(card);
+        if (!original) return;
         forwarding = true;
         try { original.click(); } finally { forwarding = false; }
       }
@@ -176,16 +196,28 @@
       restart();
     }));
     root.addEventListener('keydown', event => {
-      if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1); }
-      if (event.key === 'ArrowRight') { event.preventDefault(); step(1); }
-      if (event.key === 'Home') { event.preventDefault(); update(0); restart(); }
-      if (event.key === 'End') { event.preventDefault(); update(realCount - 1); restart(); }
+      const focusActiveCard = () => cards[active].focus();
+      if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1); focusActiveCard(); }
+      if (event.key === 'ArrowRight') { event.preventDefault(); step(1); focusActiveCard(); }
+      if (event.key === 'Home') { event.preventDefault(); update(0); restart(); focusActiveCard(); }
+      if (event.key === 'End') { event.preventDefault(); update(realCount - 1); restart(); focusActiveCard(); }
     });
-    root.addEventListener('pointerenter', stop);
-    root.addEventListener('pointerleave', restart);
-    root.addEventListener('focusin', stop);
-    root.addEventListener('focusout', event => {
-      if (!root.contains(event.relatedTarget)) restart();
+    scope.addEventListener('pointerenter', () => {
+      pointerWithinScope = true;
+      stop();
+    });
+    scope.addEventListener('pointerleave', () => {
+      pointerWithinScope = false;
+      restart();
+    });
+    scope.addEventListener('focusin', () => {
+      focusWithinScope = true;
+      stop();
+    });
+    scope.addEventListener('focusout', event => {
+      if (scope.contains(event.relatedTarget)) return;
+      focusWithinScope = false;
+      restart();
     });
     root.addEventListener('pointerdown', event => {
       pointerStart = event.clientX;
@@ -198,11 +230,15 @@
     });
     root.addEventListener('pointercancel', () => { pointerStart = null; });
     window.addEventListener('resize', layout, { passive: true });
+    controllers.set(root, dispose);
 
     layout();
     restart();
     root.dataset.carouselReady = 'true';
   }
 
-  window.CircularCarousel = { init: initCircularCarousel };
+  window.CircularCarousel = {
+    init: initCircularCarousel,
+    destroy: destroyCircularCarousel
+  };
 }());

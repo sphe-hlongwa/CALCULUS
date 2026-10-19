@@ -25,8 +25,8 @@ const Exams = (() => {
       {
         id: 'november',
         label: 'November Exams',
-        cardBlurb: 'Three 2-hour, 90-mark papers in the November 2024 format.',
-        blurb: 'Three 2-hour, 90-mark papers laid out like the MATH1036 November 2024 exam: a multiple-choice Section A and guided written Section B questions on integration techniques, improper integrals, series, power series, differential equations and volumes.',
+        cardBlurb: 'Three 2-hour, 90-mark papers on the November scope: optimization, integration, improper integrals, series and ODEs.',
+        blurb: 'Three 2-hour, 90-mark papers laid out like the MATH1036 November 2024 exam, with a multiple-choice Section A and guided written Section B questions. Scope: applied optimization (§6.6), advanced integration techniques (§9.1, 9.2, 9.4), improper integrals (§10), sequences and series (§11.1–11.6) and differential equations (§12.0, 12.1, 12.3).',
         papers: (typeof NOVEMBER_EXAMS !== 'undefined') ? NOVEMBER_EXAMS : []
       },
       {
@@ -193,7 +193,6 @@ const Exams = (() => {
             <p class="exam-pick-meta">${paper.totalMarks} marks &middot; ${paper.duration} minutes &middot; ${paper.questions.length} questions</p>
           </div>
         </div>
-        ${paper.topics ? `<p class="exam-session-blurb">${paper.topics}</p>` : ''}
         <span class="exam-start-link">${sess.startLabel || 'Start Paper'} <span aria-hidden="true">&rarr;</span></span>
       </div>
     `).join('');
@@ -204,7 +203,7 @@ const Exams = (() => {
       </div>
       <div class="exam-list-header">
         <h2>${sess.label}</h2>
-        <p class="exam-list-sub">${sess.listIntro ? sess.listIntro + ' ' : papers.length + ' full-length practice papers. '}${sess.blurb} Each question includes a full worked memo.</p>
+        <p class="exam-list-sub">${sess.listIntro || (papers.length + ' full-length practice papers with worked memos.')}</p>
       </div>
       <div class="exam-pick-grid">${cards}</div>
     `;
@@ -337,7 +336,10 @@ const Exams = (() => {
     return html;
   }
   function inlineMd(s) {
-    return s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // Escape HTML first: maths such as $0<p<1$ or $x<4$ contains "<", which the
+    // browser would otherwise parse as a tag and swallow the text (and the $ delimiters).
+    const esc = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   }
 
   return { open, close, renderSessions, renderList, renderPaper, toggleFullscreen };

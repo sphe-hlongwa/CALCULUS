@@ -51,7 +51,7 @@
       });
     };
 
-    const setOpen = next => {
+    const setOpen = (next, focusFirst = false) => {
       open = next;
       root.toggleAttribute('data-open', open);
       trigger.setAttribute('aria-expanded', String(open));
@@ -59,14 +59,23 @@
         item.tabIndex = open ? 0 : -1;
         item.setAttribute('aria-hidden', String(!open));
       });
+      if (open && focusFirst) items.find(item => !item.disabled)?.focus();
     };
 
-    trigger.addEventListener('click', () => setOpen(!open));
+    trigger.addEventListener('click', event => {
+      const opening = !open;
+      setOpen(!open, opening && event.detail === 0);
+    });
     if (hoverTrigger) {
       root.addEventListener('pointerenter', () => {
         if (!reduced) setOpen(true);
       });
-      root.addEventListener('pointerleave', () => setOpen(false));
+      root.addEventListener('pointerleave', () => {
+        if (!root.contains(document.activeElement)) setOpen(false);
+      });
+      root.addEventListener('focusout', event => {
+        if (!root.contains(event.relatedTarget) && !root.matches(':hover')) setOpen(false);
+      });
     }
     root.addEventListener('keydown', event => {
       if (event.key === 'Escape') {

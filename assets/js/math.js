@@ -28,9 +28,7 @@ function renderMath(container, attempts = 0) {
       throwOnError: false,
       strict: false,
       trust: false,
-      ignoredClasses: ['katex-rendered'],
     });
-    container.classList.add('katex-rendered');
   } catch (error) {
     // Do not break the exam if one expression is malformed.
     console.warn('KaTeX rendering error:', error);

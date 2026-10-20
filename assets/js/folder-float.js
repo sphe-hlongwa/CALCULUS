@@ -15,6 +15,7 @@
     if (!trigger || !itemLayer || !items.length) return;
 
     let open = false;
+    let mouseHoverOpened = false;
     const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches || false;
     const hoverTrigger = root.dataset.trigger === 'hover';
     root.style.setProperty('--ff-n', items.length);
@@ -43,6 +44,7 @@
         current.items.forEach(({ index, width }) => {
           const random = jitter(index);
           const shift = (rowIndex % 2 ? 1 : -1) * Math.min(16, spread * .1);
+          items[index].style.setProperty('--i', index);
           items[index].style.setProperty('--x', `${(x + width / 2 + shift + (random - .5) * 6).toFixed(1)}px`);
           items[index].style.setProperty('--y', `${(-30 - rowIndex * rowHeight - random * 6).toFixed(1)}px`);
           items[index].style.setProperty('--r', `${((random * 2 - 1) * 8).toFixed(2)}deg`);
@@ -63,14 +65,23 @@
     };
 
     trigger.addEventListener('click', event => {
+      if (mouseHoverOpened) {
+        mouseHoverOpened = false;
+        setOpen(true);
+        return;
+      }
       const opening = !open;
       setOpen(!open, opening && event.detail === 0);
     });
     if (hoverTrigger) {
-      root.addEventListener('pointerenter', () => {
-        if (!reduced) setOpen(true);
+      root.addEventListener('pointerenter', event => {
+        if (event.pointerType !== 'mouse' || reduced) return;
+        mouseHoverOpened = !open;
+        setOpen(true);
       });
-      root.addEventListener('pointerleave', () => {
+      root.addEventListener('pointerleave', event => {
+        if (event.pointerType !== 'mouse') return;
+        mouseHoverOpened = false;
         if (!root.contains(document.activeElement)) setOpen(false);
       });
       root.addEventListener('focusout', event => {

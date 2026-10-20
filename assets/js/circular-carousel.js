@@ -52,6 +52,7 @@
     let lastFrame = 0;
     let pointerStart = null;
     let forwarding = false;
+    let suppressSwipeClick = false;
     let disposed = false;
     let pointerWithinScope = scope.matches(':hover');
     let focusWithinScope = scope.contains(document.activeElement);
@@ -171,6 +172,12 @@
     };
 
     const handleCardClick = event => {
+      if (suppressSwipeClick) {
+        suppressSwipeClick = false;
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
       if (forwarding) return;
       const card = event.target.closest('.welcome-carousel__card');
       if (!card) return;
@@ -226,7 +233,10 @@
       if (pointerStart == null) return;
       const delta = event.clientX - pointerStart;
       pointerStart = null;
-      if (Math.abs(delta) > 35) step(delta > 0 ? -1 : 1);
+      if (Math.abs(delta) > 35) {
+        suppressSwipeClick = true;
+        step(delta > 0 ? -1 : 1);
+      }
     });
     root.addEventListener('pointercancel', () => { pointerStart = null; });
     window.addEventListener('resize', layout, { passive: true });

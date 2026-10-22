@@ -61,7 +61,11 @@
     const isVisible = card => getComputedStyle(card).display !== 'none';
 
     const setRadius = () => {
-      const width = cards[0].getBoundingClientRect().width || 220;
+      // offsetWidth is the card's layout width. getBoundingClientRect() would
+      // return the 3D-projected width (foreshortened by the ring's current
+      // rotation and enlarged by perspective), which depends on the radius
+      // itself, so every resize produced a different, wrong radius.
+      const width = cards[0].offsetWidth || 220;
       const spacing = cards.length > realCount
         ? 28
         : Math.max(34, Math.min(76, root.clientWidth * 0.1));
@@ -143,11 +147,27 @@
       lastFrame = 0;
     };
 
+    // Re-measure at most once per frame; resize fires many times while dragging.
+    let layoutFrame = 0;
+    const scheduleLayout = () => {
+      if (layoutFrame || disposed) return;
+      layoutFrame = window.requestAnimationFrame(() => {
+        layoutFrame = 0;
+        if (!disposed) layout();
+      });
+    };
+    const resizeObserver = typeof ResizeObserver === 'function'
+      ? new ResizeObserver(scheduleLayout)
+      : null;
+
     const dispose = () => {
       if (disposed) return;
       disposed = true;
       stop();
-      window.removeEventListener('resize', layout);
+      if (layoutFrame) window.cancelAnimationFrame(layoutFrame);
+      layoutFrame = 0;
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', scheduleLayout);
       controllers.delete(root);
     };
 
@@ -239,7 +259,8 @@
       }
     });
     root.addEventListener('pointercancel', () => { pointerStart = null; });
-    window.addEventListener('resize', layout, { passive: true });
+    window.addEventListener('resize', scheduleLayout, { passive: true });
+    resizeObserver?.observe(root);
     controllers.set(root, dispose);
 
     layout();

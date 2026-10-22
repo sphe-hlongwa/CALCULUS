@@ -203,7 +203,10 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  overflow-y: auto;
+  /* The overlay itself must never scroll: only #exam-content scrolls, so
+     reaching the end of the paper can't drag the whole modal along. */
+  overflow: hidden;
+  overscroll-behavior: contain;
   padding: 40px 20px;
 }
 #exam-overlay.hidden { display: none; }
@@ -214,6 +217,7 @@
   width: 100%;
   max-width: 1070px;
   min-height: 75vh;
+  max-height: calc(100vh - 80px);   /* fits inside the overlay's 40px padding */
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
   overflow: hidden;
@@ -246,7 +250,13 @@
 }
 .panel-icon-btn:hover { background: var(--border); color: var(--text-1); }
 
-#exam-content { padding: 24px 28px 48px; max-height: calc(90vh - 60px); overflow-y: auto; flex: 1; }
+#exam-content {
+  padding: 24px 28px 48px;
+  flex: 1;
+  min-height: 0;                    /* lets the flex child shrink and scroll inside the shell */
+  overflow-y: auto;
+  overscroll-behavior: contain;     /* don't chain scrolling to the overlay/page at the end */
+}
 
 /* ── Full-screen mode ── */
 #exam-overlay.exam-overlay-fullscreen {
@@ -258,6 +268,7 @@
   width: 100vw;
   height: 100vh;
   min-height: 100vh;
+  max-height: none;
   border-radius: 0;
 }
 .exam-shell.exam-shell-fullscreen #exam-content {
@@ -465,7 +476,10 @@ body.dark .exam-graph-wrap { background: #1e293b; border-color: #334155; }
 
 @media (max-width: 640px) {
   #exam-overlay { padding: 0; }
-  .exam-shell { border-radius: 0; min-height: 100vh; border-left: none; border-right: none; }
+  .exam-shell { border-radius: 0; min-height: 100vh; max-height: 100vh; border-left: none; border-right: none; }
+  @supports (height: 100dvh) {
+    .exam-shell { min-height: 100dvh; max-height: 100dvh; }
+  }
   .exam-shell-header { padding: 12px 14px; }
 
   /* Give the paper the full width: minimal gutter around it */

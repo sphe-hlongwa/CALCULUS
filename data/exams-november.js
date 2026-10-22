@@ -317,7 +317,7 @@ The series converges when $\dfrac{|x-3|}{2}<1$, i.e. $|x-3|<2$. So the **radius 
 
 **Interval of convergence: $(1,5)$.** ✓
 
-**(b)** Differentiate: $f(x)=x^{-1}$, $f'(x)=-x^{-2}$, $f''(x)=2x^{-3}$, $f'''(x)=-6x^{-4}$, and in general $f^{(n)}(x)=\dfrac{(-1)^nn!}{x^{n+1}}$. ✓✓
+**(b)** The Taylor series about $a$ comes from the general formula $c_n=\dfrac{f^{(n)}(a)}{n!}$ (Theorem 11.21); the Maclaurin table in §11.6 covers only $a=0$. Differentiate: $f(x)=x^{-1}$, $f'(x)=-x^{-2}$, $f''(x)=2x^{-3}$, $f'''(x)=-6x^{-4}$, and in general $f^{(n)}(x)=\dfrac{(-1)^nn!}{x^{n+1}}$. ✓✓
 
 Therefore $c_n=\dfrac{f^{(n)}(2)}{n!}=\dfrac{(-1)^n}{2^{n+1}}$. ✓ The Taylor series is
 $$\frac1x=\sum_{n=0}^{\infty}\frac{(-1)^n}{2^{n+1}}(x-2)^n=\frac12-\frac{x-2}{4}+\frac{(x-2)^2}{8}-\frac{(x-2)^3}{16}+\cdots$$ ✓
@@ -454,7 +454,7 @@ For $p\neq1$ and $0<t<1$: $\displaystyle\int_t^1x^{-p}dx=\frac{1-t^{1-p}}{1-p}$.
 - If $p>1$ then $t^{1-p}\to\infty$: diverges.
 - If $p=1$: $\int_t^1\frac dx x=-\ln t\to\infty$: diverges.
 
-So it converges exactly when $p<1$. (This is the *opposite* inequality to the benchmark at infinity, where $\int_1^\infty x^{-p}dx$ needs $p>1$.) 
+So it converges exactly when $p<1$. (Theorem 10.1 in the Semester 2 guide states only the benchmark at infinity, $\int_1^\infty x^{-p}dx$, so the benchmark at zero is derived here.) (This is the *opposite* inequality to the benchmark at infinity, where $\int_1^\infty x^{-p}dx$ needs $p>1$.) 
         `
       },
       {
@@ -470,6 +470,8 @@ Consider the series $\displaystyle\sum_{n=1}^{\infty}\frac{2n+3}{n^{3}+n+1}$. Wh
         `,
         solution: String.raw`
 **Answer: B.** ✓✓✓
+
+**Limit Comparison Test** (the limit form of the Comparison Test in §11.3.2; recalled here because the guide states only the direct form): if $a_n,b_n>0$ and $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=c$ with $0<c<\infty$, then $\sum a_n$ and $\sum b_n$ either both converge or both diverge.
 
 The terms are positive. For rational expressions compare with the ratio of the highest powers: $\dfrac{2n}{n^3}\sim\dfrac{2}{n^2}$, so take $b_n=\dfrac1{n^2}$. 
 $$\lim_{n\to\infty}\frac{a_n}{b_n}=\lim_{n\to\infty}\frac{(2n+3)\,n^2}{n^3+n+1}=2,$$ 
@@ -547,7 +549,7 @@ $$2x=\frac{128}{x^2}\ \Longrightarrow\ x^3=64\ \Longrightarrow\ x=4.$$ ✓
 
 **(d)** The domain is not a closed interval, so we examine the end behaviour:
 $$\lim_{x\to0^+}\left(x^2+\frac{128}{x}\right)=\infty,\qquad\lim_{x\to\infty}\left(x^2+\frac{128}{x}\right)=\infty.$$ ✓
-$S$ is continuous on $(0,\infty)$, has the single critical number $x=4$, and $S\to\infty$ at both ends of the domain. So the critical point cannot be a maximum and must be the **absolute minimum**. ✓ (Also $S'<0$ for $0<x<4$ and $S'>0$ for $x>4$.)
+$S$ is continuous on $(0,\infty)$, has the single critical number $x=4$, and $S\to\infty$ at both ends of the domain. So the critical point cannot be a maximum and must be the **absolute minimum**. ✓ (This end-behaviour argument replaces the Closed Interval Method when the domain is open: Study Guide 1 §6.3 states the Extreme Value Theorem only for closed intervals. Also $S'<0$ for $0<x<4$ and $S'>0$ for $x>4$.)
 
 The best container has $x=4$ m and $h=\dfrac{32}{16}=2$ m, and the minimum surface area is $S(4)=16+32=\boxed{48\ \text{m}^2}$. ✓
         `
@@ -774,7 +776,7 @@ $$\int_0^{\pi/2}\sin^{2}x\,\cos^{2}x\,dx=$$
         solution: String.raw`
 **Answer: A.** ✓✓✓
 
-Both powers are even, so use the double-angle identities. Since $\sin x\cos x=\frac12\sin2x$: 
+Both powers are even, so use the double-angle identities. Since $\sin x\cos x=\frac12\sin2x$ (this is $\sin2x=2\sin x\cos x$ rearranged; §9.4 lists the half-angle forms $\sin^2x=\frac{1-\cos2x}{2}$ and $\cos^2x=\frac{1+\cos2x}{2}$): 
 $$\sin^2x\cos^2x=\frac14\sin^22x=\frac14\cdot\frac{1-\cos4x}{2}=\frac{1-\cos4x}{8}.$$ 
 $$\int_0^{\pi/2}\frac{1-\cos4x}{8}\,dx=\frac18\Big[x-\frac{\sin4x}{4}\Big]_0^{\pi/2}=\frac18\cdot\frac\pi2=\frac{\pi}{16}.$$ 
 
@@ -817,6 +819,8 @@ The series $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\sin\frac1n$ is
 **Answer: C.** ✓✓✓
 
 *Convergence.* Let $b_n=\sin\frac1n>0$. Then $b_n\to\sin0=0$ and $b_n$ is decreasing (since $\sin$ is increasing on $[0,1]$ and $\frac1n$ decreases). By the **Alternating Series Test** the series converges. 
+
+*Reminder.* **Limit Comparison Test** (the limit form of the Comparison Test in §11.3.2; recalled here because the guide states only the direct form): if $a_n,b_n>0$ and $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=c$ with $0<c<\infty$, then $\sum a_n$ and $\sum b_n$ either both converge or both diverge.
 
 *Absolute convergence.* $\displaystyle\lim_{n\to\infty}\frac{\sin(1/n)}{1/n}=1$, so by the **Limit Comparison Test** $\sum\sin\frac1n$ behaves like the harmonic series $\sum\frac1n$ and **diverges**.  So the series converges but not absolutely: **conditionally convergent**. 
 
@@ -1228,7 +1232,7 @@ $$S=2\pi r^{2}+2\pi rh=2\pi r^{2}+2\pi r\cdot\frac{54}{r^{2}}=2\pi r^{2}+\frac{1
 **(c)** $S'(r)=4\pi r-\dfrac{108\pi}{r^{2}}=\dfrac{4\pi\left(r^{3}-27\right)}{r^{2}}$. It is defined for all $r>0$, so critical numbers come from $S'(r)=0$: ✓✓
 $$r^{3}=27\ \Longrightarrow\ r=3.$$ ✓
 
-**(d)** $S''(r)=4\pi+\dfrac{216\pi}{r^{3}}>0$ for every $r>0$, so $S$ is concave up on its whole domain. ✓ Hence the critical number $r=3$ gives the **absolute minimum**. ✓ The height is $h=\dfrac{54}{9}=6$ (so $h=2r$), and ✓
+**(d)** $S''(r)=4\pi+\dfrac{216\pi}{r^{3}}>0$ for every $r>0$, so $S$ is concave up on its whole domain. ✓ Hence the critical number $r=3$ gives the **absolute minimum**. ✓ (Theorem 6.11 in Study Guide 1 gives a *local* minimum; because $S$ is concave up on its whole domain, the graph lies above its tangent line at $r=3$, so the local minimum is the absolute minimum.) The height is $h=\dfrac{54}{9}=6$ (so $h=2r$), and ✓
 $$S(3)=2\pi(9)+\frac{108\pi}{3}=18\pi+36\pi=\boxed{54\pi\ \text{cm}^{2}}.$$
         `
       },
@@ -1672,6 +1676,8 @@ The sequence is **convergent with limit $\ln3$**. ✓
 
 **(c)** *Alternating Series Test.* Let $b_n=\dfrac{1}{n+\sqrt n}>0$. The denominator is increasing, so $b_n$ is decreasing, and $b_n\to0$. ✓ Hence $\sum\dfrac{(-1)^n}{n+\sqrt n}$ **converges**. ✓
 
+*Reminder.* **Limit Comparison Test** (the limit form of the Comparison Test in §11.3.2; recalled here because the guide states only the direct form): if $a_n,b_n>0$ and $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=c$ with $0<c<\infty$, then $\sum a_n$ and $\sum b_n$ either both converge or both diverge.
+
 *Absolute convergence.* Compare $\displaystyle\sum\frac{1}{n+\sqrt n}$ with $\displaystyle\sum\frac1n$ by the Limit Comparison Test: ✓
 $$\lim_{n\to\infty}\frac{1/(n+\sqrt n)}{1/n}=\lim_{n\to\infty}\frac{1}{1+n^{-1/2}}=1>0.$$
 Since $\sum\frac1n$ diverges, so does $\sum\frac{1}{n+\sqrt n}$. The series is therefore **conditionally convergent**. ✓
@@ -2009,7 +2015,9 @@ Since $\frac1n\to0$, the **Squeeze Theorem** gives $a_n\to0$. The sequence is **
 $$\frac{a_{n+1}}{a_n}=\frac{(n+1)!}{(n+1)^{n+1}}\cdot\frac{n^{n}}{n!}=\frac{n^{n}}{(n+1)^{n}}=\left(1+\frac1n\right)^{-n}\ \longrightarrow\ \frac1e.$$ ✓
 Since $\frac1e<1$, the series **converges**. ✓
 
-**(c)** All terms are positive. Compare with the convergent geometric series $\displaystyle\sum\left(\frac23\right)^{n}$: ✓
+**(c)** **Limit Comparison Test** (the limit form of the Comparison Test in §11.3.2; recalled here because the guide states only the direct form): if $a_n,b_n>0$ and $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=c$ with $0<c<\infty$, then $\sum a_n$ and $\sum b_n$ either both converge or both diverge.
+
+All terms are positive. Compare with the convergent geometric series $\displaystyle\sum\left(\frac23\right)^{n}$: ✓
 $$\lim_{n\to\infty}\frac{\dfrac{2^{n}+5}{3^{n}+n}}{\left(\dfrac23\right)^{n}}=\lim_{n\to\infty}\frac{1+5/2^{n}}{1+n/3^{n}}=1,$$
 a finite positive number (using $n/3^{n}\to0$). ✓ By the Limit Comparison Test the series **converges**. ✓
         `

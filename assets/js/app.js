@@ -237,6 +237,54 @@ const CHAPTER_CONTENT = {
       <div class="math-block">$$\\int_a^b [f(x) \\pm g(x)]\\,dx = \\int_a^b f(x)\\,dx \\pm \\int_a^b g(x)\\,dx$$</div>
       <div class="math-block">$$\\int_a^b f(x)\\,dx = \\int_a^c f(x)\\,dx + \\int_c^b f(x)\\,dx \\quad \\text{for any } c \\in [a,b]$$</div>
     </div>
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} What the sum is actually saying</div>
+      <ol>
+        <li>Cut $[a,b]$ into $n$ thin strips, each of width $\\Delta x = \\dfrac{b-a}{n}$.</li>
+        <li>Treat each strip as a <strong>rectangle</strong>: height $f(x_i^*)$ (the function value at some point $x_i^*$ in that strip) times width $\\Delta x$.</li>
+        <li>Add the $n$ rectangle areas. This is the Riemann sum, an <em>approximation</em> of the area.</li>
+        <li>Let $n \\to \\infty$: the strips get thinner, the rectangles fit the curve exactly, and the approximation becomes the true value.</li>
+      </ol>
+      <p>It does not matter whether $x_i^*$ is the left end, right end or middle of the strip: the limit is the same. The symbol $\\int$ is a stretched "S" for <em>sum</em>, and $f(x)\\,dx$ is "height times a tiny width".</p>
+      <p>The result is a <strong>signed</strong> area: parts above the $x$-axis count positive, parts below count negative.</p>
+    </div>
+
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} The properties in plain words</div>
+      <ul>
+        <li><strong>Swapping the limits flips the sign:</strong> going from $b$ to $a$ is walking the strip backwards.</li>
+        <li><strong>Same limits give $0$:</strong> a region of zero width has zero area.</li>
+        <li><strong>Sums split:</strong> the area under $f+g$ is the area under $f$ plus the area under $g$.</li>
+        <li><strong>Splitting the interval:</strong> area from $a$ to $b$ = area from $a$ to $c$ plus area from $c$ to $b$. This is how you handle functions that change formula or sign partway.</li>
+      </ul>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 8.2.1.1</span>
+        <h4>Use the definition (right endpoints) to compute $\\displaystyle\\int_0^2 x\\,dx$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Find $\\Delta x$ and the sample points</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\Delta x = \\frac{2-0}{n} = \\frac{2}{n}, \\qquad x_i = 0 + i\\,\\Delta x = \\frac{2i}{n}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Build the sum $\\sum f(x_i)\\,\\Delta x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\sum_{i=1}^n \\frac{2i}{n}\\cdot\\frac{2}{n} = \\frac{4}{n^2}\\sum_{i=1}^n i$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Use $\\displaystyle\\sum_{i=1}^n i = \\frac{n(n+1)}{2}$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{4}{n^2}\\cdot\\frac{n(n+1)}{2} = \\frac{2(n+1)}{n} = 2 + \\frac{2}{n}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Take the limit $n \\to \\infty$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int_0^2 x\\,dx = \\lim_{n\\to\\infty}\\left(2 + \\frac{2}{n}\\right) = 2$$
+          <p>Check with geometry: the region is a triangle with base $2$ and height $2$, so its area is $\\tfrac12\\cdot 2\\cdot 2 = 2$. &#10003;</p></div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch8-sec2-2" class="section-heading fade-up"><span class="section-num">8.2.2</span> Interpreting the Definite Integral as a Known Area</h3>
     
     <div class="content-card card-tip fade-up">
@@ -286,6 +334,42 @@ const CHAPTER_CONTENT = {
       <p>For regions bounded by $y = f(x)$ (top curve) and $y = g(x)$ (bottom curve) between $x = a$ and $x = b$ where $f(x) \\geq g(x)$:</p>
       <div class="math-block">$$A = \\int_a^b \\Big[\\text{Top} - \\text{Bottom}\\Big]\\,dx = \\int_a^b \\big[f(x) - g(x)\\big]\\,dx$$</div>
     </div>
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why Top - Bottom?</div>
+      <p>Slice the region into thin vertical strips of width $dx$. Each strip is almost a rectangle: its <strong>height</strong> is the gap between the curves, $f(x)-g(x)$, and its <strong>width</strong> is $dx$. Area of a strip = height &times; width, and the integral adds up all the strips from $x=a$ to $x=b$.</p>
+      <p>Subtracting means it works even when the curves dip below the $x$-axis, because only the <em>gap</em> matters. If your answer comes out negative, you subtracted the wrong way round.</p>
+    </div>
+
+    <div class="content-card card-memory fade-up">
+      <div class="card-badge">${Icons.brain} The 3-Step Method</div>
+      <ol>
+        <li><strong>Find the limits:</strong> set $f(x) = g(x)$ and solve for $x$ (unless the problem gives $a$ and $b$).</li>
+        <li><strong>Find which is on top:</strong> test one $x$ between the limits in both functions. The bigger value is the top curve.</li>
+        <li><strong>Integrate</strong> Top $-$ Bottom from $a$ to $b$.</li>
+      </ol>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 8.2.3.1</span>
+        <h4>Find the area enclosed by $y = \\sqrt{x}$ and $y = x^2$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Find the limits (set the curves equal)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\sqrt{x} = x^2 \\;\\Rightarrow\\; x = x^4 \\;\\Rightarrow\\; x(1 - x^3) = 0 \\;\\Rightarrow\\; x = 0 \\text{ or } x = 1$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Find which curve is on top</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>Test $x = \\tfrac14$: $\\sqrt{x} = \\tfrac12$ and $x^2 = \\tfrac1{16}$. So $\\sqrt{x}$ is on top for $0 < x < 1$.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate Top $-$ Bottom</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$A = \\int_0^1 \\left(\\sqrt{x} - x^2\\right)dx = \\left[\\frac{2}{3}x^{3/2} - \\frac{x^3}{3}\\right]_0^1 = \\frac{2}{3} - \\frac{1}{3} = \\frac{1}{3}$$</div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch8-sec2-4" class="section-heading fade-up"><span class="section-num">8.2.4</span> Area between two Curves: y-axis</h3>
     
     <div class="content-card card-theorem fade-up">
@@ -294,6 +378,42 @@ const CHAPTER_CONTENT = {
       <p>For regions bounded by $x = f(y)$ (right curve) and $x = g(y)$ (left curve) between $y = c$ and $y = d$ where $f(y) \\geq g(y)$:</p>
       <div class="math-block">$$A = \\int_c^d \\Big[\\text{Right} - \\text{Left}\\Big]\\,dy = \\int_c^d \\big[f(y) - g(y)\\big]\\,dy$$</div>
     </div>
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} When to slice horizontally</div>
+      <p>Use horizontal strips (width $dy$, length = Right $-$ Left) when:</p>
+      <ul>
+        <li>the curves are given as $x$ in terms of $y$ (like $x = y^2$), or</li>
+        <li>slicing vertically would force you to <strong>split into two integrals</strong> because the top or bottom curve changes partway, while horizontally the right and left curves stay the same.</li>
+      </ul>
+      <p>The method is identical, with $x$ and $y$ swapped: find the limits in $y$, decide who is on the right, integrate Right $-$ Left.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 8.2.4.1</span>
+        <h4>Find the area enclosed by $y^2 = x$ and $y = x - 2$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Write both curves as $x$ in terms of $y$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$x = y^2 \\qquad\\text{and}\\qquad x = y + 2$$
+          <p>(Vertical strips would need two integrals here, because the bottom curve changes at $x = 1$. Horizontal strips need only one.)</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Find the limits (set equal and solve for $y$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$y^2 = y + 2 \\;\\Rightarrow\\; y^2 - y - 2 = 0 \\;\\Rightarrow\\; (y-2)(y+1) = 0 \\;\\Rightarrow\\; y = -1 \\text{ or } y = 2$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Find which curve is on the right</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>Test $y = 0$: $x = y+2$ gives $2$ and $x = y^2$ gives $0$. So the line $x = y+2$ is on the right.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Integrate Right $-$ Left</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$A = \\int_{-1}^{2}\\big[(y+2) - y^2\\big]\\,dy = \\left[\\frac{y^2}{2} + 2y - \\frac{y^3}{3}\\right]_{-1}^{2} = \\frac{10}{3} - \\left(-\\frac{7}{6}\\right) = \\frac{9}{2}$$</div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch8-sec2-5" class="section-heading fade-up"><span class="section-num">8.2.5</span> Area with Crossing over Functions</h3>
 
     <div class="content-card card-theorem fade-up">
@@ -391,6 +511,53 @@ const CHAPTER_CONTENT = {
       <div class="math-block">$$V = \\pi \\int_a^b [f(x)]^2 \\, dx \\quad \\text{(rotation about the } x\\text{-axis)}$$</div>
       <div class="math-block">$$V = \\pi \\int_c^d [g(y)]^2 \\, dy \\quad \\text{(rotation about the } y\\text{-axis)}$$</div>
     </div>
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why $\\pi\\int [f(x)]^2\\,dx$?</div>
+      <p>Cut the solid into thin slices perpendicular to the axis. Each slice is a flat <strong>disk</strong>, a very short cylinder with radius $f(x)$ and thickness $dx$. The volume of a cylinder is $\\pi r^2 h$, so one slice has volume</p>
+      <div class="math-block">$$\\pi\\,[f(x)]^2\\,dx$$</div>
+      <p>and the integral adds up every slice. The radius is always the <em>distance from the curve to the axis of rotation</em>.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 8.3.1.1</span>
+        <h4>The region under $y = \\sqrt{x}$ on $[0,4]$ is rotated about the $x$-axis. Find the volume.</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Identify the radius</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>The axis of rotation is the $x$-axis, so the radius is the height of the curve: $r = f(x) = \\sqrt{x}$.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Square it and integrate</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$V = \\pi\\int_0^4 \\left(\\sqrt{x}\\right)^2 dx = \\pi\\int_0^4 x\\,dx = \\pi\\left[\\frac{x^2}{2}\\right]_0^4 = 8\\pi$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 8.3.1.2</span>
+        <h4>The region bounded by $y = x^2$, the $y$-axis and $y = 1$ is rotated about the $y$-axis. Find the volume.</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">The axis is vertical, so slice and integrate in $y$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>Solve the curve for $x$: $x = \\sqrt{y}$. The radius of each disk is the distance from the $y$-axis to the curve, $r = \\sqrt{y}$, and $y$ runs from $0$ to $1$.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Square it and integrate</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$V = \\pi\\int_0^1 \\left(\\sqrt{y}\\right)^2 dy = \\pi\\int_0^1 y\\,dy = \\pi\\left[\\frac{y^2}{2}\\right]_0^1 = \\frac{\\pi}{2}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistake</div>
+      <div class="math-block">$$\\text{WRONG: } \\pi\\left(\\int f\\,dx\\right)^2 \\qquad \\text{CORRECT: } \\pi\\int [f(x)]^2\\,dx$$</div>
+      <p>Square $f(x)$ <em>inside</em> the integral first, then integrate. Squaring the answer afterwards is a different number.</p>
+    </div>
+
     <h3 id="ch8-sec3-2" class="section-heading fade-up"><span class="section-num">8.3.2</span> The Washer Method</h3>
     
     <div class="content-card card-theorem fade-up">
@@ -399,6 +566,40 @@ const CHAPTER_CONTENT = {
       <p>When revolving the region between two curves $f(x) \\geq g(x) \\geq 0$ around the $x$-axis:</p>
       <div class="math-block">$$V = \\pi \\int_a^b \\Big(\\big[R(x)\\big]^2 - \\big[r(x)\\big]^2\\Big)\\,dx$$</div>
       <p>where $R(x)$ is the <strong>outer radius</strong> and $r(x)$ is the <strong>inner radius</strong>.</p>
+    </div>
+
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why subtract the squares?</div>
+      <p>When the region does not touch the axis, each slice has a hole in the middle: a <strong>washer</strong>. Its area is the big disk minus the hole:</p>
+      <div class="math-block">$$\\pi R^2 - \\pi r^2 = \\pi\\big(R^2 - r^2\\big)$$</div>
+      <p>$R$ is the distance from the axis to the <em>far</em> curve and $r$ the distance to the <em>near</em> curve. Multiply by the thickness $dx$ and add up.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 8.3.2.1</span>
+        <h4>The region between $y = \\sqrt{x}$ and $y = x^2$ is rotated about the $x$-axis. Find the volume.</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Find the limits and decide outer and inner</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>From the area example, the curves meet at $x = 0$ and $x = 1$. Between them $\\sqrt{x} \\ge x^2$ (test $x=\\tfrac14$: $\\tfrac12 > \\tfrac1{16}$), so the outer radius is $R = \\sqrt{x}$ and the inner radius is $r = x^2$.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Square each radius separately</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$R^2 = \\left(\\sqrt{x}\\right)^2 = x \\qquad r^2 = \\left(x^2\\right)^2 = x^4$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$V = \\pi\\int_0^1 \\left(x - x^4\\right)dx = \\pi\\left[\\frac{x^2}{2} - \\frac{x^5}{5}\\right]_0^1 = \\pi\\left(\\frac12 - \\frac15\\right) = \\frac{3\\pi}{10}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistake</div>
+      <div class="math-block">$$\\text{WRONG: } \\pi\\int (R - r)^2\\,dx \\qquad \\text{CORRECT: } \\pi\\int \\big(R^2 - r^2\\big)\\,dx$$</div>
+      <p>Square each radius first, then subtract. $(R-r)^2$ is not the same as $R^2 - r^2$.</p>
     </div>
 
     <div class="viz-card fade-up">
@@ -641,6 +842,62 @@ const CHAPTER_CONTENT = {
       <div class="math-block">$$\\int \\frac{du}{a^2 + u^2} = \\frac{1}{a} \\tan^{-1}\\!\\left(\\frac{u}{a}\\right) + C \\qquad \\int \\frac{du}{\\sqrt{a^2 - u^2}} = \\sin^{-1}\\!\\left(\\frac{u}{a}\\right) + C$$</div>
     </div>
 
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why we do this</div>
+      <p>The inverse-trig formulas need the form $a^2 + u^2$ or $a^2 - u^2$ with <strong>no middle term</strong>. A quadratic like $x^2 + 4x + 13$ has an $x$ term, so it does not match. Completing the square rewrites it as <em>(something)$^2$ + constant</em>, which removes the middle term, and then $u = x + 2$ is a simple shift ($du = dx$).</p>
+    </div>
+
+    <div class="content-card card-memory fade-up">
+      <div class="card-badge">${Icons.brain} The Recipe</div>
+      <ol>
+        <li>Take <strong>half</strong> of the coefficient of $x$ and put it in a bracket: $x^2 + bx \\to \\left(x + \\tfrac b2\\right)^2$.</li>
+        <li><strong>Subtract the square</strong> of that half to compensate: $x^2 + bx + c = \\left(x+\\tfrac b2\\right)^2 + \\left(c - \\tfrac{b^2}{4}\\right)$.</li>
+        <li>If the $x^2$ term is negative (as in $5 - 4x - x^2$), factor out the minus sign first.</li>
+      </ol>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.1.1.1</span>
+        <h4>Evaluate $\\displaystyle\\int \\frac{dx}{x^2 + 4x + 13}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Complete the square (half of $4$ is $2$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$x^2 + 4x + 13 = (x+2)^2 - 4 + 13 = (x+2)^2 + 3^2$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute $u = x + 2$, $du = dx$, $a = 3$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\frac{du}{u^2 + 3^2}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Use $\\displaystyle\\int\\frac{du}{a^2+u^2} = \\frac1a\\tan^{-1}\\frac ua$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\frac{dx}{x^2+4x+13} = \\frac{1}{3}\\tan^{-1}\\!\\left(\\frac{x+2}{3}\\right) + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.1.1.2</span>
+        <h4>Evaluate $\\displaystyle\\int \\frac{dx}{\\sqrt{5 - 4x - x^2}}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Factor out the minus, then complete the square</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$5 - 4x - x^2 = 5 - (x^2 + 4x) = 5 - \\big[(x+2)^2 - 4\\big] = 9 - (x+2)^2$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute $u = x + 2$, $du = dx$, $a = 3$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\frac{du}{\\sqrt{3^2 - u^2}}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Use $\\displaystyle\\int\\frac{du}{\\sqrt{a^2-u^2}} = \\sin^{-1}\\frac ua$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\frac{dx}{\\sqrt{5-4x-x^2}} = \\sin^{-1}\\!\\left(\\frac{x+2}{3}\\right) + C$$</div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch9-sec1-2" class="section-heading fade-up"><span class="section-num">9.1.2</span> Exponential and Logarithmic Integrals</h3>
     <div class="content-card card-definition fade-up">
       <div class="card-badge">${Icons.book} Essential Integration Rules</div>
@@ -649,11 +906,83 @@ const CHAPTER_CONTENT = {
       <div class="math-block">$$\\int \\sec x \\, dx = \\ln|\\sec x + \\tan x| + C$$</div>
     </div>
 
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Where these rules come from</div>
+      <ul>
+        <li><strong>$a^x$:</strong> the derivative of $a^x$ is $a^x\\ln a$, so integrating must divide by $\\ln a$ (the same idea as the $1/k$ in 9.4.1).</li>
+        <li><strong>$\\ln|x|$:</strong> $\\dfrac{d}{dx}\\ln|x| = \\dfrac1x$ for both positive and negative $x$, which is why the absolute value is needed.</li>
+        <li><strong>$\\tan x$:</strong> write $\\tan x = \\dfrac{\\sin x}{\\cos x}$ and let $u = \\cos x$, $du = -\\sin x\\,dx$. This gives $-\\ln|\\cos x|$.</li>
+        <li><strong>$\\sec x$:</strong> multiply top and bottom by $\\sec x + \\tan x$. The top becomes $\\sec^2 x + \\sec x\\tan x$, which is exactly the derivative of the bottom, so the answer is $\\ln|\\sec x + \\tan x|$.</li>
+      </ul>
+    </div>
+
+    <div class="content-card card-memory fade-up">
+      <div class="card-badge">${Icons.brain} Pattern: top is the derivative of the bottom</div>
+      <div class="math-block">$$\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + C$$</div>
+      <p>If the numerator is (a multiple of) the derivative of the denominator, the answer is a log. It is just $u$-substitution with $u = f(x)$.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.1.2.1</span>
+        <h4>Evaluate $\\displaystyle\\int \\frac{x^2}{x^3+1}\\,dx$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Spot the pattern: the derivative of $x^3+1$ is $3x^2$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>The numerator $x^2$ is a constant multiple ($\\tfrac13$) of $3x^2$, so substitute $u = x^3 + 1$.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute $u = x^3+1$, $du = 3x^2\\,dx$, so $x^2\\,dx = \\tfrac13\\,du$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{1}{3}\\int \\frac{du}{u}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate and substitute back</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\frac{x^2}{x^3+1}\\,dx = \\frac{1}{3}\\ln|x^3+1| + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.1.2.2</span>
+        <h4>Evaluate $\\displaystyle\\int_0^3 2^x\\,dx$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Use $\\displaystyle\\int a^x\\,dx = \\frac{a^x}{\\ln a}$ with $a = 2$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int 2^x\\,dx = \\frac{2^x}{\\ln 2}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Evaluate at the limits</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\left[\\frac{2^x}{\\ln 2}\\right]_0^3 = \\frac{8 - 1}{\\ln 2} = \\frac{7}{\\ln 2}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistake</div>
+      <div class="math-block">$$\\text{WRONG: } \\int 2^x\\,dx = \\frac{2^{x+1}}{x+1} \\qquad \\text{CORRECT: } \\frac{2^x}{\\ln 2}$$</div>
+      <p>The power rule is for $x^n$ (variable base, constant exponent). In $2^x$ the <em>exponent</em> is the variable, so it is an exponential and needs $\\ln a$.</p>
+    </div>
+
     <h2 id="ch9-sec2" class="section-heading fade-up"><span class="section-num">9.2</span> Integration by Parts (IBP)</h2>
 
     <div class="content-card card-theorem fade-up">
       <div class="card-badge">${Icons.book} Theorem</div>
       <div class="math-block">$$\\int u\\,dv = uv - \\int v\\,du$$</div>
+    </div>
+
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Where the formula comes from</div>
+      <p>It is the <strong>product rule run backwards</strong>. Start with $\\dfrac{d}{dx}(uv) = u\\,v' + v\\,u'$, integrate both sides, and rearrange:</p>
+      <div class="math-block">$$uv = \\int u\\,dv + \\int v\\,du \\;\\Longrightarrow\\; \\int u\\,dv = uv - \\int v\\,du$$</div>
+      <p>So IBP swaps a hard integral $\\int u\\,dv$ for a (hopefully easier) one, $\\int v\\,du$. That tells you how to choose:</p>
+      <ul>
+        <li><strong>$u$</strong> should get <em>simpler</em> when you differentiate it (like $x$, $\\ln x$, $\\tan^{-1}x$).</li>
+        <li><strong>$dv$</strong> must be something you can <em>integrate</em> (like $e^x\\,dx$, $\\cos x\\,dx$).</li>
+      </ul>
+      <p>LIATE below is just a quick ranking of which functions make good $u$.</p>
     </div>
 
     <div class="content-card card-memory fade-up">
@@ -691,6 +1020,85 @@ const CHAPTER_CONTENT = {
       </div>
     </div>
 
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.2.2</span>
+        <h4>Evaluate $\\displaystyle\\int \\ln x\\,dx$ (the "hidden" $dv = dx$ trick)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">There is only one function, so put $dv = dx$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>$\\ln x$ is a Logarithm (first in LIATE), so it is $u$. Everything left over is $dv = 1\\,dx$.</p>
+          $$u = \\ln x,\\; dv = dx \\implies du = \\frac{1}{x}\\,dx,\\; v = x$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Apply the formula</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\ln x\\,dx = x\\ln x - \\int x\\cdot\\frac{1}{x}\\,dx = x\\ln x - \\int 1\\,dx$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate the remainder</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\ln x\\,dx = x\\ln x - x + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.2.3</span>
+        <h4>Evaluate $\\displaystyle\\int x^2 e^x\\,dx$ (apply IBP twice)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">First round: $u = x^2$ (Algebraic), $dv = e^x\\,dx$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$du = 2x\\,dx,\\; v = e^x \\implies \\int x^2e^x\\,dx = x^2e^x - 2\\int xe^x\\,dx$$
+          <p>The power of $x$ dropped from $2$ to $1$, so we are making progress.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Second round: the leftover $\\int xe^x\\,dx$ is Example 9.2.1</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int xe^x\\,dx = xe^x - e^x$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Substitute back (watch the factor of $2$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int x^2e^x\\,dx = x^2e^x - 2\\big(xe^x - e^x\\big) + C = e^x\\big(x^2 - 2x + 2\\big) + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.2.4</span>
+        <h4>Evaluate $\\displaystyle\\int e^x\\cos x\\,dx$ (the integral comes back)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">First round: $u = \\cos x$, $dv = e^x\\,dx$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$I = \\int e^x\\cos x\\,dx = e^x\\cos x + \\int e^x\\sin x\\,dx$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Second round on the new integral: $u = \\sin x$, $dv = e^x\\,dx$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int e^x\\sin x\\,dx = e^x\\sin x - \\int e^x\\cos x\\,dx = e^x\\sin x - I$$
+          <p>The original integral $I$ has reappeared. This is not a failure: it is what we want.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Treat it as an equation and solve for $I$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$I = e^x\\cos x + e^x\\sin x - I \\;\\Rightarrow\\; 2I = e^x(\\cos x + \\sin x)$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Divide by $2$ and add the constant</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int e^x\\cos x\\,dx = \\frac{e^x}{2}\\big(\\sin x + \\cos x\\big) + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistakes</div>
+      <ul>
+        <li><strong>Choosing $u$ and $dv$ backwards.</strong> For $\\int xe^x\\,dx$, taking $u = e^x$, $dv = x\\,dx$ gives $\\frac{x^2}{2}e^x - \\int\\frac{x^2}{2}e^x\\,dx$, which is <em>harder</em>. If the new integral looks worse, swap.</li>
+        <li><strong>Sign slip.</strong> The formula has a <em>minus</em>: $uv - \\int v\\,du$. With a second round inside, keep the minus on the whole bracket.</li>
+        <li><strong>Giving up when the original integral returns</strong> (as with $e^x\\cos x$). Solve for it algebraically.</li>
+      </ul>
+    </div>
+
     <h2 id="ch9-sec3" class="section-heading fade-up"><span class="section-num">9.3</span> Trigonometric Substitutions</h2>
 
     <div class="content-card card-theorem fade-up">
@@ -698,6 +1106,119 @@ const CHAPTER_CONTENT = {
       <div class="math-block">$$\\sqrt{a^2 - x^2} \\implies x = a\\sin\\theta, \\quad\\sqrt{a^2-x^2} = a\\cos\\theta$$</div>
       <div class="math-block">$$\\sqrt{a^2 + x^2} \\implies x = a\\tan\\theta, \\quad\\sqrt{a^2+x^2} = a\\sec\\theta$$</div>
       <div class="math-block">$$\\sqrt{x^2 - a^2} \\implies x = a\\sec\\theta, \\quad\\sqrt{x^2-a^2} = a\\tan\\theta$$</div>
+    </div>
+
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why it works</div>
+      <p>Each square root hides a right triangle. A triangle with hypotenuse $a$ and one leg $x$ has its other leg equal to $\\sqrt{a^2-x^2}$. Writing $x = a\\sin\\theta$ turns that root into $a\\cos\\theta$, so the square root <strong>disappears</strong> and you are left with an ordinary trig integral. The other two cases use the other Pythagorean identities:</p>
+      <div class="math-block">$$1-\\sin^2\\theta=\\cos^2\\theta \\qquad 1+\\tan^2\\theta=\\sec^2\\theta \\qquad \\sec^2\\theta-1=\\tan^2\\theta$$</div>
+      <p>In every case $a^2 \\pm x^2$ becomes a perfect square, so the root collapses to one trig term. Which one to use depends only on what is inside the root:</p>
+      <ul>
+        <li>$a^2 - x^2$ (minus $x^2$) &rarr; use <strong>sine</strong></li>
+        <li>$a^2 + x^2$ (plus $x^2$) &rarr; use <strong>tangent</strong></li>
+        <li>$x^2 - a^2$ ($x^2$ first) &rarr; use <strong>secant</strong></li>
+      </ul>
+    </div>
+
+    <div class="content-card card-memory fade-up">
+      <div class="card-badge">${Icons.brain} The 4-Step Method</div>
+      <ol>
+        <li><strong>Substitute</strong> for $x$ <em>and</em> for $dx$ (differentiate your substitution).</li>
+        <li><strong>Simplify</strong> the root with the identity, then cancel what you can.</li>
+        <li><strong>Integrate</strong> with respect to $\\theta$.</li>
+        <li><strong>Draw the triangle</strong> from your substitution to turn $\\theta$ back into $x$.</li>
+      </ol>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.3.1</span>
+        <h4>Evaluate $\\displaystyle\\int \\frac{\\sqrt{9-x^2}}{x^2}\\,dx$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Pick the substitution ($a = 3$, minus $x^2$ so use sine)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$x = 3\\sin\\theta, \\qquad dx = 3\\cos\\theta\\,d\\theta, \\qquad \\sqrt{9-x^2} = \\sqrt{9\\cos^2\\theta} = 3\\cos\\theta$$
+          <p>We take $-\\tfrac{\\pi}{2}\\le\\theta\\le\\tfrac{\\pi}{2}$, where $\\cos\\theta \\ge 0$, so no absolute value is needed.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute everything and simplify</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\frac{3\\cos\\theta}{9\\sin^2\\theta}\\cdot 3\\cos\\theta\\,d\\theta = \\int \\frac{\\cos^2\\theta}{\\sin^2\\theta}\\,d\\theta = \\int \\cot^2\\theta\\,d\\theta$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate using $\\cot^2\\theta = \\csc^2\\theta - 1$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int(\\csc^2\\theta - 1)\\,d\\theta = -\\cot\\theta - \\theta + C$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Draw the triangle to return to $x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>Since $\\sin\\theta = \\dfrac{x}{3}$: opposite $= x$, hypotenuse $= 3$, adjacent $= \\sqrt{9-x^2}$ (Pythagoras). So $\\cot\\theta = \\dfrac{\\sqrt{9-x^2}}{x}$ and $\\theta = \\sin^{-1}\\!\\dfrac{x}{3}$.</p>
+          $$\\int \\frac{\\sqrt{9-x^2}}{x^2}\\,dx = -\\frac{\\sqrt{9-x^2}}{x} - \\sin^{-1}\\!\\left(\\frac{x}{3}\\right) + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.3.2</span>
+        <h4>Evaluate $\\displaystyle\\int \\frac{dx}{x^2\\sqrt{x^2+4}}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Pick the substitution ($a = 2$, plus $x^2$ so use tangent)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$x = 2\\tan\\theta, \\qquad dx = 2\\sec^2\\theta\\,d\\theta, \\qquad \\sqrt{x^2+4} = 2\\sec\\theta$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute and simplify</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\frac{2\\sec^2\\theta}{4\\tan^2\\theta\\cdot 2\\sec\\theta}\\,d\\theta = \\frac{1}{4}\\int \\frac{\\sec\\theta}{\\tan^2\\theta}\\,d\\theta = \\frac{1}{4}\\int \\frac{\\cos\\theta}{\\sin^2\\theta}\\,d\\theta$$
+          <p>(Rewrite in sines and cosines: $\\dfrac{\\sec\\theta}{\\tan^2\\theta} = \\dfrac{1/\\cos\\theta}{\\sin^2\\theta/\\cos^2\\theta} = \\dfrac{\\cos\\theta}{\\sin^2\\theta}$.)</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate with $u = \\sin\\theta$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{1}{4}\\int \\frac{du}{u^2} = -\\frac{1}{4u} + C = -\\frac{1}{4\\sin\\theta} + C$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Draw the triangle to return to $x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>Since $\\tan\\theta = \\dfrac{x}{2}$: opposite $= x$, adjacent $= 2$, hypotenuse $= \\sqrt{x^2+4}$. So $\\sin\\theta = \\dfrac{x}{\\sqrt{x^2+4}}$.</p>
+          $$\\int \\frac{dx}{x^2\\sqrt{x^2+4}} = -\\frac{\\sqrt{x^2+4}}{4x} + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.3.3</span>
+        <h4>Evaluate $\\displaystyle\\int \\frac{\\sqrt{x^2-9}}{x}\\,dx \\quad (x > 3)$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Pick the substitution ($a = 3$, $x^2$ first so use secant)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$x = 3\\sec\\theta, \\qquad dx = 3\\sec\\theta\\tan\\theta\\,d\\theta, \\qquad \\sqrt{x^2-9} = 3\\tan\\theta$$
+          <p>For $x>3$ we take $0<\\theta<\\tfrac{\\pi}{2}$, where $\\tan\\theta>0$.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute and simplify</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\frac{3\\tan\\theta}{3\\sec\\theta}\\cdot 3\\sec\\theta\\tan\\theta\\,d\\theta = 3\\int \\tan^2\\theta\\,d\\theta = 3\\int(\\sec^2\\theta - 1)\\,d\\theta$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$3\\tan\\theta - 3\\theta + C$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Draw the triangle to return to $x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>Since $\\sec\\theta = \\dfrac{x}{3}$: hypotenuse $= x$, adjacent $= 3$, opposite $= \\sqrt{x^2-9}$. So $\\tan\\theta = \\dfrac{\\sqrt{x^2-9}}{3}$ and $\\theta = \\sec^{-1}\\!\\dfrac{x}{3}$.</p>
+          $$\\int \\frac{\\sqrt{x^2-9}}{x}\\,dx = \\sqrt{x^2-9} - 3\\sec^{-1}\\!\\left(\\frac{x}{3}\\right) + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistakes</div>
+      <div class="card-title">Three traps</div>
+      <ul>
+        <li><strong>Forgetting $dx$ also changes.</strong> If $x = 3\\sin\\theta$ then $dx = 3\\cos\\theta\\,d\\theta$, not $d\\theta$.</li>
+        <li><strong>Leaving the answer in $\\theta$.</strong> The question is in $x$, so finish with the triangle.</li>
+        <li><strong>Writing $\\sqrt{9-x^2} = 3 - x$.</strong> A root never splits over subtraction; substitute first, then simplify.</li>
+      </ul>
     </div>
 
     <div class="decision-tree fade-up">
@@ -726,6 +1247,29 @@ const CHAPTER_CONTENT = {
       <div class="math-block">$$\\int \\sin(kx)\\,dx = -\\frac{1}{k}\\cos(kx) + C \\qquad \\int \\cos(kx)\\,dx = \\frac{1}{k}\\sin(kx) + C \\quad (k \\neq 0)$$</div>
     </div>
 
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why divide by $k$?</div>
+      <p>By the chain rule, $\\dfrac{d}{dx}\\sin(kx) = k\\cos(kx)$: differentiating <em>adds</em> a factor of $k$. Integrating has to undo that, so we <strong>divide by $k$</strong>. (This is just a quick $u$-substitution with $u = kx$.)</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.4.1.1</span>
+        <h4>Evaluate $\\displaystyle\\int_0^{\\pi/2}\\sin(2x)\\,dx$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Find the antiderivative ($k = 2$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\sin(2x)\\,dx = -\\frac{1}{2}\\cos(2x) + C$$
+          <p>Check: differentiating $-\\tfrac12\\cos 2x$ gives $-\\tfrac12\\cdot(-2\\sin 2x) = \\sin 2x$. &#10003;</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Evaluate at the limits</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\left[-\\frac{1}{2}\\cos(2x)\\right]_0^{\\pi/2} = -\\frac{1}{2}\\cos\\pi + \\frac{1}{2}\\cos 0 = \\frac{1}{2} + \\frac{1}{2} = 1$$</div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch9-sec4-2" class="section-heading fade-up"><span class="section-num">9.4.2</span> Powers of sin(x) and Powers of cos(x)</h3>
     <div class="content-card card-tip fade-up">
       <div class="card-badge">${Icons.bulb} Integrating Powers of Sine and Cosine</div>
@@ -735,6 +1279,60 @@ const CHAPTER_CONTENT = {
           <div class="math-block">$$\\sin^2 x = \\frac{1 - \\cos(2x)}{2} \\qquad \\cos^2 x = \\frac{1 + \\cos(2x)}{2}$$</div>
         </li>
       </ul>
+    </div>
+
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why odd and even powers are treated differently</div>
+      <p><strong>Odd power:</strong> $\\sin^3 x = \\sin^2 x\\cdot\\sin x$. Peeling off one $\\sin x$ leaves exactly what $du$ needs when $u = \\cos x$ (since $du = -\\sin x\\,dx$), and the even power left over converts to $\\cos x$ with $\\sin^2 x = 1-\\cos^2 x$.</p>
+      <p><strong>Even power:</strong> there is no spare factor to use as $du$, so a substitution cannot start. Instead the half-angle identity <em>lowers the power</em> and brings in $\\cos 2x$, which we know how to integrate.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.4.2.1</span>
+        <h4>Evaluate $\\displaystyle\\int \\sin^3 x\\,dx$ (odd power)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Peel off one $\\sin x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\sin^2 x\\cdot\\sin x\\,dx$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Convert the even part with $\\sin^2 x = 1-\\cos^2 x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int (1-\\cos^2 x)\\sin x\\,dx$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Substitute $u = \\cos x$, $du = -\\sin x\\,dx$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$-\\int (1-u^2)\\,du = -u + \\frac{u^3}{3} + C$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Back to $x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\sin^3 x\\,dx = -\\cos x + \\frac{\\cos^3 x}{3} + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.4.2.2</span>
+        <h4>Evaluate $\\displaystyle\\int \\cos^2 x\\,dx$ (even power)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">No spare factor, so use the half-angle identity</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\cos^2 x = \\frac{1+\\cos 2x}{2}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Integrate (the $\\cos 2x$ term uses the $1/k$ rule from 9.4.1)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{1}{2}\\int (1+\\cos 2x)\\,dx = \\frac{1}{2}\\left(x + \\frac{\\sin 2x}{2}\\right) + C = \\frac{x}{2} + \\frac{\\sin 2x}{4} + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistake</div>
+      <div class="math-block">$$\\text{WRONG: } \\int\\cos^2 x\\,dx = \\frac{\\cos^3 x}{3} \\qquad \\text{CORRECT: use } \\cos^2 x = \\tfrac{1+\\cos 2x}{2}$$</div>
+      <p>The power rule only works when the derivative of the base is also present. There is no $\\sin x\\,dx$ here, so you cannot treat $\\cos x$ like a plain variable.</p>
     </div>
 
     <h3 id="ch9-sec4-3" class="section-heading fade-up"><span class="section-num">9.4.3</span> Products of Powers of sin(x) and Powers of cos(x)</h3>
@@ -747,6 +1345,54 @@ const CHAPTER_CONTENT = {
       </ol>
     </div>
 
+    <div class="content-card card-exam fade-up">
+      <div class="card-badge">${Icons.target} Exam Tip</div>
+      <div class="card-title">Look for an odd power first</div>
+      <p>Check the powers in this order: is the power of $\\cos x$ odd? Is the power of $\\sin x$ odd? If either is, use the quick $u$-substitution. Only use half-angle identities when <strong>both are even</strong>, because that route is the longest.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.4.3.1</span>
+        <h4>Evaluate $\\displaystyle\\int \\sin^2 x\\cos^3 x\\,dx$ ($\\cos$ has an odd power)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Save one $\\cos x\\,dx$ and convert the rest with $\\cos^2 x = 1-\\sin^2 x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\sin^2 x\\,(1-\\sin^2 x)\\cos x\\,dx$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute $u = \\sin x$, $du = \\cos x\\,dx$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int u^2(1-u^2)\\,du = \\int (u^2 - u^4)\\,du = \\frac{u^3}{3} - \\frac{u^5}{5} + C$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Back to $x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{\\sin^3 x}{3} - \\frac{\\sin^5 x}{5} + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.4.3.2</span>
+        <h4>Evaluate $\\displaystyle\\int \\sin^2 x\\cos^2 x\\,dx$ (both even)</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Combine first using $\\sin x\\cos x = \\tfrac12\\sin 2x$ (saves work)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\sin^2 x\\cos^2 x = \\left(\\tfrac12\\sin 2x\\right)^2 = \\frac{1}{4}\\sin^2 2x$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Half-angle identity on $\\sin^2 2x$ (the angle doubles to $4x$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{1}{4}\\cdot\\frac{1-\\cos 4x}{2} = \\frac{1-\\cos 4x}{8}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\frac{1-\\cos 4x}{8}\\,dx = \\frac{x}{8} - \\frac{\\sin 4x}{32} + C$$</div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch9-sec4-4" class="section-heading fade-up"><span class="section-num">9.4.4</span> Products of sin and cos with Different Arguments</h3>
     <div class="content-card card-theorem fade-up">
       <div class="card-badge">${Icons.book} Product-to-Sum Identities</div>
@@ -755,11 +1401,89 @@ const CHAPTER_CONTENT = {
       <div class="math-block">$$\\cos A \\cos B = \\frac{1}{2}\\Big[\\cos(A-B) + \\cos(A+B)\\Big]$$</div>
     </div>
 
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why we need these identities</div>
+      <p>When the angles differ (say $3x$ and $5x$), no $u$-substitution works, because neither factor is the derivative of the other. The product-to-sum identities rewrite the product as a <strong>sum</strong> of single sines or cosines, and each of those integrates with the $1/k$ rule from 9.4.1.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.4.4.1</span>
+        <h4>Evaluate $\\displaystyle\\int \\sin 3x\\cos 5x\\,dx$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Match the pattern $\\sin A\\cos B$ with $A = 3x$, $B = 5x$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\sin A\\cos B = \\tfrac12\\big[\\sin(A-B)+\\sin(A+B)\\big]$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Apply it (note $A-B = -2x$, and sine is odd)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\sin 3x\\cos 5x = \\tfrac12\\big[\\sin(-2x) + \\sin 8x\\big] = \\tfrac12\\big[-\\sin 2x + \\sin 8x\\big]$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate each term with the $1/k$ rule</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{1}{2}\\left[\\frac{\\cos 2x}{2} - \\frac{\\cos 8x}{8}\\right] + C = \\frac{\\cos 2x}{4} - \\frac{\\cos 8x}{16} + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistake</div>
+      <p>$A - B$ is often negative. Use $\\sin(-\\theta) = -\\sin\\theta$ and $\\cos(-\\theta) = \\cos\\theta$ to tidy it up before integrating, otherwise the sign of the sine terms goes wrong.</p>
+    </div>
+
     <h3 id="ch9-sec4-5" class="section-heading fade-up"><span class="section-num">9.4.5</span> Powers of tan(x) and cot(x)</h3>
     <div class="content-card card-tip fade-up">
       <div class="card-badge">${Icons.bulb} Powers of Tan and Cot</div>
       <p>Use identity $\\tan^2 x = \\sec^2 x - 1$ or $\\cot^2 x = \\csc^2 x - 1$ iteratively:</p>
       <div class="math-block">$$\\int \\tan^n x \\, dx = \\int \\tan^{n-2} x (\\sec^2 x - 1) \\, dx = \\frac{\\tan^{n-1} x}{n-1} - \\int \\tan^{n-2} x \\, dx$$</div>
+    </div>
+
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why it works</div>
+      <p>This is the same trick as 9.4.2. Since $\\dfrac{d}{dx}\\tan x = \\sec^2 x$, a spare $\\sec^2 x\\,dx$ is exactly $du$ for $u = \\tan x$. The identity $\\tan^2 x = \\sec^2 x - 1$ is how we <strong>create</strong> that spare $\\sec^2 x$. Peel off $\\tan^2 x$, replace it, then split into two integrals.</p>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.4.5.1</span>
+        <h4>Evaluate $\\displaystyle\\int \\tan^2 x\\,dx$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Replace $\\tan^2 x$ with $\\sec^2 x - 1$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int (\\sec^2 x - 1)\\,dx$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Integrate each term</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\tan^2 x\\,dx = \\tan x - x + C$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 9.4.5.2</span>
+        <h4>Evaluate $\\displaystyle\\int \\tan^3 x\\,dx$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Peel off $\\tan^2 x$ and replace it</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\tan x\\,\\tan^2 x\\,dx = \\int \\tan x(\\sec^2 x - 1)\\,dx = \\int \\tan x\\sec^2 x\\,dx - \\int \\tan x\\,dx$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">First integral: $u = \\tan x$, $du = \\sec^2 x\\,dx$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int u\\,du = \\frac{\\tan^2 x}{2}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Second integral: recall $\\displaystyle\\int \\tan x\\,dx = -\\ln|\\cos x|$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$-\\int \\tan x\\,dx = +\\ln|\\cos x|$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Combine</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int \\tan^3 x\\,dx = \\frac{\\tan^2 x}{2} + \\ln|\\cos x| + C \\quad\\Big(= \\frac{\\tan^2 x}{2} - \\ln|\\sec x| + C\\Big)$$</div>
+        </div>
+      </div>
     </div>
 
     <h2 id="ch9-sec5" class="section-heading fade-up"><span class="section-num">9.5</span> Partial Fraction Decomposition</h2>
@@ -1387,6 +2111,25 @@ const CHAPTER_CONTENT = {
       <div class="card-badge">${Icons.target} Remainder Estimate</div>
       <div class="math-block">$$\\int_{n+1}^\\infty f(x)\\,dx \\leq R_n \\leq \\int_n^\\infty f(x)\\,dx \\quad \\text{where } R_n = S - S_n$$</div>
     </div>
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why it works</div>
+      <p>The sum $\\sum f(n)$ is the total area of rectangles of width $1$ and height $f(n)$. Because $f$ is decreasing:</p>
+      <ul>
+        <li>Rectangles drawn <em>to the right</em> stay below the curve, so the sum is at most $a_1 + \\int_1^\\infty f$. If the integral is finite, so is the sum.</li>
+        <li>Rectangles drawn <em>to the left</em> stick out above the curve, so the sum is at least $\\int_1^\\infty f$. If the integral is infinite, so is the sum.</li>
+      </ul>
+      <p>This is why $f$ must be <strong>continuous, positive and decreasing</strong>: the comparison with area breaks without them.</p>
+    </div>
+
+    <div class="content-card card-memory fade-up">
+      <div class="card-badge">${Icons.brain} Your two benchmark series</div>
+      <ul>
+        <li><strong>$p$-series</strong> $\\displaystyle\\sum_{n=1}^\\infty \\frac{1}{n^p}$: converges if $p > 1$, diverges if $p \\le 1$. (This is the Integral Test applied to $\\int_1^\\infty x^{-p}\\,dx$, which is finite exactly when $p > 1$.)</li>
+        <li><strong>Geometric series</strong> $\\displaystyle\\sum_{n=0}^\\infty ar^n$: converges if $|r| < 1$, with sum $\\dfrac{a}{1-r}$; diverges if $|r| \\ge 1$.</li>
+      </ul>
+      <p>The Comparison Tests below measure everything else against these two.</p>
+    </div>
+
     <div class="worked-example fade-up">
       <div class="worked-example-header">
         <span class="ex-badge">Worked Example 11.3.1.1</span>
@@ -1415,6 +2158,36 @@ const CHAPTER_CONTENT = {
       </div>
     </div>
 
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.1.2</span>
+        <h4>Does $\\displaystyle\\sum_{n=2}^\\infty \\frac{1}{n\\ln n}$ converge?</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Check the conditions for $f(x) = \\dfrac{1}{x\\ln x}$ on $[2,\\infty)$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>It is continuous and positive for $x \\ge 2$, and decreasing because $x\\ln x$ increases. (The series starts at $n = 2$ because $\\ln 1 = 0$ would make the first term undefined.)</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Substitute $u = \\ln x$ in the improper integral</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\int_2^\\infty \\frac{dx}{x\\ln x} = \\lim_{t\\to\\infty}\\Big[\\ln|\\ln x|\\Big]_2^t = \\lim_{t\\to\\infty}\\big(\\ln\\ln t - \\ln\\ln 2\\big) = \\infty$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclude</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>The integral diverges, so the series <strong>diverges</strong>. It diverges extremely slowly, but it does diverge. &#10003;</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistakes</div>
+      <ul>
+        <li><strong>Not checking "decreasing".</strong> A function like $\\dfrac{2+\\sin n}{n}$ is not decreasing, so the test cannot be used.</li>
+        <li><strong>Treating the integral as the sum.</strong> The integral's value only tells you convergence, not $\\sum a_n$.</li>
+        <li><strong>Integrating from the wrong start.</strong> Match the lower limit to where the series starts.</li>
+      </ul>
+    </div>
+
     <h3 id="ch11-sec3-2" class="section-heading fade-up"><span class="section-num">11.3.2</span> The Comparison Test</h3>
     
     <div class="content-card card-theorem fade-up">
@@ -1427,6 +2200,21 @@ const CHAPTER_CONTENT = {
       <p><strong>2. Limit Comparison Test:</strong> If $a_n > 0, b_n > 0$ and $\\displaystyle\\lim_{n \\to \\infty} \\frac{a_n}{b_n} = L$ where $0 < L < \\infty$:</p>
       <p>Both series $\\sum a_n$ and $\\sum b_n$ either both converge or both diverge.</p>
     </div>
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why it works</div>
+      <p><strong>Direct:</strong> if your terms are smaller than the terms of a series that adds to a finite number, your total can't be bigger than that finite number. If your terms are bigger than those of a series that blows up, yours blows up too.</p>
+      <p><strong>Limit:</strong> if $\\dfrac{a_n}{b_n} \\to L$ with $0 < L < \\infty$, then for large $n$, $a_n \\approx L\\,b_n$. The tails are constant multiples of each other, so they behave the same way.</p>
+    </div>
+
+    <div class="content-card card-memory fade-up">
+      <div class="card-badge">${Icons.brain} Choosing $b_n$ and the test</div>
+      <ul>
+        <li><strong>Choosing $b_n$:</strong> keep only the dominant term on top and bottom. $\\dfrac{2n+1}{n^2+3} \\to \\dfrac{2n}{n^2} \\to \\dfrac1n$ (constants don't matter). Use a $p$-series or geometric series.</li>
+        <li><strong>Direct Comparison</strong> when the inequality is obvious <em>and points the right way</em>.</li>
+        <li><strong>Limit Comparison</strong> when the inequality goes the wrong way or is messy (typical for subtraction in the denominator).</li>
+      </ul>
+    </div>
+
     <div class="worked-example fade-up">
       <div class="worked-example-header">
         <span class="ex-badge">Worked Example 11.3.2.1</span>
@@ -1484,6 +2272,37 @@ const CHAPTER_CONTENT = {
       </div>
     </div>
 
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.2.3</span>
+        <h4>Does $\\displaystyle\\sum_{n=1}^\\infty \\frac{1}{2^n - 1}$ converge?</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Try Direct Comparison with $\\dfrac{1}{2^n}$: the inequality goes the wrong way</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>Subtracting $1$ makes the denominator smaller, so $\\dfrac{1}{2^n - 1} > \\dfrac{1}{2^n}$. Being <em>bigger</em> than a convergent series proves nothing, so Direct Comparison fails.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Switch to Limit Comparison with $b_n = \\dfrac{1}{2^n}$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\lim_{n\\to\\infty}\\frac{1/(2^n-1)}{1/2^n} = \\lim_{n\\to\\infty}\\frac{2^n}{2^n-1} = 1$$
+          <p>Since $0 < 1 < \\infty$, both series behave the same way.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Decide using $\\sum b_n$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>$\\sum \\dfrac{1}{2^n}$ is geometric with $r = \\tfrac12$, so it converges. Therefore $\\sum \\dfrac{1}{2^n - 1}$ <strong>converges</strong>. &#10003;</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistakes</div>
+      <ul>
+        <li><strong>Wrong direction.</strong> Smaller than a <em>divergent</em> series, or bigger than a <em>convergent</em> series, proves nothing.</li>
+        <li><strong>Limit Comparison with $L = 0$ or $L = \\infty$.</strong> The test needs $0 < L < \\infty$. Otherwise pick a different $b_n$.</li>
+        <li><strong>Negative terms.</strong> Both tests need positive terms. If $a_n$ changes sign, look at $|a_n|$ or use another test.</li>
+      </ul>
+    </div>
+
     <h3 id="ch11-sec3-3" class="section-heading fade-up"><span class="section-num">11.3.3</span> Alternating Series</h3>
     
     <div class="content-card card-theorem fade-up">
@@ -1495,6 +2314,24 @@ const CHAPTER_CONTENT = {
       </ol>
       <p><strong>Estimation Theorem:</strong> $|R_n| = |S - S_n| \\leq b_{n+1}$.</p>
     </div>
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why it works</div>
+      <p>Look at the partial sums: add $b_1$, subtract $b_2$, add $b_3$, and so on. Each step goes back the other way by a smaller amount, and the steps shrink to $0$. The partial sums bounce left and right, squeezing in on one value.</p>
+      <p>The true sum is always trapped between two consecutive partial sums, so stopping after $n$ terms gives an error of at most the <em>first omitted term</em>, $b_{n+1}$.</p>
+    </div>
+
+    <div class="content-card card-exam fade-up">
+      <div class="card-badge">${Icons.target} Exam Tip</div>
+      <div class="card-title">The three checks</div>
+      <p>Always write out all three checks:</p>
+      <ol>
+        <li>$b_n > 0$ (the signs really alternate).</li>
+        <li>$b_n$ is decreasing, i.e. $b_{n+1} \\le b_n$.</li>
+        <li>$\\lim b_n = 0$.</li>
+      </ol>
+      <p>If $\\lim b_n \\ne 0$ the series <strong>diverges</strong> (Divergence Test). If $b_n \\to 0$ but $b_n$ is not decreasing, this test is simply <strong>inconclusive</strong>.</p>
+    </div>
+
     <div class="worked-example fade-up">
       <div class="worked-example-header">
         <span class="ex-badge">Worked Example 11.3.3.1</span>
@@ -1529,6 +2366,28 @@ const CHAPTER_CONTENT = {
       </div>
     </div>
 
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.3.2</span>
+        <h4>How many terms of $\\displaystyle\\sum_{n=1}^\\infty \\frac{(-1)^{n-1}}{n^2}$ guarantee an error less than $0.001$?</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Use the estimate $|R_n| \\le b_{n+1}$ with $b_n = \\dfrac{1}{n^2}$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$|R_n| \\le \\frac{1}{(n+1)^2}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Require the bound to be less than $0.001$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{1}{(n+1)^2} < 0.001 \\;\\Longrightarrow\\; (n+1)^2 > 1000 \\;\\Longrightarrow\\; n + 1 > 31.6$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Round up</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>$n + 1 \\ge 32$, so $n \\ge 31$. Check: $b_{32} = \\dfrac{1}{1024} \\approx 0.00098 < 0.001$. &#10003;</p>
+          <p>Using the first <strong>31 terms</strong> guarantees the error is below $0.001$.</p></div>
+        </div>
+      </div>
+    </div>
+
     <h3 id="ch11-sec3-4" class="section-heading fade-up"><span class="section-num">11.3.4</span> Absolute Convergence and the Ratio and Root Tests</h3>
     
     <div class="content-card card-theorem fade-up">
@@ -1540,6 +2399,20 @@ const CHAPTER_CONTENT = {
         <li><strong>$L = 1$:</strong> Test is <em>inconclusive</em> (use another test).</li>
       </ul>
     </div>
+    <div class="content-card card-definition fade-up">
+      <div class="card-badge">${Icons.book} Definition - Absolute vs Conditional Convergence</div>
+      <ul>
+        <li><strong>Absolutely convergent:</strong> $\\sum |a_n|$ converges. In that case $\\sum a_n$ converges too.</li>
+        <li><strong>Conditionally convergent:</strong> $\\sum a_n$ converges but $\\sum |a_n|$ diverges. The series only works because of the cancellation between positive and negative terms.</li>
+      </ul>
+    </div>
+
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Why Ratio and Root work</div>
+      <p>If $\\left|\\dfrac{a_{n+1}}{a_n}\\right| \\to L < 1$, then eventually each term is about $L$ times the previous one. The tail looks like a geometric series with ratio $L$, which converges. If $L > 1$ the terms grow, so the series diverges.</p>
+      <p>When $L = 1$ the tail could look like $\\sum\\frac1n$ (diverges) or $\\sum\\frac{1}{n^2}$ (converges), and both give $L = 1$. That is why the test says nothing.</p>
+    </div>
+
     <div class="worked-example fade-up">
       <div class="worked-example-header">
         <span class="ex-badge">Worked Example 11.3.4.1</span>
@@ -1593,6 +2466,37 @@ const CHAPTER_CONTENT = {
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.3.4.3</span>
+        <h4>Classify $\\displaystyle\\sum_{n=1}^\\infty \\frac{(-1)^{n-1}}{n}$ as absolutely or conditionally convergent</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Does the series itself converge? (Alternating Series Test)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>$b_n = \\tfrac1n$ is positive, decreasing and tends to $0$, so the series <strong>converges</strong>.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Does the series of absolute values converge?</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\sum_{n=1}^\\infty \\left|\\frac{(-1)^{n-1}}{n}\\right| = \\sum_{n=1}^\\infty \\frac{1}{n}$$
+          <p>This is the harmonic series ($p = 1$), which <strong>diverges</strong>.</p></div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Conclude</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>It converges, but not absolutely, so it is <strong>conditionally convergent</strong>. &#10003;</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistakes</div>
+      <ul>
+        <li><strong>Reading $L = 1$ as "diverges".</strong> It means inconclusive. Switch to another test (for example $\\sum\\frac{1}{n^2}$ gives $L = 1$ but converges).</li>
+        <li><strong>Using the Ratio Test on polynomial terms.</strong> For terms like $\\frac{1}{n^2+1}$, $L$ is always $1$. The Ratio Test is for factorials and exponentials.</li>
+        <li><strong>Forgetting the absolute value</strong> in $\\left|\\frac{a_{n+1}}{a_n}\\right|$, which breaks alternating series.</li>
+      </ul>
     </div>
 
     <h3 id="ch11-sec3-5" class="section-heading fade-up"><span class="section-num">11.3.5</span> Strategy for Testing Series</h3>
@@ -1693,6 +2597,27 @@ const CHAPTER_CONTENT = {
       <p>This is an infinite polynomial centered at $x=a$. It converges at $x=a$ always. To find the <strong>Radius of Convergence $R$</strong>, use the <strong>Ratio Test</strong> on the absolute value of the terms.</p>
     </div>
 
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} What "radius of convergence" means</div>
+      <p>Every power series $\\sum c_n(x-a)^n$ behaves in exactly one of three ways:</p>
+      <ul>
+        <li><strong>$R = 0$:</strong> converges only at $x = a$.</li>
+        <li><strong>$R = \\infty$:</strong> converges for every $x$.</li>
+        <li><strong>$0 < R < \\infty$:</strong> converges for $|x-a| < R$, diverges for $|x-a| > R$. At the two endpoints $x = a \\pm R$ it could go either way.</li>
+      </ul>
+      <p>So the convergence region is an interval <strong>centered at $a$</strong> with half-width $R$. $R$ is a single number; the <em>interval of convergence</em> is the set of $x$-values, and it must be stated with the correct brackets.</p>
+    </div>
+
+    <div class="content-card card-memory fade-up">
+      <div class="card-badge">${Icons.brain} The 4-Step Method</div>
+      <ol>
+        <li><strong>Ratio Test</strong> on the absolute value of the terms. You get $\\lim\\left|\\frac{a_{n+1}}{a_n}\\right| = L\\,|x-a|$.</li>
+        <li><strong>Solve $L\\,|x-a| < 1$.</strong> This gives $|x-a| < R$ with $R = 1/L$.</li>
+        <li><strong>Write the open interval</strong> $(a-R,\\,a+R)$.</li>
+        <li><strong>Test each endpoint separately</strong> by substituting it into the series and using a different test. The Ratio Test always gives $1$ at an endpoint, so it cannot decide.</li>
+      </ol>
+    </div>
+
     <div class="worked-example fade-up">
       <div class="worked-example-header">
         <span class="ex-badge">Worked Example 11.4.1</span>
@@ -1723,6 +2648,76 @@ const CHAPTER_CONTENT = {
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.4.2</span>
+        <h4>Find the radius and interval of convergence of $\\displaystyle\\sum_{n=0}^\\infty \\frac{x^n}{n!}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Ratio Test</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\left|\\frac{x^{n+1}}{(n+1)!}\\cdot\\frac{n!}{x^n}\\right| = \\frac{|x|}{n+1} \\;\\longrightarrow\\; 0$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Compare with $1$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>The limit is $0 < 1$ for <strong>every</strong> $x$, so there is no restriction on $x$.</p>
+          $$R = \\infty, \\qquad \\text{interval of convergence } (-\\infty,\\infty)$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.4.3</span>
+        <h4>Find the radius and interval of convergence of $\\displaystyle\\sum_{n=0}^\\infty n!\\,x^n$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Ratio Test</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\left|\\frac{(n+1)!\\,x^{n+1}}{n!\\,x^n}\\right| = (n+1)|x|$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Take the limit</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>For any $x \\ne 0$ this goes to $\\infty$, which is bigger than $1$, so the series diverges. At $x = 0$ every term after the first is $0$.</p>
+          $$R = 0, \\qquad \\text{converges only at } x = 0$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 11.4.4</span>
+        <h4>Find the interval of convergence of $\\displaystyle\\sum_{n=1}^\\infty \\frac{(x+1)^n}{n^2\\,3^n}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Ratio Test</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\left|\\frac{(x+1)^{n+1}}{(n+1)^2 3^{n+1}}\\cdot\\frac{n^2 3^n}{(x+1)^n}\\right| = \\frac{|x+1|}{3}\\cdot\\frac{n^2}{(n+1)^2} \\;\\longrightarrow\\; \\frac{|x+1|}{3}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Solve $\\dfrac{|x+1|}{3} < 1$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$|x+1| < 3 \\implies R = 3, \\qquad -4 < x < 2$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Check the endpoints</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><ul style="margin-left: 20px; font-size: 0.9rem; color: var(--text-2);">
+            <li>$x = 2$: $\\displaystyle\\sum \\frac{3^n}{n^2 3^n} = \\sum\\frac{1}{n^2}$, a $p$-series with $p = 2 > 1$, so it <strong>converges</strong>.</li>
+            <li>$x = -4$: $\\displaystyle\\sum \\frac{(-3)^n}{n^2 3^n} = \\sum\\frac{(-1)^n}{n^2}$, which converges absolutely (same $p$-series), so it <strong>converges</strong>.</li>
+          </ul>
+          <strong>Interval of Convergence: $[-4,\\,2]$</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistakes</div>
+      <ul>
+        <li><strong>Skipping the endpoints.</strong> The interval is not finished until you have tested both ends.</li>
+        <li><strong>Using the Ratio Test at an endpoint.</strong> It returns $1$ there (inconclusive). Use the Integral, Comparison or Alternating Series Test instead.</li>
+        <li><strong>Forgetting the absolute value</strong> in the Ratio Test, which loses the "$|x-a|$" and the correct two-sided interval.</li>
+      </ul>
     </div>
 
     <h2 id="ch11-sec5" class="section-heading fade-up"><span class="section-num">11.5</span> Representations of Functions as Power Series</h2>
@@ -2171,6 +3166,24 @@ const CHAPTER_CONTENT = {
 
     <h2 id="ch12-sec1" class="section-heading fade-up"><span class="section-num">12.1</span> Separable ODEs</h2>
 
+    <div class="content-card card-definition fade-up">
+      <div class="card-badge">${Icons.book} Definition - Separable ODE</div>
+      <p>A first-order ODE is <strong>separable</strong> if the right-hand side can be factored into an $x$-only part times a $y$-only part:</p>
+      <div class="math-block">$$\\frac{dy}{dx} = g(x)\\,h(y)$$</div>
+      <p>Separable: $\\dfrac{dy}{dx} = xy$, $\\ \\dfrac{dy}{dx} = \\dfrac{x}{y}$, $\\ \\dfrac{dy}{dx} = e^{x-y}$ (since $e^{x-y} = e^x e^{-y}$).<br>Not separable: $\\dfrac{dy}{dx} = x + y$ (it cannot be factored into an $x$ part times a $y$ part).</p>
+    </div>
+
+    <div class="content-card card-memory fade-up">
+      <div class="card-badge">${Icons.brain} The Method</div>
+      <ol>
+        <li><strong>Separate:</strong> divide by $h(y)$ and multiply by $dx$, so all the $y$'s are with $dy$ and all the $x$'s with $dx$: $\\dfrac{dy}{h(y)} = g(x)\\,dx$.</li>
+        <li><strong>Integrate both sides</strong>, each with respect to its own variable. Add <em>one</em> constant $C$.</li>
+        <li><strong>Solve for $y$</strong> if you can.</li>
+        <li><strong>Use the initial condition</strong> (if given) to find $C$.</li>
+      </ol>
+      <p>Why it works: the left side $\\int \\frac{dy}{h(y)}$ is really $\\int \\frac{1}{h(y)}\\frac{dy}{dx}\\,dx$, so this is just $u$-substitution run backwards. Once separated, each side is an ordinary integral.</p>
+    </div>
+
     <div class="worked-example fade-up">
       <div class="worked-example-header">
         <span class="ex-badge">Worked Example 12.1.1</span>
@@ -2190,6 +3203,70 @@ const CHAPTER_CONTENT = {
           <div class="step-body">$$y = e^{x^2/2 + C_1} = Ce^{x^2/2} \\quad (C = \\pm e^{C_1})$$</div>
         </div>
       </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 12.1.2</span>
+        <h4>Solve $\\dfrac{dy}{dx} = \\dfrac{x}{y}$ with $y(0) = 2$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Separate the variables</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$y\\,dy = x\\,dx$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Integrate both sides (one constant)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{y^2}{2} = \\frac{x^2}{2} + C \\;\\Rightarrow\\; y^2 = x^2 + K \\quad (K = 2C)$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Use $y(0) = 2$ to find $K$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$2^2 = 0 + K \\;\\Rightarrow\\; K = 4$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Solve for $y$, choosing the sign that matches the initial condition</div><div class="step-chevron">▶</div></div>
+          <div class="step-body"><p>Since $y(0) = 2 > 0$ we take the positive root:</p>
+          $$y = \\sqrt{x^2 + 4}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 12.1.3</span>
+        <h4>Solve $\\dfrac{dy}{dx} = e^{x-y}$ with $y(0) = 1$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Factor the right side to see that it is separable</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{dy}{dx} = e^x\\cdot e^{-y}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Separate (divide by $e^{-y}$, which is the same as multiplying by $e^y$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$e^y\\,dy = e^x\\,dx$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate both sides</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$e^y = e^x + C$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Use $y(0) = 1$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$e^1 = e^0 + C \\;\\Rightarrow\\; C = e - 1$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">5</div><div class="step-label">Solve for $y$ with a logarithm</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$y = \\ln\\!\\left(e^x + e - 1\\right)$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistakes</div>
+      <ul>
+        <li><strong>Two constants.</strong> Put <em>one</em> $C$ on one side after integrating. $C_1$ on the left and $C_2$ on the right just merge into a single constant.</li>
+        <li><strong>Losing solutions.</strong> Dividing by $h(y)$ assumes $h(y) \\ne 0$. If $h(y_0) = 0$ then the constant function $y = y_0$ is also a solution. For $\\frac{dy}{dx} = xy$ that is $y = 0$ (already included when $C = 0$).</li>
+        <li><strong>Forgetting the initial condition</strong> before solving for $y$, which makes the sign or constant ambiguous.</li>
+      </ul>
     </div>
 
     <h2 id="ch12-sec2" class="section-heading fade-up"><span class="section-num">12.2</span> Homogeneous ODEs</h2>
@@ -2277,6 +3354,26 @@ const CHAPTER_CONTENT = {
       <p><em>Why it works</em>: Multiplying through by $\\mu$ makes the left side a perfect derivative: $\\frac{d}{dx}[\\mu y] = \\mu Q$.</p>
     </div>
 
+    <div class="content-card card-tip fade-up">
+      <div class="card-badge">${Icons.bulb} Where the integrating factor comes from</div>
+      <p>We want to multiply $y' + P(x)y = Q(x)$ by some $\\mu(x)$ so that the left side becomes a single product-rule derivative. The product rule says</p>
+      <div class="math-block">$$\\frac{d}{dx}\\big[\\mu y\\big] = \\mu y' + \\mu' y$$</div>
+      <p>and the left side after multiplying is $\\mu y' + \\mu P\\,y$. These match exactly when</p>
+      <div class="math-block">$$\\mu' = P\\,\\mu$$</div>
+      <p>This is a separable ODE for $\\mu$ itself, and solving it gives $\\mu = e^{\\int P\\,dx}$. So the integrating factor is <em>defined</em> to make the left side a perfect derivative, which you can then integrate directly. (No $+C$ is needed when you find $\\mu$: any one antiderivative of $P$ works.)</p>
+    </div>
+
+    <div class="content-card card-memory fade-up">
+      <div class="card-badge">${Icons.brain} The 5-Step Method</div>
+      <ol>
+        <li><strong>Standard form:</strong> divide so the coefficient of $y'$ is $1$: $y' + P(x)y = Q(x)$. <em>Do this first.</em></li>
+        <li><strong>Integrating factor:</strong> $\\mu = e^{\\int P\\,dx}$.</li>
+        <li><strong>Multiply</strong> both sides by $\\mu$. The left side is now $\\dfrac{d}{dx}[\\mu y]$.</li>
+        <li><strong>Integrate</strong> both sides (add $C$ here).</li>
+        <li><strong>Divide by $\\mu$</strong> to solve for $y$ (the $C$ gets divided too).</li>
+      </ol>
+    </div>
+
     <div class="worked-example fade-up">
       <div class="worked-example-header">
         <span class="ex-badge">Worked Example 12.3.1</span>
@@ -2309,6 +3406,66 @@ const CHAPTER_CONTENT = {
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 12.3.2</span>
+        <h4>Solve $xy' - 2y = x^3$ with $y(1) = 2$, for $x > 0$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">Standard form: divide by $x$ so the coefficient of $y'$ is $1$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$y' - \\frac{2}{x}\\,y = x^2 \\qquad\\Longrightarrow\\qquad P(x) = -\\frac{2}{x},\\quad Q(x) = x^2$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Integrating factor</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\mu = e^{\\int -\\frac{2}{x}dx} = e^{-2\\ln x} = e^{\\ln x^{-2}} = x^{-2}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Multiply through: the left side is $\\dfrac{d}{dx}[\\mu y]$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{d}{dx}\\left[\\frac{y}{x^2}\\right] = x^{-2}\\cdot x^2 = 1$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">4</div><div class="step-label">Integrate and solve for $y$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\frac{y}{x^2} = x + C \\;\\Longrightarrow\\; y = x^3 + Cx^2$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">5</div><div class="step-label">Use $y(1) = 2$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$2 = 1 + C \\;\\Rightarrow\\; C = 1 \\qquad\\Longrightarrow\\qquad y = x^3 + x^2$$
+          <p>Check: $y' = 3x^2 + 2x$, so $xy' - 2y = 3x^3 + 2x^2 - 2x^3 - 2x^2 = x^3$. &#10003;</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-example fade-up">
+      <div class="worked-example-header">
+        <span class="ex-badge">Worked Example 12.3.3</span>
+        <h4>Solve $y' + 2y = e^{-x}$</h4>
+      </div>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">1</div><div class="step-label">It is already in standard form: $P = 2$, $Q = e^{-x}$</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$\\mu = e^{\\int 2\\,dx} = e^{2x}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">2</div><div class="step-label">Multiply through and recognize the perfect derivative</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$e^{2x}y' + 2e^{2x}y = e^{x} \\;\\Longrightarrow\\; \\frac{d}{dx}\\big[e^{2x}y\\big] = e^{x}$$</div>
+        </div>
+        <div class="step-item">
+          <div class="step-header"><div class="step-num">3</div><div class="step-label">Integrate and divide by $e^{2x}$ (including the $C$)</div><div class="step-chevron">▶</div></div>
+          <div class="step-body">$$e^{2x}y = e^x + C \\;\\Longrightarrow\\; y = e^{-x} + Ce^{-2x}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card card-mistake fade-up">
+      <div class="card-badge">${Icons.alertTriangle} Common Mistakes</div>
+      <ul>
+        <li><strong>Skipping standard form.</strong> For $xy' - 2y = x^3$, the $P$ is $-\\frac{2}{x}$, not $-2$. The coefficient of $y'$ must be $1$ before you read off $P$.</li>
+        <li><strong>Not dividing $C$ by $\\mu$.</strong> In $\\mu y = \\int\\mu Q\\,dx + C$, divide <em>everything</em> by $\\mu$, including $C$. This is why you get $Cx^2$ above, not just $C$.</li>
+        <li><strong>Simplifying $e^{\\ln x^2}$ wrongly.</strong> $e^{2\\ln x} = e^{\\ln x^2} = x^2$. Use $e^{\\ln A} = A$.</li>
+      </ul>
     </div>
 
     <div class="viz-card fade-up">

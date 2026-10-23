@@ -25,8 +25,8 @@ const Exams = (() => {
       {
         id: 'november',
         label: 'November Exams',
-        cardBlurb: 'Six 2-hour, 90-mark papers on the November scope: optimization, integration, improper integrals, series and ODEs.',
-        blurb: 'Six 2-hour, 90-mark papers laid out like the MATH1036 November 2024 exam, with a multiple-choice Section A and guided written Section B questions. Scope: applied optimization (§6.6), advanced integration techniques (§9.1, 9.2, 9.4), improper integrals (§10), sequences and series (§11.1–11.6) and differential equations (§12.0, 12.1, 12.3).',
+        cardBlurb: 'Nine 2-hour, 90-mark papers on the November scope: optimization, integration, improper integrals, series and ODEs.',
+        blurb: 'Nine 2-hour, 90-mark papers laid out like the MATH1036 November 2024 exam, with a multiple-choice Section A and guided written Section B questions. Scope: applied optimization (§6.6), advanced integration techniques (§9.1, 9.2, 9.4), improper integrals (§10), sequences and series (§11.1–11.6) and differential equations (§12.0, 12.1, 12.3).',
         papers: (typeof NOVEMBER_EXAMS !== 'undefined') ? NOVEMBER_EXAMS : []
       },
       {

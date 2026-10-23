@@ -1,7 +1,7 @@
 /**
  * data/exams-november.js — November practice exams
  *
- * Six original 90-mark / 2-hour practice papers, laid out like the
+ * Nine original 90-mark / 2-hour practice papers, laid out like the
  * MATH1036 November 2024 examination:
  *   Section A  six multiple-choice questions          (14 marks: 2, 3, 2, 3, 2, 2)
  *   Section B  B1-B8 guided written questions         (76 marks: 11, 9, 10, 10, 9, 9, 8, 10)
@@ -19,7 +19,7 @@
  *   §12    Differential equations (12.0 verifying solutions, 12.1 separable, 12.3 first-order linear)
  *            EXCLUDED: 12.2 homogeneous, 12.4 exact
  *
- * Every paper has the same blueprint, so the six papers are balanced but share no question:
+ * Every paper has the same blueprint, so the nine papers are balanced but share no question:
  *   A1 §6.6 optimization setup   A2 §9 integral         A3 §10 improper integral
  *   A4 §11.1-11.3 series         A5 §11.4-11.6          A6 §12 differential equation
  *   B1 §6.6 optimization (7-step workflow, one of: triangle / open box / wire / cylinder-in-cone paradigms)
@@ -27,8 +27,13 @@
  *   B4 §10 improper integrals    B5 §11.1-11.3 sequence + series tests
  *   B6 §11.4-11.6 power series   B7 §12.0/12.1 separable ODE    B8 §12.3 first-order linear ODE
  *
- * No question is copied from a source paper, and no question repeats across these six
+ * No question is copied from a source paper, and no question repeats across these nine
  * papers or the Tutorial Quiz Test 4 papers in data/exams-tutorial.js.
+ *
+ * Papers 7-9 add further §6.6 paradigms (a fence along a river, a cable across a river,
+ * an open-domain poster problem), new reduction formulas (x^n e^x, x^2 (ln x)^n,
+ * the (1-x^2)^n beta-type formula) and the extra bridging notes listed in the solutions
+ * (Limit Comparison Test, p-integral at zero, open-domain optimization).
  *
  * Each question has a "label" (A1-A6, B1-B8) that the viewer shows instead of
  * the plain number.
@@ -317,7 +322,7 @@ The series converges when $\dfrac{|x-3|}{2}<1$, i.e. $|x-3|<2$. So the **radius 
 
 **Interval of convergence: $(1,5)$.** ✓
 
-**(b)** Differentiate: $f(x)=x^{-1}$, $f'(x)=-x^{-2}$, $f''(x)=2x^{-3}$, $f'''(x)=-6x^{-4}$, and in general $f^{(n)}(x)=\dfrac{(-1)^nn!}{x^{n+1}}$. ✓✓
+**(b)** The Taylor series about $a$ comes from the general formula $c_n=\dfrac{f^{(n)}(a)}{n!}$ (Theorem 11.21); the Maclaurin table in §11.6 covers only $a=0$. Differentiate: $f(x)=x^{-1}$, $f'(x)=-x^{-2}$, $f''(x)=2x^{-3}$, $f'''(x)=-6x^{-4}$, and in general $f^{(n)}(x)=\dfrac{(-1)^nn!}{x^{n+1}}$. ✓✓
 
 Therefore $c_n=\dfrac{f^{(n)}(2)}{n!}=\dfrac{(-1)^n}{2^{n+1}}$. ✓ The Taylor series is
 $$\frac1x=\sum_{n=0}^{\infty}\frac{(-1)^n}{2^{n+1}}(x-2)^n=\frac12-\frac{x-2}{4}+\frac{(x-2)^2}{8}-\frac{(x-2)^3}{16}+\cdots$$ ✓
@@ -454,7 +459,7 @@ For $p\neq1$ and $0<t<1$: $\displaystyle\int_t^1x^{-p}dx=\frac{1-t^{1-p}}{1-p}$.
 - If $p>1$ then $t^{1-p}\to\infty$: diverges.
 - If $p=1$: $\int_t^1\frac dx x=-\ln t\to\infty$: diverges.
 
-So it converges exactly when $p<1$. (This is the *opposite* inequality to the benchmark at infinity, where $\int_1^\infty x^{-p}dx$ needs $p>1$.) 
+So it converges exactly when $p<1$. (Theorem 10.1 in the Semester 2 guide states only the benchmark at infinity, $\int_1^\infty x^{-p}dx$, so the benchmark at zero is derived here.) (This is the *opposite* inequality to the benchmark at infinity, where $\int_1^\infty x^{-p}dx$ needs $p>1$.) 
         `
       },
       {
@@ -470,6 +475,8 @@ Consider the series $\displaystyle\sum_{n=1}^{\infty}\frac{2n+3}{n^{3}+n+1}$. Wh
         `,
         solution: String.raw`
 **Answer: B.** ✓✓✓
+
+**Limit Comparison Test** (the limit form of the Comparison Test in §11.3.2; recalled here because the guide states only the direct form): if $a_n,b_n>0$ and $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=c$ with $0<c<\infty$, then $\sum a_n$ and $\sum b_n$ either both converge or both diverge.
 
 The terms are positive. For rational expressions compare with the ratio of the highest powers: $\dfrac{2n}{n^3}\sim\dfrac{2}{n^2}$, so take $b_n=\dfrac1{n^2}$. 
 $$\lim_{n\to\infty}\frac{a_n}{b_n}=\lim_{n\to\infty}\frac{(2n+3)\,n^2}{n^3+n+1}=2,$$ 
@@ -547,7 +554,7 @@ $$2x=\frac{128}{x^2}\ \Longrightarrow\ x^3=64\ \Longrightarrow\ x=4.$$ ✓
 
 **(d)** The domain is not a closed interval, so we examine the end behaviour:
 $$\lim_{x\to0^+}\left(x^2+\frac{128}{x}\right)=\infty,\qquad\lim_{x\to\infty}\left(x^2+\frac{128}{x}\right)=\infty.$$ ✓
-$S$ is continuous on $(0,\infty)$, has the single critical number $x=4$, and $S\to\infty$ at both ends of the domain. So the critical point cannot be a maximum and must be the **absolute minimum**. ✓ (Also $S'<0$ for $0<x<4$ and $S'>0$ for $x>4$.)
+$S$ is continuous on $(0,\infty)$, has the single critical number $x=4$, and $S\to\infty$ at both ends of the domain. So the critical point cannot be a maximum and must be the **absolute minimum**. ✓ (This end-behaviour argument replaces the Closed Interval Method when the domain is open: Study Guide 1 §6.3 states the Extreme Value Theorem only for closed intervals. Also $S'<0$ for $0<x<4$ and $S'>0$ for $x>4$.)
 
 The best container has $x=4$ m and $h=\dfrac{32}{16}=2$ m, and the minimum surface area is $S(4)=16+32=\boxed{48\ \text{m}^2}$. ✓
         `
@@ -774,7 +781,7 @@ $$\int_0^{\pi/2}\sin^{2}x\,\cos^{2}x\,dx=$$
         solution: String.raw`
 **Answer: A.** ✓✓✓
 
-Both powers are even, so use the double-angle identities. Since $\sin x\cos x=\frac12\sin2x$: 
+Both powers are even, so use the double-angle identities. Since $\sin x\cos x=\frac12\sin2x$ (this is $\sin2x=2\sin x\cos x$ rearranged; §9.4 lists the half-angle forms $\sin^2x=\frac{1-\cos2x}{2}$ and $\cos^2x=\frac{1+\cos2x}{2}$): 
 $$\sin^2x\cos^2x=\frac14\sin^22x=\frac14\cdot\frac{1-\cos4x}{2}=\frac{1-\cos4x}{8}.$$ 
 $$\int_0^{\pi/2}\frac{1-\cos4x}{8}\,dx=\frac18\Big[x-\frac{\sin4x}{4}\Big]_0^{\pi/2}=\frac18\cdot\frac\pi2=\frac{\pi}{16}.$$ 
 
@@ -817,6 +824,8 @@ The series $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\sin\frac1n$ is
 **Answer: C.** ✓✓✓
 
 *Convergence.* Let $b_n=\sin\frac1n>0$. Then $b_n\to\sin0=0$ and $b_n$ is decreasing (since $\sin$ is increasing on $[0,1]$ and $\frac1n$ decreases). By the **Alternating Series Test** the series converges. 
+
+*Reminder.* **Limit Comparison Test** (the limit form of the Comparison Test in §11.3.2; recalled here because the guide states only the direct form): if $a_n,b_n>0$ and $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=c$ with $0<c<\infty$, then $\sum a_n$ and $\sum b_n$ either both converge or both diverge.
 
 *Absolute convergence.* $\displaystyle\lim_{n\to\infty}\frac{\sin(1/n)}{1/n}=1$, so by the **Limit Comparison Test** $\sum\sin\frac1n$ behaves like the harmonic series $\sum\frac1n$ and **diverges**.  So the series converges but not absolutely: **conditionally convergent**. 
 
@@ -1228,7 +1237,7 @@ $$S=2\pi r^{2}+2\pi rh=2\pi r^{2}+2\pi r\cdot\frac{54}{r^{2}}=2\pi r^{2}+\frac{1
 **(c)** $S'(r)=4\pi r-\dfrac{108\pi}{r^{2}}=\dfrac{4\pi\left(r^{3}-27\right)}{r^{2}}$. It is defined for all $r>0$, so critical numbers come from $S'(r)=0$: ✓✓
 $$r^{3}=27\ \Longrightarrow\ r=3.$$ ✓
 
-**(d)** $S''(r)=4\pi+\dfrac{216\pi}{r^{3}}>0$ for every $r>0$, so $S$ is concave up on its whole domain. ✓ Hence the critical number $r=3$ gives the **absolute minimum**. ✓ The height is $h=\dfrac{54}{9}=6$ (so $h=2r$), and ✓
+**(d)** $S''(r)=4\pi+\dfrac{216\pi}{r^{3}}>0$ for every $r>0$, so $S$ is concave up on its whole domain. ✓ Hence the critical number $r=3$ gives the **absolute minimum**. ✓ (Theorem 6.11 in Study Guide 1 gives a *local* minimum; because $S$ is concave up on its whole domain, the graph lies above its tangent line at $r=3$, so the local minimum is the absolute minimum.) The height is $h=\dfrac{54}{9}=6$ (so $h=2r$), and ✓
 $$S(3)=2\pi(9)+\frac{108\pi}{3}=18\pi+36\pi=\boxed{54\pi\ \text{cm}^{2}}.$$
         `
       },
@@ -1672,6 +1681,8 @@ The sequence is **convergent with limit $\ln3$**. ✓
 
 **(c)** *Alternating Series Test.* Let $b_n=\dfrac{1}{n+\sqrt n}>0$. The denominator is increasing, so $b_n$ is decreasing, and $b_n\to0$. ✓ Hence $\sum\dfrac{(-1)^n}{n+\sqrt n}$ **converges**. ✓
 
+*Reminder.* **Limit Comparison Test** (the limit form of the Comparison Test in §11.3.2; recalled here because the guide states only the direct form): if $a_n,b_n>0$ and $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=c$ with $0<c<\infty$, then $\sum a_n$ and $\sum b_n$ either both converge or both diverge.
+
 *Absolute convergence.* Compare $\displaystyle\sum\frac{1}{n+\sqrt n}$ with $\displaystyle\sum\frac1n$ by the Limit Comparison Test: ✓
 $$\lim_{n\to\infty}\frac{1/(n+\sqrt n)}{1/n}=\lim_{n\to\infty}\frac{1}{1+n^{-1/2}}=1>0.$$
 Since $\sum\frac1n$ diverges, so does $\sum\frac{1}{n+\sqrt n}$. The series is therefore **conditionally convergent**. ✓
@@ -2009,7 +2020,9 @@ Since $\frac1n\to0$, the **Squeeze Theorem** gives $a_n\to0$. The sequence is **
 $$\frac{a_{n+1}}{a_n}=\frac{(n+1)!}{(n+1)^{n+1}}\cdot\frac{n^{n}}{n!}=\frac{n^{n}}{(n+1)^{n}}=\left(1+\frac1n\right)^{-n}\ \longrightarrow\ \frac1e.$$ ✓
 Since $\frac1e<1$, the series **converges**. ✓
 
-**(c)** All terms are positive. Compare with the convergent geometric series $\displaystyle\sum\left(\frac23\right)^{n}$: ✓
+**(c)** **Limit Comparison Test** (the limit form of the Comparison Test in §11.3.2; recalled here because the guide states only the direct form): if $a_n,b_n>0$ and $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=c$ with $0<c<\infty$, then $\sum a_n$ and $\sum b_n$ either both converge or both diverge.
+
+All terms are positive. Compare with the convergent geometric series $\displaystyle\sum\left(\frac23\right)^{n}$: ✓
 $$\lim_{n\to\infty}\frac{\dfrac{2^{n}+5}{3^{n}+n}}{\left(\dfrac23\right)^{n}}=\lim_{n\to\infty}\frac{1+5/2^{n}}{1+n/3^{n}}=1,$$
 a finite positive number (using $n/3^{n}\to0$). ✓ By the Limit Comparison Test the series **converges**. ✓
         `
@@ -2089,6 +2102,1059 @@ Integrate: $ye^{-x^{2}}=\dfrac{x^{2}}{2}+C$, so the **general solution** is ✓
 $$y=e^{x^{2}}\left(\frac{x^{2}}{2}+C\right).$$
 With $y(0)=1$: $1=C$. ✓ The **particular solution** is ✓
 $$y=e^{x^{2}}\left(\frac{x^{2}}{2}+1\right).$$
+        `
+      }
+    ]
+  },
+{
+    id: 'nov-paper7',
+    label: 'November Paper 7',
+    date: 'November Exam G',
+    kind: 'CALCULUS EXAMINATION',
+    totalMarks: 90,
+    duration: 120,
+    topics: 'A closed box and a field divided by a fence along a river (§6.6), an arctangent substitution and a linear numerator over a completed square (§9.1), sin⁴x cos³x (§9.4), the reduction formula for xⁿeˣ (§9.2), an interior discontinuity and the Comparison Theorem (§10), the Integral Test and an alternating series, a hyperbolic Maclaurin series, and separable and linear ODEs.',
+    instructions: [
+      'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
+      'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
+      'No calculators are allowed.',
+      'You have 2 hours in total.',
+      'Use the “Show Memo” button under each question to check your solution once you have attempted it.'
+    ],
+    questions: [
+      {
+        number: 1, label: 'A1', title: 'Setting up an optimization problem', section: 'Section A · §6.6', marks: 2,
+        prompt: String.raw`
+A closed rectangular box has a square base of side $x$ and height $h$. Its total surface area (top, bottom and four sides) is $150$. Eliminating $h$, the volume of the box is a function of $x$ alone. Which choice gives that function together with its correct domain?
+
+- **A.** $V(x)=\dfrac{x^{2}\left(75-x^{2}\right)}{2}$, $\;0\le x\le5\sqrt3$.
+- **B.** $V(x)=\dfrac{x\left(150-x^{2}\right)}{4}$, $\;0\le x\le\sqrt{150}$.
+- **C.** $V(x)=\dfrac{x\left(75-x^{2}\right)}{2}$, $\;0\le x\le75$.
+- **D.** $V(x)=\dfrac{x\left(75-x^{2}\right)}{2}$, $\;0\le x\le5\sqrt3$.
+- **E.** $V(x)=2x\left(75-x^{2}\right)$, $\;0\le x\le5\sqrt3$.
+        `,
+        solution: String.raw`
+**Answer: D.** ✓✓
+
+The surface area is $2x^{2}$ (top and bottom) plus $4xh$ (four sides), so $2x^{2}+4xh=150$ and $h=\dfrac{75-x^{2}}{2x}$. Then $V=x^{2}h=\dfrac{x\left(75-x^{2}\right)}{2}$. The height cannot be negative, so $x^{2}\le75$, i.e. $x\le5\sqrt3$. The domain is $\left[0,5\sqrt3\right]$.
+
+- **B** is the formula for a box with **no top** (surface area $x^{2}+4xh$). **C** has the right function but the domain $[0,75]$ would make $h$ negative. **A** and **E** have the wrong power of $x$ in the function.
+        `
+      },
+      {
+        number: 2, label: 'A2', title: 'An arctangent substitution', section: 'Section A · §9.1', marks: 3,
+        prompt: String.raw`
+$$\int\frac{e^{x}}{1+e^{2x}}\,dx=$$
+
+- **A.** $\arctan\left(e^{2x}\right)+C$.
+- **B.** $\ln\left(1+e^{2x}\right)+C$.
+- **C.** $\dfrac12\ln\left(1+e^{2x}\right)+C$.
+- **D.** $e^{x}\arctan\left(e^{x}\right)+C$.
+- **E.** $\arctan\left(e^{x}\right)+C$.
+        `,
+        solution: String.raw`
+**Answer: E.** ✓✓✓
+
+Substitute $u=e^{x}$, so $du=e^{x}\,dx$ and $e^{2x}=u^{2}$:
+$$\int\frac{e^{x}}{1+e^{2x}}\,dx=\int\frac{du}{1+u^{2}}=\arctan u+C=\arctan\left(e^{x}\right)+C.$$
+
+- **B** and **C** treat the numerator as the derivative of the denominator, but $\dfrac{d}{dx}\left(1+e^{2x}\right)=2e^{2x}$, not $e^{x}$. **D** is a product-rule slip. **A** forgets that $e^{2x}=\left(e^{x}\right)^{2}$ must be matched with $u^{2}$.
+        `
+      },
+      {
+        number: 3, label: 'A3', title: 'A Type I improper integral', section: 'Section A · §10', marks: 2,
+        prompt: String.raw`
+$$\int_{1}^{\infty}\frac{\ln x}{x^{2}}\,dx=$$
+
+- **A.** $0$.
+- **B.** $1$.
+- **C.** $2$.
+- **D.** $e$.
+- **E.** The integral diverges.
+        `,
+        solution: String.raw`
+**Answer: B.** ✓✓
+
+Integrate by parts with $u=\ln x$, $dv=x^{-2}dx$: $\displaystyle\int\frac{\ln x}{x^{2}}dx=-\frac{\ln x}{x}-\frac1x$. Then
+$$\int_{1}^{t}\frac{\ln x}{x^{2}}dx=\left(-\frac{\ln t}{t}-\frac1t\right)-(0-1)=1-\frac{\ln t+1}{t}.$$
+As $t\to\infty$, $\dfrac{\ln t}{t}\to0$ (l'Hôpital) and $\dfrac1t\to0$, so the integral converges to $1$.
+        `
+      },
+      {
+        number: 4, label: 'A4', title: 'Which series converges?', section: 'Section A · §11.2–11.3', marks: 3,
+        prompt: String.raw`
+Which one of the following series **converges**?
+
+- **A.** $\displaystyle\sum_{n=2}^{\infty}\frac{1}{n\ln n}$.
+- **B.** $\displaystyle\sum_{n=1}^{\infty}\frac{n}{n+1}$.
+- **C.** $\displaystyle\sum_{n=2}^{\infty}\frac{1}{n(\ln n)^{2}}$.
+- **D.** $\displaystyle\sum_{n=1}^{\infty}\frac{1}{\sqrt n}$.
+- **E.** $\displaystyle\sum_{n=1}^{\infty}\cos\frac1n$.
+        `,
+        solution: String.raw`
+**Answer: C.** ✓✓✓
+
+Use the **Integral Test** with $f(x)=\dfrac{1}{x(\ln x)^{2}}$, which is positive, continuous and decreasing on $[2,\infty)$:
+$$\int_{2}^{\infty}\frac{dx}{x(\ln x)^{2}}=\lim_{t\to\infty}\left[-\frac{1}{\ln x}\right]_{2}^{t}=\frac{1}{\ln2}<\infty,$$
+so the series in **C** converges.
+
+- **A:** $\displaystyle\int_{2}^{\infty}\frac{dx}{x\ln x}=\lim_{t\to\infty}\left[\ln\ln x\right]_2^t=\infty$, so it diverges. **B** and **E:** the terms tend to $1\neq0$, so they diverge by the Test for Divergence. **D** is a $p$-series with $p=\frac12\le1$, so it diverges.
+        `
+      },
+      {
+        number: 5, label: 'A5', title: 'A Maclaurin coefficient', section: 'Section A · §11.6', marks: 2,
+        prompt: String.raw`
+The coefficient of $x^{4}$ in the Maclaurin series of $f(x)=e^{-x^{2}}$ is
+
+- **A.** $\dfrac12$.
+- **B.** $-\dfrac12$.
+- **C.** $\dfrac1{24}$.
+- **D.** $1$.
+- **E.** $-1$.
+        `,
+        solution: String.raw`
+**Answer: A.** ✓✓
+
+Substitute $u=-x^{2}$ into $e^{u}=1+u+\dfrac{u^{2}}{2!}+\cdots$:
+$$e^{-x^{2}}=1-x^{2}+\frac{x^{4}}{2}-\frac{x^{6}}{6}+\cdots$$
+The coefficient of $x^{4}$ is $\dfrac12$. (**B** has the wrong sign: $(-x^{2})^{2}$ is positive. **C** uses $\frac1{4!}$ instead of $\frac1{2!}$.)
+        `
+      },
+      {
+        number: 6, label: 'A6', title: 'The general solution of a separable equation', section: 'Section A · §12.1', marks: 2,
+        prompt: String.raw`
+The general solution of the differential equation $\dfrac{dy}{dx}=\dfrac{3x^{2}}{y}$ is
+
+- **A.** $y=x^{3}+C$.
+- **B.** $y^{2}=x^{3}+C$.
+- **C.** $y^{2}=2x^{3}+C$.
+- **D.** $y^{2}=6x+C$.
+- **E.** $y=\sqrt{x^{3}}+C$.
+        `,
+        solution: String.raw`
+**Answer: C.** ✓✓
+
+Separate the variables: $y\,dy=3x^{2}\,dx$. Integrate: $\dfrac{y^{2}}{2}=x^{3}+C_1$, so $y^{2}=2x^{3}+C$ with $C=2C_1$.
+
+- **B** forgets the factor $2$ from integrating $y\,dy$. **D** differentiates instead of integrating. **A** and **E** are not solutions: for example $y=x^{3}+C$ gives $\frac{dy}{dx}=3x^{2}\neq\frac{3x^{2}}{y}$.
+        `
+      },
+      {
+        number: 7, label: 'B1', title: 'Optimization — a field divided by a fence along a river', section: 'Section B · §6.6', marks: 11,
+        prompt: String.raw`
+A farmer has $240$ m of fencing. She will build a rectangular field beside a long straight river; **no fence is needed along the river**. The field is divided into two equal pens by a fence **perpendicular to the river**. So the fencing is used for the far side (parallel to the river, length $y$ m) and for **three** fences perpendicular to the river (the two ends and the divider, each of length $x$ m). She wants the **largest possible total area**.
+
+**(a)** Draw a labelled diagram. Use the length of fencing available to write $y$ in terms of $x$, and hence write the total area $A$ as a function of $x$ alone. (4)
+
+**(b)** State the domain of $A$. (1)
+
+**(c)** Find the critical number(s) of $A$. (3)
+
+**(d)** Use the Closed Interval Method to show that the critical number gives the absolute maximum area. State the dimensions of the best field and its area. (3)
+        `,
+        solution: String.raw`
+**(a)** *Diagram:* a rectangle with the river along the bottom side. Three vertical fences of length $x$ (left end, divider, right end) and one horizontal fence of length $y$ along the top. ✓
+
+The fencing used is $3x+y=240$, so ✓
+$$y=240-3x.$$ ✓
+The area (objective function) is $A=xy$, so ✓
+$$A(x)=x(240-3x)=240x-3x^{2}.$$
+
+**(b)** Both lengths are non-negative: $x\ge0$ and $y=240-3x\ge0$, i.e. $x\le80$. The domain is the **closed interval** $[0,80]$. ✓
+
+**(c)** $A'(x)=240-6x$ exists for all $x$, so the critical numbers come from $A'(x)=0$: ✓✓
+$$240-6x=0\ \Longrightarrow\ x=40.$$ ✓
+
+**(d)** $A$ is continuous on the closed interval $[0,80]$, so by the **Extreme Value Theorem** it has an absolute maximum there, found by the **Closed Interval Method**: ✓
+$$A(0)=0,\qquad A(40)=240(40)-3(1600)=9600-4800=4800,\qquad A(80)=0.$$ ✓
+The largest value is $A(40)=4800$. The best field has $x=40$ m and $y=240-120=120$ m (each pen $40$ m by $60$ m), with total area $\boxed{4800\ \text{m}^{2}}$. ✓
+        `
+      },
+      {
+        number: 8, label: 'B2', title: 'Completing the square; a power of sine and cosine', section: 'Section B · §9.1, §9.4', marks: 9,
+        prompt: String.raw`
+**(a)** Evaluate $\displaystyle\int_{-1}^{1}\frac{3x+1}{x^{2}+2x+5}\,dx.$ (5)
+
+**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\sin^{4}x\,\cos^{3}x\,dx.$ (4)
+        `,
+        solution: String.raw`
+**(a)** Complete the square: $x^{2}+2x+5=(x+1)^{2}+4$. The derivative of the denominator is $2x+2$, so write the numerator as ✓
+$$3x+1=\tfrac32(2x+2)-2.$$ ✓
+Then
+$$\int\frac{3x+1}{x^{2}+2x+5}dx=\frac32\int\frac{2x+2}{x^{2}+2x+5}dx-2\int\frac{dx}{(x+1)^{2}+4}=\frac32\ln\left(x^{2}+2x+5\right)-\arctan\frac{x+1}{2}+C.$$ ✓✓
+Evaluate between $-1$ and $1$:
+$$\left[\frac32\ln\left(x^{2}+2x+5\right)-\arctan\frac{x+1}{2}\right]_{-1}^{1}=\left(\frac32\ln8-\frac\pi4\right)-\left(\frac32\ln4-0\right)=\boxed{\frac32\ln2-\frac\pi4}.$$ ✓
+
+**(b)** The power of cosine is odd: keep one factor $\cos x$ and write $\cos^{2}x=1-\sin^{2}x$. ✓
+$$\sin^{4}x\cos^{3}x=\sin^{4}x\left(1-\sin^{2}x\right)\cos x.$$
+Substitute $u=\sin x$, $du=\cos x\,dx$ (limits $0\to1$): ✓
+$$\int_0^{1}\left(u^{4}-u^{6}\right)du=\left[\frac{u^{5}}{5}-\frac{u^{7}}{7}\right]_0^{1}=\frac15-\frac17=\boxed{\frac{2}{35}}.$$ ✓✓
+        `
+      },
+      {
+        number: 9, label: 'B3', title: 'Integration by parts; a reduction formula', section: 'Section B · §9.2', marks: 10,
+        prompt: String.raw`
+**(a)** Evaluate $\displaystyle\int_0^{\ln2}x\sinh3x\,dx$. Give your answer in terms of $\ln2$. (3)
+
+**(b)** For an integer $n\ge1$ let $I_n=\displaystyle\int x^{n}e^{x}\,dx$.
+
+**(i)** Use integration by parts to prove the reduction formula
+$$I_n=x^{n}e^{x}-n\,I_{n-1}.$$ (4)
+
+**(ii)** Hence evaluate $\displaystyle\int_0^{1}x^{3}e^{x}\,dx$. (3)
+        `,
+        solution: String.raw`
+**(a)** Take $u=x$ and $dv=\sinh3x\,dx$, so $du=dx$ and $v=\dfrac{\cosh3x}{3}$: ✓
+$$\int_0^{\ln2}x\sinh3x\,dx=\left[\frac{x\cosh3x}{3}\right]_0^{\ln2}-\frac13\int_0^{\ln2}\cosh3x\,dx=\frac{\ln2\cosh(3\ln2)}{3}-\frac{\sinh(3\ln2)}{9}.$$ ✓
+Since $e^{3\ln2}=8$: $\cosh(3\ln2)=\dfrac{8+\frac18}{2}=\dfrac{65}{16}$ and $\sinh(3\ln2)=\dfrac{8-\frac18}{2}=\dfrac{63}{16}$. Hence
+$$\frac{65}{48}\ln2-\frac{63}{144}=\boxed{\frac{65}{48}\ln2-\frac{7}{16}}.$$ ✓
+
+**(b)(i)** Take $u=x^{n}$ and $dv=e^{x}dx$, so $du=nx^{n-1}dx$ and $v=e^{x}$: ✓✓
+$$I_n=x^{n}e^{x}-\int e^{x}\,n\,x^{n-1}dx=x^{n}e^{x}-n\int x^{n-1}e^{x}dx.$$ ✓
+The last integral is $I_{n-1}$, so $I_n=x^{n}e^{x}-n\,I_{n-1}$. ✓
+
+**(b)(ii)** Apply the formula between $0$ and $1$ (the term $x^{n}e^{x}$ gives $e-0=e$ for every $n\ge1$). Write $J_n=\displaystyle\int_0^{1}x^{n}e^{x}dx$, so $J_n=e-nJ_{n-1}$. Start from $J_0=\displaystyle\int_0^{1}e^{x}dx=e-1$. ✓
+$$J_1=e-(e-1)=1,\qquad J_2=e-2J_1=e-2,\qquad J_3=e-3J_2=e-3(e-2)=\boxed{6-2e}.$$ ✓✓
+        `
+      },
+      {
+        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        prompt: String.raw`
+**(a)** Explain why the integral $\displaystyle\int_0^{4}\frac{dx}{(x-2)^{2/3}}$ is called improper, and say how it must be treated. (2)
+
+**(b)** Determine whether the improper integral
+$$\int_{-\infty}^{0}x\,e^{x}\,dx$$
+converges or diverges. If it converges, find its value. Justify every limit that you use. (4)
+
+**(c)** Use the Comparison Theorem to determine whether $\displaystyle\int_{1}^{\infty}\frac{dx}{\sqrt{x^{3}+1}}$ converges or diverges. (4)
+        `,
+        solution: String.raw`
+**(a)** The integrand is undefined at $x=2$, which lies **inside** $[0,4]$, and $\dfrac{1}{(x-2)^{2/3}}\to\infty$ there. ✓ The Fundamental Theorem cannot be applied across the discontinuity, so the integral is improper (Type II). It must be **split at $x=2$**,
+$$\int_0^{2}\frac{dx}{(x-2)^{2/3}}+\int_2^{4}\frac{dx}{(x-2)^{2/3}},$$
+and each piece treated as a limit; the original integral converges only if **both** pieces converge. ✓
+
+**(b)** The lower limit is infinite (Type I): $\displaystyle\int_{-\infty}^{0}xe^{x}dx=\lim_{t\to-\infty}\int_t^{0}xe^{x}dx$. ✓
+By parts ($u=x$, $dv=e^{x}dx$): $\displaystyle\int xe^{x}dx=xe^{x}-e^{x}$. So
+$$\int_t^{0}xe^{x}dx=(0-1)-\left(te^{t}-e^{t}\right)=-1-te^{t}+e^{t}.$$ ✓
+As $t\to-\infty$: $e^{t}\to0$, and $te^{t}=\dfrac{t}{e^{-t}}\to\dfrac{1}{-e^{-t}}\to0$ by l'Hôpital's rule. ✓ So the integral **converges** and
+$$\int_{-\infty}^{0}xe^{x}dx=-1.$$ ✓
+
+**(c)** For $x\ge1$ we have $x^{3}+1>x^{3}$, so
+$$0<\frac{1}{\sqrt{x^{3}+1}}<\frac{1}{\sqrt{x^{3}}}=x^{-3/2}.$$ ✓✓
+Now $\displaystyle\int_{1}^{\infty}x^{-3/2}dx=\lim_{t\to\infty}\left[-2x^{-1/2}\right]_1^t=2$ converges ($p=\frac32>1$). ✓ By the **Comparison Theorem** (a smaller non-negative integrand than a convergent integral), $\displaystyle\int_{1}^{\infty}\frac{dx}{\sqrt{x^{3}+1}}$ **converges**. ✓
+        `
+      },
+      {
+        number: 11, label: 'B5', title: 'Sequences and series', section: 'Section B · §11.1–11.3', marks: 9,
+        prompt: String.raw`
+**(a)** Determine, giving reasons, whether the sequence $\{a_n\}=\left\{n^{2}e^{-n}\right\}$ is convergent or divergent. If it is convergent, state to what value it converges. (3)
+
+**(b)** Explain why the Test for Divergence cannot be used to show that $\displaystyle\sum_{n=1}^{\infty}n^{2}e^{-n}$ converges, and use a suitable test to decide whether this series converges or diverges. (2)
+
+**(c)** Determine whether the series
+$$\sum_{n=1}^{\infty}(-1)^{n+1}\frac{n}{n^{2}+1}$$
+is absolutely convergent, conditionally convergent or divergent. Justify your answer. (4)
+        `,
+        solution: String.raw`
+**(a)** Write $a_n=\dfrac{n^{2}}{e^{n}}$, of the form $\frac{\infty}{\infty}$. Let $f(x)=\dfrac{x^{2}}{e^{x}}$ and use l'Hôpital's rule twice: ✓
+$$\lim_{x\to\infty}\frac{x^{2}}{e^{x}}=\lim_{x\to\infty}\frac{2x}{e^{x}}=\lim_{x\to\infty}\frac{2}{e^{x}}=0.$$ ✓
+So the sequence is **convergent with limit $0$**. ✓
+
+**(b)** The Test for Divergence can only prove divergence: since $a_n\to0$ it is **inconclusive**. ✓ Use the **Ratio Test** with $c_n=n^{2}e^{-n}>0$:
+$$\frac{c_{n+1}}{c_n}=\frac{(n+1)^{2}e^{-(n+1)}}{n^{2}e^{-n}}=\left(\frac{n+1}{n}\right)^{2}\cdot\frac1e\ \longrightarrow\ \frac1e<1,$$
+so the series **converges**. ✓
+
+**(c)** *Not absolutely convergent.* The series of absolute values is $\displaystyle\sum\frac{n}{n^{2}+1}$. Compare with the divergent harmonic series $\sum\frac1n$ using the **Limit Comparison Test** (if $a_n,b_n>0$ and $a_n/b_n\to c$ with $0<c<\infty$, the series behave alike): ✓
+$$\lim_{n\to\infty}\frac{n/(n^{2}+1)}{1/n}=\lim_{n\to\infty}\frac{n^{2}}{n^{2}+1}=1.$$
+So $\sum\frac{n}{n^{2}+1}$ diverges. ✓
+
+*Convergent.* Let $b_n=\dfrac{n}{n^{2}+1}>0$. Then $b_n\to0$, and $b_n$ is decreasing because $f(x)=\dfrac{x}{x^{2}+1}$ has $f'(x)=\dfrac{1-x^{2}}{(x^{2}+1)^{2}}\le0$ for $x\ge1$. By the **Alternating Series Test** the series converges. ✓
+
+Convergent but not absolutely convergent, so it is **conditionally convergent**.
+        `
+      },
+      {
+        number: 12, label: 'B6', title: 'Power series and a hyperbolic Maclaurin series', section: 'Section B · §11.4, §11.6', marks: 9,
+        prompt: String.raw`
+**(a)** Find the radius of convergence and the interval of convergence of the power series
+$$\sum_{n=1}^{\infty}\frac{(3x-2)^{n}}{n^{2}}.$$ (5)
+
+**(b)** **(i)** Use the formula $c_n=\dfrac{f^{(n)}(0)}{n!}$ to show that the Maclaurin series of $f(x)=\cosh x$ is $\displaystyle\sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!}$. (2)
+
+**(ii)** Hence find the Maclaurin series of $g(x)=\dfrac{\cosh x-1}{x^{2}}$ (write the first three terms and the general term). (2)
+        `,
+        solution: String.raw`
+**(a)** Use the **Ratio Test** with $a_n=\dfrac{(3x-2)^{n}}{n^{2}}$: ✓
+$$\left|\frac{a_{n+1}}{a_n}\right|=\frac{|3x-2|^{n+1}}{(n+1)^{2}}\cdot\frac{n^{2}}{|3x-2|^{n}}=|3x-2|\left(\frac{n}{n+1}\right)^{2}\to|3x-2|.$$ ✓
+The series converges when $|3x-2|<1$, i.e. $\left|x-\frac23\right|<\frac13$. The **radius of convergence is $R=\frac13$** (centre $\frac23$), and the series converges for $\frac13<x<1$. ✓
+
+*Endpoints.* At $x=1$: $\displaystyle\sum\frac{1}{n^{2}}$ converges ($p$-series, $p=2>1$). At $x=\frac13$: $\displaystyle\sum\frac{(-1)^{n}}{n^{2}}$ converges (absolutely, by the same $p$-series). ✓
+
+The **interval of convergence** is $\left[\dfrac13,\,1\right]$. ✓
+
+**(b)(i)** Here $f'(x)=\sinh x$, $f''(x)=\cosh x$, and the derivatives alternate between $\cosh x$ and $\sinh x$. At $0$: $\cosh0=1$ and $\sinh0=0$. So $f^{(n)}(0)=1$ for even $n$ and $0$ for odd $n$. ✓ Hence $c_n=\dfrac{1}{n!}$ for even $n$, $c_n=0$ for odd $n$, giving
+$$\cosh x=\sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!}=1+\frac{x^{2}}{2!}+\frac{x^{4}}{4!}+\cdots$$ ✓
+
+**(b)(ii)** Subtract $1$ and divide by $x^{2}$: ✓
+$$\frac{\cosh x-1}{x^{2}}=\frac{1}{x^{2}}\sum_{n=1}^{\infty}\frac{x^{2n}}{(2n)!}=\sum_{n=1}^{\infty}\frac{x^{2n-2}}{(2n)!}=\frac12+\frac{x^{2}}{24}+\frac{x^{4}}{720}+\cdots$$ ✓
+        `
+      },
+      {
+        number: 13, label: 'B7', title: 'Differential equations — separable', section: 'Section B · §12.1', marks: 8,
+        prompt: String.raw`
+Given the differential equation
+$$\frac{dy}{dx}=2x\sqrt{y},\qquad y>0.$$
+
+**(a)** State the order of the equation, and show that it is separable by writing it in the form $M(x)\,dx+N(y)\,dy=0$. (2)
+
+**(b)** Find the general solution of the equation. (3)
+
+**(c)** Find the particular solution given that $y=4$ when $x=0$. (3)
+        `,
+        solution: String.raw`
+**(a)** The highest derivative is $\dfrac{dy}{dx}$, so the equation is **first order**. ✓ Dividing by $\sqrt y$ (valid since $y>0$) and rearranging:
+$$2x\,dx-y^{-1/2}\,dy=0,$$
+which has the form $M(x)\,dx+N(y)\,dy=0$ with $M=2x$ and $N=-y^{-1/2}$, so it is **separable**. ✓
+
+**(b)** Integrate $y^{-1/2}dy=2x\,dx$: ✓
+$$2\sqrt y=x^{2}+C,$$ ✓
+so the **general solution** is
+$$y=\frac{\left(x^{2}+C\right)^{2}}{4}.$$ ✓
+(The constant solution $y=0$ was lost when we divided by $\sqrt y$, but it is excluded by $y>0$.)
+
+**(c)** With $y(0)=4$: $2\sqrt4=0+C$, so $C=4$. ✓✓ The **particular solution** is ✓
+$$y=\frac{\left(x^{2}+4\right)^{2}}{4}.$$
+        `
+      },
+      {
+        number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
+        prompt: String.raw`
+Given the differential equation
+$$x\frac{dy}{dx}+y=x\ln x,\qquad x>0.$$
+
+**(a)** Show that this is a linear differential equation by writing it in standard form. (2)
+
+**(b)** Find the integrating factor $e^{\int P(x)\,dx}$. (2)
+
+**(c)** Hence find the general solution of the differential equation. (4)
+
+**(d)** Find the particular solution satisfying $y=\dfrac12$ when $x=1$. (2)
+        `,
+        solution: String.raw`
+**(a)** Divide through by $x$ (positive on the domain):
+$$\frac{dy}{dx}+\frac1x\,y=\ln x.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\frac1x$ and $Q(x)=\ln x$, so it is **linear**.
+
+**(b)** $\displaystyle\int\frac1x\,dx=\ln x$ (for $x>0$), so ✓
+$$\mu(x)=e^{\ln x}=x.$$ ✓
+
+**(c)** Multiply the standard form by $\mu=x$; the left side is an exact derivative: ✓
+$$\frac{d}{dx}(xy)=x\ln x.$$
+Integrate the right side by parts ($u=\ln x$, $dv=x\,dx$): $\displaystyle\int x\ln x\,dx=\frac{x^{2}}{2}\ln x-\frac{x^{2}}{4}$. ✓✓ So
+$$xy=\frac{x^{2}}{2}\ln x-\frac{x^{2}}{4}+C,$$
+and the **general solution** is ✓
+$$y=\frac{x\ln x}{2}-\frac{x}{4}+\frac{C}{x}.$$
+
+**(d)** With $y(1)=\frac12$: $\frac12=0-\frac14+C$, so $C=\frac34$. ✓ The **particular solution** is ✓
+$$y=\frac{x\ln x}{2}-\frac{x}{4}+\frac{3}{4x}.$$
+        `
+      }
+    ]
+  },
+{
+    id: 'nov-paper8',
+    label: 'November Paper 8',
+    date: 'November Exam H',
+    kind: 'CALCULUS EXAMINATION',
+    totalMarks: 90,
+    duration: 120,
+    topics: 'A pen against a wall and a cable across a river (§6.6), a hyperbolic integral, completing the square with a linear numerator and cos 2x cos x (§9.1, §9.4), the reduction formula for x²(ln x)ⁿ (§9.2), 1/x² across zero, a hyperbolic improper integral and the Comparison Theorem (§10), the Root and Ratio Tests, a Taylor series about π/6, and separable and linear ODEs.',
+    instructions: [
+      'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
+      'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
+      'No calculators are allowed.',
+      'You have 2 hours in total.',
+      'Use the “Show Memo” button under each question to check your solution once you have attempted it.'
+    ],
+    questions: [
+      {
+        number: 1, label: 'A1', title: 'A pen against a wall', section: 'Section A · §6.6', marks: 2,
+        prompt: String.raw`
+A rectangular pen is built against a long straight wall using $60$ m of fencing. No fence is needed along the wall, so the fencing forms the two sides of length $x$ that are perpendicular to the wall and the side of length $y$ parallel to it. Using the length of fencing to eliminate $y$, the area of the pen is a function of $x$. Which choice gives that function together with its correct domain?
+
+- **A.** $A(x)=x(60-2x)$, $\;0\le x\le60$.
+- **B.** $A(x)=x(60-x)$, $\;0\le x\le60$.
+- **C.** $A(x)=x(60-2x)$, $\;0\le x\le30$.
+- **D.** $A(x)=x(30-x)$, $\;0\le x\le30$.
+- **E.** $A(x)=x(60-3x)$, $\;0\le x\le20$.
+        `,
+        solution: String.raw`
+**Answer: C.** ✓✓
+
+The fencing is $2x+y=60$, so $y=60-2x$ and $A=xy=x(60-2x)$. Both lengths are non-negative: $x\ge0$ and $y=60-2x\ge0$ give $x\le30$. The domain is $[0,30]$.
+
+- **B** counts only one side of length $x$. **A** has the right function but the domain $[0,60]$ would give a negative $y$. **D** halves the area incorrectly. **E** counts three sides of length $x$ (that is the shape with a divider).
+        `
+      },
+      {
+        number: 2, label: 'A2', title: 'A hyperbolic integral', section: 'Section A · §9.2', marks: 3,
+        prompt: String.raw`
+$$\int_0^{\ln2}\sinh x\,\cosh x\,dx=$$
+
+- **A.** $\dfrac{9}{16}$.
+- **B.** $\dfrac{15}{16}$.
+- **C.** $\dfrac34$.
+- **D.** $\dfrac{9}{32}$.
+- **E.** $\dfrac{5}{16}$.
+        `,
+        solution: String.raw`
+**Answer: D.** ✓✓✓
+
+Substitute $u=\sinh x$, $du=\cosh x\,dx$:
+$$\int_0^{\ln2}\sinh x\cosh x\,dx=\left[\frac{\sinh^{2}x}{2}\right]_0^{\ln2}.$$
+Since $e^{\ln2}=2$, $\sinh(\ln2)=\dfrac{2-\frac12}{2}=\dfrac34$, so the value is $\dfrac{1}{2}\cdot\dfrac{9}{16}=\dfrac{9}{32}$.
+
+(Check: $\sinh x\cosh x=\frac12\sinh2x$, and $\left[\frac{\cosh2x}{4}\right]_0^{\ln2}=\frac{17/8-1}{4}=\frac{9}{32}$.) **B** is the value of the integrand at $\ln2$ (forgetting to integrate); **A** forgets the factor $\frac12$.
+        `
+      },
+      {
+        number: 3, label: 'A3', title: 'A Type I improper integral', section: 'Section A · §10', marks: 2,
+        prompt: String.raw`
+$$\int_0^{\infty}x\,e^{-x^{2}}\,dx=$$
+
+- **A.** $1$.
+- **B.** $\dfrac12$.
+- **C.** $0$.
+- **D.** $2$.
+- **E.** The integral diverges.
+        `,
+        solution: String.raw`
+**Answer: B.** ✓✓
+
+Substitute $u=x^{2}$, $du=2x\,dx$: $\displaystyle\int xe^{-x^{2}}dx=-\tfrac12e^{-x^{2}}$. Then
+$$\int_0^{t}xe^{-x^{2}}dx=\frac12\left(1-e^{-t^{2}}\right)\ \longrightarrow\ \frac12\quad(t\to\infty).$$
+The integral converges to $\frac12$.
+        `
+      },
+      {
+        number: 4, label: 'A4', title: 'The Root Test', section: 'Section A · §11.2–11.3', marks: 3,
+        prompt: String.raw`
+Which one of the following statements about the series $\displaystyle\sum_{n=1}^{\infty}\left(\frac{n}{2n+1}\right)^{n}$ is correct?
+
+- **A.** The Root Test is inconclusive.
+- **B.** It diverges, by the Root Test, because $\displaystyle\lim_{n\to\infty}\sqrt[n]{a_n}=\frac12$.
+- **C.** It diverges, by the Test for Divergence, because $\dfrac{n}{2n+1}\to\dfrac12\neq0$.
+- **D.** It converges, because $a_n\to0$.
+- **E.** It converges, by the Root Test, because $\displaystyle\lim_{n\to\infty}\sqrt[n]{a_n}=\frac12<1$.
+        `,
+        solution: String.raw`
+**Answer: E.** ✓✓✓
+
+With $a_n=\left(\dfrac{n}{2n+1}\right)^{n}>0$,
+$$\sqrt[n]{a_n}=\frac{n}{2n+1}\ \longrightarrow\ \frac12<1,$$
+so the series **converges** by the Root Test.
+
+- **B** reverses the rule (the series diverges only if the limit is $>1$). **C** applies the Test for Divergence to the base instead of the terms: in fact $a_n=\left(\frac{n}{2n+1}\right)^{n}\to0$. **D** is the classic mistake that $a_n\to0$ proves convergence. **A** is wrong because the limit is not $1$.
+        `
+      },
+      {
+        number: 5, label: 'A5', title: 'A Taylor coefficient', section: 'Section A · §11.6', marks: 2,
+        prompt: String.raw`
+The coefficient of $(x-1)^{3}$ in the Taylor series of $f(x)=\ln x$ about $a=1$ is
+
+- **A.** $\dfrac13$.
+- **B.** $2$.
+- **C.** $-\dfrac13$.
+- **D.** $\dfrac16$.
+- **E.** $\dfrac12$.
+        `,
+        solution: String.raw`
+**Answer: A.** ✓✓
+
+Use $c_n=\dfrac{f^{(n)}(a)}{n!}$. Here $f'(x)=\dfrac1x$, $f''(x)=-\dfrac1{x^{2}}$, $f'''(x)=\dfrac{2}{x^{3}}$, so $f'''(1)=2$ and
+$$c_3=\frac{2}{3!}=\frac13.$$
+
+
+- **B** is $f'''(1)$ itself (forgetting to divide by $3!$). **C** has the wrong sign, since $f'''(1)=+2$. **D** is $\frac1{3!}$ (forgetting that $f'''(1)=2$). **E** is the size of the coefficient of $(x-1)^{2}$, which is $-\frac12$.
+        `
+      },
+      {
+        number: 6, label: 'A6', title: 'Verifying a solution of a differential equation', section: 'Section A · §12.0', marks: 2,
+        prompt: String.raw`
+The function $y=\dfrac{1}{1-x}$ (for $x<1$) is a solution of which one of the following differential equations?
+
+- **A.** $\dfrac{dy}{dx}=y$.
+- **B.** $\dfrac{dy}{dx}=y^{2}$.
+- **C.** $\dfrac{dy}{dx}=-y^{2}$.
+- **D.** $\dfrac{dy}{dx}=1-y$.
+- **E.** $\dfrac{dy}{dx}=\dfrac{y}{x}$.
+        `,
+        solution: String.raw`
+**Answer: B.** ✓✓
+
+Differentiate: $\dfrac{dy}{dx}=\dfrac{d}{dx}(1-x)^{-1}=(1-x)^{-2}=\dfrac{1}{(1-x)^{2}}=y^{2}$. So $y$ satisfies $\dfrac{dy}{dx}=y^{2}$.
+
+
+
+- **A** fails at $x=\frac12$ (here $y=2$ but $y'=4$). **C** fails because $-y^{2}<0$ while $y'>0$. **D** fails at $x=0$ (here $y=1$ and $y'=1$, but $1-y=0$). **E** fails because $\frac{y}{x}$ is undefined at $x=0$ while $y'(0)=1$.
+        `
+      },
+      {
+        number: 7, label: 'B1', title: 'Optimization — a cable across a river', section: 'Section B · §6.6', marks: 11,
+        prompt: String.raw`
+A straight river is $3$ km wide. A power station $A$ is on one bank. A factory $B$ is on the opposite bank, $8$ km downstream from the point $P$ that is directly opposite $A$. A cable is laid from $A$ **under the river** to a point $Q$ on the factory's bank, and then **along the bank** from $Q$ to $B$. Let $x$ km be the distance $PQ$.
+
+Laying cable under water costs R$5000$ per km and laying it along the bank costs R$3000$ per km. The company wants the **cheapest** route. Work with the cost $C$ measured in **thousands of rand**.
+
+**(a)** Draw a labelled diagram. Find the length of the underwater section in terms of $x$, and hence write the cost $C$ as a function of $x$ alone. (4)
+
+**(b)** State the domain of $C$. (1)
+
+**(c)** Find the critical number(s) of $C$. (3)
+
+**(d)** Use the Closed Interval Method to show that the critical number gives the absolute minimum cost. State the position of $Q$ and the minimum cost. (3)
+        `,
+        solution: String.raw`
+**(a)** *Diagram:* the river as a strip of width $3$ with $A$ on the near bank and $P$ directly opposite on the far bank; $Q$ is $x$ from $P$ towards $B$, and $B$ is $8$ from $P$ on the same bank. ✓
+
+The underwater section $AQ$ is the hypotenuse of a right triangle with sides $3$ and $x$ (Pythagoras): ✓
+$$AQ=\sqrt{9+x^{2}}.$$
+The section along the bank is $QB=8-x$. ✓ The cost (objective function), in thousands of rand, is
+$$C(x)=5\sqrt{9+x^{2}}+3(8-x).$$ ✓
+
+**(b)** $Q$ must lie on the bank between $P$ and $B$, so $0\le x\le8$. The domain is the **closed interval** $[0,8]$. ✓
+
+**(c)** $C'(x)=\dfrac{5x}{\sqrt{9+x^{2}}}-3$ exists for all $x$, so critical numbers come from $C'(x)=0$: ✓
+$$5x=3\sqrt{9+x^{2}}\ \Longrightarrow\ 25x^{2}=9\left(9+x^{2}\right)\ \Longrightarrow\ 16x^{2}=81\ \Longrightarrow\ x=\frac94.$$ ✓✓
+(Only the positive root is in the domain, and it satisfies the original equation since both sides are positive.)
+
+**(d)** $C$ is continuous on $[0,8]$, so by the **Extreme Value Theorem** it has an absolute minimum there; compare the critical number and the endpoints: ✓
+$$C(0)=5(3)+3(8)=39,\qquad C\!\left(\tfrac94\right)=5\sqrt{9+\tfrac{81}{16}}+3\left(8-\tfrac94\right)=5\cdot\tfrac{15}{4}+3\cdot\tfrac{23}{4}=\tfrac{75+69}{4}=36,$$
+$$C(8)=5\sqrt{73}>5\cdot8=40.$$ ✓
+The smallest value is $C\!\left(\frac94\right)=36$. The cable should reach the far bank at $Q$, $\dfrac94=2.25$ km from $P$, and the minimum cost is $\boxed{\text{R}36\,000}$. ✓
+        `
+      },
+      {
+        number: 8, label: 'B2', title: 'Completing the square; a product of cosines', section: 'Section B · §9.1, §9.4', marks: 9,
+        prompt: String.raw`
+**(a)** Evaluate $\displaystyle\int_{2}^{4}\frac{2x-1}{x^{2}-4x+8}\,dx.$ (5)
+
+**(b)** Evaluate $\displaystyle\int_0^{\pi/3}\cos2x\,\cos x\,dx.$ (4)
+        `,
+        solution: String.raw`
+**(a)** Complete the square: $x^{2}-4x+8=(x-2)^{2}+4$. The derivative of the denominator is $2x-4$, so write the numerator as ✓
+$$2x-1=(2x-4)+3.$$ ✓
+Then
+$$\int\frac{2x-1}{x^{2}-4x+8}dx=\ln\left(x^{2}-4x+8\right)+3\int\frac{dx}{(x-2)^{2}+4}=\ln\left(x^{2}-4x+8\right)+\frac32\arctan\frac{x-2}{2}+C.$$ ✓✓
+Evaluate between $2$ and $4$ (the denominator is $4$ at $x=2$ and $8$ at $x=4$):
+$$\left(\ln8+\frac32\arctan1\right)-\left(\ln4+\frac32\arctan0\right)=\boxed{\ln2+\frac{3\pi}{8}}.$$ ✓
+
+**(b)** The arguments differ, so use the product-to-sum identity $\cos A\cos B=\frac12\left[\cos(A-B)+\cos(A+B)\right]$: ✓
+$$\cos2x\cos x=\frac12\left(\cos x+\cos3x\right).$$ ✓
+$$\int_0^{\pi/3}\frac12\left(\cos x+\cos3x\right)dx=\frac12\left[\sin x+\frac{\sin3x}{3}\right]_0^{\pi/3}=\frac12\left(\frac{\sqrt3}{2}+\frac{\sin\pi}{3}\right)=\boxed{\frac{\sqrt3}{4}}.$$ ✓✓
+        `
+      },
+      {
+        number: 9, label: 'B3', title: 'Integration by parts; a reduction formula', section: 'Section B · §9.2', marks: 10,
+        prompt: String.raw`
+**(a)** Evaluate $\displaystyle\int_0^{\ln2}x^{2}\cosh x\,dx$. Give your answer in terms of $\ln2$. (4)
+
+**(b)** For an integer $n\ge1$ let $I_n=\displaystyle\int x^{2}(\ln x)^{n}\,dx$.
+
+**(i)** Use integration by parts to prove the reduction formula
+$$I_n=\frac{x^{3}(\ln x)^{n}}{3}-\frac n3\,I_{n-1}.$$ (4)
+
+**(ii)** Hence evaluate $\displaystyle\int_1^{e}x^{2}(\ln x)^{2}\,dx$. (2)
+        `,
+        solution: String.raw`
+**(a)** Integrate by parts twice. First ($u=x^{2}$, $dv=\cosh x\,dx$): $\displaystyle\int x^{2}\cosh x\,dx=x^{2}\sinh x-2\int x\sinh x\,dx$. ✓
+Second ($u=x$, $dv=\sinh x\,dx$): $\displaystyle\int x\sinh x\,dx=x\cosh x-\sinh x$. ✓ Hence
+$$\int x^{2}\cosh x\,dx=x^{2}\sinh x-2x\cosh x+2\sinh x.$$ ✓
+At $x=\ln2$ we have $\sinh(\ln2)=\frac34$ and $\cosh(\ln2)=\frac54$; at $x=0$ the expression is $0$:
+$$\int_0^{\ln2}x^{2}\cosh x\,dx=\frac34(\ln2)^{2}-\frac52\ln2+\frac32.$$ ✓
+
+**(b)(i)** Take $u=(\ln x)^{n}$ and $dv=x^{2}dx$, so $du=\dfrac{n(\ln x)^{n-1}}{x}dx$ and $v=\dfrac{x^{3}}{3}$: ✓✓
+$$I_n=\frac{x^{3}(\ln x)^{n}}{3}-\int\frac{x^{3}}{3}\cdot\frac{n(\ln x)^{n-1}}{x}dx=\frac{x^{3}(\ln x)^{n}}{3}-\frac n3\int x^{2}(\ln x)^{n-1}dx.$$ ✓
+The last integral is $I_{n-1}$, which proves the formula. ✓
+
+**(b)(ii)** First find $\displaystyle\int_1^ex^{2}\ln x\,dx$ (the case $n=1$, with $I_0=\frac{x^{3}}{3}$): ✓
+$$\int_1^{e}x^{2}\ln x\,dx=\left[\frac{x^{3}\ln x}{3}-\frac{x^{3}}{9}\right]_1^{e}=\left(\frac{e^{3}}{3}-\frac{e^{3}}{9}\right)-\left(0-\frac19\right)=\frac{2e^{3}+1}{9}.$$
+Now $n=2$:
+$$\int_1^{e}x^{2}(\ln x)^{2}dx=\left[\frac{x^{3}(\ln x)^{2}}{3}\right]_1^{e}-\frac23\cdot\frac{2e^{3}+1}{9}=\frac{e^{3}}{3}-\frac{4e^{3}+2}{27}=\boxed{\frac{5e^{3}-2}{27}}.$$ ✓
+        `
+      },
+      {
+        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        prompt: String.raw`
+**(a)** Explain why the integral $\displaystyle\int_{-1}^{1}\frac{dx}{x^{2}}$ is called improper. Explain also why the calculation $\left[-\dfrac1x\right]_{-1}^{1}=-2$ is **not** a valid value for it. (2)
+
+**(b)** Determine whether the improper integral
+$$\int_0^{\infty}\frac{dx}{e^{x}+e^{-x}}$$
+converges or diverges. If it converges, find its value. Justify every limit that you use. (4)
+
+**(c)** Use the Comparison Theorem to determine whether $\displaystyle\int_{2}^{\infty}\frac{dx}{\sqrt x-1}$ converges or diverges. (4)
+        `,
+        solution: String.raw`
+**(a)** The integrand $\dfrac1{x^{2}}$ is undefined at $x=0$, which lies **inside** $[-1,1]$, and it tends to $+\infty$ there. ✓ The Fundamental Theorem cannot be applied across the discontinuity, so the integral is improper (Type II). The value $-2$ is impossible: the integrand is **positive** everywhere, so its integral cannot be negative. The integral must be split at $0$, and each half $\displaystyle\int_0^{1}\frac{dx}{x^{2}}$ diverges ($p=2\ge1$). ✓ So the integral **diverges**.
+
+**(b)** The upper limit is infinite (Type I). Multiply top and bottom by $e^{x}$: ✓
+$$\frac{1}{e^{x}+e^{-x}}=\frac{e^{x}}{e^{2x}+1}.$$
+With $u=e^{x}$, $du=e^{x}dx$: $\displaystyle\int\frac{e^{x}}{e^{2x}+1}dx=\arctan\left(e^{x}\right)$. ✓ So
+$$\int_0^{t}\frac{dx}{e^{x}+e^{-x}}=\arctan\left(e^{t}\right)-\arctan1.$$ ✓
+As $t\to\infty$, $e^{t}\to\infty$ and $\arctan\left(e^{t}\right)\to\dfrac\pi2$. Hence the integral **converges** and ✓
+$$\int_0^{\infty}\frac{dx}{e^{x}+e^{-x}}=\frac\pi2-\frac\pi4=\frac\pi4.$$
+
+**(c)** For $x\ge2$ we have $0<\sqrt x-1<\sqrt x$, so
+$$\frac{1}{\sqrt x-1}>\frac{1}{\sqrt x}=x^{-1/2}>0.$$ ✓✓
+Now $\displaystyle\int_2^{\infty}x^{-1/2}dx=\lim_{t\to\infty}\left[2\sqrt x\right]_2^t=\infty$ **diverges** ($p=\frac12\le1$). ✓ A larger integrand than a divergent integral also diverges, so by the **Comparison Theorem** $\displaystyle\int_{2}^{\infty}\frac{dx}{\sqrt x-1}$ **diverges**. ✓
+        `
+      },
+      {
+        number: 11, label: 'B5', title: 'Sequences and series', section: 'Section B · §11.1–11.3', marks: 9,
+        prompt: String.raw`
+**(a)** Determine, giving reasons, whether the sequence $\{a_n\}=\left\{n^{1/n}\right\}$ is convergent or divergent. If it is convergent, state to what value it converges. (3)
+
+**(b)** Using (a) or otherwise, decide (with reasons) if the following series converges or diverges.
+$$\sum_{n=1}^{\infty}n^{1/n}$$ (2)
+
+**(c)** Decide (with reasons) if the following series converges or diverges.
+$$\sum_{n=1}^{\infty}\frac{2^{n}\,n!}{n^{n}}$$ (4)
+        `,
+        solution: String.raw`
+**(a)** Write $a_n=n^{1/n}=e^{(\ln n)/n}$. ✓ By l'Hôpital's rule
+$$\lim_{x\to\infty}\frac{\ln x}{x}=\lim_{x\to\infty}\frac{1/x}{1}=0.$$ ✓
+Since the exponential function is continuous, $a_n\to e^{0}=1$. So the sequence is **convergent with limit $1$**. ✓
+
+**(b)** Since $a_n\to1\neq0$, the **Test for Divergence** shows that $\sum n^{1/n}$ **diverges**. ✓✓
+
+**(c)** Use the **Ratio Test** with $c_n=\dfrac{2^{n}n!}{n^{n}}>0$: ✓
+$$\frac{c_{n+1}}{c_n}=\frac{2^{n+1}(n+1)!}{(n+1)^{n+1}}\cdot\frac{n^{n}}{2^{n}n!}=\frac{2(n+1)\,n^{n}}{(n+1)^{n+1}}=2\left(\frac{n}{n+1}\right)^{n}=\frac{2}{\left(1+\frac1n\right)^{n}}.$$ ✓✓
+Since $\left(1+\frac1n\right)^{n}\to e$, the ratio tends to $\dfrac2e<1$ (because $e>2$), so the series **converges**. ✓
+        `
+      },
+      {
+        number: 12, label: 'B6', title: 'Power series and a Taylor series', section: 'Section B · §11.4, §11.6', marks: 9,
+        prompt: String.raw`
+**(a)** Find the radius of convergence and the interval of convergence of the power series
+$$\sum_{n=1}^{\infty}\frac{(-1)^{n}(x-2)^{n}}{n\,3^{n}}.$$ (5)
+
+**(b)** Use the formula $c_n=\dfrac{f^{(n)}(a)}{n!}$ to find the first four terms of the Taylor series of $f(x)=\sin x$ about $a=\dfrac\pi6$. (4)
+        `,
+        solution: String.raw`
+**(a)** Use the **Ratio Test** with $a_n=\dfrac{(-1)^{n}(x-2)^{n}}{n\,3^{n}}$: ✓
+$$\left|\frac{a_{n+1}}{a_n}\right|=\frac{|x-2|^{n+1}}{(n+1)3^{n+1}}\cdot\frac{n\,3^{n}}{|x-2|^{n}}=\frac{|x-2|}{3}\cdot\frac{n}{n+1}\to\frac{|x-2|}{3}.$$ ✓
+The series converges for $|x-2|<3$, so the **radius of convergence is $R=3$**, and it converges for $-1<x<5$. ✓
+
+*Endpoints.* At $x=5$: $\displaystyle\sum\frac{(-1)^{n}3^{n}}{n\,3^{n}}=\sum\frac{(-1)^{n}}{n}$ converges (Alternating Series Test). At $x=-1$: $\displaystyle\sum\frac{(-1)^{n}(-3)^{n}}{n\,3^{n}}=\sum\frac1n$ diverges (harmonic series). ✓✓
+
+The **interval of convergence** is $(-1,\,5]$. ✓
+
+**(b)** Differentiate and evaluate at $a=\frac\pi6$: ✓
+$$f=\sin x\to\tfrac12,\qquad f'=\cos x\to\tfrac{\sqrt3}{2},\qquad f''=-\sin x\to-\tfrac12,\qquad f'''=-\cos x\to-\tfrac{\sqrt3}{2}.$$ ✓
+So $c_0=\frac12$, $c_1=\frac{\sqrt3}{2}$, $c_2=\dfrac{-1/2}{2!}=-\frac14$, $c_3=\dfrac{-\sqrt3/2}{3!}=-\dfrac{\sqrt3}{12}$, and ✓
+$$\sin x=\frac12+\frac{\sqrt3}{2}\left(x-\frac\pi6\right)-\frac14\left(x-\frac\pi6\right)^{2}-\frac{\sqrt3}{12}\left(x-\frac\pi6\right)^{3}+\cdots$$ ✓
+        `
+      },
+      {
+        number: 13, label: 'B7', title: 'Differential equations — verifying and separating', section: 'Section B · §12.1', marks: 8,
+        prompt: String.raw`
+**(a)** State the order of the differential equation $y''-2y'-3y=0$, and show that $y=Ae^{3x}+Be^{-x}$ is a solution for all constants $A$ and $B$. (2)
+
+**(b)** Given the differential equation
+$$x\,\frac{dy}{dx}=y\ln x,\qquad x>0,$$
+write it in the form $M(x)\,dx+N(y)\,dy=0$ and find its general solution. (3)
+
+**(c)** Find the particular solution of the equation in (b) given that $y=2$ when $x=1$. (3)
+        `,
+        solution: String.raw`
+**(a)** The highest derivative is $y''$, so the equation is **second order**. ✓ With $y=Ae^{3x}+Be^{-x}$: $y'=3Ae^{3x}-Be^{-x}$ and $y''=9Ae^{3x}+Be^{-x}$, so
+$$y''-2y'-3y=(9-6-3)Ae^{3x}+(1+2-3)Be^{-x}=0.$$ ✓
+Hence $y$ is a solution for all $A$ and $B$.
+
+**(b)** For $y\neq0$ divide by $xy$:
+$$\frac{\ln x}{x}\,dx-\frac1y\,dy=0,$$ ✓
+of the required form. Integrate (using $u=\ln x$ on the left): ✓
+$$\frac{(\ln x)^{2}}{2}=\ln|y|+K,\quad\text{so}\quad|y|=e^{-K}e^{(\ln x)^{2}/2}.$$
+The **general solution** is
+$$y=A\,e^{(\ln x)^{2}/2},$$ ✓
+where $A=\pm e^{-K}$ (and $A=0$ gives the constant solution $y=0$).
+
+**(c)** With $y(1)=2$: $\ln1=0$, so $2=Ae^{0}=A$. ✓✓ The **particular solution** is ✓
+$$y=2e^{(\ln x)^{2}/2}.$$
+        `
+      },
+      {
+        number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
+        prompt: String.raw`
+Given the differential equation
+$$\frac{dy}{dx}=2y+x\,e^{2x}.$$
+
+**(a)** Show that this is a linear differential equation by writing it in standard form. (2)
+
+**(b)** Find the integrating factor $e^{\int P(x)\,dx}$. (2)
+
+**(c)** Hence find the general solution of the differential equation. (4)
+
+**(d)** Find the particular solution satisfying $y=3$ when $x=0$. (2)
+        `,
+        solution: String.raw`
+**(a)** Move the $y$-term to the left-hand side:
+$$\frac{dy}{dx}-2y=x\,e^{2x}.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=-2$ and $Q(x)=xe^{2x}$, so it is **linear**.
+
+**(b)** $\displaystyle\int-2\,dx=-2x$, so ✓
+$$\mu(x)=e^{-2x}.$$ ✓
+
+**(c)** Multiply the standard form by $\mu=e^{-2x}$; the left side is an exact derivative: ✓
+$$\frac{d}{dx}\left(ye^{-2x}\right)=e^{-2x}\cdot xe^{2x}=x.$$ ✓
+Integrate: $ye^{-2x}=\dfrac{x^{2}}{2}+C$, so the **general solution** is ✓✓
+$$y=e^{2x}\left(\frac{x^{2}}{2}+C\right).$$
+
+**(d)** With $y(0)=3$: $3=C$. ✓ The **particular solution** is ✓
+$$y=e^{2x}\left(\frac{x^{2}}{2}+3\right).$$
+        `
+      }
+    ]
+  },
+{
+    id: 'nov-paper9',
+    label: 'November Paper 9',
+    date: 'November Exam I',
+    kind: 'CALCULUS EXAMINATION',
+    totalMarks: 90,
+    duration: 120,
+    topics: 'A cone of fixed slant height and a printed poster with margins, an open-domain optimization (§6.6), arcsine, arctangent and sin⁶x integrals (§9.1, §9.4), a hyperbolic integral and the reduction formula for ∫(1−x²)ⁿdx (§9.2), improper integrals near zero and at infinity (§10), the Limit Comparison Test, absolute convergence and the Test for Divergence, a power series with its derivative and the series for sin x / x, and separable and linear ODEs.',
+    instructions: [
+      'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
+      'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
+      'No calculators are allowed.',
+      'You have 2 hours in total.',
+      'Use the “Show Memo” button under each question to check your solution once you have attempted it.'
+    ],
+    questions: [
+      {
+        number: 1, label: 'A1', title: 'A cone of fixed slant height', section: 'Section A · §6.6', marks: 2,
+        prompt: String.raw`
+A right circular cone has **slant height** $5$ (the distance from its apex to any point on the rim of its base). Let $h$ be the height and $r$ the radius of the base. Using $r^{2}+h^{2}=25$ to eliminate $r$, the volume of the cone is a function of $h$ alone. Which choice gives that function together with its correct domain?
+
+- **A.** $V(h)=\dfrac{\pi}{3}\left(25+h^{2}\right)h$, $\;h\ge0$.
+- **B.** $V(h)=\pi\left(25-h^{2}\right)h$, $\;0\le h\le5$.
+- **C.** $V(h)=\dfrac{\pi}{3}\left(25-h^{2}\right)h$, $\;0\le h\le25$.
+- **D.** $V(h)=\dfrac{\pi}{3}(5-h)h^{2}$, $\;0\le h\le5$.
+- **E.** $V(h)=\dfrac{\pi}{3}\left(25-h^{2}\right)h$, $\;0\le h\le5$.
+        `,
+        solution: String.raw`
+**Answer: E.** ✓✓
+
+The volume is $V=\dfrac13\pi r^{2}h$ and $r^{2}=25-h^{2}$, so $V(h)=\dfrac\pi3\left(25-h^{2}\right)h$. Since $r^{2}\ge0$ we need $h^{2}\le25$, so $0\le h\le5$ (at $h=5$ the radius is $0$).
+
+- **B** omits the factor $\frac13$. **C** has the right function but the domain $[0,25]$ would make $r^{2}$ negative. **D** and **A** use the wrong relation between $r$ and $h$.
+        `
+      },
+      {
+        number: 2, label: 'A2', title: 'A product of trigonometric functions', section: 'Section A · §9.4', marks: 3,
+        prompt: String.raw`
+$$\int_0^{\pi}\sin2x\,\cos x\,dx=$$
+
+- **A.** $0$.
+- **B.** $\dfrac23$.
+- **C.** $\dfrac43$.
+- **D.** $2$.
+- **E.** $\dfrac83$.
+        `,
+        solution: String.raw`
+**Answer: C.** ✓✓✓
+
+Use $\sin2x=2\sin x\cos x$, so $\sin2x\cos x=2\sin x\cos^{2}x$. With $u=\cos x$, $du=-\sin x\,dx$:
+$$\int_0^{\pi}2\sin x\cos^{2}x\,dx=\left[-\frac{2\cos^{3}x}{3}\right]_0^{\pi}=-\frac23(-1)+\frac23(1)=\frac43.$$
+
+(Alternatively, $\sin2x\cos x=\frac12(\sin3x+\sin x)$ and $\frac12\left[-\frac{\cos3x}{3}-\cos x\right]_0^{\pi}=\frac12\left(\frac23+2\right)=\frac43$.)
+
+- **B** loses the factor $2$ in $\sin2x=2\sin x\cos x$. **A**, **D** and **E** come from slips in evaluating $\cos^{3}x$ at the limits $0$ and $\pi$.
+        `
+      },
+      {
+        number: 3, label: 'A3', title: 'A Type II improper integral', section: 'Section A · §10', marks: 2,
+        prompt: String.raw`
+$$\int_0^{1}\ln x\,dx=$$
+
+- **A.** $-\dfrac12$.
+- **B.** $0$.
+- **C.** $1$.
+- **D.** $-1$.
+- **E.** The integral diverges.
+        `,
+        solution: String.raw`
+**Answer: D.** ✓✓
+
+The integrand is undefined at $x=0$, so the integral is $\displaystyle\lim_{t\to0^{+}}\int_t^{1}\ln x\,dx$. By parts, $\displaystyle\int\ln x\,dx=x\ln x-x$, so
+$$\int_t^{1}\ln x\,dx=(0-1)-(t\ln t-t)=-1-t\ln t+t.$$
+As $t\to0^{+}$: $t\to0$ and $t\ln t=\dfrac{\ln t}{1/t}\to\dfrac{1/t}{-1/t^{2}}=-t\to0$ (l'Hôpital). So the integral converges to $-1$ (negative, since $\ln x<0$ on $(0,1)$).
+        `
+      },
+      {
+        number: 4, label: 'A4', title: 'Absolute convergence', section: 'Section A · §11.2–11.3', marks: 3,
+        prompt: String.raw`
+Which one of the following statements about the series $\displaystyle\sum_{n=1}^{\infty}\frac{\sin n}{n^{2}}$ is correct?
+
+- **A.** It is absolutely convergent, by comparison with $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n^{2}}$.
+- **B.** It diverges, by the Test for Divergence, because $\sin n$ has no limit.
+- **C.** It is conditionally convergent, by the Alternating Series Test.
+- **D.** It converges, by the Alternating Series Test, because the terms change sign.
+- **E.** It diverges, by comparison with $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n}$.
+        `,
+        solution: String.raw`
+**Answer: A.** ✓✓✓
+
+Since $|\sin n|\le1$, we have $0\le\dfrac{|\sin n|}{n^{2}}\le\dfrac1{n^{2}}$. The series $\sum\frac1{n^{2}}$ converges ($p$-series, $p=2>1$), so by the **Comparison Test** $\sum\left|\dfrac{\sin n}{n^{2}}\right|$ converges: the series is **absolutely convergent**.
+
+- **B:** the terms $\frac{\sin n}{n^{2}}$ do tend to $0$ (squeezed by $\pm\frac1{n^{2}}$); the Test for Divergence is simply inconclusive. **C** and **D:** the signs of $\sin n$ do not alternate in a regular pattern, so the Alternating Series Test does not apply (and absolute convergence rules out *conditional*). **E:** the bound $\frac{|\sin n|}{n^{2}}\le\frac1n$ is true but gives no information, because $\sum\frac1n$ diverges.
+        `
+      },
+      {
+        number: 5, label: 'A5', title: 'Recognising a Maclaurin series', section: 'Section A · §11.6', marks: 2,
+        prompt: String.raw`
+The sum of the series $\displaystyle\sum_{n=1}^{\infty}\frac{3^{n}}{n!}$ is
+
+- **A.** $e^{3}$.
+- **B.** $e^{3}-1$.
+- **C.** $3e$.
+- **D.** $e^{3}+1$.
+- **E.** $3e-1$.
+        `,
+        solution: String.raw`
+**Answer: B.** ✓✓
+
+The Maclaurin series of $e^{x}$ is $\displaystyle\sum_{n=0}^{\infty}\frac{x^{n}}{n!}$. At $x=3$: $e^{3}=\displaystyle\sum_{n=0}^{\infty}\frac{3^{n}}{n!}=1+\sum_{n=1}^{\infty}\frac{3^{n}}{n!}$. Our series starts at $n=1$, so its sum is $e^{3}-1$. (**A** forgets that the $n=0$ term, equal to $1$, is missing.)
+        `
+      },
+      {
+        number: 6, label: 'A6', title: 'Order and linearity', section: 'Section A · §12.0', marks: 2,
+        prompt: String.raw`
+The differential equation $y''+\left(y'\right)^{3}=x$ is
+
+- **A.** first order and linear.
+- **B.** second order and linear.
+- **C.** second order and nonlinear.
+- **D.** first order and nonlinear.
+- **E.** third order and nonlinear.
+        `,
+        solution: String.raw`
+**Answer: C.** ✓✓
+
+The highest derivative is $y''$, so the equation is **second order**. The term $\left(y'\right)^{3}$ is a power of a derivative, so the equation is not linear in $y$ and its derivatives: it is **nonlinear**. (The exponent $3$ does not affect the order.)
+        `
+      },
+      {
+        number: 7, label: 'B1', title: 'Optimization — a poster with margins (open domain)', section: 'Section B · §6.6', marks: 11,
+        prompt: String.raw`
+A rectangular poster must contain $150\ \text{cm}^{2}$ of printed material. The printed region is surrounded by margins of $2$ cm at the top and at the bottom and $3$ cm at each side. Let $x$ cm be the **width** of the printed region. The printer wants the poster of **smallest total area**.
+
+**(a)** Draw a labelled diagram. Write the height of the printed region in terms of $x$, and hence write the total area $P$ of the poster as a function of $x$ alone. (4)
+
+**(b)** State the domain of $P$. (1)
+
+**(c)** Find the critical number(s) of $P$. (3)
+
+**(d)** The domain in (b) is **not** a closed interval, so the Closed Interval Method cannot be used. Use the Second Derivative Test (or the behaviour of $P$ at the ends of the domain) to justify that the critical number gives the absolute minimum. State the dimensions of the poster and its area. (3)
+        `,
+        solution: String.raw`
+**(a)** *Diagram:* an outer rectangle (the poster) containing an inner rectangle (the printed region) of width $x$ and height $y$, with margins $3$ at each side and $2$ at top and bottom. ✓
+
+The printed area is $xy=150$, so ✓
+$$y=\frac{150}{x}.$$
+The poster has width $x+6$ and height $y+4=\dfrac{150}{x}+4$, so the total area is ✓✓
+$$P(x)=(x+6)\left(\frac{150}{x}+4\right)=174+4x+\frac{900}{x}.$$
+
+**(b)** The width must be positive and can be as large as we like: the domain is the **open interval** $(0,\infty)$. ✓
+
+**(c)** $P'(x)=4-\dfrac{900}{x^{2}}$ exists for all $x>0$, so the critical numbers come from $P'(x)=0$: ✓✓
+$$4=\frac{900}{x^{2}}\ \Longrightarrow\ x^{2}=225\ \Longrightarrow\ x=15\quad(x>0).$$ ✓
+
+**(d)** $P''(x)=\dfrac{1800}{x^{3}}>0$ for **every** $x>0$, so $P$ is concave up on its whole domain. ✓ Hence the graph lies above its tangent line at $x=15$, which is horizontal, so the local minimum at $x=15$ is the **absolute minimum**. (Equivalently, $P(x)\to\infty$ both as $x\to0^{+}$ and as $x\to\infty$, so the only critical point must be the absolute minimum.) ✓
+
+The printed region is $15$ cm wide and $\dfrac{150}{15}=10$ cm high, so the best poster is $\boxed{21\ \text{cm wide}\times14\ \text{cm high}}$, with area $P(15)=174+60+60=\boxed{294\ \text{cm}^{2}}$. ✓
+        `
+      },
+      {
+        number: 8, label: 'B2', title: 'Inverse-trigonometric integrals; an even power of sine', section: 'Section B · §9.1, §9.4', marks: 9,
+        prompt: String.raw`
+**(a)** Evaluate
+
+**(i)** $\displaystyle\int_{1}^{\sqrt e}\frac{dx}{x\sqrt{1-(\ln x)^{2}}}$ (3)
+
+**(ii)** $\displaystyle\int_{0}^{1}\frac{x}{1+x^{4}}\,dx$ (2)
+
+**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\sin^{6}x\,dx.$ (4)
+        `,
+        solution: String.raw`
+**(a)(i)** Substitute $u=\ln x$, so $du=\dfrac{dx}{x}$. The limits become $\ln1=0$ and $\ln\sqrt e=\frac12$: ✓
+$$\int_0^{1/2}\frac{du}{\sqrt{1-u^{2}}}=\Big[\arcsin u\Big]_0^{1/2}=\arcsin\frac12-0=\boxed{\frac\pi6}.$$ ✓✓
+
+**(a)(ii)** Substitute $u=x^{2}$, so $du=2x\,dx$ and the limits stay $0$ and $1$: ✓
+$$\frac12\int_0^{1}\frac{du}{1+u^{2}}=\frac12\Big[\arctan u\Big]_0^{1}=\boxed{\frac\pi8}.$$ ✓
+
+**(b)** The power is even, so use $\sin^{2}x=\dfrac{1-\cos2x}{2}$: ✓
+$$\sin^{6}x=\left(\frac{1-\cos2x}{2}\right)^{3}=\frac18\left(1-3\cos2x+3\cos^{2}2x-\cos^{3}2x\right).$$ ✓
+Integrate over $\left[0,\frac\pi2\right]$ term by term: $\displaystyle\int_0^{\pi/2}1\,dx=\frac\pi2$; $\displaystyle\int_0^{\pi/2}\cos2x\,dx=0$; $\displaystyle\int_0^{\pi/2}\cos^{2}2x\,dx=\int_0^{\pi/2}\frac{1+\cos4x}{2}dx=\frac\pi4$; and
+$$\int_0^{\pi/2}\cos^{3}2x\,dx=\int_0^{\pi/2}\left(1-\sin^{2}2x\right)\cos2x\,dx=\left[\frac{\sin2x}{2}-\frac{\sin^{3}2x}{6}\right]_0^{\pi/2}=0.$$ ✓
+Therefore
+$$\int_0^{\pi/2}\sin^{6}x\,dx=\frac18\left(\frac\pi2+3\cdot\frac\pi4\right)=\frac18\cdot\frac{5\pi}{4}=\boxed{\frac{5\pi}{32}}.$$ ✓
+        `
+      },
+      {
+        number: 9, label: 'B3', title: 'Integration by parts; a reduction formula', section: 'Section B · §9.2', marks: 10,
+        prompt: String.raw`
+**(a)** Evaluate $\displaystyle\int_0^{\ln5}x\cosh x\,dx$. Give your answer in terms of $\ln5$. (3)
+
+**(b)** For an integer $n\ge0$ let $I_n=\displaystyle\int_0^{1}\left(1-x^{2}\right)^{n}dx$.
+
+**(i)** For $n\ge1$, use integration by parts to prove that
+$$I_n=\frac{2n}{2n+1}\,I_{n-1}.$$ (5)
+
+**(ii)** Hence evaluate $I_3$. (2)
+        `,
+        solution: String.raw`
+**(a)** Take $u=x$ and $dv=\cosh x\,dx$, so $du=dx$ and $v=\sinh x$: ✓
+$$\int_0^{\ln5}x\cosh x\,dx=\Big[x\sinh x\Big]_0^{\ln5}-\int_0^{\ln5}\sinh x\,dx=\ln5\,\sinh(\ln5)-\Big[\cosh x\Big]_0^{\ln5}.$$ ✓
+Since $e^{\ln5}=5$: $\sinh(\ln5)=\dfrac{5-\frac15}{2}=\dfrac{12}{5}$ and $\cosh(\ln5)=\dfrac{5+\frac15}{2}=\dfrac{13}{5}$. Hence
+$$\frac{12}{5}\ln5-\left(\frac{13}{5}-1\right)=\boxed{\frac{12}{5}\ln5-\frac85}.$$ ✓
+
+**(b)(i)** Take $u=\left(1-x^{2}\right)^{n}$ and $dv=dx$, so $du=-2nx\left(1-x^{2}\right)^{n-1}dx$ and $v=x$: ✓✓
+$$I_n=\Big[x\left(1-x^{2}\right)^{n}\Big]_0^{1}+2n\int_0^{1}x^{2}\left(1-x^{2}\right)^{n-1}dx.$$
+The boundary term is $0-0=0$ (it vanishes at $x=1$ because $1-x^{2}=0$ and $n\ge1$). Write $x^{2}=1-\left(1-x^{2}\right)$: ✓
+$$I_n=2n\int_0^{1}\left[1-\left(1-x^{2}\right)\right]\left(1-x^{2}\right)^{n-1}dx=2n\left(I_{n-1}-I_n\right).$$ ✓
+Collect the $I_n$ terms: $(2n+1)I_n=2n\,I_{n-1}$, which gives $I_n=\dfrac{2n}{2n+1}I_{n-1}$. ✓
+
+**(b)(ii)** $I_0=\displaystyle\int_0^{1}1\,dx=1$. Applying the formula three times: ✓
+$$I_1=\frac23\,I_0=\frac23,\qquad I_2=\frac45\,I_1=\frac{8}{15},\qquad I_3=\frac67\,I_2=\frac67\cdot\frac{8}{15}=\frac{48}{105}=\boxed{\frac{16}{35}}.$$ ✓✓
+(Check: $\displaystyle\int_0^{1}\left(1-3x^{2}+3x^{4}-x^{6}\right)dx=1-1+\frac35-\frac17=\frac{16}{35}$.)
+        `
+      },
+      {
+        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        prompt: String.raw`
+**(a)** Explain why the integral $\displaystyle\int_0^{3}\frac{dx}{(x-1)^{2}}$ is called improper, and say how it must be treated. (2)
+
+**(b)** Determine whether the improper integral
+$$\int_{2}^{\infty}\frac{dx}{x\,(\ln x)^{2}}$$
+converges or diverges. If it converges, find its value. Justify every limit that you use. (4)
+
+**(c)** Use the Comparison Theorem to determine whether $\displaystyle\int_{0}^{1}\frac{dx}{\sqrt x+x^{3}}$ converges or diverges. (4)
+        `,
+        solution: String.raw`
+**(a)** The integrand is undefined at $x=1$, which lies **inside** $[0,3]$, and $\dfrac{1}{(x-1)^{2}}\to\infty$ there. ✓ The Fundamental Theorem cannot be applied across the discontinuity, so the integral is improper (Type II). It must be **split at $x=1$** into $\displaystyle\int_0^{1}+\int_1^{3}$, each treated as a limit; the integral converges only if both pieces converge. (Here neither does: a naive evaluation $\left[-\frac1{x-1}\right]_0^3=-\frac32$ is impossible for a positive integrand.) ✓
+
+**(b)** The upper limit is infinite (Type I): $\displaystyle\lim_{t\to\infty}\int_2^{t}\frac{dx}{x(\ln x)^{2}}$. ✓ Substitute $u=\ln x$, $du=\dfrac{dx}{x}$: $\displaystyle\int\frac{dx}{x(\ln x)^{2}}=\int u^{-2}du=-\frac1u=-\frac{1}{\ln x}$. ✓ So
+$$\int_2^{t}\frac{dx}{x(\ln x)^{2}}=-\frac{1}{\ln t}+\frac{1}{\ln2}.$$ ✓
+As $t\to\infty$, $\ln t\to\infty$ and $\dfrac{1}{\ln t}\to0$. The integral **converges** and
+$$\int_2^{\infty}\frac{dx}{x(\ln x)^{2}}=\frac{1}{\ln2}.$$ ✓
+
+**(c)** The integrand is undefined at $x=0$ (Type II), so the integral is $\displaystyle\lim_{t\to0^{+}}\int_t^{1}\frac{dx}{\sqrt x+x^{3}}$. For $0<x\le1$ we have $\sqrt x+x^{3}>\sqrt x$, so
+$$0<\frac{1}{\sqrt x+x^{3}}<\frac{1}{\sqrt x}=x^{-1/2}.$$ ✓✓
+Now $\displaystyle\int_0^{1}x^{-1/2}dx=\lim_{t\to0^{+}}\Big[2\sqrt x\Big]_t^{1}=2$ converges (the $p$-integral at zero converges for $p<1$, and $p=\frac12$). ✓ By the **Comparison Theorem**, $\displaystyle\int_0^{1}\frac{dx}{\sqrt x+x^{3}}$ **converges**. ✓
+        `
+      },
+      {
+        number: 11, label: 'B5', title: 'Sequences and series', section: 'Section B · §11.1–11.3', marks: 9,
+        prompt: String.raw`
+**(a)** Determine, giving reasons, whether the sequence $\{a_n\}=\left\{(-1)^{n}\dfrac{n}{n+1}\right\}$ is convergent or divergent. If it is convergent, state to what value it converges. (3)
+
+**(b)** Using (a) or otherwise, decide (with reasons) if the following series converges or diverges.
+$$\sum_{n=1}^{\infty}(-1)^{n}\frac{n}{n+1}$$ (2)
+
+**(c)** Decide (with reasons) if the following series converges or diverges.
+$$\sum_{n=1}^{\infty}\frac{n+1}{n^{3/2}+5}$$ (4)
+        `,
+        solution: String.raw`
+**(a)** The absolute values satisfy $|a_n|=\dfrac{n}{n+1}\to1$. ✓ But the sign alternates: for **even** $n$ the terms $a_n\to1$, and for **odd** $n$ the terms $a_n\to-1$. ✓ A convergent sequence has a single limit for all its subsequences, so the sequence is **divergent** (it oscillates between values near $1$ and $-1$). ✓
+
+**(b)** Since $\lim a_n$ does not exist (in particular it is not $0$), the **Test for Divergence** shows that $\sum(-1)^{n}\dfrac{n}{n+1}$ **diverges**. ✓✓
+
+**(c)** The terms are positive. For large $n$ they behave like $\dfrac{n}{n^{3/2}}=\dfrac{1}{\sqrt n}$, so use the **Limit Comparison Test** (if $a_n,b_n>0$ and $a_n/b_n\to c$ with $0<c<\infty$, the two series converge or diverge together) with $b_n=\dfrac{1}{\sqrt n}$: ✓
+$$\lim_{n\to\infty}\frac{a_n}{b_n}=\lim_{n\to\infty}\frac{(n+1)\sqrt n}{n^{3/2}+5}=\lim_{n\to\infty}\frac{n^{3/2}+n^{1/2}}{n^{3/2}+5}=1.$$ ✓✓
+Since $0<1<\infty$ and $\displaystyle\sum\frac{1}{\sqrt n}$ diverges ($p$-series, $p=\frac12\le1$), the series **diverges**. ✓
+        `
+      },
+      {
+        number: 12, label: 'B6', title: 'Power series and the series for sin x / x', section: 'Section B · §11.4, §11.6', marks: 9,
+        prompt: String.raw`
+**(a)** **(i)** Find the radius of convergence and the interval of convergence of the power series
+$$\sum_{n=1}^{\infty}\frac{n!\,x^{n}}{(2n)!}.$$ (3)
+
+**(ii)** Without further calculation, state the radius of convergence of the series obtained by differentiating the series in (i) term by term, and give the reason. (2)
+
+**(b)** Use the Maclaurin series of $\sin x$ to find the Maclaurin series of $g(x)=\dfrac{\sin x}{x}$ (write the first three terms and the general term). Integrate it term by term to write $\displaystyle\int_0^{1}\frac{\sin x}{x}\,dx$ as an infinite series. (4)
+        `,
+        solution: String.raw`
+**(a)(i)** Use the **Ratio Test** with $a_n=\dfrac{n!\,x^{n}}{(2n)!}$: ✓
+$$\left|\frac{a_{n+1}}{a_n}\right|=\frac{(n+1)!\,|x|^{n+1}}{(2n+2)!}\cdot\frac{(2n)!}{n!\,|x|^{n}}=\frac{(n+1)|x|}{(2n+2)(2n+1)}=\frac{|x|}{2(2n+1)}\ \longrightarrow\ 0$$ ✓
+for **every** $x$, and $0<1$. So the series converges for all $x$: the **radius of convergence is $R=\infty$** and the **interval of convergence is $(-\infty,\infty)$**. ✓
+
+**(a)(ii)** By the theorem on term-by-term differentiation, the differentiated series has the **same radius of convergence**, $R=\infty$. ✓✓ (Differentiation can change convergence at the endpoints of the interval, but there are none here.)
+
+**(b)** $\sin x=\displaystyle\sum_{n=0}^{\infty}\frac{(-1)^{n}x^{2n+1}}{(2n+1)!}$, so dividing by $x$: ✓
+$$\frac{\sin x}{x}=\sum_{n=0}^{\infty}\frac{(-1)^{n}x^{2n}}{(2n+1)!}=1-\frac{x^{2}}{6}+\frac{x^{4}}{120}-\cdots$$ ✓
+Integrate term by term over $[0,1]$ (allowed inside the radius of convergence, which is $\infty$): ✓
+$$\int_0^{1}\frac{\sin x}{x}\,dx=\sum_{n=0}^{\infty}\frac{(-1)^{n}}{(2n+1)\,(2n+1)!}=1-\frac1{18}+\frac1{600}-\cdots$$
+        `
+      },
+      {
+        number: 13, label: 'B7', title: 'Differential equations — separable', section: 'Section B · §12.1', marks: 8,
+        prompt: String.raw`
+Given the differential equation
+$$\frac{dy}{dx}=y\tan x,\qquad -\frac\pi2<x<\frac\pi2.$$
+
+**(a)** State the order of the equation, and show that it is separable by writing it in the form $M(x)\,dx+N(y)\,dy=0$. (2)
+
+**(b)** Find the general solution of the equation. (3)
+
+**(c)** Find the particular solution given that $y=4$ when $x=\dfrac\pi3$. (3)
+        `,
+        solution: String.raw`
+**(a)** The highest derivative is $\dfrac{dy}{dx}$, so the equation is **first order**. ✓ For $y\neq0$, divide by $y$ and rearrange:
+$$\tan x\,dx-\frac1y\,dy=0,$$
+which has the form $M(x)\,dx+N(y)\,dy=0$ with $M=\tan x$ and $N=-\frac1y$, so it is **separable**. ✓
+
+**(b)** Integrate $\dfrac{dy}{y}=\tan x\,dx$ (on the interval, $\cos x>0$): ✓
+$$\ln|y|=-\ln(\cos x)+K=\ln(\sec x)+K,$$ ✓
+so $|y|=e^{K}\sec x$ and the **general solution** is
+$$y=A\sec x,$$ ✓
+where $A=\pm e^{K}$ (and $A=0$ gives the constant solution $y=0$).
+
+**(c)** With $y\!\left(\frac\pi3\right)=4$: $\sec\frac\pi3=2$, so $4=2A$ and $A=2$. ✓✓ The **particular solution** is ✓
+$$y=2\sec x.$$
+        `
+      },
+      {
+        number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
+        prompt: String.raw`
+Given the differential equation
+$$2x\,\frac{dy}{dx}+y=6x^{3/2},\qquad x>0.$$
+
+**(a)** Show that this is a linear differential equation by writing it in standard form. (2)
+
+**(b)** Find the integrating factor $e^{\int P(x)\,dx}$. (2)
+
+**(c)** Hence find the general solution of the differential equation. (4)
+
+**(d)** Find the particular solution satisfying $y=7$ when $x=4$. (2)
+        `,
+        solution: String.raw`
+**(a)** Divide through by $2x$ (positive on the domain):
+$$\frac{dy}{dx}+\frac{1}{2x}\,y=3x^{1/2}.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\frac{1}{2x}$ and $Q(x)=3x^{1/2}$, so it is **linear**.
+
+**(b)** $\displaystyle\int\frac{1}{2x}\,dx=\frac12\ln x$ (for $x>0$), so ✓
+$$\mu(x)=e^{\frac12\ln x}=\sqrt x.$$ ✓
+
+**(c)** Multiply the standard form by $\mu=\sqrt x$; the left side is an exact derivative: ✓
+$$\frac{d}{dx}\left(\sqrt x\,y\right)=\sqrt x\cdot3\sqrt x=3x.$$ ✓
+Integrate: $\sqrt x\,y=\dfrac{3x^{2}}{2}+C$, so the **general solution** is ✓✓
+$$y=\frac32x^{3/2}+\frac{C}{\sqrt x}.$$
+
+**(d)** With $y(4)=7$: $7=\dfrac32\cdot8+\dfrac{C}{2}=12+\dfrac C2$, so $C=-10$. ✓ The **particular solution** is ✓
+$$y=\frac32x^{3/2}-\frac{10}{\sqrt x}.$$
         `
       }
     ]

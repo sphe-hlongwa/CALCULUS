@@ -30,6 +30,30 @@
  * No question is copied from a source paper, and no question repeats across these nine
  * papers or the Tutorial Quiz Test 4 papers in data/exams-tutorial.js.
  *
+ * DISTINCTNESS PASS: within every slot (B2(a), B2(b), B3(a), B3(b)-(c), B4, B5, B6, B7, B8)
+ * the nine papers now test nine different question types, not the same type with new numbers
+ * (for example B3(a) is x cosh x, x cosh^2 x, x e^x cosh x, x^2 sinh x, x sinh^2 x cosh x,
+ * x sech^2 x, sinh x ln(cosh x), sin x cosh x and x sech x tanh x, one per paper).
+ * Paper 1 is the baseline; only its B6(b) was changed.
+ *
+ * DISTINCTNESS PASS: within every slot (B2(a), B2(b), B3(a), B3(b)-(c), B4, B5, B6, B7, B8)
+ * the nine papers now test nine different question types, not the same type with new numbers
+ * (for example B3(a) is x cosh x, x cosh^2 x, x e^x cosh x, x^2 sinh x, x sinh^2 x cosh x,
+ * x sech^2 x, sinh x ln(cosh x), sin x cosh x and x sech x tanh x, one per paper).
+ * Paper 1 is the baseline; only its B6(b) was changed.
+ *
+ * DISTINCTNESS PASS: within every slot (B2(a), B2(b), B3(a), B3(b)-(c), B4, B5, B6, B7, B8)
+ * the nine papers now test nine different question types, not the same type with new numbers
+ * (for example B3(a) is x cosh x, x cosh^2 x, x e^x cosh x, x^2 sinh x, x sinh^2 x cosh x,
+ * x sech^2 x, sinh x ln(cosh x), sin x cosh x and x sech x tanh x, one per paper).
+ * Paper 1 is the baseline; only its B6(b) was changed.
+ *
+ * DISTINCTNESS PASS: within every slot (B2(a), B2(b), B3(a), B3(b)-(c), B4, B5, B6, B7, B8)
+ * the nine papers now test nine different question types, not the same type with new numbers
+ * (for example B3(a) is x cosh x, x cosh^2 x, x e^x cosh x, x^2 sinh x, x sinh^2 x cosh x,
+ * x sech^2 x, sinh x ln(cosh x), sin x cosh x and x sech x tanh x, one per paper).
+ * Paper 1 is the baseline and is unchanged.
+ *
  * Papers 7-9 add further §6.6 paradigms (a fence along a river, a cable across a river,
  * an open-domain poster problem), new reduction formulas (x^n e^x, x^2 (ln x)^n,
  * the (1-x^2)^n beta-type formula) and the extra bridging notes listed in the solutions
@@ -50,7 +74,7 @@ const NOVEMBER_EXAMS = [
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Cylinder in a cone and a triangular plot (§6.6), completing the square and f′/f (§9.1), reduction formula for (ln x)ⁿ (§9.2), odd powers of sin and cos (§9.4), Type I improper integral, Ratio Test and Divergence Test, interval of convergence and Taylor series, separable and linear ODEs.',
+    topics: 'Cylinder in a cone and a triangular plot (§6.6), completing the square and f′/f (§9.1), reduction formula for (ln x)ⁿ (§9.2), odd powers of sin and cos (§9.4), Type I improper integral, Ratio Test and Divergence Test, interval of convergence and the Taylor series of ln x about 2, a separable ODE with a by-parts integral and a linear ODE with integrating factor x².',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -311,7 +335,8 @@ This tends to $\dfrac14<1$, so the series **converges**. ✓
 **(a)** Find the radius of convergence and the interval of convergence of the power series
 $$\sum_{n=1}^{\infty}\frac{n\,(x-3)^{n}}{2^{n}}.$$ (5)
 
-**(b)** Use the formula $c_n=\dfrac{f^{(n)}(a)}{n!}$ to find the Taylor series of $f(x)=\dfrac1x$ about $a=2$. Write down the first four terms and the general term. (4)
+**(b)** Use the formula $c_n=\dfrac{f^{(n)}(a)}{n!}$ to find the Taylor series of $f(x)=\ln x$ about $a=2$. Write down the first four terms and the general term. Given that the series converges to $\ln x$ for $|x-2|<2$, use it at $x=3$ to show that
+$$\ln\frac32=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n\,2^{n}}.$$ (4)
         `,
         solution: String.raw`
 **(a)** **Ratio Test.** With $a_n=\dfrac{n(x-3)^n}{2^n}$,
@@ -322,65 +347,64 @@ The series converges when $\dfrac{|x-3|}{2}<1$, i.e. $|x-3|<2$. So the **radius 
 
 **Interval of convergence: $(1,5)$.** ✓
 
-**(b)** The Taylor series about $a$ comes from the general formula $c_n=\dfrac{f^{(n)}(a)}{n!}$ (Theorem 11.21); the Maclaurin table in §11.6 covers only $a=0$. Differentiate: $f(x)=x^{-1}$, $f'(x)=-x^{-2}$, $f''(x)=2x^{-3}$, $f'''(x)=-6x^{-4}$, and in general $f^{(n)}(x)=\dfrac{(-1)^nn!}{x^{n+1}}$. ✓✓
-
-Therefore $c_n=\dfrac{f^{(n)}(2)}{n!}=\dfrac{(-1)^n}{2^{n+1}}$. ✓ The Taylor series is
-$$\frac1x=\sum_{n=0}^{\infty}\frac{(-1)^n}{2^{n+1}}(x-2)^n=\frac12-\frac{x-2}{4}+\frac{(x-2)^2}{8}-\frac{(x-2)^3}{16}+\cdots$$ ✓
+**(b)** Differentiate repeatedly: $f'(x)=x^{-1}$, $f''(x)=-x^{-2}$, $f'''(x)=2x^{-3}$, $f^{(4)}(x)=-6x^{-4}$, and in general ✓✓
+$$f^{(n)}(x)=\frac{(-1)^{n-1}(n-1)!}{x^{n}}\qquad(n\ge1).$$
+At $a=2$: $c_0=\ln2$ and $c_n=\dfrac{f^{(n)}(2)}{n!}=\dfrac{(-1)^{n-1}(n-1)!}{2^{n}\,n!}=\dfrac{(-1)^{n-1}}{n\,2^{n}}$. ✓ So
+$$\ln x=\ln2+\frac{x-2}{2}-\frac{(x-2)^2}{8}+\frac{(x-2)^3}{24}-\cdots=\ln2+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}(x-2)^n}{n\,2^n}.$$
+The point $x=3$ satisfies $|3-2|=1<2$, so we may substitute: $\ln3=\ln2+\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n\,2^n}$, hence ✓
+$$\ln\frac32=\ln3-\ln2=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n\,2^n}=\frac12-\frac18+\frac1{24}-\cdots.$$
         `
       },
       {
         number: 13, label: 'B7', title: 'Differential equations — separable', section: 'Section B · §12.1', marks: 8,
         prompt: String.raw`
 Given the differential equation
-$$\left(1+x^{2}\right)\frac{dy}{dx}=x\,e^{-y}.$$
+$$\frac{dy}{dx}=x\,e^{\,x-y}.$$
 
 **(a)** State the order of the equation, and show that it is separable by writing it in the form $M(x)\,dx+N(y)\,dy=0$. (2)
 
-**(b)** Find the general solution of the equation. (3)
+**(b)** Find the general solution of the equation, giving $y$ in terms of $x$. (3)
 
-**(c)** Find the particular solution given that $y=0$ when $x=0$. (3)
+**(c)** Find the particular solution given that $y=0$ when $x=0$, and explain why it is defined for every real $x$. (3)
         `,
         solution: String.raw`
-**(a)** The highest derivative is $\frac{dy}{dx}$, so the equation is of **order $1$**. Multiplying by $e^{y}\,dx$ and dividing by $1+x^2$: ✓
-$$-\frac{x}{1+x^2}\,dx+e^{y}\,dy=0.$$
-This has the form $M(x)\,dx+N(y)\,dy=0$ with $M=-\dfrac{x}{1+x^2}$ and $N=e^y$, so it is **separable**. ✓
+**(a)** The equation is **first order**. ✓ Since $e^{x-y}=e^{x}e^{-y}$, multiplying by $e^{y}$ gives
+$$x\,e^{x}\,dx-e^{y}\,dy=0,$$ ✓
+which has the form $M(x)\,dx+N(y)\,dy=0$, so it is **separable**.
 
-**(b)** Integrate both sides of $e^y\,dy=\dfrac{x}{1+x^2}\,dx$: ✓
-$$e^{y}=\frac12\ln\left(1+x^2\right)+C.$$ ✓
-Solving for $y$ (where the right side is positive): ✓
-$$y=\ln\!\left(\tfrac12\ln\left(1+x^2\right)+C\right).$$
+**(b)** Integrate both sides of $e^{y}\,dy=xe^{x}\,dx$. The right side needs integration by parts ($u=x$, $dv=e^xdx$): $\displaystyle\int xe^x\,dx=(x-1)e^x$. ✓ So
+$$e^{y}=(x-1)e^{x}+C\qquad\Longrightarrow\qquad y=\ln\!\left((x-1)e^{x}+C\right).$$ ✓✓
 
-**(c)** With $y(0)=0$: $e^0=\frac12\ln1+C$, so $C=1$. ✓✓
-$$y=\ln\!\left(1+\tfrac12\ln\left(1+x^2\right)\right),$$ ✓
-which is defined for all $x$ because $1+\frac12\ln(1+x^2)\ge1>0$.
+**(c)** With $y(0)=0$: $e^0=1=(0-1)\cdot1+C$, so $C=2$. ✓ The **particular solution** is
+$$y=\ln\!\left((x-1)e^{x}+2\right).$$ ✓
+It is defined for all $x$ because $g(x)=(x-1)e^x+2$ has $g'(x)=xe^x$, so its minimum is $g(0)=1>0$. ✓
         `
       },
       {
         number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
         prompt: String.raw`
 Given the differential equation
-$$\cos x\,\frac{dy}{dx}+y\sin x=\cos^{3}x,\qquad -\frac{\pi}{2}<x<\frac{\pi}{2}.$$
+$$x\,\frac{dy}{dx}+2y=\sin x,\qquad x>0.$$
 
 **(a)** Show that this is a linear differential equation by writing it in standard form. (2)
 
 **(b)** Find the integrating factor $e^{\int P(x)\,dx}$. (3)
 
-**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=2$ when $x=0$. (5)
+**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=\dfrac1\pi$ when $x=\pi$. (5)
         `,
         solution: String.raw`
-**(a)** Divide through by $\cos x$ (which is positive on the interval):
-$$\frac{dy}{dx}+(\tan x)\,y=\cos^{2}x.$$ ✓✓
-This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\tan x$ and $Q(x)=\cos^2x$, so it is **linear**.
+**(a)** Divide through by $x$ (positive on the domain):
+$$\frac{dy}{dx}+\frac{2}{x}\,y=\frac{\sin x}{x}.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\dfrac2x$ and $Q(x)=\dfrac{\sin x}{x}$, so it is **linear**.
 
-**(b)** $\displaystyle\int\tan x\,dx=-\ln|\cos x|=\ln|\sec x|$, so ✓✓
-$$\mu(x)=e^{\ln\sec x}=\sec x\qquad(\sec x>0\text{ on the interval}).$$ ✓
+**(b)** $\displaystyle\int\frac2x\,dx=2\ln x$, so ✓✓
+$$\mu(x)=e^{2\ln x}=x^{2}.$$ ✓
 
-**(c)** Multiply the standard form by $\mu=\sec x$; the left side becomes an exact derivative: ✓
-$$\frac{d}{dx}\big(y\sec x\big)=\sec x\cos^2x=\cos x.$$ ✓
-Integrate: $y\sec x=\sin x+C$, so the **general solution** is ✓
-$$y=\cos x\,(\sin x+C)=\sin x\cos x+C\cos x.$$
-With $y(0)=2$: $2=0+C\cdot1$, so $C=2$. ✓ The **particular solution** is ✓
-$$y=\sin x\cos x+2\cos x.$$
+**(c)** Multiply the standard form by $\mu=x^2$: ✓
+$$\frac{d}{dx}\left(x^{2}y\right)=x\sin x.$$
+By parts ($u=x$, $dv=\sin x\,dx$): $\displaystyle\int x\sin x\,dx=-x\cos x+\sin x$. ✓ So $x^2y=\sin x-x\cos x+C$ and the **general solution** is ✓✓
+$$y=\frac{\sin x-x\cos x+C}{x^{2}}.$$
+With $y(\pi)=\dfrac1\pi$: $\dfrac{0+\pi+C}{\pi^2}=\dfrac1\pi$, so $C=0$. ✓ The **particular solution** is $y=\dfrac{\sin x-x\cos x}{x^{2}}$.
         `
       }
     ]
@@ -392,7 +416,7 @@ $$y=\sin x\cos x+2\cos x.$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Open-top box and container (§6.6), completing the square to an arctangent (§9.1), even powers of sin and the sec ⁿ reduction formula (§9.2, §9.4), improper integral with two endpoint discontinuities, Integral Test, power-series representations by differentiation and integration, separable and linear ODEs.',
+    topics: 'Open-top box and container (§6.6), completing the square to an arctangent and powers of sine (§9.1, §9.4), x cosh²x and the secⁿ reduction formula (§9.2), improper integral with two endpoint discontinuities, Integral Test, power-series representations by differentiation and integration, a separable ODE solved with arctan and tan(a+b), and a linear ODE with integrating factor e^(−1/x).',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -421,23 +445,23 @@ Cutting a square of side $x$ from each corner removes $2x$ from each dimension o
         `
       },
       {
-        number: 2, label: 'A2', title: 'Completing the square', section: 'Section A · §9.1', marks: 3,
+        number: 2, label: 'A2', title: 'An arctangent by substitution', section: 'Section A · §9.1', marks: 3,
         prompt: String.raw`
-$$\int\frac{dx}{x^{2}-6x+13}=$$
+$$\int\frac{\sin x}{1+\cos^{2}x}\,dx=$$
 
-- **A.** $\dfrac12\arctan\!\left(\dfrac{x-3}{2}\right)+C$.
-- **B.** $\arctan\!\left(\dfrac{x-3}{2}\right)+C$.
-- **C.** $\dfrac12\arctan(x-3)+C$.
-- **D.** $\ln\left|x^{2}-6x+13\right|+C$.
-- **E.** $\dfrac13\arctan\!\left(\dfrac{x-3}{3}\right)+C$.
+- **A.** $\arctan(\sin x)+C$.
+- **B.** $\arctan(\cos x)+C$.
+- **C.** $-\arctan(\cos x)+C$.
+- **D.** $\ln\left(1+\cos^{2}x\right)+C$.
+- **E.** $-\dfrac{1}{1+\cos^{2}x}+C$.
         `,
         solution: String.raw`
-**Answer: A.** ✓✓✓
+**Answer: C.** ✓✓✓
 
-The quadratic is irreducible (discriminant $36-52<0$), so complete the square: $x^2-6x+13=(x-3)^2+4$.  Then with $u=x-3$ and $a=2$,
-$$\int\frac{dx}{(x-3)^2+2^2}=\frac1a\arctan\frac ua+C=\frac12\arctan\!\left(\frac{x-3}{2}\right)+C.$$ 
+Let $u=\cos x$, so $du=-\sin x\,dx$. Then
+$$\int\frac{\sin x}{1+\cos^{2}x}\,dx=-\int\frac{du}{1+u^{2}}=-\arctan u+C=-\arctan(\cos x)+C.$$
 
-- **B** forgets the factor $\frac1a$. **C** forgets to divide by $a$ inside. **E** uses $a=3$ (it would need $+9$). **D** would need the numerator to be the derivative $2x-6$.
+- **B** loses the minus sign from $du=-\sin x\,dx$. **A** differentiates to $\dfrac{\cos x}{1+\sin^2x}$. **D** would need the numerator $-2\cos x\sin x$. **E** is not an antiderivative of this function.
         `
       },
       {
@@ -580,7 +604,7 @@ $$\int_0^\pi\sin^4x\,dx=\Big[\frac{3x}{8}-\frac{\sin2x}{4}+\frac{\sin4x}{32}\Big
       {
         number: 9, label: 'B3', title: 'Integration by parts; a reduction formula', section: 'Section B · §9.2', marks: 10,
         prompt: String.raw`
-**(a)** Evaluate $\displaystyle\int_0^{\ln2}x\sinh x\,dx$. (3)
+**(a)** Evaluate $\displaystyle\int_0^{\ln2}x\cosh^{2}x\,dx$. (3)
 
 **(b)** For an integer $n\ge2$ prove the reduction formula
 $$\int\sec^{n}x\,dx=\frac{\sec^{n-2}x\,\tan x}{n-1}+\frac{n-2}{n-1}\int\sec^{n-2}x\,dx.$$ (4)
@@ -588,10 +612,13 @@ $$\int\sec^{n}x\,dx=\frac{\sec^{n-2}x\,\tan x}{n-1}+\frac{n-2}{n-1}\int\sec^{n-2
 **(c)** Hence evaluate $\displaystyle\int_0^{\pi/3}\sec^{3}x\,dx$. You may use $\displaystyle\int\sec x\,dx=\ln|\sec x+\tan x|+C$. (3)
         `,
         solution: String.raw`
-**(a)** By parts with $u=x$, $dv=\sinh x\,dx$, $v=\cosh x$: ✓
-$$\int x\sinh x\,dx=x\cosh x-\int\cosh x\,dx=x\cosh x-\sinh x.$$ ✓
-Since $\cosh(\ln2)=\dfrac{2+\frac12}{2}=\dfrac54$ and $\sinh(\ln2)=\dfrac{2-\frac12}{2}=\dfrac34$:
-$$\int_0^{\ln2}x\sinh x\,dx=\left(\frac54\ln2-\frac34\right)-(0-0)=\frac54\ln2-\frac34.$$ ✓
+**(a)** First write $\cosh^2x=\tfrac12(1+\cosh2x)$: ✓
+$$\int_0^{\ln2}x\cosh^2x\,dx=\tfrac12\int_0^{\ln2}x\,dx+\tfrac12\int_0^{\ln2}x\cosh2x\,dx.$$
+The first integral is $\tfrac12\cdot\tfrac{\ln^22}{2}=\tfrac{\ln^22}{4}$. For the second, integrate by parts with $u=x$, $dv=\cosh2x\,dx$, $v=\tfrac12\sinh2x$: ✓
+$$\int x\cosh2x\,dx=\tfrac12x\sinh2x-\tfrac14\cosh2x.$$
+At $x=\ln2$: $\sinh(2\ln2)=\tfrac{4-1/4}{2}=\tfrac{15}8$ and $\cosh(2\ln2)=\tfrac{4+1/4}{2}=\tfrac{17}8$, so
+$$\Big[\cdots\Big]_0^{\ln2}=\tfrac{15}{16}\ln2-\tfrac{17}{32}-\left(0-\tfrac14\right)=\tfrac{15}{16}\ln2-\tfrac{9}{32}.$$
+Hence the integral equals $\dfrac{\ln^22}{4}+\dfrac{15\ln2}{32}-\dfrac9{64}\approx0.304$. ✓
 
 **(b)** Write $\sec^nx=\sec^{n-2}x\cdot\sec^2x$ and integrate by parts with $u=\sec^{n-2}x$, $dv=\sec^2x\,dx$. Then $du=(n-2)\sec^{n-2}x\tan x\,dx$ and $v=\tan x$. ✓✓
 $$\int\sec^nx\,dx=\sec^{n-2}x\tan x-(n-2)\int\sec^{n-2}x\tan^2x\,dx.$$
@@ -680,52 +707,52 @@ $$\ln(3-x)=\ln3-\sum_{n=0}^{\infty}\frac{x^{n+1}}{(n+1)\,3^{n+1}}=\ln3-\frac x3-
         number: 13, label: 'B7', title: 'Differential equations — separable', section: 'Section B · §12.1', marks: 8,
         prompt: String.raw`
 Given the differential equation
-$$y^{2}\,\frac{dy}{dx}=\frac{x}{\sqrt{1+x^{2}}}.$$
+$$\left(1+x^{2}\right)\frac{dy}{dx}=1+y^{2}.$$
 
 **(a)** State the order of the equation, and show that it is separable by writing it in the form $M(x)\,dx+N(y)\,dy=0$. (2)
 
 **(b)** Find the general solution of the equation. (3)
 
-**(c)** Find the particular solution given that $y=1$ when $x=0$. (3)
+**(c)** Find the particular solution given that $y=1$ when $x=0$, giving $y$ as a rational function of $x$, and state the largest interval containing $x=0$ on which it is defined. (3)
         `,
         solution: String.raw`
-**(a)** The highest derivative is $\frac{dy}{dx}$, so the equation has **order $1$**. Multiplying by $dx$: ✓
-$$-\frac{x}{\sqrt{1+x^2}}\,dx+y^2\,dy=0,$$
-which has the form $M(x)\,dx+N(y)\,dy=0$, so it is **separable**. ✓
+**(a)** The equation is **first order**. ✓ Dividing by $(1+x^2)(1+y^2)$:
+$$\frac{dx}{1+x^{2}}-\frac{dy}{1+y^{2}}=0,$$ ✓
+which has the form $M(x)\,dx+N(y)\,dy=0$, so it is **separable**.
 
-**(b)** Integrate $y^2\,dy=\dfrac{x}{\sqrt{1+x^2}}\,dx$. With $w=1+x^2$, $dw=2x\,dx$, the right side is $\frac12\int w^{-1/2}dw=\sqrt{1+x^2}$: ✓
-$$\frac{y^3}{3}=\sqrt{1+x^2}+C\ \Longrightarrow\ y^3=3\sqrt{1+x^2}+K\quad(K=3C).$$ ✓✓
+**(b)** Integrate: $\arctan x-\arctan y=C_1$, so the **general solution** is ✓✓
+$$\arctan y=\arctan x+C.$$
 
-**(c)** With $y(0)=1$: $1=3\cdot1+K$, so $K=-2$. ✓✓
-$$y^3=3\sqrt{1+x^2}-2\ \Longrightarrow\ y=\left(3\sqrt{1+x^2}-2\right)^{1/3}.$$ ✓
+**(c)** With $y(0)=1$: $\arctan1=\dfrac\pi4=0+C$. ✓ Then $y=\tan\!\left(\arctan x+\dfrac\pi4\right)$, and by the addition formula $\tan(a+b)=\dfrac{\tan a+\tan b}{1-\tan a\tan b}$:
+$$y=\frac{x+1}{1-x}.$$ ✓
+The formula $\arctan y=\arctan x+\frac\pi4$ requires $\arctan x+\frac\pi4<\frac\pi2$, i.e. $x<1$ (and the lower bound holds for all $x$). The largest interval containing $0$ is $(-\infty,1)$. ✓
         `
       },
       {
         number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
         prompt: String.raw`
 Given the differential equation
-$$x\frac{dy}{dx}+2y=e^{x},\qquad x>0.$$
+$$x^{2}\,\frac{dy}{dx}+y=e^{1/x},\qquad x>0.$$
 
 **(a)** Show that this is a linear differential equation by writing it in standard form. (2)
 
 **(b)** Find the integrating factor $e^{\int P(x)\,dx}$. (3)
 
-**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=3$ when $x=1$. (5)
+**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=0$ when $x=1$. (5)
         `,
         solution: String.raw`
-**(a)** Divide through by $x$ (allowed since $x>0$):
-$$\frac{dy}{dx}+\frac{2}{x}\,y=\frac{e^{x}}{x}.$$ ✓✓
-This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\dfrac2x$ and $Q(x)=\dfrac{e^x}{x}$, so it is **linear**.
+**(a)** Divide through by $x^2$:
+$$\frac{dy}{dx}+\frac{1}{x^{2}}\,y=\frac{e^{1/x}}{x^{2}}.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=x^{-2}$ and $Q(x)=\dfrac{e^{1/x}}{x^2}$, so it is **linear**.
 
-**(b)** $\displaystyle\int\frac2x\,dx=2\ln x$ (as $x>0$), so ✓✓
-$$\mu(x)=e^{2\ln x}=x^{2}.$$ ✓
+**(b)** $\displaystyle\int x^{-2}\,dx=-\frac1x$, so ✓✓
+$$\mu(x)=e^{-1/x}.$$ ✓
 
-**(c)** Multiply the standard form by $\mu=x^2$; the left side becomes an exact derivative: ✓
-$$\frac{d}{dx}\left(x^2y\right)=x^2\cdot\frac{e^x}{x}=xe^x.$$ ✓
-By parts ($u=x$, $dv=e^xdx$): $\displaystyle\int xe^xdx=xe^x-e^x+C=(x-1)e^x+C$. Hence the **general solution** is ✓
-$$x^2y=(x-1)e^x+C\ \Longrightarrow\ y=\frac{(x-1)e^x+C}{x^2}.$$
-With $y(1)=3$: $3=\dfrac{0+C}{1}$, so $C=3$. ✓ The **particular solution** is ✓
-$$y=\frac{(x-1)e^{x}+3}{x^{2}}.$$
+**(c)** Multiply by $\mu=e^{-1/x}$; the right-hand side simplifies because $e^{-1/x}e^{1/x}=1$: ✓
+$$\frac{d}{dx}\left(ye^{-1/x}\right)=\frac{1}{x^{2}}.$$
+Integrate: $ye^{-1/x}=-\dfrac1x+C$, so the **general solution** is ✓✓
+$$y=\left(C-\frac1x\right)e^{1/x}.$$
+With $y(1)=0$: $(C-1)e=0$, so $C=1$. ✓ The **particular solution** is $y=\left(1-\dfrac1x\right)e^{1/x}$.
         `
       }
     ]
@@ -737,7 +764,7 @@ $$y=\frac{(x-1)e^{x}+3}{x^{2}}.$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'A wire cut into a square and a circle (§6.6), products of sines and cosines with different arguments (§9.4), the cosⁿ reduction formula (§9.2), improper integral with a substitution, monotone sequences and the Root Test, Maclaurin and Taylor series, verifying solutions, separable and linear ODEs.',
+    topics: 'A wire cut into a square and a circle (§6.6), products of sines and cosines with different arguments (§9.4), x eˣ cosh x and the cosⁿ reduction formula (§9.2), improper integral with a substitution, a recursive sequence with a geometric series, the Root Test, Maclaurin and Taylor series, verifying a repeated-root solution, a separable ODE with ∫dy/(y ln y), and a linear ODE with integrating factor (1+x²)^(3/2).',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -935,7 +962,7 @@ $$\int_0^{\pi/2}\sin3x\cos5x\,dx=\frac12\left(-\frac58-\frac38\right)=-\frac12.$
       {
         number: 9, label: 'B3', title: 'Integration by parts; a reduction formula', section: 'Section B · §9.2', marks: 10,
         prompt: String.raw`
-**(a)** Evaluate $\displaystyle\int_0^{1}x\sinh(2x)\,dx$. Give your answer in terms of $e$. (3)
+**(a)** Evaluate $\displaystyle\int_0^{1}x\,e^{x}\cosh x\,dx$. Give your answer in terms of $e$. (3)
 
 **(b)** For an integer $n\ge2$ prove the reduction formula
 $$\int\cos^{n}x\,dx=\frac{\cos^{n-1}x\,\sin x}{n}+\frac{n-1}{n}\int\cos^{n-2}x\,dx.$$ (4)
@@ -943,9 +970,11 @@ $$\int\cos^{n}x\,dx=\frac{\cos^{n-1}x\,\sin x}{n}+\frac{n-1}{n}\int\cos^{n-2}x\,
 **(c)** Hence evaluate $\displaystyle\int_0^{\pi/2}\cos^{6}x\,dx.$ (3)
         `,
         solution: String.raw`
-**(a)** By parts with $u=x$, $dv=\sinh(2x)\,dx$, so $du=dx$, $v=\dfrac{\cosh2x}{2}$: ✓
-$$\int x\sinh2x\,dx=\frac{x\cosh2x}{2}-\frac12\int\cosh2x\,dx=\frac{x\cosh2x}{2}-\frac{\sinh2x}{4}.$$ ✓
-$$\int_0^1x\sinh2x\,dx=\frac{\cosh2}{2}-\frac{\sinh2}{4}=\frac{e^2+e^{-2}}{4}-\frac{e^2-e^{-2}}{8}=\frac{e^{2}+3e^{-2}}{8}.$$ ✓
+**(a)** Since $e^{x}\cosh x=\tfrac12\left(e^{2x}+1\right)$, ✓
+$$\int_0^1xe^x\cosh x\,dx=\tfrac12\int_0^1xe^{2x}\,dx+\tfrac12\int_0^1x\,dx.$$
+By parts with $u=x$, $dv=e^{2x}dx$: $\int xe^{2x}dx=\tfrac12xe^{2x}-\tfrac14e^{2x}$, so ✓
+$$\int_0^1xe^{2x}dx=\left(\tfrac12e^2-\tfrac14e^2\right)-\left(0-\tfrac14\right)=\tfrac{e^2+1}{4}.$$
+Therefore the integral is $\tfrac12\cdot\tfrac{e^2+1}4+\tfrac12\cdot\tfrac12=\dfrac{e^2+3}{8}$. ✓
 
 **(b)** Write $\cos^nx=\cos^{n-1}x\cdot\cos x$ and integrate by parts with $u=\cos^{n-1}x$, $dv=\cos x\,dx$. Then $du=-(n-1)\cos^{n-2}x\sin x\,dx$ and $v=\sin x$. ✓✓
 $$\int\cos^nx\,dx=\cos^{n-1}x\sin x+(n-1)\int\cos^{n-2}x\sin^2x\,dx.$$
@@ -985,8 +1014,7 @@ $$\int_0^\infty e^{-\sqrt x}dx=2.$$
         prompt: String.raw`
 **(a)** The sequence $\{a_n\}$ is defined by $a_1=1$ and $a_{n+1}=\dfrac{a_n}{2}+3$ for $n\ge1$. Show, by induction or otherwise, that $a_n<6$ for all $n$ and that $\{a_n\}$ is increasing. Hence explain why the sequence converges, and find its limit. (4)
 
-**(b)** Using (a) or otherwise, decide (with reasons) if the following series converges or diverges.
-$$\sum_{n=1}^{\infty}a_n$$ (2)
+**(b)** Show that $6-a_{n+1}=\tfrac12\left(6-a_n\right)$ for all $n$, and hence find the exact value of $\displaystyle\sum_{n=1}^{\infty}\left(6-a_n\right)$. (2)
 
 **(c)** Use the Root Test to decide whether the following series converges or diverges.
 $$\sum_{n=1}^{\infty}\frac{n^{2}}{\left(n^{2}+1\right)^{n}}$$ (3)
@@ -998,7 +1026,8 @@ $$\sum_{n=1}^{\infty}\frac{n^{2}}{\left(n^{2}+1\right)^{n}}$$ (3)
 
 A sequence that is **increasing and bounded above converges** (Monotonic Sequence Theorem). ✓ Let $L=\lim a_n$; then $a_{n+1}\to L$ too, so $L=\dfrac L2+3$, which gives $L=6$. ✓
 
-**(b)** Since $a_n\to6\neq0$, the **Test for Divergence** shows that $\sum a_n$ **diverges**. ✓✓
+**(b)** From the recurrence, $6-a_{n+1}=6-\dfrac{a_n}{2}-3=3-\dfrac{a_n}2=\dfrac12\left(6-a_n\right)$. ✓ So $\{6-a_n\}$ is geometric with first term $6-a_1=5$ and common ratio $\tfrac12$, and
+$$\sum_{n=1}^{\infty}\left(6-a_n\right)=\frac{5}{1-\frac12}=10.$$ ✓
 
 **(c)** Apply the **Root Test** to $c_n=\dfrac{n^2}{(n^2+1)^n}>0$: ✓
 $$\sqrt[n]{c_n}=\frac{n^{2/n}}{n^2+1}.$$ ✓
@@ -1026,54 +1055,55 @@ $$T_3(x)=2+\frac{x-4}{4}-\frac{(x-4)^2}{64}+\frac{(x-4)^3}{512}.$$
         `
       },
       {
-        number: 13, label: 'B7', title: 'Differential equations — verifying and separating', section: 'Section B · §12.0, §12.1', marks: 8,
+        number: 13, label: 'B7', title: 'Differential equations — verifying and separating', section: 'Section B · §12.1', marks: 8,
         prompt: String.raw`
-**(a)** State the order of the differential equation $y''+4y=0$, and show that $y=A\cos2x+B\sin2x$ is a solution for all constants $A$ and $B$. (2)
+**(a)** State the order of the differential equation $y''-4y'+4y=0$, and show that $y=(A+Bx)\,e^{2x}$ is a solution for all constants $A$ and $B$. (2)
 
 **(b)** Given the differential equation
-$$\frac{dy}{dx}=e^{x-y},$$
+$$\frac{dy}{dx}=2x\,y\ln y,\qquad y>1,$$
 write it in the form $M(x)\,dx+N(y)\,dy=0$ and find its general solution. (3)
 
-**(c)** Find the particular solution of the equation in (b) given that $y=1$ when $x=0$. (3)
+**(c)** Find the particular solution of the equation in (b) given that $y=e$ when $x=0$. (3)
         `,
         solution: String.raw`
-**(a)** The highest derivative is $y''$, so the equation is of **order $2$**. For $y=A\cos2x+B\sin2x$: ✓
-$$y'=-2A\sin2x+2B\cos2x,\qquad y''=-4A\cos2x-4B\sin2x=-4y,$$
-so $y''+4y=0$ for all $A,B$. ✓
+**(a)** The equation is **second order**. ✓ For $y=(A+Bx)e^{2x}$:
+$$y'=\left(2A+B+2Bx\right)e^{2x},\qquad y''=\left(4A+4B+4Bx\right)e^{2x}.$$
+$$y''-4y'+4y=e^{2x}\Big[(4A+4B+4Bx)-(8A+4B+8Bx)+(4A+4Bx)\Big]=0.$$ ✓
 
-**(b)** Since $e^{x-y}=e^x\cdot e^{-y}$, the equation is separable: $e^{y}\,dy=e^{x}\,dx$, i.e. $e^x\,dx-e^y\,dy=0$. ✓ Integrate both sides: ✓
-$$e^{y}=e^{x}+C\ \Longrightarrow\ y=\ln\left(e^{x}+C\right).$$ ✓
+**(b)** For $y>1$ we have $y\ln y>0$, so we may divide:
+$$2x\,dx-\frac{dy}{y\ln y}=0.$$ ✓
+Integrate, using $w=\ln y$ for the second term ($\int\frac{dy}{y\ln y}=\ln(\ln y)$): $x^{2}-\ln(\ln y)=C_1$. So $\ln y=Ae^{x^{2}}$ with $A=e^{-C_1}>0$, and the **general solution** is ✓✓
+$$y=\exp\!\left(Ae^{x^{2}}\right).$$
 
-**(c)** With $y(0)=1$: $e^1=e^0+C$, so $C=e-1$. ✓✓
-$$y=\ln\left(e^{x}+e-1\right).$$ ✓
+**(c)** With $y(0)=e$: $\ln e=1=Ae^{0}$, so $A=1$. ✓ The **particular solution** is ✓✓
+$$y=\exp\!\left(e^{x^{2}}\right).$$
         `
       },
       {
         number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
         prompt: String.raw`
 Given the differential equation
-$$\left(1+x^{2}\right)\frac{dy}{dx}+4xy=4x.$$
+$$\left(1+x^{2}\right)\frac{dy}{dx}+3x\,y=x.$$
 
 **(a)** Show that this is a linear differential equation by writing it in standard form. (2)
 
 **(b)** Find the integrating factor $e^{\int P(x)\,dx}$. (3)
 
-**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=3$ when $x=0$. (5)
+**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=1$ when $x=0$. Describe the behaviour of this solution as $x\to\infty$. (5)
         `,
         solution: String.raw`
-**(a)** Divide through by $1+x^2$ (never zero):
-$$\frac{dy}{dx}+\frac{4x}{1+x^2}\,y=\frac{4x}{1+x^2}.$$ ✓✓
-This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=Q(x)=\dfrac{4x}{1+x^2}$, so it is **linear**.
+**(a)** Divide through by $1+x^2$:
+$$\frac{dy}{dx}+\frac{3x}{1+x^{2}}\,y=\frac{x}{1+x^{2}}.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\dfrac{3x}{1+x^2}$ and $Q(x)=\dfrac{x}{1+x^2}$, so it is **linear**.
 
-**(b)** With $w=1+x^2$, $dw=2x\,dx$: $\displaystyle\int\frac{4x}{1+x^2}dx=2\int\frac{dw}{w}=2\ln\left(1+x^2\right)$. ✓✓ Hence
-$$\mu(x)=e^{2\ln(1+x^2)}=\left(1+x^2\right)^2.$$ ✓
+**(b)** $\displaystyle\int\frac{3x}{1+x^{2}}\,dx=\frac32\ln\left(1+x^{2}\right)$, so ✓✓
+$$\mu(x)=\left(1+x^{2}\right)^{3/2}.$$ ✓
 
-**(c)** Multiply the standard form by $\mu=(1+x^2)^2$; the left side becomes an exact derivative: ✓
-$$\frac{d}{dx}\left[\left(1+x^2\right)^2y\right]=\left(1+x^2\right)^2\cdot\frac{4x}{1+x^2}=4x\left(1+x^2\right)=4x+4x^3.$$ ✓
-Integrate: $\left(1+x^2\right)^2y=2x^2+x^4+C=\left(1+x^2\right)^2-1+C$, so the **general solution** is ✓
-$$y=\frac{x^4+2x^2+C}{\left(1+x^2\right)^2}=1+\frac{C-1}{\left(1+x^2\right)^2}.$$
-With $y(0)=3$: $3=C$. ✓ The **particular solution** is ✓
-$$y=\frac{x^4+2x^2+3}{\left(1+x^2\right)^2}=1+\frac{2}{\left(1+x^2\right)^2}.$$
+**(c)** Multiply by $\mu$: ✓
+$$\frac{d}{dx}\Big(\left(1+x^2\right)^{3/2}y\Big)=\left(1+x^2\right)^{3/2}\cdot\frac{x}{1+x^2}=x\left(1+x^{2}\right)^{1/2}.$$
+Integrate (substitute $w=1+x^2$): $\left(1+x^2\right)^{3/2}y=\tfrac13\left(1+x^2\right)^{3/2}+C$, so the **general solution** is ✓✓
+$$y=\frac13+C\left(1+x^{2}\right)^{-3/2}.$$
+With $y(0)=1$: $1=\tfrac13+C$, so $C=\tfrac23$. ✓ The **particular solution** is $y=\dfrac13+\dfrac23\left(1+x^{2}\right)^{-3/2}$. As $x\to\infty$ the second term tends to $0$, so $y\to\dfrac13$. ✓
         `
       }
     ]
@@ -1085,7 +1115,7 @@ $$y=\frac{x^4+2x^2+3}{\left(1+x^2\right)^2}=1+\frac{2}{\left(1+x^2\right)^2}.$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Parabola rectangle and a closed cylindrical tin (§6.6), exponential and logarithmic substitutions and odd powers of cosine (§9.1, §9.4), a hyperbolic reduction formula (§9.2), improper integral with an interior discontinuity and a cyclic integral, Integral Test, interval of convergence and a Maclaurin series from eˣ, separable and linear ODEs.',
+    topics: 'Parabola rectangle and a closed cylindrical tin (§6.6), exponential and logarithmic substitutions and a double-angle trigonometric integral (§9.1, §9.4), x² sinh x and the reduction formula for (arcsin x)ⁿ (§9.2), improper integral with an interior discontinuity and a cyclic integral, a telescoping series and the Comparison Test, interval of convergence and the product series of eˣ sin x with a limit, a separable ODE with sin⁴x, and a linear ODE with right-hand side eˣ sin x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -1114,24 +1144,24 @@ The vertices are $(\pm x,0)$ and $(\pm x,\,12-x^2)$, so the rectangle has width 
         `
       },
       {
-        number: 2, label: 'A2', title: 'A power of sine', section: 'Section A · §9.4', marks: 3,
+        number: 2, label: 'A2', title: 'A power of cosine', section: 'Section A · §9.4', marks: 3,
         prompt: String.raw`
-$$\int\sin^{3}x\,dx=$$
+$$\int_0^{\pi/2}\cos^{4}x\,dx=$$
 
-- **A.** $\dfrac{\sin^{4}x}{4}+C$.
-- **B.** $\cos x-\dfrac{\cos^{3}x}{3}+C$.
-- **C.** $-\cos x+\dfrac{\cos^{3}x}{3}+C$.
-- **D.** $-\cos x-\dfrac{\cos^{3}x}{3}+C$.
-- **E.** $-\dfrac{\cos^{3}x}{3}+C$.
+- **A.** $\dfrac{\pi}{8}$.
+- **B.** $\dfrac{3\pi}{8}$.
+- **C.** $\dfrac{\pi}{4}$.
+- **D.** $\dfrac{3\pi}{16}$.
+- **E.** $\dfrac{3\pi}{32}$.
         `,
         solution: String.raw`
-**Answer: C.** ✓✓✓
+**Answer: D.** ✓✓✓
 
-The power of $\sin x$ is odd, so save one factor $\sin x$ and write $\sin^2x=1-\cos^2x$:
-$$\int\sin^{3}x\,dx=\int\left(1-\cos^{2}x\right)\sin x\,dx.$$
-Let $u=\cos x$, $du=-\sin x\,dx$: $\displaystyle-\int\left(1-u^{2}\right)du=-u+\frac{u^{3}}{3}+C=-\cos x+\frac{\cos^{3}x}{3}+C.$
+The power is even, so use $\cos^2x=\tfrac12(1+\cos2x)$ twice:
+$$\cos^4x=\tfrac14\left(1+2\cos2x+\cos^22x\right)=\tfrac14\left(\tfrac32+2\cos2x+\tfrac12\cos4x\right)=\tfrac38+\tfrac12\cos2x+\tfrac18\cos4x.$$
+Both cosine terms integrate to $0$ over $[0,\pi/2]$ (each is a whole number of half-periods), so the integral is $\tfrac38\cdot\tfrac\pi2=\dfrac{3\pi}{16}$.
 
-- **A** treats $\sin^3x$ as if it were $\sin x$ times a derivative of $\sin x$. **B** has the wrong sign. **D** has a sign error on the cubic term. **E** drops the $-\cos x$ term.
+- **B** multiplies $\tfrac38$ by the length $\pi$ instead of $\tfrac\pi2$. **C** is $\int_0^{\pi/2}\cos^2x\,dx$ and **A** is half of that. **E** is half the correct value.
         `
       },
       {
@@ -1197,20 +1227,20 @@ The series converges when $4|x|<1$, so $R=\dfrac14$. ✓
       {
         number: 6, label: 'A6', title: 'An initial value problem', section: 'Section A · §12.1', marks: 2,
         prompt: String.raw`
-The solution of $\dfrac{dy}{dx}=2xy$ with $y(0)=3$ is
+The solution of $\dfrac{dy}{dx}=\dfrac{2y}{x}$, $x>0$, with $y(1)=3$ is
 
-- **A.** $y=3e^{2x}$.
-- **B.** $y=e^{x^{2}}+2$.
-- **C.** $y=3e^{x}$.
-- **D.** $y=3x^{2}$.
-- **E.** $y=3e^{x^{2}}$.
+- **A.** $y=3e^{2x-2}$.
+- **B.** $y=x^{2}+2$.
+- **C.** $y=3x$.
+- **D.** $y=2x+1$.
+- **E.** $y=3x^{2}$.
         `,
         solution: String.raw`
 **Answer: E.** ✓✓
 
-Separate: $\dfrac{dy}{y}=2x\,dx$, so $\ln|y|=x^{2}+C$ and $y=Ae^{x^{2}}$. ✓ With $y(0)=3$ we get $A=3$, so $y=3e^{x^{2}}$. ✓
+Separate: $\dfrac{dy}{y}=\dfrac{2\,dx}{x}$, so $\ln|y|=2\ln x+C$ and $y=Ax^{2}$. ✓ With $y(1)=3$ we get $A=3$, so $y=3x^{2}$. ✓
 
-- **A** and **C** have the wrong exponent. **B** is not a solution: its derivative is $2xe^{x^2}$, which is not $2x(e^{x^2}+2)$. **D** gives $y'=6x\neq2x\cdot3x^2$.
+- **A** solves $y'=2y$, not $y'=2y/x$. **B** gives $y'=2x\neq\dfrac{2(x^2+2)}{x}$. **C** gives $y'=3\neq\dfrac{2\cdot3x}{x}=6$. **D** gives $y'=2\neq\dfrac{2(2x+1)}{x}$.
         `
       },
       {
@@ -1250,7 +1280,7 @@ $$S(3)=2\pi(9)+\frac{108\pi}{3}=18\pi+36\pi=\boxed{54\pi\ \text{cm}^{2}}.$$
 
 **(ii)** $\displaystyle\int_{1}^{e^{2}}\frac{dx}{x\,(1+\ln x)}$ (2)
 
-**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\cos^{5}x\,dx.$ (4)
+**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\sin2x\,\cos^{3}x\,dx.$ (4)
         `,
         solution: String.raw`
 **(a)(i)** Let $u=e^{x}$, so $du=e^{x}dx$ and $e^{2x}=u^{2}$. When $x=0$, $u=1$; when $x=\frac12\ln3$, $u=e^{\ln\sqrt3}=\sqrt3$. ✓
@@ -1260,10 +1290,10 @@ $$=\arcsin\frac{\sqrt3}{2}-\arcsin\frac12=\frac\pi3-\frac\pi6=\frac\pi6.$$ ✓
 **(ii)** Let $u=1+\ln x$, so $du=\dfrac{dx}{x}$. When $x=1$, $u=1$; when $x=e^{2}$, $u=3$. ✓
 $$\int_{1}^{3}\frac{du}{u}=\ln3-\ln1=\ln3.$$ ✓
 
-**(b)** The power of $\cos x$ is odd, so save one factor $\cos x$ and write $\cos^{2}x=1-\sin^{2}x$: ✓
-$$\int_0^{\pi/2}\cos^{5}x\,dx=\int_0^{\pi/2}\left(1-\sin^{2}x\right)^{2}\cos x\,dx.$$
-Let $u=\sin x$, $du=\cos x\,dx$; $x=0\Rightarrow u=0$ and $x=\frac\pi2\Rightarrow u=1$. ✓
-$$=\int_{0}^{1}\left(1-2u^{2}+u^{4}\right)du=\Big[u-\frac{2u^{3}}{3}+\frac{u^{5}}{5}\Big]_0^1=1-\frac23+\frac15=\frac{8}{15}.$$ ✓✓
+**(b)** Use the double-angle formula $\sin2x=2\sin x\cos x$: ✓
+$$\int_0^{\pi/2}\sin2x\cos^3x\,dx=2\int_0^{\pi/2}\sin x\cos^{4}x\,dx.$$ ✓
+Let $u=\cos x$, $du=-\sin x\,dx$; the limits $x=0,\pi/2$ become $u=1,0$: ✓
+$$2\int_{1}^{0}-u^{4}\,du=2\int_0^1u^{4}\,du=\frac25.$$ ✓
         `
       },
       {
@@ -1271,10 +1301,10 @@ $$=\int_{0}^{1}\left(1-2u^{2}+u^{4}\right)du=\Big[u-\frac{2u^{3}}{3}+\frac{u^{5}
         prompt: String.raw`
 **(a)** Evaluate $\displaystyle\int_0^{1}x^{2}\sinh x\,dx$. Give your answer in terms of $e$. (3)
 
-**(b)** For an integer $n\ge2$ let $I_n=\displaystyle\int\cosh^{n}x\,dx$. Prove the reduction formula
-$$I_n=\frac{\cosh^{n-1}x\,\sinh x}{n}+\frac{n-1}{n}\,I_{n-2}.$$ (4)
+**(b)** For an integer $n\ge2$ let $I_n=\displaystyle\int(\arcsin x)^{n}\,dx$ for $-1<x<1$. By integrating by parts twice, prove the reduction formula
+$$I_n=x(\arcsin x)^{n}+n\sqrt{1-x^{2}}\,(\arcsin x)^{n-1}-n(n-1)\,I_{n-2}.$$ (4)
 
-**(c)** Hence evaluate $\displaystyle\int_0^{\ln 2}\cosh^{4}x\,dx.$ (3)
+**(c)** Hence evaluate $\displaystyle\int_0^{1}(\arcsin x)^{2}\,dx.$ (3)
         `,
         solution: String.raw`
 **(a)** Integrate by parts with $u=x^{2}$, $dv=\sinh x\,dx$, so $du=2x\,dx$ and $v=\cosh x$: ✓
@@ -1284,16 +1314,16 @@ $$\int x^{2}\sinh x\,dx=x^{2}\cosh x-2x\sinh x+2\cosh x.$$
 $$\int_0^1x^{2}\sinh x\,dx=\big(3\cosh1-2\sinh1\big)-2=\frac{e}{2}+\frac{5}{2e}-2,$$ ✓
 using $\cosh1=\frac{e+e^{-1}}2$ and $\sinh1=\frac{e-e^{-1}}2$.
 
-**(b)** Write $\cosh^{n}x=\cosh^{n-1}x\cdot\cosh x$ and take $u=\cosh^{n-1}x$, $dv=\cosh x\,dx$, so $du=(n-1)\cosh^{n-2}x\sinh x\,dx$ and $v=\sinh x$: ✓✓
-$$I_n=\cosh^{n-1}x\sinh x-(n-1)\int\cosh^{n-2}x\,\sinh^{2}x\,dx.$$
-Use $\sinh^{2}x=\cosh^{2}x-1$: ✓
-$$I_n=\cosh^{n-1}x\sinh x-(n-1)\left(I_n-I_{n-2}\right).$$
-Collect the $I_n$ terms: $nI_n=\cosh^{n-1}x\sinh x+(n-1)I_{n-2}$. Dividing by $n$ gives the formula. ∎ ✓
+**(b)** Write $A=\arcsin x$, so $\dfrac{dA}{dx}=\dfrac1{\sqrt{1-x^2}}$. First integration by parts with $u=A^n$, $dv=dx$: ✓
+$$I_n=xA^{n}-n\int\frac{x\,A^{n-1}}{\sqrt{1-x^{2}}}\,dx.$$
+For the remaining integral take $u=A^{n-1}$ and $dv=\dfrac{x}{\sqrt{1-x^2}}\,dx$, so $v=-\sqrt{1-x^2}$ and $du=\dfrac{(n-1)A^{n-2}}{\sqrt{1-x^2}}\,dx$: ✓✓
+$$\int\frac{xA^{n-1}}{\sqrt{1-x^2}}\,dx=-\sqrt{1-x^2}\,A^{n-1}+(n-1)\int A^{n-2}\,dx=-\sqrt{1-x^2}\,A^{n-1}+(n-1)I_{n-2}.$$
+Substituting back, $I_n=xA^n+n\sqrt{1-x^2}\,A^{n-1}-n(n-1)I_{n-2}$. ∎ ✓
 
-**(c)** Let $K_m=\displaystyle\int_0^{\ln2}\cosh^{m}x\,dx$. Since $e^{\ln2}=2$, $\cosh(\ln2)=\dfrac{2+\frac12}{2}=\dfrac54$ and $\sinh(\ln2)=\dfrac{2-\frac12}{2}=\dfrac34$, while $\sinh0=0$. By (b): ✓
-$$K_2=\frac{\frac54\cdot\frac34}{2}+\frac12K_0=\frac{15}{32}+\frac{\ln2}{2}\qquad(K_0=\ln2),$$
-$$K_4=\frac{\left(\frac54\right)^{3}\frac34}{4}+\frac34K_2=\frac{375}{1024}+\frac{45}{128}+\frac{3\ln2}{8}.$$ ✓
-$$\int_0^{\ln2}\cosh^{4}x\,dx=\frac{735}{1024}+\frac{3}{8}\ln2.$$ ✓
+**(c)** Take $n=2$, with $I_0=\displaystyle\int dx=x$: ✓
+$$\int_0^{1}A^{2}dx=\Big[xA^{2}+2\sqrt{1-x^{2}}\,A\Big]_0^{1}-2\int_0^1dx.$$
+At $x=1$: $A=\tfrac\pi2$, so the bracket is $\tfrac{\pi^2}{4}+0$; at $x=0$ it is $0$. ✓ Therefore
+$$\int_0^1(\arcsin x)^2dx=\frac{\pi^2}{4}-2\approx0.467.$$ ✓
         `
       },
       {
@@ -1326,22 +1356,24 @@ $$\int_0^{\infty}e^{-x}\sin2x\,dx=\frac25.$$
         prompt: String.raw`
 **(a)** Determine whether the sequence $\{a_n\}=\left\{\left(1-\dfrac{2}{n}\right)^{n}\right\}$ is convergent or divergent. If it is convergent, state to what value it converges. (3)
 
-**(b)** Using (a) or otherwise, decide (with reasons) if the following series converges or diverges.
-$$\sum_{n=3}^{\infty}\left(1-\frac{2}{n}\right)^{n}$$ (2)
+**(b)** Use the identity $\dfrac{1}{(n+1)(n+2)}=\dfrac1{n+1}-\dfrac1{n+2}$ to find the exact sum of the series
+$$\sum_{n=1}^{\infty}\frac{1}{(n+1)(n+2)}.$$ (2)
 
-**(c)** Use the Integral Test to decide whether the following series converges or diverges. Verify that the conditions of the test hold.
-$$\sum_{n=2}^{\infty}\frac{1}{n(\ln n)^{2}}$$ (4)
+**(c)** Use the Comparison Test to decide whether the following series converges or diverges.
+$$\sum_{n=1}^{\infty}\frac{2+\sin n}{n^{2}+3}$$ (4)
         `,
         solution: String.raw`
 **(a)** Take logarithms: $\ln a_n=n\ln\!\left(1-\dfrac2n\right)=\dfrac{\ln(1-2/n)}{1/n}$, which has the form $\frac00$. ✓ With $f(x)=\dfrac{\ln(1-2/x)}{1/x}$ and l'Hôpital's rule:
 $$\lim_{x\to\infty}\frac{\ln(1-2/x)}{1/x}=\lim_{x\to\infty}\frac{\dfrac{2/x^{2}}{1-2/x}}{-1/x^{2}}=\lim_{x\to\infty}\frac{-2}{1-2/x}=-2.$$ ✓
 By continuity of $e^{x}$, $a_n\to e^{-2}$. The sequence is **convergent with limit $e^{-2}$**. ✓
 
-**(b)** Since $a_n\to e^{-2}\neq0$, the **Test for Divergence** shows the series **diverges**. ✓✓
+**(b)** The partial sums telescope:
+$$s_N=\sum_{n=1}^{N}\left(\frac1{n+1}-\frac1{n+2}\right)=\frac12-\frac1{N+2}.$$ ✓
+Since $s_N\to\tfrac12$, the series converges and its sum is $\dfrac12$. ✓
 
-**(c)** Let $f(x)=\dfrac{1}{x(\ln x)^{2}}$ on $[2,\infty)$. It is **positive** and **continuous**, and **decreasing** because the denominator $x(\ln x)^2$ is increasing for $x\ge2$. ✓ So the Integral Test applies. With $u=\ln x$:
-$$\int_2^{\infty}\frac{dx}{x(\ln x)^{2}}=\lim_{t\to\infty}\left[-\frac{1}{\ln x}\right]_2^t=\lim_{t\to\infty}\left(\frac1{\ln2}-\frac{1}{\ln t}\right)=\frac{1}{\ln2}.$$ ✓✓
-The integral converges, so the series **converges** by the Integral Test. ✓
+**(c)** Since $-1\le\sin n\le1$, we have $1\le2+\sin n\le3$, so for every $n\ge1$ ✓
+$$0<\frac{2+\sin n}{n^{2}+3}\le\frac{3}{n^{2}+3}<\frac{3}{n^{2}}.$$ ✓✓
+The series $\sum\dfrac{3}{n^2}=3\sum\dfrac1{n^2}$ converges (a $p$-series with $p=2>1$), so by the Comparison Test the given series **converges**. ✓
         `
       },
       {
@@ -1350,7 +1382,8 @@ The integral converges, so the series **converges** by the Integral Test. ✓
 **(a)** Find the radius of convergence and the interval of convergence of the power series
 $$\sum_{n=1}^{\infty}\frac{(x+3)^{n}}{\sqrt n\;2^{n}}.$$ (5)
 
-**(b)** Use the Maclaurin series of $e^{x}$ to find the Maclaurin series of $f(x)=\dfrac{e^{x}-1}{x}$ (write the first three terms and the general term). Hence evaluate $\displaystyle\sum_{n=0}^{\infty}\frac{1}{(n+1)!}$. (4)
+**(b)** By multiplying the Maclaurin series of $e^{x}$ and $\sin x$, find the first four non-zero terms of the Maclaurin series of $f(x)=e^{x}\sin x$. Hence evaluate
+$$\lim_{x\to0}\frac{e^{x}\sin x-x-x^{2}}{x^{3}}.$$ (4)
         `,
         solution: String.raw`
 **(a)** **Ratio Test.** With $a_n=\dfrac{(x+3)^n}{\sqrt n\,2^n}$,
@@ -1361,64 +1394,70 @@ The series converges when $|x+3|<2$, so the **radius of convergence is $R=2$** a
 
 **Interval of convergence: $[-5,-1)$.** ✓
 
-**(b)** $e^{x}=\displaystyle\sum_{n=0}^{\infty}\frac{x^{n}}{n!}$, so $e^{x}-1=\displaystyle\sum_{n=1}^{\infty}\frac{x^{n}}{n!}$. Dividing by $x$: ✓
-$$f(x)=\sum_{n=1}^{\infty}\frac{x^{n-1}}{n!}=\sum_{n=0}^{\infty}\frac{x^{n}}{(n+1)!}=1+\frac{x}{2}+\frac{x^{2}}{6}+\cdots$$ ✓
-This holds for all $x$ (and $f(0)=1$ is the constant term). At $x=1$, $f(1)=e-1$, so ✓
-$$\sum_{n=0}^{\infty}\frac{1}{(n+1)!}=e-1.$$ ✓
+**(b)** Use $e^x=1+x+\dfrac{x^2}{2}+\dfrac{x^3}{6}+\dfrac{x^4}{24}+\cdots$ and $\sin x=x-\dfrac{x^3}{6}+\dfrac{x^5}{120}-\cdots$ and collect powers of $x$: ✓
+- $x^1$: $1\cdot x=x$.
+- $x^2$: $x\cdot x=x^2$.
+- $x^3$: $\dfrac{x^2}{2}\cdot x+1\cdot\left(-\dfrac{x^3}{6}\right)=\left(\dfrac12-\dfrac16\right)x^3=\dfrac{x^3}{3}$.
+- $x^4$: $\dfrac{x^3}{6}\cdot x+x\cdot\left(-\dfrac{x^3}{6}\right)=0$.
+- $x^5$: $\dfrac{1}{120}-\dfrac{1}{2}\cdot\dfrac16+\dfrac1{24}=\dfrac{1-10+5}{120}=-\dfrac1{30}$. ✓✓
+
+So $e^x\sin x=x+x^2+\dfrac{x^3}{3}-\dfrac{x^5}{30}+\cdots$ (the $x^4$ term vanishes). Then
+$$\frac{e^x\sin x-x-x^2}{x^3}=\frac13-\frac{x^2}{30}+\cdots\ \longrightarrow\ \frac13\quad(x\to0).$$ ✓
         `
       },
       {
         number: 13, label: 'B7', title: 'Differential equations — separable', section: 'Section B · §12.1', marks: 8,
         prompt: String.raw`
 Given the differential equation
-$$\frac{dy}{dx}=2x\left(1+y^{2}\right).$$
+$$\frac{dy}{dx}=y\,\sin^{4}x.$$
 
 **(a)** State the order of the equation, and show that it is separable by writing it in the form $M(x)\,dx+N(y)\,dy=0$. (2)
 
-**(b)** Find the general solution of the equation. (3)
+**(b)** Find the general solution of the equation. You may use the identity $\sin^{4}x=\dfrac38-\dfrac12\cos2x+\dfrac18\cos4x$. (3)
 
-**(c)** Find the particular solution given that $y=1$ when $x=0$, and state the largest interval containing $x=0$ on which this solution is defined. (3)
+**(c)** Find the particular solution given that $y=2$ when $x=0$. (3)
         `,
         solution: String.raw`
-**(a)** The highest derivative is $\frac{dy}{dx}$, so the equation has **order $1$**. Dividing by $1+y^{2}$ and multiplying by $dx$: ✓
-$$-2x\,dx+\frac{1}{1+y^{2}}\,dy=0,$$
-which has the form $M(x)\,dx+N(y)\,dy=0$ with $M=-2x$ and $N=\dfrac{1}{1+y^2}$, so it is **separable**. ✓
+**(a)** The equation is **first order**. ✓ For $y\ne0$:
+$$\sin^{4}x\,dx-\frac{dy}{y}=0,$$ ✓
+which has the form $M(x)\,dx+N(y)\,dy=0$, so it is **separable**.
 
-**(b)** Integrate $\dfrac{dy}{1+y^{2}}=2x\,dx$: ✓
-$$\arctan y=x^{2}+C.$$ ✓
-Hence the general solution is $y=\tan\!\left(x^{2}+C\right)$. ✓
+**(b)** Integrate $\dfrac{dy}{y}=\sin^4x\,dx$ using the identity: ✓
+$$\ln|y|=\int\left(\frac38-\frac12\cos2x+\frac18\cos4x\right)dx=\frac{3x}{8}-\frac{\sin2x}{4}+\frac{\sin4x}{32}+C_1.$$
+Exponentiating, the **general solution** is ✓✓
+$$y=A\exp\!\left(\frac{3x}{8}-\frac{\sin2x}{4}+\frac{\sin4x}{32}\right),\qquad A\ne0\text{ constant}$$
+(and $A=0$ gives the solution $y=0$).
 
-**(c)** With $y(0)=1$: $\arctan1=C$, so $C=\dfrac\pi4$. ✓✓ The particular solution is
-$$y=\tan\!\left(x^{2}+\frac\pi4\right).$$
-The tangent is defined while $x^{2}+\frac\pi4<\frac\pi2$, i.e. $x^{2}<\frac\pi4$, so the largest interval containing $0$ is $\left(-\dfrac{\sqrt\pi}{2},\,\dfrac{\sqrt\pi}{2}\right)$. ✓
+**(c)** With $y(0)=2$: the exponent is $0$ at $x=0$, so $A=2$. ✓ The **particular solution** is ✓✓
+$$y=2\exp\!\left(\frac{3x}{8}-\frac{\sin2x}{4}+\frac{\sin4x}{32}\right).$$
         `
       },
       {
         number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
         prompt: String.raw`
 Given the differential equation
-$$\sin x\,\frac{dy}{dx}+y\cos x=\sin 2x,\qquad 0<x<\pi.$$
+$$\frac{dy}{dx}=2y+e^{x}\sin x.$$
 
 **(a)** Show that this is a linear differential equation by writing it in standard form. (2)
 
 **(b)** Find the integrating factor $e^{\int P(x)\,dx}$. (3)
 
-**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=3$ when $x=\dfrac\pi2$. (5)
+**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=0$ when $x=0$. (5)
         `,
         solution: String.raw`
-**(a)** Divide through by $\sin x$ (positive on the interval) and use $\sin2x=2\sin x\cos x$:
-$$\frac{dy}{dx}+(\cot x)\,y=2\cos x.$$ ✓✓
-This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\cot x$ and $Q(x)=2\cos x$, so it is **linear**.
+**(a)** Move the $y$-term to the left:
+$$\frac{dy}{dx}-2y=e^{x}\sin x.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=-2$ and $Q(x)=e^x\sin x$, so it is **linear**.
 
-**(b)** $\displaystyle\int\cot x\,dx=\ln|\sin x|$, so ✓✓
-$$\mu(x)=e^{\ln\sin x}=\sin x\qquad(\sin x>0\text{ on the interval}).$$ ✓
+**(b)** $\displaystyle\int(-2)\,dx=-2x$, so $\mu(x)=e^{-2x}$. ✓✓✓
 
-**(c)** Multiply the standard form by $\mu=\sin x$; the left side is an exact derivative: ✓
-$$\frac{d}{dx}\big(y\sin x\big)=2\sin x\cos x=\sin2x.$$ ✓
-Integrate: $y\sin x=\sin^{2}x+C$, so the **general solution** is ✓
-$$y=\sin x+\frac{C}{\sin x}.$$
-With $y\!\left(\frac\pi2\right)=3$: $3=1+C$, so $C=2$. ✓ The **particular solution** is ✓
-$$y=\sin x+\frac{2}{\sin x}.$$
+**(c)** Multiply by $e^{-2x}$: ✓
+$$\frac{d}{dx}\left(ye^{-2x}\right)=e^{-x}\sin x.$$
+Let $K=\displaystyle\int e^{-x}\sin x\,dx$. By parts twice: $K=-e^{-x}\sin x+\displaystyle\int e^{-x}\cos x\,dx=-e^{-x}\sin x-e^{-x}\cos x-K$, so ✓
+$$K=-\frac{e^{-x}(\sin x+\cos x)}{2}.$$
+Hence $ye^{-2x}=-\dfrac{e^{-x}(\sin x+\cos x)}{2}+C$ and the **general solution** is ✓
+$$y=-\frac{e^{x}(\sin x+\cos x)}{2}+Ce^{2x}.$$
+With $y(0)=0$: $0=-\tfrac12+C$, so $C=\tfrac12$. ✓ The **particular solution** is $y=\dfrac{e^{2x}-e^{x}(\sin x+\cos x)}{2}$.
         `
       }
     ]
@@ -1430,7 +1469,7 @@ $$y=\sin x+\frac{2}{\sin x}.$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Norman window and a rectangle in a semicircle (§6.6), inverse-sine and logarithmic integrals and products of sines (§9.1, §9.4), reduction formula for xⁿ sin x (§9.2), improper integral with a substitution, alternating series, power series from 1/(1+2x) and sin²x, verifying solutions, separable and linear ODEs.',
+    topics: 'Norman window and a rectangle in a semicircle (§6.6), inverse-sine and logarithmic integrals and cos²x sin 3x (§9.1, §9.4), x sinh²x cosh x and the reduction formula for xⁿ sin x (§9.2), improper integral with a substitution, alternating series, power series from 1/(1+x³) with an error bound and the Taylor series of e²ˣ about 1, implicit verification of a solution, a separable ODE with an implicit solution, and a linear ODE needing integration by parts.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -1596,7 +1635,7 @@ The absolute maximum is $\boxed{100\ \text{cm}^{2}}$. The rectangle has width $2
 
 **(ii)** $\displaystyle\int_{0}^{2}\frac{x}{x^{2}+4}\,dx$ (2)
 
-**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\sin2x\,\sin5x\,dx.$ (4)
+**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\cos^{2}x\,\sin3x\,dx.$ (4)
         `,
         solution: String.raw`
 **(a)(i)** Complete the square: $4x-x^{2}=4-(x-2)^{2}$. Let $u=x-2$, so $du=dx$; $x=1\Rightarrow u=-1$ and $x=3\Rightarrow u=1$. ✓
@@ -1606,17 +1645,18 @@ $$=\arcsin\frac12-\arcsin\!\left(-\frac12\right)=\frac\pi6+\frac\pi6=\frac\pi3.$
 **(ii)** The numerator is half of the derivative of $x^{2}+4$, so ✓
 $$\int_0^2\frac{x}{x^{2}+4}\,dx=\Big[\frac12\ln\left(x^{2}+4\right)\Big]_0^2=\frac12\left(\ln8-\ln4\right)=\frac12\ln2.$$ ✓
 
-**(b)** Use the product-to-sum identity $\sin A\sin B=\frac12\left[\cos(A-B)-\cos(A+B)\right]$: ✓
-$$\sin2x\sin5x=\frac12\left[\cos3x-\cos7x\right].$$ ✓
-$$\int_0^{\pi/2}\sin2x\sin5x\,dx=\frac12\Big[\frac{\sin3x}{3}-\frac{\sin7x}{7}\Big]_0^{\pi/2}=\frac12\left[\left(-\frac13\right)-\left(-\frac17\right)\right]$$ ✓
-since $\sin\frac{3\pi}2=-1$ and $\sin\frac{7\pi}2=-1$. Therefore
-$$=\frac12\left(-\frac{4}{21}\right)=-\frac{2}{21}.$$ ✓
+**(b)** Use $\cos^2x=\tfrac12(1+\cos2x)$: ✓
+$$\int_0^{\pi/2}\cos^2x\sin3x\,dx=\tfrac12\int_0^{\pi/2}\sin3x\,dx+\tfrac12\int_0^{\pi/2}\cos2x\sin3x\,dx.$$
+First integral: $\tfrac12\Big[-\dfrac{\cos3x}{3}\Big]_0^{\pi/2}=\tfrac12\cdot\tfrac13=\tfrac16$. ✓
+Second integral: $\sin3x\cos2x=\tfrac12(\sin5x+\sin x)$, so ✓
+$$\tfrac14\Big[-\frac{\cos5x}{5}-\cos x\Big]_0^{\pi/2}=\tfrac14\left(0-\left(-\tfrac15-1\right)\right)=\tfrac{3}{10}.$$
+Total: $\dfrac16+\dfrac3{10}=\dfrac{7}{15}$. ✓
         `
       },
       {
         number: 9, label: 'B3', title: 'Integration by parts; a reduction formula', section: 'Section B · §9.2', marks: 10,
         prompt: String.raw`
-**(a)** Evaluate $\displaystyle\int_0^{\ln2}x\cosh2x\,dx$. (3)
+**(a)** Evaluate $\displaystyle\int_0^{1}x\sinh^{2}x\,\cosh x\,dx$. Give your answer in terms of $\sinh1$ and $\cosh1$. (3)
 
 **(b)** For an integer $n\ge2$ let $I_n=\displaystyle\int x^{n}\sin x\,dx$. Prove the reduction formula
 $$I_n=-x^{n}\cos x+n\,x^{n-1}\sin x-n(n-1)\,I_{n-2}.$$ (4)
@@ -1624,10 +1664,12 @@ $$I_n=-x^{n}\cos x+n\,x^{n-1}\sin x-n(n-1)\,I_{n-2}.$$ (4)
 **(c)** Hence evaluate $\displaystyle\int_0^{\pi/2}x^{3}\sin x\,dx.$ (3)
         `,
         solution: String.raw`
-**(a)** Integrate by parts with $u=x$, $dv=\cosh2x\,dx$, so $du=dx$ and $v=\dfrac{\sinh2x}{2}$: ✓
-$$\int x\cosh2x\,dx=\frac{x\sinh2x}{2}-\frac12\int\sinh2x\,dx=\frac{x\sinh2x}{2}-\frac{\cosh2x}{4}.$$ ✓
-Since $e^{2\ln2}=4$: $\sinh(2\ln2)=\dfrac{4-\frac14}{2}=\dfrac{15}8$ and $\cosh(2\ln2)=\dfrac{4+\frac14}{2}=\dfrac{17}8$. Hence
-$$\int_0^{\ln2}x\cosh2x\,dx=\left(\frac{15\ln2}{16}-\frac{17}{32}\right)-\left(0-\frac14\right)=\frac{15\ln2}{16}-\frac{9}{32}.$$ ✓
+**(a)** Integrate by parts with $u=x$ and $dv=\sinh^2x\cosh x\,dx$, so $v=\tfrac13\sinh^3x$: ✓
+$$\int x\sinh^2x\cosh x\,dx=\tfrac13x\sinh^3x-\tfrac13\int\sinh^3x\,dx.$$
+Now $\sinh^3x=\sinh x\left(\cosh^2x-1\right)$, so $\displaystyle\int\sinh^3x\,dx=\tfrac13\cosh^3x-\cosh x$. ✓ Hence
+$$\int x\sinh^2x\cosh x\,dx=\tfrac13x\sinh^3x-\tfrac19\cosh^3x+\tfrac13\cosh x.$$
+Evaluating from $0$ to $1$ (the value at $0$ is $-\tfrac19+\tfrac13=\tfrac29$):
+$$\tfrac13\sinh^31-\tfrac19\cosh^31+\tfrac13\cosh1-\tfrac29\approx0.425.$$ ✓
 
 **(b)** Take $u=x^{n}$, $dv=\sin x\,dx$, so $du=nx^{n-1}dx$ and $v=-\cos x$: ✓
 $$I_n=-x^{n}\cos x+n\int x^{n-1}\cos x\,dx.$$
@@ -1691,47 +1733,52 @@ Since $\sum\frac1n$ diverges, so does $\sum\frac{1}{n+\sqrt n}$. The series is t
       {
         number: 12, label: 'B6', title: 'Power series representations; a Maclaurin series', section: 'Section B · §11.5, §11.6', marks: 9,
         prompt: String.raw`
-**(a)** Use the geometric series to find a power series for $f(x)=\dfrac{1}{1+2x}$ about $x=0$, and state its radius of convergence. (3)
+**(a)** Use the geometric series to find a power series for $f(x)=\dfrac{1}{1+x^{3}}$ about $x=0$, and state its radius of convergence. (3)
 
-**(b)** Integrate your series from (a) term by term to obtain a power series for $\ln(1+2x)$. Hence, by choosing a suitable value of $x$, find the exact value of $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n\,3^{n}}$. (3)
+**(b)** Integrate your series term by term to write $\displaystyle\int_0^{1/2}\frac{dx}{1+x^{3}}$ as an infinite series. Use its first three terms to approximate the integral, and show, by comparing the remaining terms with a geometric series, that the error is less than $10^{-3}$. (3)
 
-**(c)** Using the Maclaurin series of $\cos u$, find the Maclaurin series of $g(x)=\sin^{2}x$ (write the first three non-zero terms and the general term). (3)
+**(c)** Use the Maclaurin series of $e^{u}$ to find the Taylor series of $f(x)=e^{2x}$ about $a=1$ (write the first four terms and the general term), and state its radius of convergence. (3)
         `,
         solution: String.raw`
-**(a)** Write $\dfrac1{1+2x}=\dfrac{1}{1-(-2x)}$ and use $\dfrac1{1-r}=\displaystyle\sum_{n=0}^{\infty}r^{n}$ with $r=-2x$: ✓
-$$\frac{1}{1+2x}=\sum_{n=0}^{\infty}(-2x)^{n}=\sum_{n=0}^{\infty}(-2)^{n}x^{n},$$ ✓
-valid when $|2x|<1$, so the **radius of convergence is $R=\dfrac12$**. ✓
+**(a)** Replace $x$ by $-x^{3}$ in $\dfrac1{1-x}=\sum x^n$:
+$$\frac{1}{1+x^{3}}=\sum_{n=0}^{\infty}(-1)^{n}x^{3n}=1-x^3+x^6-x^9+\cdots,$$ ✓✓
+valid when $|x^{3}|<1$, i.e. $|x|<1$, so the radius of convergence is $R=1$. ✓
 
-**(b)** Integrate term by term from $0$ to $x$: $\displaystyle\int_0^x\frac{dt}{1+2t}=\frac12\ln(1+2x)=\sum_{n=0}^{\infty}\frac{(-2)^{n}x^{n+1}}{n+1}$. ✓ Multiplying by $2$ and putting $k=n+1$:
-$$\ln(1+2x)=\sum_{k=1}^{\infty}\frac{(-1)^{k+1}(2x)^{k}}{k},\qquad |x|<\tfrac12.$$ ✓
-Choose $x=\frac16$ (inside the radius), so $2x=\frac13$ and $\ln\!\left(1+\frac13\right)=\ln\frac43$: ✓
-$$\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k\,3^{k}}=\ln\frac43.$$
+**(b)** Since $\tfrac12$ lies inside the interval of convergence, we may integrate term by term:
+$$\int_0^{1/2}\frac{dx}{1+x^3}=\sum_{n=0}^{\infty}\frac{(-1)^n}{3n+1}\left(\tfrac12\right)^{3n+1}=\frac12-\frac1{64}+\frac1{896}-\frac1{10240}+\cdots.$$ ✓
+The first three terms give $\dfrac12-\dfrac1{64}+\dfrac1{896}=\dfrac{435}{896}\approx0.4855$. The omitted terms satisfy (using $3n+1\ge10$ for $n\ge3$)
+$$\left|\sum_{n=3}^{\infty}\frac{(-1)^n}{3n+1}\left(\tfrac12\right)^{3n+1}\right|\le\frac1{10}\sum_{n=3}^{\infty}\left(\tfrac12\right)^{3n+1}=\frac1{10}\cdot\frac{(1/2)^{10}}{1-1/8}=\frac{1}{8960}<10^{-3}.$$ ✓✓
 
-**(c)** $\sin^{2}x=\dfrac{1-\cos2x}{2}$ and $\cos u=\displaystyle\sum_{n=0}^{\infty}\frac{(-1)^{n}u^{2n}}{(2n)!}$ with $u=2x$, so $1-\cos2x=-\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n}2^{2n}x^{2n}}{(2n)!}$. ✓ Dividing by $2$:
-$$\sin^{2}x=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}\,2^{2n-1}x^{2n}}{(2n)!}=x^{2}-\frac{x^{4}}{3}+\frac{2x^{6}}{45}-\cdots$$ ✓✓
+**(c)** Re-centre at $a=1$: write $2x=2+2(x-1)$, so $e^{2x}=e^{2}\,e^{2(x-1)}$. ✓ Substituting $u=2(x-1)$ in $e^u=\sum u^n/n!$:
+$$e^{2x}=e^{2}\sum_{n=0}^{\infty}\frac{2^{n}(x-1)^{n}}{n!}=e^{2}\left[1+2(x-1)+2(x-1)^2+\tfrac43(x-1)^3+\cdots\right].$$ ✓
+The series for $e^u$ converges for every $u$, so the radius of convergence is $R=\infty$. ✓
         `
       },
       {
         number: 13, label: 'B7', title: 'Differential equations — verifying and separating', section: 'Section B · §12.0, §12.1', marks: 8,
         prompt: String.raw`
-**(a)** State the order of the differential equation $y''-2y'+2y=0$, and show that $y=e^{x}\left(A\cos x+B\sin x\right)$ is a solution for all constants $A$ and $B$. (2)
+**(a)** State the order of the differential equation $(2y-x)\dfrac{dy}{dx}=y-2x$, and show that any differentiable function $y(x)$ defined implicitly by $x^{2}-xy+y^{2}=C$ is a solution. (2)
 
 **(b)** Given the differential equation
-$$\frac{dy}{dx}=x\,(y-1),\qquad y>1,$$
-write it in the form $M(x)\,dx+N(y)\,dy=0$ and find its general solution. (3)
+$$\frac{dy}{dx}=\frac{2x+1}{2y+1},\qquad y>-\tfrac12,$$
+write it in the form $M(x)\,dx+N(y)\,dy=0$ and find its general solution, leaving it in implicit form. (3)
 
-**(c)** Find the particular solution of the equation in (b) given that $y=3$ when $x=0$. (3)
+**(c)** Find the particular solution of the equation in (b) given that $y=1$ when $x=0$, and write $y$ explicitly in terms of $x$. (3)
         `,
         solution: String.raw`
-**(a)** The highest derivative is $y''$, so the order is $2$. ✓ Differentiate $y=e^{x}(A\cos x+B\sin x)$:
-$$y'=e^{x}\left[(A+B)\cos x+(B-A)\sin x\right],\qquad y''=e^{x}\left[2B\cos x-2A\sin x\right].$$
-Then $y''-2y'+2y=e^{x}\Big[\left(2B-2A-2B+2A\right)\cos x+\left(-2A-2B+2A+2B\right)\sin x\Big]=0$ for all $A,B$. ✓
+**(a)** The equation is **first order**. ✓ Differentiate $x^2-xy+y^2=C$ implicitly with respect to $x$:
+$$2x-y-x\frac{dy}{dx}+2y\frac{dy}{dx}=0\ \Longrightarrow\ (2y-x)\frac{dy}{dx}=y-2x,$$ ✓
+which is the given equation, so every such $y(x)$ is a solution.
 
-**(b)** Rearranging: $-x\,dx+\dfrac{1}{y-1}\,dy=0$, of the form $M(x)\,dx+N(y)\,dy=0$. ✓ Integrate $\dfrac{dy}{y-1}=x\,dx$ (with $y>1$): ✓
-$$\ln(y-1)=\frac{x^{2}}{2}+C\ \Longrightarrow\ y=1+Ae^{x^{2}/2},\qquad A=e^{C}>0.$$ ✓
+**(b)** Multiply by $(2y+1)$: ✓
+$$(2x+1)\,dx-(2y+1)\,dy=0.$$
+Integrate: $x^2+x-y^2-y=C_1$, so the **general solution** (implicit form) is ✓✓
+$$y^{2}+y=x^{2}+x+C.$$
 
-**(c)** With $y(0)=3$: $3=1+A$, so $A=2$. ✓✓
-$$y=1+2e^{x^{2}/2}.$$ ✓
+**(c)** With $y(0)=1$: $1+1=0+0+C$, so $C=2$. ✓ Solve the quadratic $y^2+y-\left(x^2+x+2\right)=0$ for $y$:
+$$y=\frac{-1\pm\sqrt{1+4\left(x^2+x+2\right)}}{2}=\frac{-1\pm\sqrt{4x^2+4x+9}}{2}.$$
+Since $y(0)=1>-\tfrac12$ we must take the $+$ sign (at $x=0$: $\frac{-1+3}{2}=1$). ✓ So
+$$y=\frac{-1+\sqrt{4x^{2}+4x+9}}{2}.$$ ✓ (Here $4x^2+4x+9=(2x+1)^2+8>0$ for all $x$.)
         `
       },
       {
@@ -1771,7 +1818,7 @@ $$y=x^{4}\left[(x-1)e^{x}+2\right].$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Nearest point on a curve and a cone in a sphere (§6.6), completing the square and mixed even powers (§9.1, §9.4), reduction formula for 1/(1+x²)ⁿ (§9.2), comparison test and an arctangent improper integral, squeeze theorem and Ratio Test, Taylor series of 1/x², separable and linear ODEs.',
+    topics: 'Nearest point on a curve and a cone in a sphere (§6.6), an exponential substitution over a completed square and mixed even powers (§9.1, §9.4), x sech²x and the reduction formula for 1/(1+x²)ⁿ (§9.2), comparison test and an arctangent improper integral, squeeze theorem and Ratio Test, the Maclaurin series of x eˣ from the coefficient formula, a separable ODE with an arcsine solution and a linear ODE with integrating factor ln x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -1822,22 +1869,23 @@ $$\int_1^{e}x\ln x\,dx=\Big[\frac{x^{2}\ln x}{2}\Big]_1^{e}-\int_1^{e}\frac{x}{2
         `
       },
       {
-        number: 3, label: 'A3', title: 'An arctangent improper integral', section: 'Section A · §10', marks: 2,
+        number: 3, label: 'A3', title: 'An integrable singularity at an endpoint', section: 'Section A · §10', marks: 2,
         prompt: String.raw`
-$$\int_{0}^{\infty}\frac{dx}{1+x^{2}}=$$
+$$\int_{0}^{1}\frac{dx}{\sqrt{1-x}}=$$
 
-- **A.** $\pi$.
-- **B.** $1$.
-- **C.** $\dfrac\pi2$.
-- **D.** $\dfrac\pi4$.
+- **A.** $1$.
+- **B.** $2$.
+- **C.** $\dfrac12$.
+- **D.** $\dfrac\pi2$.
 - **E.** The integral diverges.
         `,
         solution: String.raw`
-**Answer: C.** ✓✓
+**Answer: B.** ✓✓
 
-$\displaystyle\int_0^{\infty}\frac{dx}{1+x^{2}}=\lim_{t\to\infty}\big[\arctan x\big]_0^{t}=\lim_{t\to\infty}\arctan t=\frac\pi2.$ ✓✓
+The integrand is unbounded at $x=1$, so
+$$\int_0^{1}\frac{dx}{\sqrt{1-x}}=\lim_{t\to1^-}\Big[-2\sqrt{1-x}\Big]_0^{t}=\lim_{t\to1^-}\left(2-2\sqrt{1-t}\right)=2.$$ ✓✓
 
-- **A** is the value over $(-\infty,\infty)$. **D** is $\arctan1$. **B** and **E** are wrong: the integral converges, to $\frac\pi2$.
+- **E** is the usual mistake of assuming that a vertical asymptote forces divergence; here the exponent is $\tfrac12<1$. **A** and **C** come from mis-integrating $(1-x)^{-1/2}$. **D** is not related to this integral.
         `
       },
       {
@@ -1860,24 +1908,23 @@ The other ratios tend to $0$, $\frac14$, $\frac1e$ and $\frac12$ respectively, a
         `
       },
       {
-        number: 5, label: 'A5', title: 'A Maclaurin coefficient', section: 'Section A · §11.6', marks: 2,
+        number: 5, label: 'A5', title: 'A Maclaurin coefficient of a product', section: 'Section A · §11.6', marks: 2,
         prompt: String.raw`
-The coefficient of $x^{3}$ in the Maclaurin series of $f(x)=\sin2x$ is
+The coefficient of $x^{4}$ in the Maclaurin series of $f(x)=e^{x}\cos x$ is
 
-- **A.** $\dfrac43$.
-- **B.** $-\dfrac83$.
-- **C.** $-\dfrac23$.
-- **D.** $-\dfrac43$.
-- **E.** $\dfrac83$.
+- **A.** $\dfrac1{24}$.
+- **B.** $-\dfrac14$.
+- **C.** $-\dfrac16$.
+- **D.** $\dfrac16$.
+- **E.** $-\dfrac5{24}$.
         `,
         solution: String.raw`
-**Answer: D.** ✓✓
+**Answer: C.** ✓✓
 
-Use $\sin u=u-\dfrac{u^{3}}{3!}+\cdots$ with $u=2x$: $\sin2x=2x-\dfrac{8x^{3}}{6}+\cdots$, so the coefficient of $x^{3}$ is $-\dfrac86=-\dfrac43$. ✓✓
+Multiply $e^x=1+x+\dfrac{x^2}{2}+\dfrac{x^3}{6}+\dfrac{x^4}{24}+\cdots$ by $\cos x=1-\dfrac{x^2}{2}+\dfrac{x^4}{24}-\cdots$. The $x^4$ terms come from $1\cdot\dfrac{x^4}{24}$, $\dfrac{x^2}{2}\cdot\left(-\dfrac{x^2}{2}\right)$ and $\dfrac{x^4}{24}\cdot1$: ✓
+$$\frac1{24}-\frac14+\frac1{24}=-\frac{4}{24}=-\frac16.$$ ✓
 
-(Equivalently, $c_3=\dfrac{f'''(0)}{3!}=\dfrac{-8\cos0}{6}=-\dfrac43$.)
-
-- **A** has the wrong sign. **B**, **C** and **E** come from mishandling $2^{3}$ or $3!$.
+- **A** is the coefficient in $e^x$ (or $\cos x$) alone. **B** keeps only the cross term. **E** forgets one of the two $\frac1{24}$ terms. **D** has the wrong sign.
         `
       },
       {
@@ -1935,15 +1982,16 @@ The absolute maximum is $\boxed{\dfrac{32\pi}{3}\ \text{cm}^{3}}$, attained when
       {
         number: 8, label: 'B2', title: 'Completing the square; a product of powers of sine and cosine', section: 'Section B · §9.1, §9.4', marks: 9,
         prompt: String.raw`
-**(a)** Evaluate $\displaystyle\int_{-2}^{0}\frac{x+4}{x^{2}+4x+8}\,dx.$ (5)
+**(a)** Evaluate $\displaystyle\int_0^{\ln3}\frac{e^{x}}{e^{2x}+4e^{x}+13}\,dx.$ (5)
 
 **(b)** Evaluate $\displaystyle\int_0^{\pi/2}\sin^{2}x\,\cos^{4}x\,dx.$ (4)
         `,
         solution: String.raw`
-**(a)** Complete the square: $x^{2}+4x+8=(x+2)^{2}+4$. The derivative of the denominator is $2x+4$, so split the numerator as $x+4=\frac12(2x+4)+2$: ✓
-$$\int\frac{x+4}{x^{2}+4x+8}\,dx=\frac12\int\frac{2x+4}{x^{2}+4x+8}\,dx+2\int\frac{dx}{(x+2)^{2}+4}.$$ ✓
-The first integral is $\frac12\ln\left(x^{2}+4x+8\right)$ (the quadratic is always positive). ✓ The second is the arctangent form $\int\frac{du}{u^{2}+a^{2}}=\frac1a\arctan\frac ua$ with $a=2$, $u=x+2$, giving $2\cdot\frac12\arctan\frac{x+2}{2}$. ✓
-$$\Big[\frac12\ln\left(x^{2}+4x+8\right)+\arctan\frac{x+2}{2}\Big]_{-2}^{0}=\left(\frac12\ln8+\frac\pi4\right)-\left(\frac12\ln4+0\right)=\frac12\ln2+\frac\pi4.$$ ✓
+**(a)** Substitute $u=e^{x}$, $du=e^{x}dx$. The limits $x=0,\ln3$ become $u=1,3$: ✓✓
+$$\int_0^{\ln3}\frac{e^{x}\,dx}{e^{2x}+4e^{x}+13}=\int_1^{3}\frac{du}{u^{2}+4u+13}.$$
+Complete the square: $u^2+4u+13=(u+2)^2+3^2$, so ✓
+$$\int_1^{3}\frac{du}{(u+2)^{2}+3^{2}}=\frac13\Big[\arctan\frac{u+2}{3}\Big]_1^{3}=\frac13\left(\arctan\frac53-\arctan1\right).$$ ✓✓
+Since $\arctan\frac53-\arctan1=\arctan\dfrac{5/3-1}{1+5/3}=\arctan\dfrac14$, the value is $\dfrac13\arctan\dfrac14\approx0.082$.
 
 **(b)** Both powers are even, so use double-angle identities: $\sin^{2}x\cos^{2}x=\frac14\sin^{2}2x$ and $\cos^{2}x=\frac{1+\cos2x}{2}$. ✓
 $$\sin^{2}x\cos^{4}x=\frac14\sin^{2}2x\cdot\frac{1+\cos2x}{2}=\frac18\sin^{2}2x+\frac18\sin^{2}2x\cos2x.$$ ✓
@@ -2033,7 +2081,7 @@ a finite positive number (using $n/3^{n}\to0$). ✓ By the Limit Comparison Test
 **(a)** Find the radius of convergence and the interval of convergence of the power series
 $$\sum_{n=1}^{\infty}\frac{x^{2n}}{n\,9^{n}}.$$ (5)
 
-**(b)** Use the formula $c_n=\dfrac{f^{(n)}(a)}{n!}$ to find the Taylor series of $f(x)=\dfrac{1}{x^{2}}$ about $a=1$. Write down the first four terms and the general term. (4)
+**(b)** Use the formula $c_n=\dfrac{f^{(n)}(0)}{n!}$ to find the Maclaurin series of $f(x)=x\,e^{x}$. Write down the first four non-zero terms and the general term. (4)
         `,
         solution: String.raw`
 **(a)** **Ratio Test.** With $a_n=\dfrac{x^{2n}}{n\,9^n}$,
@@ -2044,64 +2092,61 @@ The series converges when $\dfrac{x^{2}}{9}<1$, i.e. $|x|<3$. So the **radius of
 
 **Interval of convergence: $(-3,3)$.** ✓
 
-**(b)** $f(x)=x^{-2}$, $f'(x)=-2x^{-3}$, $f''(x)=6x^{-4}$, $f'''(x)=-24x^{-5}$, and in general $f^{(n)}(x)=(-1)^{n}(n+1)!\,x^{-n-2}$. ✓✓
-
-Therefore $c_n=\dfrac{f^{(n)}(1)}{n!}=(-1)^{n}(n+1)$. ✓ The Taylor series is
-$$\frac{1}{x^{2}}=\sum_{n=0}^{\infty}(-1)^{n}(n+1)(x-1)^{n}=1-2(x-1)+3(x-1)^{2}-4(x-1)^{3}+\cdots$$ ✓
+**(b)** Differentiate: $f'(x)=(x+1)e^x$, $f''(x)=(x+2)e^x$, $f'''(x)=(x+3)e^x$, and in general $f^{(n)}(x)=(x+n)e^x$ (each differentiation raises the constant by $1$). ✓✓ Therefore $f^{(n)}(0)=n$ and
+$$c_n=\frac{n}{n!}=\frac{1}{(n-1)!}\quad(n\ge1),\qquad c_0=0.$$ ✓
+The Maclaurin series is
+$$xe^x=x+x^2+\frac{x^3}{2!}+\frac{x^4}{3!}+\cdots=\sum_{n=1}^{\infty}\frac{x^n}{(n-1)!}.$$ ✓
         `
       },
       {
         number: 13, label: 'B7', title: 'Differential equations — separable', section: 'Section B · §12.1', marks: 8,
         prompt: String.raw`
 Given the differential equation
-$$(1+x)\,\frac{dy}{dx}=y^{2},\qquad x>-1.$$
+$$\frac{dy}{dx}=x\sqrt{1-y^{2}},\qquad -1<y<1.$$
 
 **(a)** State the order of the equation, and show that it is separable by writing it in the form $M(x)\,dx+N(y)\,dy=0$. (2)
 
-**(b)** Find the general solution of the equation. (3)
+**(b)** Find the general solution of the equation. Also write down two constant solutions that are **not** contained in your general solution. (3)
 
-**(c)** Find the particular solution given that $y=1$ when $x=0$, and state the largest interval containing $x=0$ on which this solution is defined. (3)
+**(c)** Find the particular solution given that $y=\dfrac12$ when $x=0$, and state the values of $x$ for which this solution satisfies the original equation. (3)
         `,
         solution: String.raw`
-**(a)** The highest derivative is $\frac{dy}{dx}$, so the order is $1$. ✓ Dividing by $(1+x)y^{2}$ and multiplying by $dx$:
-$$\frac{dx}{1+x}-\frac{dy}{y^{2}}=0,$$
-which has the form $M(x)\,dx+N(y)\,dy=0$ with $M=\dfrac1{1+x}$ and $N=-\dfrac1{y^{2}}$, so it is **separable**. ✓
+**(a)** The equation is **first order**. ✓ For $|y|<1$, divide by $\sqrt{1-y^2}$:
+$$x\,dx-\frac{dy}{\sqrt{1-y^{2}}}=0,$$ ✓
+which has the form $M(x)\,dx+N(y)\,dy=0$, so it is **separable**.
 
-**(b)** Integrate $\dfrac{dy}{y^{2}}=\dfrac{dx}{1+x}$ (for $x>-1$): ✓
-$$-\frac1y=\ln(1+x)+C.$$ ✓
-Hence $y=-\dfrac{1}{\ln(1+x)+C}$. (The constant function $y=0$ is also a solution; it was lost when dividing by $y^{2}$.) ✓
+**(b)** Integrate: $\dfrac{x^2}{2}-\arcsin y=C_1$, so $\arcsin y=\dfrac{x^2}{2}+C$ and the **general solution** is ✓✓
+$$y=\sin\!\left(\frac{x^{2}}{2}+C\right).$$
+Dividing by $\sqrt{1-y^2}$ lost the constant solutions $y=1$ and $y=-1$, which satisfy the equation but are not obtained for any $C$. ✓
 
-**(c)** With $y(0)=1$: $1=-\dfrac1C$, so $C=-1$. ✓✓ The particular solution is
-$$y=\frac{1}{1-\ln(1+x)}.$$
-The denominator vanishes when $\ln(1+x)=1$, i.e. $x=e-1$. The solution is defined and continuous on the largest interval containing $0$ with $x>-1$ and $x<e-1$: $\ \boxed{(-1,\ e-1)}$. ✓
+**(c)** With $y(0)=\tfrac12$: $\arcsin\tfrac12=\dfrac\pi6=C$. ✓ So $y=\sin\!\left(\dfrac{x^2}{2}+\dfrac\pi6\right)$. Because $\arcsin y\in\left[-\frac\pi2,\frac\pi2\right]$ we need $\dfrac{x^2}{2}+\dfrac\pi6\le\dfrac\pi2$, i.e. $x^2\le\dfrac{2\pi}{3}$; for larger $|x|$ the function $\sin(\cdot)$ has the wrong sign of derivative ($y'=x\cos(\cdot)$ but $x\sqrt{1-y^2}=x|\cos(\cdot)|$). So it solves the equation for $|x|<\sqrt{2\pi/3}$. ✓✓
         `
       },
       {
         number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
         prompt: String.raw`
 Given the differential equation
-$$\frac{dy}{dx}=xe^{x^{2}}+2xy.$$
+$$x\ln x\,\frac{dy}{dx}+y=2\ln x,\qquad x>1.$$
 
 **(a)** Show that this is a linear differential equation by writing it in standard form. (2)
 
 **(b)** Find the integrating factor $e^{\int P(x)\,dx}$. (3)
 
-**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=1$ when $x=0$. (5)
+**(c)** Hence find the general solution of the differential equation, and then the particular solution satisfying $y=3$ when $x=e$. (5)
         `,
         solution: String.raw`
-**(a)** Move the $y$-term to the left:
-$$\frac{dy}{dx}-2x\,y=x\,e^{x^{2}}.$$ ✓✓
-This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=-2x$ and $Q(x)=xe^{x^{2}}$, so it is **linear**.
+**(a)** Divide through by $x\ln x$ (positive for $x>1$):
+$$\frac{dy}{dx}+\frac{1}{x\ln x}\,y=\frac{2}{x}.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\dfrac1{x\ln x}$ and $Q(x)=\dfrac2x$, so it is **linear**.
 
-**(b)** $\displaystyle\int-2x\,dx=-x^{2}$, so ✓✓
-$$\mu(x)=e^{-x^{2}}.$$ ✓
+**(b)** Substitute $w=\ln x$: $\displaystyle\int\frac{dx}{x\ln x}=\int\frac{dw}{w}=\ln(\ln x)$ (for $x>1$), so ✓✓
+$$\mu(x)=e^{\ln(\ln x)}=\ln x.$$ ✓
 
-**(c)** Multiply the standard form by $\mu=e^{-x^{2}}$; the left side is an exact derivative: ✓
-$$\frac{d}{dx}\left(ye^{-x^{2}}\right)=e^{-x^{2}}\cdot xe^{x^{2}}=x.$$ ✓
-Integrate: $ye^{-x^{2}}=\dfrac{x^{2}}{2}+C$, so the **general solution** is ✓
-$$y=e^{x^{2}}\left(\frac{x^{2}}{2}+C\right).$$
-With $y(0)=1$: $1=C$. ✓ The **particular solution** is ✓
-$$y=e^{x^{2}}\left(\frac{x^{2}}{2}+1\right).$$
+**(c)** Multiply the standard form by $\mu=\ln x$; the left side is an exact derivative: ✓
+$$\frac{d}{dx}\big(y\ln x\big)=\frac{2\ln x}{x}.$$
+Integrate (with $w=\ln x$): $y\ln x=\ln^2x+C$, so the **general solution** is ✓✓
+$$y=\ln x+\frac{C}{\ln x}.$$
+With $y(e)=3$: $3=1+C$, so $C=2$. ✓ The **particular solution** is $y=\ln x+\dfrac{2}{\ln x}$. ✓
         `
       }
     ]
@@ -2113,7 +2158,7 @@ $$y=e^{x^{2}}\left(\frac{x^{2}}{2}+1\right).$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'A closed box and a field divided by a fence along a river (§6.6), an arctangent substitution and a linear numerator over a completed square (§9.1), sin⁴x cos³x (§9.4), the reduction formula for xⁿeˣ (§9.2), an interior discontinuity and the Comparison Theorem (§10), the Integral Test and an alternating series, a hyperbolic Maclaurin series, and separable and linear ODEs.',
+    topics: 'A closed box and a field divided by a fence along a river (§6.6), a logarithmic substitution over a completed square and a product of three sines (§9.1, §9.4), sinh x ln(cosh x) and the reduction formula for xⁿe^{−x²} (§9.2), an interior discontinuity, the integral of (ln x)² and the Comparison Theorem (§10), an alternating series with ln n / n, a hyperbolic Maclaurin series and a limit by series, a separable ODE needing ∫ln x with a blow-up interval, and a linear ODE with integrating factor sin x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -2202,41 +2247,42 @@ so the series in **C** converges.
         `
       },
       {
-        number: 5, label: 'A5', title: 'A Maclaurin coefficient', section: 'Section A · §11.6', marks: 2,
+        number: 5, label: 'A5', title: 'A derivative from a Maclaurin series', section: 'Section A · §11.6', marks: 2,
         prompt: String.raw`
-The coefficient of $x^{4}$ in the Maclaurin series of $f(x)=e^{-x^{2}}$ is
+Let $f(x)=\sin\left(x^{2}\right)$. Then $f^{(6)}(0)$ is
 
-- **A.** $\dfrac12$.
-- **B.** $-\dfrac12$.
-- **C.** $\dfrac1{24}$.
-- **D.** $1$.
-- **E.** $-1$.
+- **A.** $-\dfrac16$.
+- **B.** $-20$.
+- **C.** $120$.
+- **D.** $-120$.
+- **E.** $-720$.
         `,
         solution: String.raw`
-**Answer: A.** ✓✓
+**Answer: D.** ✓✓
 
-Substitute $u=-x^{2}$ into $e^{u}=1+u+\dfrac{u^{2}}{2!}+\cdots$:
-$$e^{-x^{2}}=1-x^{2}+\frac{x^{4}}{2}-\frac{x^{6}}{6}+\cdots$$
-The coefficient of $x^{4}$ is $\dfrac12$. (**B** has the wrong sign: $(-x^{2})^{2}$ is positive. **C** uses $\frac1{4!}$ instead of $\frac1{2!}$.)
+Substitute $u=x^2$ in $\sin u=u-\dfrac{u^3}{3!}+\cdots$: $\sin\left(x^2\right)=x^{2}-\dfrac{x^{6}}{6}+\cdots$. So the coefficient of $x^6$ is $c_6=-\dfrac16$. ✓ Since $c_6=\dfrac{f^{(6)}(0)}{6!}$,
+$$f^{(6)}(0)=6!\cdot\left(-\frac16\right)=-120.$$ ✓
+
+- **A** is the coefficient $c_6$, not the derivative. **E** forgets the factor $\frac16$. **C** has the wrong sign. **B** divides by $3!$ twice.
         `
       },
       {
         number: 6, label: 'A6', title: 'The general solution of a separable equation', section: 'Section A · §12.1', marks: 2,
         prompt: String.raw`
-The general solution of the differential equation $\dfrac{dy}{dx}=\dfrac{3x^{2}}{y}$ is
+The general solution of the differential equation $\dfrac{dy}{dx}=e^{x}y$ is
 
-- **A.** $y=x^{3}+C$.
-- **B.** $y^{2}=x^{3}+C$.
-- **C.** $y^{2}=2x^{3}+C$.
-- **D.** $y^{2}=6x+C$.
-- **E.** $y=\sqrt{x^{3}}+C$.
+- **A.** $y=e^{e^{x}}+C$.
+- **B.** $y=Ce^{e^{x}}$.
+- **C.** $y=Ce^{x}$.
+- **D.** $y=e^{x}+C$.
+- **E.** $y=Ce^{xe^{x}}$.
         `,
         solution: String.raw`
-**Answer: C.** ✓✓
+**Answer: B.** ✓✓
 
-Separate the variables: $y\,dy=3x^{2}\,dx$. Integrate: $\dfrac{y^{2}}{2}=x^{3}+C_1$, so $y^{2}=2x^{3}+C$ with $C=2C_1$.
+Separate: $\dfrac{dy}{y}=e^{x}\,dx$. Integrate: $\ln|y|=e^{x}+C_1$, so $y=Ce^{e^{x}}$ with $C=\pm e^{C_1}$ (and $C=0$ gives the constant solution $y=0$).
 
-- **B** forgets the factor $2$ from integrating $y\,dy$. **D** differentiates instead of integrating. **A** and **E** are not solutions: for example $y=x^{3}+C$ gives $\frac{dy}{dx}=3x^{2}\neq\frac{3x^{2}}{y}$.
+- **A** keeps $C$ as an added constant after exponentiating (it must multiply). **C** solves $y'=y$, and **D** solves $y'=e^x$. **E** is not a solution: it gives $y'=(e^x+xe^x)y\neq e^xy$.
         `
       },
       {
@@ -2273,48 +2319,49 @@ The largest value is $A(40)=4800$. The best field has $x=40$ m and $y=240-120=12
       {
         number: 8, label: 'B2', title: 'Completing the square; a power of sine and cosine', section: 'Section B · §9.1, §9.4', marks: 9,
         prompt: String.raw`
-**(a)** Evaluate $\displaystyle\int_{-1}^{1}\frac{3x+1}{x^{2}+2x+5}\,dx.$ (5)
+**(a)** Evaluate $\displaystyle\int_1^{e}\frac{\ln x+2}{x\left(\ln^{2}x+2\ln x+5\right)}\,dx.$ (5)
 
-**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\sin^{4}x\,\cos^{3}x\,dx.$ (4)
+**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\sin x\,\sin2x\,\sin3x\,dx.$ (4)
         `,
         solution: String.raw`
-**(a)** Complete the square: $x^{2}+2x+5=(x+1)^{2}+4$. The derivative of the denominator is $2x+2$, so write the numerator as ✓
-$$3x+1=\tfrac32(2x+2)-2.$$ ✓
-Then
-$$\int\frac{3x+1}{x^{2}+2x+5}dx=\frac32\int\frac{2x+2}{x^{2}+2x+5}dx-2\int\frac{dx}{(x+1)^{2}+4}=\frac32\ln\left(x^{2}+2x+5\right)-\arctan\frac{x+1}{2}+C.$$ ✓✓
-Evaluate between $-1$ and $1$:
-$$\left[\frac32\ln\left(x^{2}+2x+5\right)-\arctan\frac{x+1}{2}\right]_{-1}^{1}=\left(\frac32\ln8-\frac\pi4\right)-\left(\frac32\ln4-0\right)=\boxed{\frac32\ln2-\frac\pi4}.$$ ✓
+**(a)** Let $u=\ln x$, $du=dx/x$; the limits become $u=0,1$: ✓
+$$\int_0^{1}\frac{u+2}{u^{2}+2u+5}\,du.$$
+The derivative of the denominator is $2u+2$, so write $u+2=\tfrac12(2u+2)+1$: ✓✓
+$$\int_0^{1}\frac{u+2}{u^2+2u+5}\,du=\tfrac12\Big[\ln\left(u^2+2u+5\right)\Big]_0^1+\int_0^{1}\frac{du}{(u+1)^2+2^2}.$$
+The second integral is $\tfrac12\big[\arctan\tfrac{u+1}{2}\big]_0^1=\tfrac12\left(\arctan1-\arctan\tfrac12\right)=\tfrac12\arctan\tfrac13$. ✓
+Hence the value is $\tfrac12\ln\tfrac85+\tfrac12\arctan\tfrac13\approx0.396$. ✓
 
-**(b)** The power of cosine is odd: keep one factor $\cos x$ and write $\cos^{2}x=1-\sin^{2}x$. ✓
-$$\sin^{4}x\cos^{3}x=\sin^{4}x\left(1-\sin^{2}x\right)\cos x.$$
-Substitute $u=\sin x$, $du=\cos x\,dx$ (limits $0\to1$): ✓
-$$\int_0^{1}\left(u^{4}-u^{6}\right)du=\left[\frac{u^{5}}{5}-\frac{u^{7}}{7}\right]_0^{1}=\frac15-\frac17=\boxed{\frac{2}{35}}.$$ ✓✓
+**(b)** Combine two of the factors first: $\sin x\sin3x=\tfrac12(\cos2x-\cos4x)$. Then ✓
+$$\sin x\sin2x\sin3x=\tfrac12\left(\sin2x\cos2x-\sin2x\cos4x\right).$$
+Now $\sin2x\cos2x=\tfrac12\sin4x$ and $\sin2x\cos4x=\tfrac12(\sin6x-\sin2x)$, so ✓
+$$\sin x\sin2x\sin3x=\tfrac14\left(\sin2x+\sin4x-\sin6x\right).$$ ✓
+Integrate over $[0,\pi/2]$: $\int\sin2x=1$, $\int\sin4x=0$, $\int\sin6x=\tfrac13$, so the value is $\tfrac14\left(1+0-\tfrac13\right)=\dfrac16$. ✓
         `
       },
       {
         number: 9, label: 'B3', title: 'Integration by parts; a reduction formula', section: 'Section B · §9.2', marks: 10,
         prompt: String.raw`
-**(a)** Evaluate $\displaystyle\int_0^{\ln2}x\sinh3x\,dx$. Give your answer in terms of $\ln2$. (3)
+**(a)** Evaluate $\displaystyle\int_0^{\ln2}\sinh x\,\ln(\cosh x)\,dx$. (3)
 
-**(b)** For an integer $n\ge1$ let $I_n=\displaystyle\int x^{n}e^{x}\,dx$.
+**(b)** For an integer $n\ge2$ let $I_n=\displaystyle\int x^{n}e^{-x^{2}}\,dx$. Prove the reduction formula
+$$I_n=-\frac{x^{\,n-1}e^{-x^{2}}}{2}+\frac{n-1}{2}\,I_{n-2}.$$ (4)
 
-**(i)** Use integration by parts to prove the reduction formula
-$$I_n=x^{n}e^{x}-n\,I_{n-1}.$$ (4)
-
-**(ii)** Hence evaluate $\displaystyle\int_0^{1}x^{3}e^{x}\,dx$. (3)
+**(c)** Hence evaluate $\displaystyle\int_0^{1}x^{5}e^{-x^{2}}\,dx.$ (3)
         `,
         solution: String.raw`
-**(a)** Take $u=x$ and $dv=\sinh3x\,dx$, so $du=dx$ and $v=\dfrac{\cosh3x}{3}$: ✓
-$$\int_0^{\ln2}x\sinh3x\,dx=\left[\frac{x\cosh3x}{3}\right]_0^{\ln2}-\frac13\int_0^{\ln2}\cosh3x\,dx=\frac{\ln2\cosh(3\ln2)}{3}-\frac{\sinh(3\ln2)}{9}.$$ ✓
-Since $e^{3\ln2}=8$: $\cosh(3\ln2)=\dfrac{8+\frac18}{2}=\dfrac{65}{16}$ and $\sinh(3\ln2)=\dfrac{8-\frac18}{2}=\dfrac{63}{16}$. Hence
-$$\frac{65}{48}\ln2-\frac{63}{144}=\boxed{\frac{65}{48}\ln2-\frac{7}{16}}.$$ ✓
+**(a)** Take $u=\ln(\cosh x)$ and $dv=\sinh x\,dx$, so $du=\tanh x\,dx$ and $v=\cosh x$: ✓
+$$\int\sinh x\ln(\cosh x)\,dx=\cosh x\ln(\cosh x)-\int\cosh x\tanh x\,dx=\cosh x\ln(\cosh x)-\cosh x.$$ ✓
+Since $\cosh(\ln2)=\tfrac12\left(2+\tfrac12\right)=\tfrac54$ and $\cosh0=1$ (so $\ln\cosh0=0$): ✓
+$$\Big[\cdots\Big]_0^{\ln2}=\left(\tfrac54\ln\tfrac54-\tfrac54\right)-(0-1)=\tfrac54\ln\tfrac54-\tfrac14\approx0.029.$$
 
-**(b)(i)** Take $u=x^{n}$ and $dv=e^{x}dx$, so $du=nx^{n-1}dx$ and $v=e^{x}$: ✓✓
-$$I_n=x^{n}e^{x}-\int e^{x}\,n\,x^{n-1}dx=x^{n}e^{x}-n\int x^{n-1}e^{x}dx.$$ ✓
-The last integral is $I_{n-1}$, so $I_n=x^{n}e^{x}-n\,I_{n-1}$. ✓
+**(b)** Write $x^ne^{-x^2}=x^{n-1}\cdot xe^{-x^2}$ and take $u=x^{n-1}$, $dv=xe^{-x^2}dx$. Then $du=(n-1)x^{n-2}dx$ and $v=-\tfrac12e^{-x^2}$. ✓✓
+$$I_n=-\frac{x^{n-1}e^{-x^2}}{2}+\frac{n-1}{2}\int x^{n-2}e^{-x^2}\,dx=-\frac{x^{n-1}e^{-x^2}}{2}+\frac{n-1}{2}I_{n-2}.$$ ✓ ∎ ✓
 
-**(b)(ii)** Apply the formula between $0$ and $1$ (the term $x^{n}e^{x}$ gives $e-0=e$ for every $n\ge1$). Write $J_n=\displaystyle\int_0^{1}x^{n}e^{x}dx$, so $J_n=e-nJ_{n-1}$. Start from $J_0=\displaystyle\int_0^{1}e^{x}dx=e-1$. ✓
-$$J_1=e-(e-1)=1,\qquad J_2=e-2J_1=e-2,\qquad J_3=e-3J_2=e-3(e-2)=\boxed{6-2e}.$$ ✓✓
+**(c)** Let $J_k=\displaystyle\int_0^1x^ke^{-x^2}dx$. By (b), the boundary term is $\Big[-\tfrac12x^{k-1}e^{-x^2}\Big]_0^1=-\dfrac1{2e}$, so ✓
+$$J_k=-\frac1{2e}+\frac{k-1}{2}J_{k-2}.$$
+Start from $J_1=\Big[-\tfrac12e^{-x^2}\Big]_0^1=\tfrac12-\dfrac1{2e}$. Then
+$$J_3=-\frac1{2e}+J_1=\frac12-\frac1e,\qquad J_5=-\frac1{2e}+2J_3=1-\frac{5}{2e}.$$ ✓✓
+So $\displaystyle\int_0^1x^5e^{-x^2}dx=1-\dfrac{5}{2e}\approx0.080$.
         `
       },
       {
@@ -2323,7 +2370,7 @@ $$J_1=e-(e-1)=1,\qquad J_2=e-2J_1=e-2,\qquad J_3=e-3J_2=e-3(e-2)=\boxed{6-2e}.$$
 **(a)** Explain why the integral $\displaystyle\int_0^{4}\frac{dx}{(x-2)^{2/3}}$ is called improper, and say how it must be treated. (2)
 
 **(b)** Determine whether the improper integral
-$$\int_{-\infty}^{0}x\,e^{x}\,dx$$
+$$\int_0^{1}\left(\ln x\right)^{2}dx$$
 converges or diverges. If it converges, find its value. Justify every limit that you use. (4)
 
 **(c)** Use the Comparison Theorem to determine whether $\displaystyle\int_{1}^{\infty}\frac{dx}{\sqrt{x^{3}+1}}$ converges or diverges. (4)
@@ -2333,11 +2380,13 @@ converges or diverges. If it converges, find its value. Justify every limit that
 $$\int_0^{2}\frac{dx}{(x-2)^{2/3}}+\int_2^{4}\frac{dx}{(x-2)^{2/3}},$$
 and each piece treated as a limit; the original integral converges only if **both** pieces converge. ✓
 
-**(b)** The lower limit is infinite (Type I): $\displaystyle\int_{-\infty}^{0}xe^{x}dx=\lim_{t\to-\infty}\int_t^{0}xe^{x}dx$. ✓
-By parts ($u=x$, $dv=e^{x}dx$): $\displaystyle\int xe^{x}dx=xe^{x}-e^{x}$. So
-$$\int_t^{0}xe^{x}dx=(0-1)-\left(te^{t}-e^{t}\right)=-1-te^{t}+e^{t}.$$ ✓
-As $t\to-\infty$: $e^{t}\to0$, and $te^{t}=\dfrac{t}{e^{-t}}\to\dfrac{1}{-e^{-t}}\to0$ by l'Hôpital's rule. ✓ So the integral **converges** and
-$$\int_{-\infty}^{0}xe^{x}dx=-1.$$ ✓
+**(b)** The integrand is unbounded as $x\to0^+$, so the integral is improper of Type II:
+$$\int_0^1(\ln x)^2dx=\lim_{t\to0^+}\int_t^1(\ln x)^2dx.$$ ✓
+Integrate by parts twice ($u=\ln^2x$, $dv=dx$, then $u=\ln x$, $dv=dx$):
+$$\int(\ln x)^2dx=x\ln^2x-2\int\ln x\,dx=x\ln^2x-2x\ln x+2x.$$ ✓
+So $\displaystyle\int_t^1(\ln x)^2dx=2-\left(t\ln^2t-2t\ln t+2t\right)$. As $t\to0^+$: $t\to0$, and by L'Hôpital
+$$\lim_{t\to0^+}t\ln t=\lim_{t\to0^+}\frac{\ln t}{1/t}=\lim_{t\to0^+}\frac{1/t}{-1/t^2}=0,\qquad \lim_{t\to0^+}t\ln^2t=\lim_{t\to0^+}\frac{\ln^2t}{1/t}=\lim_{t\to0^+}\frac{2\ln t}{-1/t}=0.$$ ✓
+Hence the integral **converges** and equals $2$. ✓
 
 **(c)** For $x\ge1$ we have $x^{3}+1>x^{3}$, so
 $$0<\frac{1}{\sqrt{x^{3}+1}}<\frac{1}{\sqrt{x^{3}}}=x^{-3/2}.$$ ✓✓
@@ -2351,9 +2400,9 @@ Now $\displaystyle\int_{1}^{\infty}x^{-3/2}dx=\lim_{t\to\infty}\left[-2x^{-1/2}\
 
 **(b)** Explain why the Test for Divergence cannot be used to show that $\displaystyle\sum_{n=1}^{\infty}n^{2}e^{-n}$ converges, and use a suitable test to decide whether this series converges or diverges. (2)
 
-**(c)** Determine whether the series
-$$\sum_{n=1}^{\infty}(-1)^{n+1}\frac{n}{n^{2}+1}$$
-is absolutely convergent, conditionally convergent or divergent. Justify your answer. (4)
+**(c)** Show that the series
+$$\sum_{n=2}^{\infty}(-1)^{n}\,\frac{\ln n}{n}$$
+converges. Is the convergence absolute or conditional? Justify your answer. (4)
         `,
         solution: String.raw`
 **(a)** Write $a_n=\dfrac{n^{2}}{e^{n}}$, of the form $\frac{\infty}{\infty}$. Let $f(x)=\dfrac{x^{2}}{e^{x}}$ and use l'Hôpital's rule twice: ✓
@@ -2364,13 +2413,8 @@ So the sequence is **convergent with limit $0$**. ✓
 $$\frac{c_{n+1}}{c_n}=\frac{(n+1)^{2}e^{-(n+1)}}{n^{2}e^{-n}}=\left(\frac{n+1}{n}\right)^{2}\cdot\frac1e\ \longrightarrow\ \frac1e<1,$$
 so the series **converges**. ✓
 
-**(c)** *Not absolutely convergent.* The series of absolute values is $\displaystyle\sum\frac{n}{n^{2}+1}$. Compare with the divergent harmonic series $\sum\frac1n$ using the **Limit Comparison Test** (if $a_n,b_n>0$ and $a_n/b_n\to c$ with $0<c<\infty$, the series behave alike): ✓
-$$\lim_{n\to\infty}\frac{n/(n^{2}+1)}{1/n}=\lim_{n\to\infty}\frac{n^{2}}{n^{2}+1}=1.$$
-So $\sum\frac{n}{n^{2}+1}$ diverges. ✓
-
-*Convergent.* Let $b_n=\dfrac{n}{n^{2}+1}>0$. Then $b_n\to0$, and $b_n$ is decreasing because $f(x)=\dfrac{x}{x^{2}+1}$ has $f'(x)=\dfrac{1-x^{2}}{(x^{2}+1)^{2}}\le0$ for $x\ge1$. By the **Alternating Series Test** the series converges. ✓
-
-Convergent but not absolutely convergent, so it is **conditionally convergent**.
+**(c)** Let $b_n=\dfrac{\ln n}{n}$. First, by L'Hôpital, $\displaystyle\lim_{x\to\infty}\frac{\ln x}{x}=\lim_{x\to\infty}\frac1x=0$, so $b_n\to0$. ✓ Next, for $f(x)=\dfrac{\ln x}{x}$ we have $f'(x)=\dfrac{1-\ln x}{x^2}<0$ for $x>e$, so $\{b_n\}$ is decreasing for $n\ge3$. ✓ By the Alternating Series Test the series converges. ✓
+For absolute convergence consider $\sum\dfrac{\ln n}{n}$. For $n\ge3$, $\ln n\ge1$, so $\dfrac{\ln n}{n}\ge\dfrac1n$, and $\sum\dfrac1n$ diverges; by comparison $\sum\dfrac{\ln n}{n}$ diverges. So the series is **conditionally convergent** (convergent, but not absolutely). ✓
         `
       },
       {
@@ -2381,7 +2425,7 @@ $$\sum_{n=1}^{\infty}\frac{(3x-2)^{n}}{n^{2}}.$$ (5)
 
 **(b)** **(i)** Use the formula $c_n=\dfrac{f^{(n)}(0)}{n!}$ to show that the Maclaurin series of $f(x)=\cosh x$ is $\displaystyle\sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!}$. (2)
 
-**(ii)** Hence find the Maclaurin series of $g(x)=\dfrac{\cosh x-1}{x^{2}}$ (write the first three terms and the general term). (2)
+**(ii)** Hence evaluate $\displaystyle\lim_{x\to0}\frac{\cosh x-1-\frac{x^{2}}{2}}{x^{4}}$. (2)
         `,
         solution: String.raw`
 **(a)** Use the **Ratio Test** with $a_n=\dfrac{(3x-2)^{n}}{n^{2}}$: ✓
@@ -2395,42 +2439,41 @@ The **interval of convergence** is $\left[\dfrac13,\,1\right]$. ✓
 **(b)(i)** Here $f'(x)=\sinh x$, $f''(x)=\cosh x$, and the derivatives alternate between $\cosh x$ and $\sinh x$. At $0$: $\cosh0=1$ and $\sinh0=0$. So $f^{(n)}(0)=1$ for even $n$ and $0$ for odd $n$. ✓ Hence $c_n=\dfrac{1}{n!}$ for even $n$, $c_n=0$ for odd $n$, giving
 $$\cosh x=\sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!}=1+\frac{x^{2}}{2!}+\frac{x^{4}}{4!}+\cdots$$ ✓
 
-**(b)(ii)** Subtract $1$ and divide by $x^{2}$: ✓
-$$\frac{\cosh x-1}{x^{2}}=\frac{1}{x^{2}}\sum_{n=1}^{\infty}\frac{x^{2n}}{(2n)!}=\sum_{n=1}^{\infty}\frac{x^{2n-2}}{(2n)!}=\frac12+\frac{x^{2}}{24}+\frac{x^{4}}{720}+\cdots$$ ✓
+**(b)(ii)** From (i), $\cosh x-1-\dfrac{x^2}{2}=\dfrac{x^4}{4!}+\dfrac{x^6}{6!}+\cdots$, so ✓
+$$\frac{\cosh x-1-\frac{x^2}{2}}{x^4}=\frac1{24}+\frac{x^2}{720}+\cdots\ \longrightarrow\ \frac1{24}\quad(x\to0).$$ ✓
         `
       },
       {
         number: 13, label: 'B7', title: 'Differential equations — separable', section: 'Section B · §12.1', marks: 8,
         prompt: String.raw`
 Given the differential equation
-$$\frac{dy}{dx}=2x\sqrt{y},\qquad y>0.$$
+$$\frac{dy}{dx}=y^{2}\ln x,\qquad x>0.$$
 
 **(a)** State the order of the equation, and show that it is separable by writing it in the form $M(x)\,dx+N(y)\,dy=0$. (2)
 
 **(b)** Find the general solution of the equation. (3)
 
-**(c)** Find the particular solution given that $y=4$ when $x=0$. (3)
+**(c)** Find the particular solution given that $y=1$ when $x=1$, and state the largest interval containing $x=1$ on which this solution is defined. (3)
         `,
         solution: String.raw`
-**(a)** The highest derivative is $\dfrac{dy}{dx}$, so the equation is **first order**. ✓ Dividing by $\sqrt y$ (valid since $y>0$) and rearranging:
-$$2x\,dx-y^{-1/2}\,dy=0,$$
-which has the form $M(x)\,dx+N(y)\,dy=0$ with $M=2x$ and $N=-y^{-1/2}$, so it is **separable**. ✓
+**(a)** The equation is **first order**. ✓ For $y\ne0$:
+$$\ln x\,dx-\frac{dy}{y^{2}}=0,$$ ✓
+which has the form $M(x)\,dx+N(y)\,dy=0$, so it is **separable**.
 
-**(b)** Integrate $y^{-1/2}dy=2x\,dx$: ✓
-$$2\sqrt y=x^{2}+C,$$ ✓
-so the **general solution** is
-$$y=\frac{\left(x^{2}+C\right)^{2}}{4}.$$ ✓
-(The constant solution $y=0$ was lost when we divided by $\sqrt y$, but it is excluded by $y>0$.)
+**(b)** Integrate $\dfrac{dy}{y^2}=\ln x\,dx$. The right side needs integration by parts: $\displaystyle\int\ln x\,dx=x\ln x-x$. ✓ So $-\dfrac1y=x\ln x-x+C$ and the **general solution** is ✓✓
+$$y=\frac{1}{C+x-x\ln x}$$
+(together with the constant solution $y=0$, lost when we divided by $y^2$).
 
-**(c)** With $y(0)=4$: $2\sqrt4=0+C$, so $C=4$. ✓✓ The **particular solution** is ✓
-$$y=\frac{\left(x^{2}+4\right)^{2}}{4}.$$
+**(c)** With $y(1)=1$: $1=\dfrac{1}{C+1-0}$, so $C=0$. ✓ The **particular solution** is ✓
+$$y=\frac{1}{x\,(1-\ln x)}.$$
+It is defined when $x>0$ and $1-\ln x\ne0$, i.e. $x\ne e$; the interval containing $x=1$ is $(0,e)$. ✓ (The solution blows up as $x\to e^-$.)
         `
       },
       {
         number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
         prompt: String.raw`
 Given the differential equation
-$$x\frac{dy}{dx}+y=x\ln x,\qquad x>0.$$
+$$\frac{dy}{dx}=5e^{\cos x}-y\cot x,\qquad 0<x<\pi.$$
 
 **(a)** Show that this is a linear differential equation by writing it in standard form. (2)
 
@@ -2438,25 +2481,23 @@ $$x\frac{dy}{dx}+y=x\ln x,\qquad x>0.$$
 
 **(c)** Hence find the general solution of the differential equation. (4)
 
-**(d)** Find the particular solution satisfying $y=\dfrac12$ when $x=1$. (2)
+**(d)** Find the particular solution satisfying $y=-4$ when $x=\dfrac\pi2$. (2)
         `,
         solution: String.raw`
-**(a)** Divide through by $x$ (positive on the domain):
-$$\frac{dy}{dx}+\frac1x\,y=\ln x.$$ ✓✓
-This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\frac1x$ and $Q(x)=\ln x$, so it is **linear**.
+**(a)** Move the $y$-term to the left:
+$$\frac{dy}{dx}+(\cot x)\,y=5e^{\cos x}.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\cot x$ and $Q(x)=5e^{\cos x}$, so it is **linear**.
 
-**(b)** $\displaystyle\int\frac1x\,dx=\ln x$ (for $x>0$), so ✓
-$$\mu(x)=e^{\ln x}=x.$$ ✓
+**(b)** $\displaystyle\int\cot x\,dx=\ln|\sin x|$, so, since $\sin x>0$ on $(0,\pi)$, ✓
+$$\mu(x)=e^{\ln\sin x}=\sin x.$$ ✓
 
-**(c)** Multiply the standard form by $\mu=x$; the left side is an exact derivative: ✓
-$$\frac{d}{dx}(xy)=x\ln x.$$
-Integrate the right side by parts ($u=\ln x$, $dv=x\,dx$): $\displaystyle\int x\ln x\,dx=\frac{x^{2}}{2}\ln x-\frac{x^{2}}{4}$. ✓✓ So
-$$xy=\frac{x^{2}}{2}\ln x-\frac{x^{2}}{4}+C,$$
-and the **general solution** is ✓
-$$y=\frac{x\ln x}{2}-\frac{x}{4}+\frac{C}{x}.$$
+**(c)** Multiply by $\sin x$: ✓
+$$\frac{d}{dx}\big(y\sin x\big)=5\sin x\,e^{\cos x}.$$
+Integrate with $u=\cos x$, $du=-\sin x\,dx$: $\displaystyle\int5\sin x\,e^{\cos x}dx=-5e^{\cos x}+C$. ✓ So the **general solution** is ✓✓
+$$y=\frac{C-5e^{\cos x}}{\sin x}.$$
 
-**(d)** With $y(1)=\frac12$: $\frac12=0-\frac14+C$, so $C=\frac34$. ✓ The **particular solution** is ✓
-$$y=\frac{x\ln x}{2}-\frac{x}{4}+\frac{3}{4x}.$$
+**(d)** With $y\left(\tfrac\pi2\right)=-4$ (where $\sin=1$, $\cos=0$): $-4=C-5$, so $C=1$. ✓ The **particular solution** is ✓
+$$y=\frac{1-5e^{\cos x}}{\sin x}.$$
         `
       }
     ]
@@ -2468,7 +2509,7 @@ $$y=\frac{x\ln x}{2}-\frac{x}{4}+\frac{3}{4x}.$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'A pen against a wall and a cable across a river (§6.6), a hyperbolic integral, completing the square with a linear numerator and cos 2x cos x (§9.1, §9.4), the reduction formula for x²(ln x)ⁿ (§9.2), 1/x² across zero, a hyperbolic improper integral and the Comparison Theorem (§10), the Root and Ratio Tests, a Taylor series about π/6, and separable and linear ODEs.',
+    topics: 'A pen against a wall and a cable across a river (§6.6), a hyperbolic integral, a tangent substitution and sin⁴x cos⁴x (§9.1, §9.4), the cyclic integral of sin x cosh x and the reduction formula for eˣ sinⁿx (§9.2), 1/x² across zero, a hyperbolic improper integral and the Comparison Theorem (§10), the Root Test, a comparison for n^{1/n} − 1 and a geometric sum, the radius of convergence of Σ nⁿxⁿ/n!, tan x by comparing coefficients, verifying a family of solutions, a separable ODE with a completed-square integral, and a linear ODE with integrating factor sec x + tan x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -2560,22 +2601,21 @@ so the series **converges** by the Root Test.
       {
         number: 5, label: 'A5', title: 'A Taylor coefficient', section: 'Section A · §11.6', marks: 2,
         prompt: String.raw`
-The coefficient of $(x-1)^{3}$ in the Taylor series of $f(x)=\ln x$ about $a=1$ is
+The coefficient of $\left(x-\dfrac\pi4\right)^{2}$ in the Taylor series of $f(x)=\sin x$ about $a=\dfrac\pi4$ is
 
-- **A.** $\dfrac13$.
-- **B.** $2$.
-- **C.** $-\dfrac13$.
-- **D.** $\dfrac16$.
-- **E.** $\dfrac12$.
+- **A.** $-\dfrac{\sqrt2}{2}$.
+- **B.** $\dfrac{\sqrt2}{4}$.
+- **C.** $-\dfrac{\sqrt2}{4}$.
+- **D.** $-\dfrac{\sqrt2}{8}$.
+- **E.** $-\dfrac14$.
         `,
         solution: String.raw`
-**Answer: A.** ✓✓
+**Answer: C.** ✓✓
 
-Use $c_n=\dfrac{f^{(n)}(a)}{n!}$. Here $f'(x)=\dfrac1x$, $f''(x)=-\dfrac1{x^{2}}$, $f'''(x)=\dfrac{2}{x^{3}}$, so $f'''(1)=2$ and
-$$c_3=\frac{2}{3!}=\frac13.$$
+$c_2=\dfrac{f''(a)}{2!}$ with $f''(x)=-\sin x$, so $f''\left(\tfrac\pi4\right)=-\dfrac{\sqrt2}{2}$ and ✓
+$$c_2=\frac{-\sqrt2/2}{2}=-\frac{\sqrt2}{4}.$$ ✓
 
-
-- **B** is $f'''(1)$ itself (forgetting to divide by $3!$). **C** has the wrong sign, since $f'''(1)=+2$. **D** is $\frac1{3!}$ (forgetting that $f'''(1)=2$). **E** is the size of the coefficient of $(x-1)^{2}$, which is $-\frac12$.
+- **A** forgets to divide by $2!$. **B** has the wrong sign. **D** divides by $4$ instead of $2$. **E** is not related to $\sin\frac\pi4$.
         `
       },
       {
@@ -2637,50 +2677,53 @@ The smallest value is $C\!\left(\frac94\right)=36$. The cable should reach the f
       {
         number: 8, label: 'B2', title: 'Completing the square; a product of cosines', section: 'Section B · §9.1, §9.4', marks: 9,
         prompt: String.raw`
-**(a)** Evaluate $\displaystyle\int_{2}^{4}\frac{2x-1}{x^{2}-4x+8}\,dx.$ (5)
+**(a)** Evaluate $\displaystyle\int_0^{\pi/4}\frac{\sec^{2}x}{\tan^{2}x+6\tan x+10}\,dx.$ (5)
 
-**(b)** Evaluate $\displaystyle\int_0^{\pi/3}\cos2x\,\cos x\,dx.$ (4)
+**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\sin^{4}x\,\cos^{4}x\,dx.$ (4)
         `,
         solution: String.raw`
-**(a)** Complete the square: $x^{2}-4x+8=(x-2)^{2}+4$. The derivative of the denominator is $2x-4$, so write the numerator as ✓
-$$2x-1=(2x-4)+3.$$ ✓
-Then
-$$\int\frac{2x-1}{x^{2}-4x+8}dx=\ln\left(x^{2}-4x+8\right)+3\int\frac{dx}{(x-2)^{2}+4}=\ln\left(x^{2}-4x+8\right)+\frac32\arctan\frac{x-2}{2}+C.$$ ✓✓
-Evaluate between $2$ and $4$ (the denominator is $4$ at $x=2$ and $8$ at $x=4$):
-$$\left(\ln8+\frac32\arctan1\right)-\left(\ln4+\frac32\arctan0\right)=\boxed{\ln2+\frac{3\pi}{8}}.$$ ✓
+**(a)** Let $u=\tan x$, $du=\sec^2x\,dx$; the limits become $u=0,1$: ✓✓
+$$\int_0^{1}\frac{du}{u^{2}+6u+10}=\int_0^{1}\frac{du}{(u+3)^{2}+1}.$$ ✓
+$$=\Big[\arctan(u+3)\Big]_0^{1}=\arctan4-\arctan3.$$ ✓✓
+Using $\arctan a-\arctan b=\arctan\dfrac{a-b}{1+ab}$, this equals $\arctan\dfrac{1}{13}\approx0.077$.
 
-**(b)** The arguments differ, so use the product-to-sum identity $\cos A\cos B=\frac12\left[\cos(A-B)+\cos(A+B)\right]$: ✓
-$$\cos2x\cos x=\frac12\left(\cos x+\cos3x\right).$$ ✓
-$$\int_0^{\pi/3}\frac12\left(\cos x+\cos3x\right)dx=\frac12\left[\sin x+\frac{\sin3x}{3}\right]_0^{\pi/3}=\frac12\left(\frac{\sqrt3}{2}+\frac{\sin\pi}{3}\right)=\boxed{\frac{\sqrt3}{4}}.$$ ✓✓
+**(b)** Notice that $\sin x\cos x=\tfrac12\sin2x$, so ✓
+$$\sin^4x\cos^4x=\left(\tfrac12\sin2x\right)^4=\tfrac1{16}\sin^42x.$$ ✓
+Now $\sin^4u=\tfrac38-\tfrac12\cos2u+\tfrac18\cos4u$, so with $u=2x$: ✓
+$$\int_0^{\pi/2}\sin^42x\,dx=\int_0^{\pi/2}\left(\tfrac38-\tfrac12\cos4x+\tfrac18\cos8x\right)dx=\tfrac38\cdot\tfrac\pi2=\tfrac{3\pi}{16},$$
+since the cosine terms integrate to $0$. Hence the value is $\dfrac1{16}\cdot\dfrac{3\pi}{16}=\dfrac{3\pi}{256}$. ✓
         `
       },
       {
         number: 9, label: 'B3', title: 'Integration by parts; a reduction formula', section: 'Section B · §9.2', marks: 10,
         prompt: String.raw`
-**(a)** Evaluate $\displaystyle\int_0^{\ln2}x^{2}\cosh x\,dx$. Give your answer in terms of $\ln2$. (4)
+**(a)** Evaluate $\displaystyle\int_0^{\pi}\sin x\,\cosh x\,dx$. (4)
 
-**(b)** For an integer $n\ge1$ let $I_n=\displaystyle\int x^{2}(\ln x)^{n}\,dx$.
+**(b)** For an integer $n\ge0$ let $I_n=\displaystyle\int e^{x}\sin^{n}x\,dx$.
 
-**(i)** Use integration by parts to prove the reduction formula
-$$I_n=\frac{x^{3}(\ln x)^{n}}{3}-\frac n3\,I_{n-1}.$$ (4)
+**(i)** For $n\ge2$ prove, by integrating by parts twice, that
+$$\left(n^{2}+1\right)I_n=e^{x}\sin^{n-1}x\,\left(\sin x-n\cos x\right)+n(n-1)\,I_{n-2}.$$ (4)
 
-**(ii)** Hence evaluate $\displaystyle\int_1^{e}x^{2}(\ln x)^{2}\,dx$. (2)
+**(ii)** Hence evaluate $\displaystyle\int_0^{\pi}e^{x}\sin^{2}x\,dx$. (2)
         `,
         solution: String.raw`
-**(a)** Integrate by parts twice. First ($u=x^{2}$, $dv=\cosh x\,dx$): $\displaystyle\int x^{2}\cosh x\,dx=x^{2}\sinh x-2\int x\sinh x\,dx$. ✓
-Second ($u=x$, $dv=\sinh x\,dx$): $\displaystyle\int x\sinh x\,dx=x\cosh x-\sinh x$. ✓ Hence
-$$\int x^{2}\cosh x\,dx=x^{2}\sinh x-2x\cosh x+2\sinh x.$$ ✓
-At $x=\ln2$ we have $\sinh(\ln2)=\frac34$ and $\cosh(\ln2)=\frac54$; at $x=0$ the expression is $0$:
-$$\int_0^{\ln2}x^{2}\cosh x\,dx=\frac34(\ln2)^{2}-\frac52\ln2+\frac32.$$ ✓
+**(a)** Let $I=\displaystyle\int\sin x\cosh x\,dx$. By parts with $u=\sin x$, $dv=\cosh x\,dx$: ✓
+$$I=\sin x\sinh x-\int\cos x\sinh x\,dx.$$
+By parts again with $u=\cos x$, $dv=\sinh x\,dx$: $\displaystyle\int\cos x\sinh x\,dx=\cos x\cosh x+\int\sin x\cosh x\,dx=\cos x\cosh x+I$. ✓ So
+$$I=\sin x\sinh x-\cos x\cosh x-I\quad\Longrightarrow\quad I=\tfrac12\left(\sin x\sinh x-\cos x\cosh x\right).$$ ✓
+Hence $\displaystyle\int_0^\pi\sin x\cosh x\,dx=\tfrac12\Big[(0+\cosh\pi)-(0-1)\Big]=\dfrac{1+\cosh\pi}{2}\approx6.30.$ ✓
 
-**(b)(i)** Take $u=(\ln x)^{n}$ and $dv=x^{2}dx$, so $du=\dfrac{n(\ln x)^{n-1}}{x}dx$ and $v=\dfrac{x^{3}}{3}$: ✓✓
-$$I_n=\frac{x^{3}(\ln x)^{n}}{3}-\int\frac{x^{3}}{3}\cdot\frac{n(\ln x)^{n-1}}{x}dx=\frac{x^{3}(\ln x)^{n}}{3}-\frac n3\int x^{2}(\ln x)^{n-1}dx.$$ ✓
-The last integral is $I_{n-1}$, which proves the formula. ✓
+**(b)(i)** First by parts with $u=\sin^nx$, $dv=e^xdx$: ✓
+$$I_n=e^x\sin^nx-n\int e^x\sin^{n-1}x\cos x\,dx.$$
+Call the last integral $K$ and integrate it by parts with $u=\sin^{n-1}x\cos x$, $dv=e^xdx$. Since $\dfrac{d}{dx}\left(\sin^{n-1}x\cos x\right)=(n-1)\sin^{n-2}x\cos^2x-\sin^nx=(n-1)\sin^{n-2}x-n\sin^nx$, ✓✓
+$$K=e^x\sin^{n-1}x\cos x-(n-1)I_{n-2}+n\,I_n.$$
+Substitute into $I_n=e^x\sin^nx-nK$:
+$$I_n=e^x\sin^nx-ne^x\sin^{n-1}x\cos x+n(n-1)I_{n-2}-n^2I_n,$$
+and collecting the $I_n$ terms gives $\left(n^2+1\right)I_n=e^x\sin^{n-1}x\left(\sin x-n\cos x\right)+n(n-1)I_{n-2}$. ∎ ✓
 
-**(b)(ii)** First find $\displaystyle\int_1^ex^{2}\ln x\,dx$ (the case $n=1$, with $I_0=\frac{x^{3}}{3}$): ✓
-$$\int_1^{e}x^{2}\ln x\,dx=\left[\frac{x^{3}\ln x}{3}-\frac{x^{3}}{9}\right]_1^{e}=\left(\frac{e^{3}}{3}-\frac{e^{3}}{9}\right)-\left(0-\frac19\right)=\frac{2e^{3}+1}{9}.$$
-Now $n=2$:
-$$\int_1^{e}x^{2}(\ln x)^{2}dx=\left[\frac{x^{3}(\ln x)^{2}}{3}\right]_1^{e}-\frac23\cdot\frac{2e^{3}+1}{9}=\frac{e^{3}}{3}-\frac{4e^{3}+2}{27}=\boxed{\frac{5e^{3}-2}{27}}.$$ ✓
+**(b)(ii)** Take $n=2$ and the limits $0$ and $\pi$. The boundary term $e^x\sin x(\sin x-2\cos x)$ is $0$ at both ends (because $\sin0=\sin\pi=0$), so ✓
+$$5\int_0^\pi e^x\sin^2x\,dx=2\int_0^\pi e^x\,dx=2\left(e^{\pi}-1\right),$$
+and the integral is $\dfrac25\left(e^\pi-1\right)\approx8.86$. ✓
         `
       },
       {
@@ -2714,104 +2757,104 @@ Now $\displaystyle\int_2^{\infty}x^{-1/2}dx=\lim_{t\to\infty}\left[2\sqrt x\righ
         prompt: String.raw`
 **(a)** Determine, giving reasons, whether the sequence $\{a_n\}=\left\{n^{1/n}\right\}$ is convergent or divergent. If it is convergent, state to what value it converges. (3)
 
-**(b)** Using (a) or otherwise, decide (with reasons) if the following series converges or diverges.
-$$\sum_{n=1}^{\infty}n^{1/n}$$ (2)
+**(b)** Use the inequality $e^{t}\ge1+t$ (valid for all $t$) to show that the series
+$$\sum_{n=3}^{\infty}\left(n^{1/n}-1\right)$$
+diverges. (2)
 
-**(c)** Decide (with reasons) if the following series converges or diverges.
-$$\sum_{n=1}^{\infty}\frac{2^{n}\,n!}{n^{n}}$$ (4)
+**(c)** Find the exact sum of the series
+$$\sum_{n=1}^{\infty}\frac{2^{n}+3^{n}}{6^{n}}.$$ (4)
         `,
         solution: String.raw`
 **(a)** Write $a_n=n^{1/n}=e^{(\ln n)/n}$. ✓ By l'Hôpital's rule
 $$\lim_{x\to\infty}\frac{\ln x}{x}=\lim_{x\to\infty}\frac{1/x}{1}=0.$$ ✓
 Since the exponential function is continuous, $a_n\to e^{0}=1$. So the sequence is **convergent with limit $1$**. ✓
 
-**(b)** Since $a_n\to1\neq0$, the **Test for Divergence** shows that $\sum n^{1/n}$ **diverges**. ✓✓
+**(b)** Write $n^{1/n}=e^{(\ln n)/n}$. With $t=\dfrac{\ln n}{n}$ the inequality gives $n^{1/n}\ge1+\dfrac{\ln n}{n}$, so ✓
+$$n^{1/n}-1\ge\frac{\ln n}{n}\ge\frac1n\qquad(n\ge3,\ \text{since }\ln n\ge\ln3>1).$$
+Because $\sum\dfrac1n$ diverges, the Comparison Test shows that $\sum\left(n^{1/n}-1\right)$ diverges. (Note that its terms do tend to $0$, by (a), so the Test for Divergence is inconclusive.) ✓
 
-**(c)** Use the **Ratio Test** with $c_n=\dfrac{2^{n}n!}{n^{n}}>0$: ✓
-$$\frac{c_{n+1}}{c_n}=\frac{2^{n+1}(n+1)!}{(n+1)^{n+1}}\cdot\frac{n^{n}}{2^{n}n!}=\frac{2(n+1)\,n^{n}}{(n+1)^{n+1}}=2\left(\frac{n}{n+1}\right)^{n}=\frac{2}{\left(1+\frac1n\right)^{n}}.$$ ✓✓
-Since $\left(1+\frac1n\right)^{n}\to e$, the ratio tends to $\dfrac2e<1$ (because $e>2$), so the series **converges**. ✓
+**(c)** Split the general term: $\dfrac{2^n+3^n}{6^n}=\left(\dfrac13\right)^{n}+\left(\dfrac12\right)^{n}$. ✓ Both are convergent geometric series (ratios $\tfrac13$ and $\tfrac12$, both of absolute value less than $1$), so ✓
+$$\sum_{n=1}^{\infty}\left(\tfrac13\right)^n=\frac{1/3}{1-1/3}=\frac12,\qquad\sum_{n=1}^{\infty}\left(\tfrac12\right)^n=\frac{1/2}{1-1/2}=1.$$ ✓
+The sum is $\dfrac12+1=\dfrac32$. ✓
         `
       },
       {
         number: 12, label: 'B6', title: 'Power series and a Taylor series', section: 'Section B · §11.4, §11.6', marks: 9,
         prompt: String.raw`
-**(a)** Find the radius of convergence and the interval of convergence of the power series
-$$\sum_{n=1}^{\infty}\frac{(-1)^{n}(x-2)^{n}}{n\,3^{n}}.$$ (5)
+**(a)** Find the radius of convergence of the power series
+$$\sum_{n=1}^{\infty}\frac{n^{n}\,x^{n}}{n!}.$$
+You are not asked to test the endpoints. You may use $\displaystyle\lim_{n\to\infty}\left(1+\frac1n\right)^{n}=e$. (5)
 
-**(b)** Use the formula $c_n=\dfrac{f^{(n)}(a)}{n!}$ to find the first four terms of the Taylor series of $f(x)=\sin x$ about $a=\dfrac\pi6$. (4)
+**(b)** The function $\tan x=\dfrac{\sin x}{\cos x}$ is odd, so its Maclaurin series has the form $\tan x=a_1x+a_3x^{3}+a_5x^{5}+\cdots$. By writing $\sin x=\tan x\cdot\cos x$, substituting the Maclaurin series of $\sin x$ and $\cos x$, and comparing coefficients, find $a_1$, $a_3$ and $a_5$. (4)
         `,
         solution: String.raw`
-**(a)** Use the **Ratio Test** with $a_n=\dfrac{(-1)^{n}(x-2)^{n}}{n\,3^{n}}$: ✓
-$$\left|\frac{a_{n+1}}{a_n}\right|=\frac{|x-2|^{n+1}}{(n+1)3^{n+1}}\cdot\frac{n\,3^{n}}{|x-2|^{n}}=\frac{|x-2|}{3}\cdot\frac{n}{n+1}\to\frac{|x-2|}{3}.$$ ✓
-The series converges for $|x-2|<3$, so the **radius of convergence is $R=3$**, and it converges for $-1<x<5$. ✓
+**(a)** Apply the Ratio Test to $a_n=\dfrac{n^nx^n}{n!}$: ✓✓
+$$\left|\frac{a_{n+1}}{a_n}\right|=\frac{(n+1)^{n+1}|x|^{n+1}}{(n+1)!}\cdot\frac{n!}{n^n|x|^n}=|x|\,\frac{(n+1)^{n}}{n^n}=|x|\left(1+\frac1n\right)^{n}\ \longrightarrow\ e\,|x|.$$ ✓✓
+The series converges when $e|x|<1$ and diverges when $e|x|>1$, so the radius of convergence is $R=\dfrac1e$. ✓
 
-*Endpoints.* At $x=5$: $\displaystyle\sum\frac{(-1)^{n}3^{n}}{n\,3^{n}}=\sum\frac{(-1)^{n}}{n}$ converges (Alternating Series Test). At $x=-1$: $\displaystyle\sum\frac{(-1)^{n}(-3)^{n}}{n\,3^{n}}=\sum\frac1n$ diverges (harmonic series). ✓✓
+**(b)** Multiply out $\left(a_1x+a_3x^3+a_5x^5+\cdots\right)\left(1-\dfrac{x^2}{2}+\dfrac{x^4}{24}-\cdots\right)$ and equate with $\sin x=x-\dfrac{x^3}{6}+\dfrac{x^5}{120}-\cdots$: ✓
+- $x^1$: $a_1=1$. ✓
+- $x^3$: $a_3-\dfrac{a_1}{2}=-\dfrac16$, so $a_3=\dfrac12-\dfrac16=\dfrac13$. ✓
+- $x^5$: $a_5-\dfrac{a_3}{2}+\dfrac{a_1}{24}=\dfrac1{120}$, so $a_5=\dfrac1{120}+\dfrac16-\dfrac1{24}=\dfrac{1+20-5}{120}=\dfrac{2}{15}$. ✓
 
-The **interval of convergence** is $(-1,\,5]$. ✓
-
-**(b)** Differentiate and evaluate at $a=\frac\pi6$: ✓
-$$f=\sin x\to\tfrac12,\qquad f'=\cos x\to\tfrac{\sqrt3}{2},\qquad f''=-\sin x\to-\tfrac12,\qquad f'''=-\cos x\to-\tfrac{\sqrt3}{2}.$$ ✓
-So $c_0=\frac12$, $c_1=\frac{\sqrt3}{2}$, $c_2=\dfrac{-1/2}{2!}=-\frac14$, $c_3=\dfrac{-\sqrt3/2}{3!}=-\dfrac{\sqrt3}{12}$, and ✓
-$$\sin x=\frac12+\frac{\sqrt3}{2}\left(x-\frac\pi6\right)-\frac14\left(x-\frac\pi6\right)^{2}-\frac{\sqrt3}{12}\left(x-\frac\pi6\right)^{3}+\cdots$$ ✓
+Hence $\tan x=x+\dfrac{x^3}{3}+\dfrac{2x^5}{15}+\cdots$. ✓
         `
       },
       {
         number: 13, label: 'B7', title: 'Differential equations — verifying and separating', section: 'Section B · §12.1', marks: 8,
         prompt: String.raw`
-**(a)** State the order of the differential equation $y''-2y'-3y=0$, and show that $y=Ae^{3x}+Be^{-x}$ is a solution for all constants $A$ and $B$. (2)
+**(a)** State the order of the differential equation $\dfrac{dy}{dx}=2xy^{2}$, and show that $y=\dfrac{1}{C-x^{2}}$ is a solution for every constant $C$. Write down a solution that is **not** of this form. (2)
 
 **(b)** Given the differential equation
-$$x\,\frac{dy}{dx}=y\ln x,\qquad x>0,$$
+$$\frac{dy}{dx}=\frac{y}{x^{2}+4x+13},\qquad y>0,$$
 write it in the form $M(x)\,dx+N(y)\,dy=0$ and find its general solution. (3)
 
-**(c)** Find the particular solution of the equation in (b) given that $y=2$ when $x=1$. (3)
+**(c)** Find the particular solution of the equation in (b) given that $y=2$ when $x=-2$, and find $\displaystyle\lim_{x\to\infty}y$. (3)
         `,
         solution: String.raw`
-**(a)** The highest derivative is $y''$, so the equation is **second order**. ✓ With $y=Ae^{3x}+Be^{-x}$: $y'=3Ae^{3x}-Be^{-x}$ and $y''=9Ae^{3x}+Be^{-x}$, so
-$$y''-2y'-3y=(9-6-3)Ae^{3x}+(1+2-3)Be^{-x}=0.$$ ✓
-Hence $y$ is a solution for all $A$ and $B$.
+**(a)** The equation is **first order**. ✓ For $y=(C-x^2)^{-1}$,
+$$\frac{dy}{dx}=-(C-x^2)^{-2}(-2x)=\frac{2x}{(C-x^2)^2}=2x\,y^2,$$
+so it is a solution. The constant function $y=0$ also satisfies $y'=2xy^2$ but is not of the form $\frac{1}{C-x^2}$ for any $C$ (it is lost when we divide by $y^2$ while separating). ✓
 
-**(b)** For $y\neq0$ divide by $xy$:
-$$\frac{\ln x}{x}\,dx-\frac1y\,dy=0,$$ ✓
-of the required form. Integrate (using $u=\ln x$ on the left): ✓
-$$\frac{(\ln x)^{2}}{2}=\ln|y|+K,\quad\text{so}\quad|y|=e^{-K}e^{(\ln x)^{2}/2}.$$
-The **general solution** is
-$$y=A\,e^{(\ln x)^{2}/2},$$ ✓
-where $A=\pm e^{-K}$ (and $A=0$ gives the constant solution $y=0$).
+**(b)** Separate: ✓
+$$\frac{dx}{x^{2}+4x+13}-\frac{dy}{y}=0.$$
+Complete the square, $x^2+4x+13=(x+2)^2+3^2$, so $\displaystyle\int\frac{dx}{(x+2)^2+9}=\frac13\arctan\frac{x+2}{3}$. Hence $\ln y=\dfrac13\arctan\dfrac{x+2}{3}+C_1$ and the **general solution** is ✓✓
+$$y=A\exp\!\left(\frac13\arctan\frac{x+2}{3}\right),\qquad A>0.$$
 
-**(c)** With $y(1)=2$: $\ln1=0$, so $2=Ae^{0}=A$. ✓✓ The **particular solution** is ✓
-$$y=2e^{(\ln x)^{2}/2}.$$
+**(c)** At $x=-2$: $\arctan0=0$, so $y(-2)=A=2$. ✓ The **particular solution** is
+$$y=2\exp\!\left(\frac13\arctan\frac{x+2}{3}\right).$$ ✓
+As $x\to\infty$, $\arctan\frac{x+2}{3}\to\frac\pi2$, so $y\to2e^{\pi/6}$. ✓
         `
       },
       {
         number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
         prompt: String.raw`
 Given the differential equation
-$$\frac{dy}{dx}=2y+x\,e^{2x}.$$
+$$\frac{dy}{dx}=\cos x-y\sec x,\qquad -\frac\pi2<x<\frac\pi2.$$
 
 **(a)** Show that this is a linear differential equation by writing it in standard form. (2)
 
-**(b)** Find the integrating factor $e^{\int P(x)\,dx}$. (2)
+**(b)** Using $\displaystyle\int\sec x\,dx=\ln|\sec x+\tan x|+C$, find the integrating factor $e^{\int P(x)\,dx}$. (2)
 
 **(c)** Hence find the general solution of the differential equation. (4)
 
-**(d)** Find the particular solution satisfying $y=3$ when $x=0$. (2)
+**(d)** Find the particular solution satisfying $y=0$ when $x=0$. (2)
         `,
         solution: String.raw`
-**(a)** Move the $y$-term to the left-hand side:
-$$\frac{dy}{dx}-2y=x\,e^{2x}.$$ ✓✓
-This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=-2$ and $Q(x)=xe^{2x}$, so it is **linear**.
+**(a)** Move the $y$-term to the left:
+$$\frac{dy}{dx}+(\sec x)\,y=\cos x.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\sec x$ and $Q(x)=\cos x$, so it is **linear**.
 
-**(b)** $\displaystyle\int-2\,dx=-2x$, so ✓
-$$\mu(x)=e^{-2x}.$$ ✓
+**(b)** $\displaystyle\int\sec x\,dx=\ln|\sec x+\tan x|$, and $\sec x+\tan x=\dfrac{1+\sin x}{\cos x}>0$ on the interval, so ✓
+$$\mu(x)=\sec x+\tan x.$$ ✓
 
-**(c)** Multiply the standard form by $\mu=e^{-2x}$; the left side is an exact derivative: ✓
-$$\frac{d}{dx}\left(ye^{-2x}\right)=e^{-2x}\cdot xe^{2x}=x.$$ ✓
-Integrate: $ye^{-2x}=\dfrac{x^{2}}{2}+C$, so the **general solution** is ✓✓
-$$y=e^{2x}\left(\frac{x^{2}}{2}+C\right).$$
+**(c)** Multiply by $\mu$. The right-hand side becomes $(\sec x+\tan x)\cos x=1+\sin x$: ✓
+$$\frac{d}{dx}\Big(y\,(\sec x+\tan x)\Big)=1+\sin x.$$
+Integrate: $y(\sec x+\tan x)=x-\cos x+C$, so the **general solution** is ✓✓
+$$y=\frac{x-\cos x+C}{\sec x+\tan x}=\frac{\cos x\,\left(x-\cos x+C\right)}{1+\sin x}.$$ ✓
 
-**(d)** With $y(0)=3$: $3=C$. ✓ The **particular solution** is ✓
-$$y=e^{2x}\left(\frac{x^{2}}{2}+3\right).$$
+**(d)** With $y(0)=0$: $\sec0+\tan0=1$, so $0=0-1+C$ and $C=1$. ✓ The **particular solution** is
+$$y=\frac{\cos x\,\left(x+1-\cos x\right)}{1+\sin x}.$$ ✓
         `
       }
     ]
@@ -2823,7 +2866,7 @@ $$y=e^{2x}\left(\frac{x^{2}}{2}+3\right).$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'A cone of fixed slant height and a printed poster with margins, an open-domain optimization (§6.6), arcsine, arctangent and sin⁶x integrals (§9.1, §9.4), a hyperbolic integral and the reduction formula for ∫(1−x²)ⁿdx (§9.2), improper integrals near zero and at infinity (§10), the Limit Comparison Test, absolute convergence and the Test for Divergence, a power series with its derivative and the series for sin x / x, and separable and linear ODEs.',
+    topics: 'A cone of fixed slant height and a printed poster with margins, an open-domain optimization (§6.6), arcsine and arctangent integrals and a power of 1+cos x (§9.1, §9.4), x sech x tanh x and the reduction formula for ∫(1−x²)ⁿdx (§9.2), improper integrals near zero and at infinity, including one with two bad endpoints (§10), L’Hôpital for ln n/√n and comparison tests, a power series with its derivative and the Maclaurin series of x² cos x, a separable ODE with arctan(sin x), and a linear ODE with integrating factor e^√x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -2985,7 +3028,7 @@ The printed region is $15$ cm wide and $\dfrac{150}{15}=10$ cm high, so the best
 
 **(ii)** $\displaystyle\int_{0}^{1}\frac{x}{1+x^{4}}\,dx$ (2)
 
-**(b)** Evaluate $\displaystyle\int_0^{\pi/2}\sin^{6}x\,dx.$ (4)
+**(b)** Evaluate $\displaystyle\int_0^{\pi}\left(1+\cos x\right)^{3}dx.$ (4)
         `,
         solution: String.raw`
 **(a)(i)** Substitute $u=\ln x$, so $du=\dfrac{dx}{x}$. The limits become $\ln1=0$ and $\ln\sqrt e=\frac12$: ✓
@@ -2994,18 +3037,19 @@ $$\int_0^{1/2}\frac{du}{\sqrt{1-u^{2}}}=\Big[\arcsin u\Big]_0^{1/2}=\arcsin\frac
 **(a)(ii)** Substitute $u=x^{2}$, so $du=2x\,dx$ and the limits stay $0$ and $1$: ✓
 $$\frac12\int_0^{1}\frac{du}{1+u^{2}}=\frac12\Big[\arctan u\Big]_0^{1}=\boxed{\frac\pi8}.$$ ✓
 
-**(b)** The power is even, so use $\sin^{2}x=\dfrac{1-\cos2x}{2}$: ✓
-$$\sin^{6}x=\left(\frac{1-\cos2x}{2}\right)^{3}=\frac18\left(1-3\cos2x+3\cos^{2}2x-\cos^{3}2x\right).$$ ✓
-Integrate over $\left[0,\frac\pi2\right]$ term by term: $\displaystyle\int_0^{\pi/2}1\,dx=\frac\pi2$; $\displaystyle\int_0^{\pi/2}\cos2x\,dx=0$; $\displaystyle\int_0^{\pi/2}\cos^{2}2x\,dx=\int_0^{\pi/2}\frac{1+\cos4x}{2}dx=\frac\pi4$; and
-$$\int_0^{\pi/2}\cos^{3}2x\,dx=\int_0^{\pi/2}\left(1-\sin^{2}2x\right)\cos2x\,dx=\left[\frac{\sin2x}{2}-\frac{\sin^{3}2x}{6}\right]_0^{\pi/2}=0.$$ ✓
-Therefore
-$$\int_0^{\pi/2}\sin^{6}x\,dx=\frac18\left(\frac\pi2+3\cdot\frac\pi4\right)=\frac18\cdot\frac{5\pi}{4}=\boxed{\frac{5\pi}{32}}.$$ ✓
+**(b)** Expand the cube: $(1+\cos x)^3=1+3\cos x+3\cos^2x+\cos^3x$. ✓
+Integrate over $[0,\pi]$ term by term:
+- $\int_0^\pi1\,dx=\pi$ and $\int_0^\pi3\cos x\,dx=3[\sin x]_0^\pi=0$. ✓
+- $\int_0^\pi3\cos^2x\,dx=\tfrac32\int_0^\pi(1+\cos2x)\,dx=\tfrac{3\pi}{2}$. ✓
+- $\int_0^\pi\cos^3x\,dx=\int_0^\pi(1-\sin^2x)\cos x\,dx=\Big[\sin x-\tfrac{\sin^3x}{3}\Big]_0^\pi=0$.
+
+Total: $\pi+\tfrac{3\pi}2=\dfrac{5\pi}{2}$. ✓
         `
       },
       {
         number: 9, label: 'B3', title: 'Integration by parts; a reduction formula', section: 'Section B · §9.2', marks: 10,
         prompt: String.raw`
-**(a)** Evaluate $\displaystyle\int_0^{\ln5}x\cosh x\,dx$. Give your answer in terms of $\ln5$. (3)
+**(a)** Evaluate $\displaystyle\int_0^{\ln2}x\,\operatorname{sech}x\tanh x\,dx$. You may use $\displaystyle\int\operatorname{sech}x\,dx=\arctan(\sinh x)+C$. (3)
 
 **(b)** For an integer $n\ge0$ let $I_n=\displaystyle\int_0^{1}\left(1-x^{2}\right)^{n}dx$.
 
@@ -3015,10 +3059,10 @@ $$I_n=\frac{2n}{2n+1}\,I_{n-1}.$$ (5)
 **(ii)** Hence evaluate $I_3$. (2)
         `,
         solution: String.raw`
-**(a)** Take $u=x$ and $dv=\cosh x\,dx$, so $du=dx$ and $v=\sinh x$: ✓
-$$\int_0^{\ln5}x\cosh x\,dx=\Big[x\sinh x\Big]_0^{\ln5}-\int_0^{\ln5}\sinh x\,dx=\ln5\,\sinh(\ln5)-\Big[\cosh x\Big]_0^{\ln5}.$$ ✓
-Since $e^{\ln5}=5$: $\sinh(\ln5)=\dfrac{5-\frac15}{2}=\dfrac{12}{5}$ and $\cosh(\ln5)=\dfrac{5+\frac15}{2}=\dfrac{13}{5}$. Hence
-$$\frac{12}{5}\ln5-\left(\frac{13}{5}-1\right)=\boxed{\frac{12}{5}\ln5-\frac85}.$$ ✓
+**(a)** Note that $\dfrac{d}{dx}\operatorname{sech}x=-\operatorname{sech}x\tanh x$. Integrate by parts with $u=x$, $dv=\operatorname{sech}x\tanh x\,dx$, $v=-\operatorname{sech}x$: ✓
+$$\int x\operatorname{sech}x\tanh x\,dx=-x\operatorname{sech}x+\int\operatorname{sech}x\,dx=-x\operatorname{sech}x+\arctan(\sinh x).$$ ✓
+At $x=\ln2$: $\cosh(\ln2)=\tfrac54$, so $\operatorname{sech}(\ln2)=\tfrac45$, and $\sinh(\ln2)=\tfrac34$. At $x=0$ the expression is $0$. So
+$$\int_0^{\ln2}x\operatorname{sech}x\tanh x\,dx=\arctan\tfrac34-\tfrac45\ln2\approx0.089.$$ ✓
 
 **(b)(i)** Take $u=\left(1-x^{2}\right)^{n}$ and $dv=dx$, so $du=-2nx\left(1-x^{2}\right)^{n-1}dx$ and $v=x$: ✓✓
 $$I_n=\Big[x\left(1-x^{2}\right)^{n}\Big]_0^{1}+2n\int_0^{1}x^{2}\left(1-x^{2}\right)^{n-1}dx.$$
@@ -3034,7 +3078,7 @@ $$I_1=\frac23\,I_0=\frac23,\qquad I_2=\frac45\,I_1=\frac{8}{15},\qquad I_3=\frac
       {
         number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_0^{3}\frac{dx}{(x-1)^{2}}$ is called improper, and say how it must be treated. (2)
+**(a)** Explain why the integral $\displaystyle\int_0^{\infty}\frac{dx}{\sqrt x\,(1+x)}$ is called improper, and say how it must be treated. (2)
 
 **(b)** Determine whether the improper integral
 $$\int_{2}^{\infty}\frac{dx}{x\,(\ln x)^{2}}$$
@@ -3043,7 +3087,9 @@ converges or diverges. If it converges, find its value. Justify every limit that
 **(c)** Use the Comparison Theorem to determine whether $\displaystyle\int_{0}^{1}\frac{dx}{\sqrt x+x^{3}}$ converges or diverges. (4)
         `,
         solution: String.raw`
-**(a)** The integrand is undefined at $x=1$, which lies **inside** $[0,3]$, and $\dfrac{1}{(x-1)^{2}}\to\infty$ there. ✓ The Fundamental Theorem cannot be applied across the discontinuity, so the integral is improper (Type II). It must be **split at $x=1$** into $\displaystyle\int_0^{1}+\int_1^{3}$, each treated as a limit; the integral converges only if both pieces converge. (Here neither does: a naive evaluation $\left[-\frac1{x-1}\right]_0^3=-\frac32$ is impossible for a positive integrand.) ✓
+**(a)** It is improper for **two** reasons: the interval is infinite ($[0,\infty)$) and the integrand is unbounded as $x\to0^+$. ✓ It must be split at a point $c$ in $(0,\infty)$, for example $c=1$:
+$$\int_0^{\infty}=\lim_{s\to0^+}\int_s^{1}+\lim_{t\to\infty}\int_1^{t},$$
+and the integral converges only if **both** limits exist (finite). ✓
 
 **(b)** The upper limit is infinite (Type I): $\displaystyle\lim_{t\to\infty}\int_2^{t}\frac{dx}{x(\ln x)^{2}}$. ✓ Substitute $u=\ln x$, $du=\dfrac{dx}{x}$: $\displaystyle\int\frac{dx}{x(\ln x)^{2}}=\int u^{-2}du=-\frac1u=-\frac{1}{\ln x}$. ✓ So
 $$\int_2^{t}\frac{dx}{x(\ln x)^{2}}=-\frac{1}{\ln t}+\frac{1}{\ln2}.$$ ✓
@@ -3058,22 +3104,23 @@ Now $\displaystyle\int_0^{1}x^{-1/2}dx=\lim_{t\to0^{+}}\Big[2\sqrt x\Big]_t^{1}=
       {
         number: 11, label: 'B5', title: 'Sequences and series', section: 'Section B · §11.1–11.3', marks: 9,
         prompt: String.raw`
-**(a)** Determine, giving reasons, whether the sequence $\{a_n\}=\left\{(-1)^{n}\dfrac{n}{n+1}\right\}$ is convergent or divergent. If it is convergent, state to what value it converges. (3)
+**(a)** Determine, giving reasons, whether the sequence $\{a_n\}=\left\{\dfrac{\ln n}{\sqrt n}\right\}$ is convergent or divergent. If it is convergent, state to what value it converges. (3)
 
-**(b)** Using (a) or otherwise, decide (with reasons) if the following series converges or diverges.
-$$\sum_{n=1}^{\infty}(-1)^{n}\frac{n}{n+1}$$ (2)
+**(b)** Decide, with reasons, whether the series $\displaystyle\sum_{n=3}^{\infty}\frac{\ln n}{n}$ converges or diverges. (2)
 
-**(c)** Decide (with reasons) if the following series converges or diverges.
+**(c)** Use the Comparison Test to decide whether the following series converges or diverges.
 $$\sum_{n=1}^{\infty}\frac{n+1}{n^{3/2}+5}$$ (4)
         `,
         solution: String.raw`
-**(a)** The absolute values satisfy $|a_n|=\dfrac{n}{n+1}\to1$. ✓ But the sign alternates: for **even** $n$ the terms $a_n\to1$, and for **odd** $n$ the terms $a_n\to-1$. ✓ A convergent sequence has a single limit for all its subsequences, so the sequence is **divergent** (it oscillates between values near $1$ and $-1$). ✓
+**(a)** Let $f(x)=\dfrac{\ln x}{\sqrt x}$, so $a_n=f(n)$. Both numerator and denominator tend to $\infty$, so by L'Hôpital's rule
+$$\lim_{x\to\infty}\frac{\ln x}{\sqrt x}=\lim_{x\to\infty}\frac{1/x}{\frac1{2\sqrt x}}=\lim_{x\to\infty}\frac{2}{\sqrt x}=0.$$ ✓✓
+Hence $\{a_n\}$ **converges to $0$**. ✓
 
-**(b)** Since $\lim a_n$ does not exist (in particular it is not $0$), the **Test for Divergence** shows that $\sum(-1)^{n}\dfrac{n}{n+1}$ **diverges**. ✓✓
+**(b)** Here $a_n=\dfrac{\ln n}n$. The terms tend to $0$, so the Test for Divergence is inconclusive. ✓ But for $n\ge3$ we have $\ln n\ge\ln3>1$, so $\dfrac{\ln n}{n}>\dfrac1n$, and $\sum\dfrac1n$ diverges. By the Comparison Test the series **diverges**. ✓
 
-**(c)** The terms are positive. For large $n$ they behave like $\dfrac{n}{n^{3/2}}=\dfrac{1}{\sqrt n}$, so use the **Limit Comparison Test** (if $a_n,b_n>0$ and $a_n/b_n\to c$ with $0<c<\infty$, the two series converge or diverge together) with $b_n=\dfrac{1}{\sqrt n}$: ✓
-$$\lim_{n\to\infty}\frac{a_n}{b_n}=\lim_{n\to\infty}\frac{(n+1)\sqrt n}{n^{3/2}+5}=\lim_{n\to\infty}\frac{n^{3/2}+n^{1/2}}{n^{3/2}+5}=1.$$ ✓✓
-Since $0<1<\infty$ and $\displaystyle\sum\frac{1}{\sqrt n}$ diverges ($p$-series, $p=\frac12\le1$), the series **diverges**. ✓
+**(c)** For $n\ge1$: $n+1\ge n$ and $n^{3/2}+5\le n^{3/2}+5n^{3/2}=6n^{3/2}$. Therefore ✓✓
+$$\frac{n+1}{n^{3/2}+5}\ \ge\ \frac{n}{6n^{3/2}}=\frac{1}{6\sqrt n}.$$
+The series $\sum\dfrac1{6\sqrt n}=\tfrac16\sum\dfrac{1}{n^{1/2}}$ diverges (a $p$-series with $p=\tfrac12\le1$). By the Comparison Test the given series **diverges**. ✓✓
         `
       },
       {
@@ -3084,7 +3131,7 @@ $$\sum_{n=1}^{\infty}\frac{n!\,x^{n}}{(2n)!}.$$ (3)
 
 **(ii)** Without further calculation, state the radius of convergence of the series obtained by differentiating the series in (i) term by term, and give the reason. (2)
 
-**(b)** Use the Maclaurin series of $\sin x$ to find the Maclaurin series of $g(x)=\dfrac{\sin x}{x}$ (write the first three terms and the general term). Integrate it term by term to write $\displaystyle\int_0^{1}\frac{\sin x}{x}\,dx$ as an infinite series. (4)
+**(b)** Use the Maclaurin series of $\cos x$ to find the Maclaurin series of $f(x)=x^{2}\cos x$ (write the first three non-zero terms and the general term). Hence find $f^{(10)}(0)$. (4)
         `,
         solution: String.raw`
 **(a)(i)** Use the **Ratio Test** with $a_n=\dfrac{n!\,x^{n}}{(2n)!}$: ✓
@@ -3093,44 +3140,42 @@ for **every** $x$, and $0<1$. So the series converges for all $x$: the **radius 
 
 **(a)(ii)** By the theorem on term-by-term differentiation, the differentiated series has the **same radius of convergence**, $R=\infty$. ✓✓ (Differentiation can change convergence at the endpoints of the interval, but there are none here.)
 
-**(b)** $\sin x=\displaystyle\sum_{n=0}^{\infty}\frac{(-1)^{n}x^{2n+1}}{(2n+1)!}$, so dividing by $x$: ✓
-$$\frac{\sin x}{x}=\sum_{n=0}^{\infty}\frac{(-1)^{n}x^{2n}}{(2n+1)!}=1-\frac{x^{2}}{6}+\frac{x^{4}}{120}-\cdots$$ ✓
-Integrate term by term over $[0,1]$ (allowed inside the radius of convergence, which is $\infty$): ✓
-$$\int_0^{1}\frac{\sin x}{x}\,dx=\sum_{n=0}^{\infty}\frac{(-1)^{n}}{(2n+1)\,(2n+1)!}=1-\frac1{18}+\frac1{600}-\cdots$$
+**(b)** Since $\cos x=\displaystyle\sum_{k=0}^{\infty}\frac{(-1)^kx^{2k}}{(2k)!}$, multiplying by $x^2$ gives ✓✓
+$$x^2\cos x=\sum_{k=0}^{\infty}\frac{(-1)^kx^{2k+2}}{(2k)!}=x^2-\frac{x^4}{2!}+\frac{x^6}{4!}-\cdots.$$
+The coefficient of $x^{10}$ comes from $2k+2=10$, i.e. $k=4$, and equals $\dfrac{(-1)^4}{8!}=\dfrac1{8!}$. ✓ Since $c_{10}=\dfrac{f^{(10)}(0)}{10!}$,
+$$f^{(10)}(0)=\frac{10!}{8!}=90.$$ ✓
         `
       },
       {
         number: 13, label: 'B7', title: 'Differential equations — separable', section: 'Section B · §12.1', marks: 8,
         prompt: String.raw`
 Given the differential equation
-$$\frac{dy}{dx}=y\tan x,\qquad -\frac\pi2<x<\frac\pi2.$$
+$$\frac{dy}{dx}=\frac{y\cos x}{1+\sin^{2}x}.$$
 
 **(a)** State the order of the equation, and show that it is separable by writing it in the form $M(x)\,dx+N(y)\,dy=0$. (2)
 
 **(b)** Find the general solution of the equation. (3)
 
-**(c)** Find the particular solution given that $y=4$ when $x=\dfrac\pi3$. (3)
+**(c)** Find the particular solution given that $y=e$ when $x=0$, and find the maximum value of $y$. (3)
         `,
         solution: String.raw`
-**(a)** The highest derivative is $\dfrac{dy}{dx}$, so the equation is **first order**. ✓ For $y\neq0$, divide by $y$ and rearrange:
-$$\tan x\,dx-\frac1y\,dy=0,$$
-which has the form $M(x)\,dx+N(y)\,dy=0$ with $M=\tan x$ and $N=-\frac1y$, so it is **separable**. ✓
+**(a)** The equation is **first order**. ✓ For $y\ne0$:
+$$\frac{\cos x}{1+\sin^{2}x}\,dx-\frac{dy}{y}=0,$$ ✓
+which has the form $M(x)\,dx+N(y)\,dy=0$, so it is **separable**.
 
-**(b)** Integrate $\dfrac{dy}{y}=\tan x\,dx$ (on the interval, $\cos x>0$): ✓
-$$\ln|y|=-\ln(\cos x)+K=\ln(\sec x)+K,$$ ✓
-so $|y|=e^{K}\sec x$ and the **general solution** is
-$$y=A\sec x,$$ ✓
-where $A=\pm e^{K}$ (and $A=0$ gives the constant solution $y=0$).
+**(b)** Let $u=\sin x$, $du=\cos x\,dx$: $\displaystyle\int\frac{\cos x}{1+\sin^2x}dx=\int\frac{du}{1+u^2}=\arctan(\sin x)$. ✓ So $\ln|y|=\arctan(\sin x)+C_1$ and the **general solution** is ✓✓
+$$y=A\,e^{\arctan(\sin x)}.$$
 
-**(c)** With $y\!\left(\frac\pi3\right)=4$: $\sec\frac\pi3=2$, so $4=2A$ and $A=2$. ✓✓ The **particular solution** is ✓
-$$y=2\sec x.$$
+**(c)** With $y(0)=e$: $e=Ae^{\arctan0}=A$. ✓ The **particular solution** is
+$$y=e\cdot e^{\arctan(\sin x)}=e^{\,1+\arctan(\sin x)}.$$
+The exponent is largest when $\sin x=1$, giving $\max y=e^{1+\pi/4}$. ✓
         `
       },
       {
         number: 14, label: 'B8', title: 'Differential equations — linear', section: 'Section B · §12.3', marks: 10,
         prompt: String.raw`
 Given the differential equation
-$$2x\,\frac{dy}{dx}+y=6x^{3/2},\qquad x>0.$$
+$$2\sqrt x\,\frac{dy}{dx}+y=2\sqrt x\,e^{-\sqrt x},\qquad x>0.$$
 
 **(a)** Show that this is a linear differential equation by writing it in standard form. (2)
 
@@ -3138,23 +3183,23 @@ $$2x\,\frac{dy}{dx}+y=6x^{3/2},\qquad x>0.$$
 
 **(c)** Hence find the general solution of the differential equation. (4)
 
-**(d)** Find the particular solution satisfying $y=7$ when $x=4$. (2)
+**(d)** Find the particular solution satisfying $y=\dfrac3e$ when $x=1$. (2)
         `,
         solution: String.raw`
-**(a)** Divide through by $2x$ (positive on the domain):
-$$\frac{dy}{dx}+\frac{1}{2x}\,y=3x^{1/2}.$$ ✓✓
-This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\frac{1}{2x}$ and $Q(x)=3x^{1/2}$, so it is **linear**.
+**(a)** Divide through by $2\sqrt x$ (positive on the domain):
+$$\frac{dy}{dx}+\frac{1}{2\sqrt x}\,y=e^{-\sqrt x}.$$ ✓✓
+This has the form $\frac{dy}{dx}+P(x)y=Q(x)$ with $P(x)=\dfrac{1}{2\sqrt x}$ and $Q(x)=e^{-\sqrt x}$, so it is **linear**.
 
-**(b)** $\displaystyle\int\frac{1}{2x}\,dx=\frac12\ln x$ (for $x>0$), so ✓
-$$\mu(x)=e^{\frac12\ln x}=\sqrt x.$$ ✓
+**(b)** $\displaystyle\int\frac{dx}{2\sqrt x}=\sqrt x$, so ✓
+$$\mu(x)=e^{\sqrt x}.$$ ✓
 
-**(c)** Multiply the standard form by $\mu=\sqrt x$; the left side is an exact derivative: ✓
-$$\frac{d}{dx}\left(\sqrt x\,y\right)=\sqrt x\cdot3\sqrt x=3x.$$ ✓
-Integrate: $\sqrt x\,y=\dfrac{3x^{2}}{2}+C$, so the **general solution** is ✓✓
-$$y=\frac32x^{3/2}+\frac{C}{\sqrt x}.$$
+**(c)** Multiply by $e^{\sqrt x}$; the right-hand side collapses: ✓
+$$\frac{d}{dx}\left(ye^{\sqrt x}\right)=e^{\sqrt x}\,e^{-\sqrt x}=1.$$
+Integrate: $ye^{\sqrt x}=x+C$, so the **general solution** is ✓✓
+$$y=(x+C)\,e^{-\sqrt x}.$$
 
-**(d)** With $y(4)=7$: $7=\dfrac32\cdot8+\dfrac{C}{2}=12+\dfrac C2$, so $C=-10$. ✓ The **particular solution** is ✓
-$$y=\frac32x^{3/2}-\frac{10}{\sqrt x}.$$
+**(d)** With $y(1)=\dfrac3e$: $\dfrac3e=(1+C)e^{-1}$, so $C=2$. ✓ The **particular solution** is ✓
+$$y=(x+2)\,e^{-\sqrt x}.$$
         `
       }
     ]

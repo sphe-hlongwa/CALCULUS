@@ -24,9 +24,9 @@
 
   /* YouTube Black Theme */
   --bg: #0f0f0f;
-  --surface: #212121;
-  --surface-2: #272727;
-  --border: #3f3f3f;
+  --surface: #141414;
+  --surface-2: #1c1c1c;
+  --border: #2a2a2a;
   --text: #f1f1f1;
   --text-2: #aaaaaa;
   --text-3: #717171;
@@ -157,9 +157,13 @@ body {
 }
 
 .topbar-search {
-  flex: 1;
-  max-width: 480px;
-  position: relative;
+  /* Centred in the middle of the header (independent of the toggle button
+     on the left and anything on the right). */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(480px, calc(100% - 160px));
 }
 
 .topbar-search input {
@@ -2247,4 +2251,93 @@ kbd {
   padding: .2em .5em;
   border-radius: 5px;
   border: 1px solid var(--border);
+}
+/* ============================================================
+   Spotify-style floating panels (desktop)
+   Rounded panels on a black canvas, separated by gaps:
+     1. sidebar (nav rail + chapter list)   2. main content   3. docked study panel
+   The topbar sits on the canvas itself, with no panel.
+   Mobile (<= 900px) keeps the slide-in drawer layout.
+   ============================================================ */
+:root {
+  --canvas: #000;
+  --panel-gap: 8px;
+  --panel-radius: 12px;
+}
+
+@media (min-width: 901px) {
+  .app-shell {
+    background: var(--canvas);
+    padding: 0 var(--panel-gap) var(--panel-gap);
+  }
+
+  .topbar {
+    background: var(--canvas);
+    border-bottom: none;
+    padding: 0 8px;
+  }
+
+  /* Panel 1: the sidebar (nav rail + chapter list) is ONE rounded panel */
+  .sidebar-wrapper {
+    background: var(--surface);
+    border-right: none;
+    margin-right: var(--panel-gap);
+    border-radius: var(--panel-radius);
+  }
+
+  .app-shell.sidebar-closed .sidebar-wrapper { margin-right: 0; }
+
+  .sidebar-two-level { gap: 0; }
+
+  .sidebar-nav-rail {
+    background: transparent;
+    border-radius: 0;
+    border-right: 1px solid var(--border);
+  }
+
+  .sidebar-detail {
+    border-radius: 0;
+  }
+
+  /* Panel 2: main content */
+  .main-content {
+    border-radius: var(--panel-radius);
+  }
+}
+
+/* ── Panel 3: docked study panel (quizzes + flashcards) ──────────────
+   On desktop the Flashcards and Quiz panels no longer slide over the
+   whole page. They dock on the right as a fourth rounded panel, and
+   the other three panels shrink to make room. */
+@media (min-width: 901px) {
+  :root { --dock-w: 440px; }
+  body:has(#quiz-panel.open) { --dock-w: 520px; }
+
+  .app-shell {
+    transition: grid-template-columns 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                padding-right 0.35s cubic-bezier(.4, 0, .2, 1);
+  }
+  body:has(#flashcard-panel.open, #quiz-panel.open) .app-shell {
+    padding-right: calc(var(--dock-w) + 2 * var(--panel-gap));
+  }
+  /* keep the header (and its centred search box) spanning the full width */
+  body:has(#flashcard-panel.open, #quiz-panel.open) .topbar {
+    margin-right: calc(-1 * (var(--dock-w) + var(--panel-gap)));
+  }
+
+  #flashcard-panel,
+  #quiz-panel {
+    top: var(--topbar-h);
+    right: var(--panel-gap);
+    bottom: var(--panel-gap);
+    height: auto;
+    border-left: none;
+    border-radius: var(--panel-radius);
+    box-shadow: none;
+    transform: translateX(calc(100% + 2 * var(--panel-gap)));
+  }
+  #flashcard-panel { width: 440px; }
+  #quiz-panel      { width: 520px; }
+  #flashcard-panel.open,
+  #quiz-panel.open { transform: translateX(0); }
 }

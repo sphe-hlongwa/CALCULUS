@@ -174,7 +174,7 @@
 
 @media (max-width: 600px) {
   .topbar { gap: 8px; padding: 0 12px; }
-  .topbar-search { max-width: none; flex: 1; }
+  .topbar-search { position: relative; left: auto; top: auto; transform: none; width: auto; max-width: none; flex: 1; }
   .topbar-search input { padding-left: 36px; padding-right: 12px; font-size: 0.9rem; }
   .fc-actions { flex-direction: column; width: 100%; max-width: 100% !important; }
   .btn-fc { width: 100%; justify-content: center; }

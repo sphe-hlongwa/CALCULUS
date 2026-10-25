@@ -207,7 +207,7 @@
      reaching the end of the paper can't drag the whole modal along. */
   overflow: hidden;
   overscroll-behavior: contain;
-  padding: 40px 20px;
+  padding: 16px 20px;
 }
 #exam-overlay.hidden { display: none; }
 
@@ -216,8 +216,9 @@
   border-radius: 20px;
   width: 100%;
   max-width: 1070px;
-  min-height: 75vh;
-  max-height: calc(100vh - 80px);   /* fits inside the overlay's 40px padding */
+  height: calc(100vh - 32px);       /* tall modal: fills the overlay's 16px padding */
+  min-height: 90vh;
+  max-height: calc(100vh - 32px);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
   overflow: hidden;
@@ -229,8 +230,8 @@
 .exam-shell-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 18px 24px;
+  gap: 10px;
+  padding: 8px 18px;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
@@ -251,7 +252,7 @@
 .panel-icon-btn:hover { background: var(--border); color: var(--text-1); }
 
 #exam-content {
-  padding: 24px 28px 48px;
+  padding: 12px 20px 24px;
   flex: 1;
   min-height: 0;                    /* lets the flex child shrink and scroll inside the shell */
   overflow-y: auto;
@@ -480,7 +481,7 @@ body.dark .exam-graph-wrap { background: #1e293b; border-color: #334155; }
   @supports (height: 100dvh) {
     .exam-shell { min-height: 100dvh; max-height: 100dvh; }
   }
-  .exam-shell-header { padding: 12px 14px; }
+  .exam-shell-header { padding: 8px 12px; }
 
   /* Give the paper the full width: minimal gutter around it */
   #exam-content { padding: 8px 6px 32px; }
@@ -529,4 +530,48 @@ body.dark .exam-graph-wrap { background: #1e293b; border-color: #334155; }
 @keyframes examTimerPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: .55; }
+}
+/* ── Header back button (left angle) ── */
+.exam-header-back { padding: 6px; margin-left: -6px; color: var(--text-1); }
+.exam-header-back .ui-icon { width: 22px; height: 22px; }
+
+/* ── Bottom Previous / Next bar ── */
+.exam-shell-footer {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+.exam-shell-footer.hidden { display: none; }
+.exam-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 48%;
+  background: var(--surface-2);
+  color: var(--text-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 5px 12px;
+  font: inherit;
+  cursor: pointer;
+  transition: background .12s ease, border-color .12s ease, opacity .12s ease;
+}
+.exam-nav-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--border); }
+.exam-nav-btn:disabled { opacity: .35; cursor: default; }
+.exam-nav-next { margin-left: auto; text-align: right; }
+.exam-nav-text { display: flex; flex-direction: row; align-items: baseline; gap: 8px; min-width: 0; line-height: 1.2; }
+.exam-nav-text small { font-size: .62rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-2); }
+.exam-nav-text span { font-size: .88rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.exam-nav-next .exam-nav-text { justify-content: flex-end; }
+.exam-shell-header .timer-bar, .exam-shell-header .exam-timer-bar { padding: 4px 12px; }
+@media (max-width: 640px) {
+  .exam-shell-footer { padding: 6px 10px; }
+  .exam-nav-btn { padding: 5px 8px; }
+  .exam-nav-text small { display: none; }
 }

@@ -9,6 +9,8 @@ const Exams = (() => {
   let timerEndsAt = null;
   let isFullscreen = false;
   let currentSessionId = null;
+  let currentView = 'sessions';   // 'sessions' | 'list' | 'paper'
+  let currentPaperId = null;
 
   // Exam sessions shown on the landing screen. Each session points at an
   // array of papers defined in data/. To add the November papers, fill in
@@ -44,6 +46,33 @@ const Exams = (() => {
   function getSession(id) { return getSessions().find(x => x.id === id); }
   function currentPapers() { return (getSession(currentSessionId) || {}).papers || []; }
 
+
+  // ── Shared modal chrome: header back button + bottom Previous / Next ──
+  function goBack() {
+    if (currentView === 'paper') renderList(currentSessionId);
+    else if (currentView === 'list') renderSessions();
+    else close();
+  }
+
+  function setNav(prev, next) {
+    const footer = document.getElementById('exam-footer');
+    const prevBtn = document.getElementById('exam-prev');
+    const nextBtn = document.getElementById('exam-next');
+    if (!footer || !prevBtn || !nextBtn) return;
+    if (!prev && !next) { footer.classList.add('hidden'); return; }
+    const chevL = (typeof Icons !== 'undefined' && Icons.chevronLeft) || '';
+    const chevR = (typeof Icons !== 'undefined' && Icons.chevronRight) || '';
+    const fill = (btn, cfg, html) => {
+      btn.disabled = !cfg;
+      btn.innerHTML = html;
+      btn.onclick = cfg ? cfg.go : null;
+      btn.title = cfg ? cfg.label : '';
+    };
+    fill(prevBtn, prev, `${chevL}<span class="exam-nav-text"><small>Previous</small><span>${prev ? prev.label : ''}</span></span>`);
+    fill(nextBtn, next, `<span class="exam-nav-text"><small>Next</small><span>${next ? next.label : ''}</span></span>${chevR}`);
+    footer.classList.remove('hidden');
+  }
+
   function open() {
     const overlay = document.getElementById('exam-overlay');
     if (!overlay) return;
@@ -71,6 +100,7 @@ const Exams = (() => {
     stopTimer();
     document.getElementById('exam-timer-bar')?.classList.add('hidden');
     overlay.classList.add('hidden');
+    document.getElementById('exam-footer')?.classList.add('hidden');
     document.body.style.overflow = '';
     toggleFullscreen(false);
   }
@@ -115,6 +145,9 @@ const Exams = (() => {
   function renderSessions() {
     stopTimer();
     currentSessionId = null;
+    currentView = 'sessions';
+    currentPaperId = null;
+    setNav(null, null);
     document.getElementById('exam-timer-bar')?.classList.add('hidden');
     const root = document.getElementById('exam-content');
     if (!root) return;
@@ -167,19 +200,23 @@ const Exams = (() => {
     if (typeof sessionId === 'string') currentSessionId = sessionId;
     const sess = getSession(currentSessionId);
     if (!sess) { renderSessions(); return; }
+    currentView = 'list';
+    currentPaperId = null;
     const papers = sess.papers;
+    {
+      const all = getSessions();
+      const idx = all.findIndex(x => x.id === sess.id);
+      const mk = o => o && { label: o.label, go: () => renderList(o.id) };
+      setNav(mk(all[idx - 1]), mk(all[idx + 1]));
+    }
 
     if (!papers.length) {
       root.innerHTML = `
-        <div class="exam-toolbar">
-          <button class="exam-back-btn" id="exam-sessions-back">&larr; All Exams</button>
-        </div>
         <div class="exam-list-header">
           <h2>${sess.label}</h2>
           <p class="exam-list-sub">The ${sess.label.toLowerCase()} haven't been added yet. Check back soon.</p>
         </div>
       `;
-      root.querySelector('#exam-sessions-back').addEventListener('click', renderSessions);
       root.scrollTop = 0;
       return;
     }
@@ -198,17 +235,12 @@ const Exams = (() => {
     `).join('');
 
     root.innerHTML = `
-      <div class="exam-toolbar">
-        <button class="exam-back-btn" id="exam-sessions-back">&larr; All Exams</button>
-      </div>
       <div class="exam-list-header">
         <h2>${sess.label}</h2>
         <p class="exam-list-sub">${sess.listIntro || (papers.length + ' full-length practice papers with worked memos.')}</p>
       </div>
       <div class="exam-pick-grid">${cards}</div>
     `;
-
-    root.querySelector('#exam-sessions-back').addEventListener('click', renderSessions);
     root.querySelectorAll('.exam-pick-card').forEach(el => {
       const open = () => renderPaper(el.dataset.examId);
       el.addEventListener('click', open);
@@ -228,6 +260,14 @@ const Exams = (() => {
     const paper = currentPapers().find(p => p.id === examId);
     const root = document.getElementById('exam-content');
     if (!paper || !root) return;
+    currentView = 'paper';
+    currentPaperId = paper.id;
+    {
+      const list = currentPapers();
+      const idx = list.findIndex(p => p.id === paper.id);
+      const mk = o => o && { label: o.label, go: () => renderPaper(o.id) };
+      setNav(mk(list[idx - 1]), mk(list[idx + 1]));
+    }
 
     const marksRows = paper.questions.map(q =>
       `<tr><td>${q.label || q.number}</td><td class="exam-marks-cell">${q.marks}</td></tr>`
@@ -254,9 +294,6 @@ const Exams = (() => {
     `).join('');
 
     root.innerHTML = `
-      <div class="exam-toolbar">
-        <button class="exam-back-btn" id="exam-back-btn">&larr; ${(getSession(currentSessionId) || {}).label || 'All Practice Papers'}</button>
-      </div>
 
       <div class="exam-paper">
         <div class="exam-cover">
@@ -281,7 +318,6 @@ const Exams = (() => {
       </div>
     `;
 
-    root.querySelector('#exam-back-btn').addEventListener('click', () => renderList(currentSessionId));
     root.querySelectorAll('.exam-reveal-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const solEl = document.getElementById('exam-sol-' + btn.dataset.q);
@@ -342,12 +378,13 @@ const Exams = (() => {
     return esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   }
 
-  return { open, close, renderSessions, renderList, renderPaper, toggleFullscreen };
+  return { open, close, goBack, renderSessions, renderList, renderPaper, toggleFullscreen };
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('exam-btn')?.addEventListener('click', () => Exams.open());
   document.getElementById('exam-close')?.addEventListener('click', () => Exams.close());
+  document.getElementById('exam-back')?.addEventListener('click', () => Exams.goBack());
   document.getElementById('exam-fullscreen-toggle')?.addEventListener('click', () => Exams.toggleFullscreen());
   document.getElementById('exam-overlay')?.addEventListener('click', e => {
     if (e.target.id === 'exam-overlay') Exams.close();

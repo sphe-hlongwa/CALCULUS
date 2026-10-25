@@ -24,7 +24,8 @@
  *   A4 §11.1-11.3 series         A5 §11.4-11.6          A6 §12 differential equation
  *   B1 §6.6 optimization (7-step workflow, one of: triangle / open box / wire / cylinder-in-cone paradigms)
  *   B2 §9.1 + §9.4 integrals     B3 §9.2 hyperbolic IBP + a reduction formula (prove it, then use it)
- *   B4 §10 improper integrals    B5 §11.1-11.3 sequence + series tests
+ *   B4 §10 improper integrals (a) 3-mark comparison/convergence argument, (b) 7-mark harder evaluation
+ *        (parameter, constant chosen for convergence, reduction formula, two bad endpoints)    B5 §11.1-11.3 sequence + series tests
  *   B6 §11.4-11.6 power series   B7 §12.0/12.1 separable ODE    B8 §12.3 first-order linear ODE
  *
  * No question is copied from a source paper, and no question repeats across these nine
@@ -74,7 +75,7 @@ const NOVEMBER_EXAMS = [
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Cylinder in a cone and a triangular plot (§6.6), completing the square and f′/f (§9.1), reduction formula for (ln x)ⁿ (§9.2), odd powers of sin and cos (§9.4), Type I improper integral, Ratio Test and Divergence Test, interval of convergence and the Taylor series of ln x about 2, a separable ODE with a by-parts integral and a linear ODE with integrating factor x².',
+    topics: 'Fencing against a river with an unknown length, and a triangle with a fixed hypotenuse (§6.6), completing the square and f′/f (§9.1), reduction formula for (ln x)ⁿ (§9.2), odd powers of sin and cos (§9.4), a p-test over [0,\infty) and a Type I improper integral with a substitution (§10), Ratio Test and Divergence Test, interval of convergence and the Taylor series of ln x about 2, a separable ODE with a by-parts integral and a linear ODE with integrating factor x².',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -84,22 +85,23 @@ const NOVEMBER_EXAMS = [
     ],
     questions: [
       {
-        number: 1, label: 'A1', title: 'Setting up an optimization problem', section: 'Section A · §6.6', marks: 2,
+        number: 1, label: 'A1', title: 'Maximizing a product with a constraint', section: 'Section A · §6.6', marks: 2,
         prompt: String.raw`
-A right circular cone has base radius $6$ and height $12$. A right circular cylinder of radius $r$ and height $h$ is inscribed in the cone, with its base on the base of the cone. Using similar triangles to eliminate $h$, the volume of the cylinder is a function of $r$ alone. Which choice gives that function together with its correct domain?
+Two positive numbers $x$ and $y$ satisfy $x+y=12$. The largest possible value of $x^{2}y$ is
 
-- **A.** $V(r)=\pi r^{2}(12-2r)$, $\;0\le r\le6$.
-- **B.** $V(r)=\pi r^{2}(12-r)$, $\;0\le r\le12$.
-- **C.** $V(r)=\pi r^{2}(12-2r)$, $\;0\le r\le12$.
-- **D.** $V(r)=\pi r^{2}\left(6-\dfrac r2\right)$, $\;0\le r\le6$.
-- **E.** $V(r)=2\pi r(12-2r)$, $\;0\le r\le6$.
+- **A.** $216$.
+- **B.** $128$.
+- **C.** $256$.
+- **D.** $243$.
+- **E.** $81$.
         `,
         solution: String.raw`
-**Answer: A.** ✓✓
+**Answer: C.** ✓✓
 
-Take a cross-section through the axis. The small triangle above the cylinder is similar to the whole triangle, so $\dfrac{12-h}{r}=\dfrac{12}{6}=2$, giving $h=12-2r$.  Then $V=\pi r^2h=\pi r^2(12-2r)$. The radius cannot be negative and cannot exceed the cone's radius $6$ (at $r=6$ the height is $0$), so the domain is $[0,6]$. 
+Substitute $y=12-x$: $f(x)=x^{2}(12-x)=12x^{2}-x^{3}$ for $0<x<12$. Then $f'(x)=24x-3x^{2}=3x(8-x)$, so $x=8$ and $y=4$. Since $f(x)\to0$ at both ends, this is the maximum:
+$$f(8)=64\cdot4=256.$$
 
-- **B** uses $h=12-r$ (wrong ratio). **C** has the right function but the domain $[0,12]$ would allow a negative height. **D** has the wrong height. **E** is the formula for a different quantity (lateral area), not volume.
+- **A**, **B**, **D** and **E** are the values of $x^{2}y$ at $(6,6)$, $(4,8)$, $(9,3)$ and $(3,9)$ respectively: valid pairs, but not the best one.
         `
       },
       {
@@ -209,34 +211,27 @@ $$y''-y'-6y=(27-9-18)e^{3x}+(-4-2+6)e^{-2x}=0.$$
         `
       },
       {
-        number: 7, label: 'B1', title: 'Optimization — a rectangle inside a triangular field', section: 'Section B · §6.6', marks: 11,
+        number: 7, label: 'B1', title: 'Optimization — fencing against a river; a triangle with a fixed hypotenuse', section: 'Section B · §6.6', marks: 11,
         prompt: String.raw`
-A farmer wants to fence off a rectangular plot inside a right-angled triangular field. The two perpendicular sides of the field have lengths $30$ m and $20$ m. One corner of the rectangle is at the right-angled corner of the field, two sides of the rectangle lie along the perpendicular sides of the field, and the opposite corner of the rectangle lies on the hypotenuse. Let $x$ be the length of the side of the rectangle that lies along the $30$ m side, and $y$ the length of the side along the $20$ m side. The farmer wants the plot of **largest area**.
+**(a)** State the Extreme Value Theorem. (2)
 
-**(a)** Draw a labelled diagram. Use similar triangles to write $y$ in terms of $x$, and hence write the area $A$ of the rectangle as a function of $x$ alone. (4)
+**(b)** A farmer has $L$ metres of fencing and uses all of it to enclose a rectangular field, one side of which lies along a straight river and needs no fence. The largest area that the farmer can enclose is $800\ \text{m}^{2}$. Find $L$, and the dimensions of the largest field. (5)
 
-**(b)** State the domain of $A$. (1)
-
-**(c)** Find the critical number(s) of $A$. (3)
-
-**(d)** Use the Closed Interval Method to show that the critical number gives the absolute maximum area. State the dimensions of the best plot and its area. (3)
+**(c)** The hypotenuse of a right-angled triangle is $10$ cm. Find the largest possible area of the triangle, and the lengths of its legs when the area is largest. (4)
         `,
         solution: String.raw`
-**(a)** *Diagram:* a right triangle with legs $30$ (horizontal) and $20$ (vertical); the rectangle has width $x$ and height $y$ in the corner at the right angle, with its far corner on the hypotenuse. ✓
+**(a)** If $f$ is **continuous on a closed interval** $[a,b]$, ✓ then $f$ attains an **absolute maximum value** $f(c)$ at some $c\in[a,b]$ and an **absolute minimum value** $f(d)$ at some $d\in[a,b]$. ✓
 
-The small triangle above the rectangle is similar to the whole triangle (same angles). Its horizontal side is $x$ and its vertical side is $20-y$, so ✓
-$$\frac{20-y}{x}=\frac{20}{30}\ \Longrightarrow\ y=20-\frac{2x}{3}.$$ ✓
-The area (objective function) is $A=xy$, which in one variable is ✓
-$$A(x)=x\left(20-\frac{2x}{3}\right)=20x-\frac{2}{3}x^{2}.$$
+**(b)** Let each side perpendicular to the river have length $x$; the side along the river has length $L-2x$. Then
+$$A(x)=x(L-2x)=Lx-2x^{2}.$$ ✓
+$A'(x)=L-4x=0\Rightarrow x=\dfrac L4$. ✓ Since $A(0)=A\!\left(\frac L2\right)=0$, this gives the maximum, ✓
+$$A_{\max}=\frac L4\cdot\frac L2=\frac{L^{2}}{8}.$$
+Setting $\dfrac{L^{2}}{8}=800$ gives $L^{2}=6400$, so $L=\boxed{80}$ m. ✓ Then $x=20$ and $L-2x=40$: the field is $\boxed{20\text{ m}\times40\text{ m}}$ (the side along the river is the $40$ m side). ✓
 
-**(b)** The width satisfies $0\le x\le30$ (at $x=30$ the height is $0$). The domain is the **closed interval** $[0,30]$. ✓
-
-**(c)** $A'(x)=20-\dfrac{4x}{3}$ exists for all $x$, so the critical numbers come from $A'(x)=0$: ✓✓
-$$20-\frac{4x}{3}=0\ \Longrightarrow\ x=15.$$ ✓
-
-**(d)** $A$ is continuous on the closed interval $[0,30]$, so by the **Extreme Value Theorem** it has an absolute maximum on it, found by comparing the critical number and the endpoints: ✓
-$$A(0)=0,\qquad A(15)=20(15)-\tfrac23(225)=300-150=150,\qquad A(30)=0.$$ ✓
-The largest value is $A(15)=150$. The best plot has $x=15$ m and $y=20-10=10$ m, with area $\boxed{150\ \text{m}^2}$. ✓
+**(c)** Let one leg be $x$ cm; the other is $\sqrt{100-x^{2}}$. Then
+$$A(x)=\tfrac12x\sqrt{100-x^{2}},\qquad 0<x<10.$$ ✓
+$$A'(x)=\tfrac12\left(\sqrt{100-x^{2}}-\frac{x^{2}}{\sqrt{100-x^{2}}}\right)=\frac{100-2x^{2}}{2\sqrt{100-x^{2}}}.$$ ✓
+$A'(x)=0\Rightarrow x=5\sqrt2$. ✓ Since $A=0$ at $x=0$ and $x=10$, this is the maximum: both legs equal $5\sqrt2$ cm and $A_{\max}=\tfrac12\cdot5\sqrt2\cdot5\sqrt2=\boxed{25\ \text{cm}^{2}}$. ✓
         `
       },
       {
@@ -285,25 +280,26 @@ So $\displaystyle\int_1^e(\ln x)^3dx=6-2e\approx0.563$.
         `
       },
       {
-        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        number: 10, label: 'B4', title: 'Improper integrals — a p-test and a substitution', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_0^{\pi/2}\sec x\,dx$ is called improper. (2)
+**(a)** Show that the integral $\displaystyle\int_0^{\infty}\frac{dx}{x^{p}}$ diverges for every real number $p$. (3)
 
 **(b)** Determine whether the improper integral
-$$\int_0^{\infty}x^{2}e^{-x}\,dx$$
-converges or diverges. If it converges, find its value. Justify every limit that you use. (8)
+$$\int_0^{\infty}x^{3}e^{-x^{2}}\,dx$$
+converges or diverges. If it converges, find its value. Justify every limit that you use. (7)
         `,
         solution: String.raw`
-**(a)** The integrand $\sec x=\dfrac{1}{\cos x}$ is continuous on $\left[0,\frac\pi2\right)$ but is **undefined at the upper limit** $x=\frac\pi2$, where $\sec x\to+\infty$. ✓ The Fundamental Theorem cannot be applied on the closed interval, so the integral is improper (Type II) and means $\displaystyle\lim_{t\to\frac\pi2^-}\int_0^t\sec x\,dx$. ✓
+**(a)** The integral is improper at both $0$ and $\infty$, so we split it as $\displaystyle\int_0^{1}x^{-p}\,dx+\int_1^{\infty}x^{-p}\,dx$, and it converges only if **both** pieces converge. ✓
+We check each piece. $\displaystyle\int_1^{\infty}x^{-p}dx$ converges **only if $p>1$** (for $p\ne1$ it is $\lim\frac{t^{1-p}-1}{1-p}$, which is finite only when $1-p<0$; for $p=1$ it is $\lim\ln t=\infty$). $\displaystyle\int_0^{1}x^{-p}dx$ converges **only if $p<1$** (for $p\ne1$ it is $\lim_{s\to0^{+}}\frac{1-s^{1-p}}{1-p}$, finite only when $1-p>0$; for $p=1$ it is $\lim(-\ln s)=\infty$). ✓
+No real $p$ satisfies both $p>1$ and $p<1$, so for every $p$ at least one piece diverges and the whole integral diverges. ✓
 
-**(b)** The upper limit is infinite (Type I), so $\displaystyle\int_0^\infty x^2e^{-x}dx=\lim_{t\to\infty}\int_0^tx^2e^{-x}dx$. ✓
-
-First integration by parts ($u=x^2$, $dv=e^{-x}dx$): $\displaystyle\int x^2e^{-x}dx=-x^2e^{-x}+2\int xe^{-x}dx$. ✓
-Second ($u=x$, $dv=e^{-x}dx$): $\displaystyle\int xe^{-x}dx=-xe^{-x}-e^{-x}$. ✓ Hence ✓
-$$\int x^2e^{-x}dx=-e^{-x}\left(x^2+2x+2\right).$$
-$$\int_0^tx^2e^{-x}dx=-e^{-t}\left(t^2+2t+2\right)+2.$$ ✓
-Now $\displaystyle\lim_{t\to\infty}\frac{t^2}{e^t}=\lim_{t\to\infty}\frac{2t}{e^t}=\lim_{t\to\infty}\frac{2}{e^t}=0$ by l'Hôpital's rule (twice), and likewise $\dfrac{t}{e^t}\to0$ and $e^{-t}\to0$. ✓ Therefore the limit exists, so the integral **converges** and ✓
-$$\int_0^\infty x^2e^{-x}dx=2.$$ ✓
+**(b)** The upper limit is infinite, so $\displaystyle\int_0^{\infty}x^{3}e^{-x^{2}}dx=\lim_{t\to\infty}\int_0^{t}x^{3}e^{-x^{2}}dx$. ✓
+Let $u=x^{2}$, $du=2x\,dx$, so $x^{3}dx=\tfrac12u\,du$: $\displaystyle\int_0^{t}x^{3}e^{-x^{2}}dx=\frac12\int_0^{t^{2}}ue^{-u}du$. ✓
+By parts ($u$, $dv=e^{-u}du$): $\displaystyle\int ue^{-u}du=-ue^{-u}+\int e^{-u}du=-(u+1)e^{-u}$. ✓
+$$\int_0^{t}x^{3}e^{-x^{2}}dx=\frac12\Big[-(u+1)e^{-u}\Big]_0^{t^{2}}=\frac12\left(1-\frac{t^{2}+1}{e^{t^{2}}}\right).$$ ✓
+With $w=t^{2}\to\infty$, $\displaystyle\lim_{w\to\infty}\frac{w+1}{e^{w}}=\lim_{w\to\infty}\frac{1}{e^{w}}=0$ by l’Hôpital’s rule. ✓
+Therefore the integral **converges** ✓ and
+$$\int_0^{\infty}x^{3}e^{-x^{2}}dx=\frac12.$$ ✓
         `
       },
       {
@@ -416,7 +412,7 @@ With $y(\pi)=\dfrac1\pi$: $\dfrac{0+\pi+C}{\pi^2}=\dfrac1\pi$, so $C=0$. ✓ The
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Open-top box and container (§6.6), completing the square to an arctangent and powers of sine (§9.1, §9.4), x cosh²x and the secⁿ reduction formula (§9.2), improper integral with two endpoint discontinuities, Integral Test, power-series representations by differentiation and integration, a separable ODE solved with arctan and tan(a+b), and a linear ODE with integrating factor e^(−1/x).',
+    topics: 'An open box from a square sheet with an unknown side, and a constrained product, with the Closed Interval Method (§6.6), completing the square to an arctangent and powers of sine (§9.1, §9.4), x cosh²x and the secⁿ reduction formula (§9.2), a Comparison Theorem divergence and a Type II improper integral solved by parts (§10), Integral Test, power-series representations by differentiation and integration, a separable ODE solved with arctan and tan(a+b), and a linear ODE with integrating factor e^(−1/x).',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -426,22 +422,24 @@ With $y(\pi)=\dfrac1\pi$: $\dfrac{0+\pi+C}{\pi^2}=\dfrac1\pi$, so $C=0$. ✓ The
     ],
     questions: [
       {
-        number: 1, label: 'A1', title: 'An open box from a flat sheet', section: 'Section A · §6.6', marks: 2,
+        number: 1, label: 'A1', title: 'A cylinder from a rotated rectangle', section: 'Section A · §6.6', marks: 2,
         prompt: String.raw`
-An open-top box is made from a rectangular sheet of cardboard measuring $8$ cm by $15$ cm by cutting a square of side $x$ cm from each corner and folding up the sides. Which choice gives the volume of the box as a function of $x$, together with its correct domain?
+A rectangle with perimeter $36$ cm is rotated about one of its sides to form a cylinder. The largest possible volume of the cylinder is
 
-- **A.** $V(x)=x(8-2x)(15-2x)$, $\;0\le x\le4$.
-- **B.** $V(x)=x(8-2x)(15-2x)$, $\;0\le x\le7.5$.
-- **C.** $V(x)=x(8-x)(15-x)$, $\;0\le x\le8$.
-- **D.** $V(x)=x(8-2x)(15-2x)$, $\;0\le x\le8$.
-- **E.** $V(x)=x^{2}(8-2x)(15-2x)$, $\;0\le x\le4$.
+- **A.** $432\pi\ \text{cm}^{3}$.
+- **B.** $729\pi\ \text{cm}^{3}$.
+- **C.** $640\pi\ \text{cm}^{3}$.
+- **D.** $0$.
+- **E.** $864\pi\ \text{cm}^{3}$.
         `,
         solution: String.raw`
-**Answer: A.** ✓✓
+**Answer: E.** ✓✓
 
-Cutting a square of side $x$ from each corner removes $2x$ from each dimension of the sheet, so the base of the box is $(8-2x)$ by $(15-2x)$ and the height is $x$: $V(x)=x(8-2x)(15-2x)$.  The base width must be non-negative, $8-2x\ge0$, so $x\le4$ (the shorter side is the restriction); hence the domain is $[0,4]$. 
+Let the side perpendicular to the axis (the radius) be $x$ cm; the side along the axis (the height) is $18-x$ cm. Then
+$$V(x)=\pi x^{2}(18-x),\qquad V'(x)=\pi\left(36x-3x^{2}\right)=3\pi x(12-x),$$
+so $x=12$ (radius $12$, height $6$), and $V=0$ at the ends of the range. Hence $V_{\max}=\pi\cdot144\cdot6=864\pi$.
 
-- **B** and **D** use the wrong upper bound ($7.5$ would make $8-2x$ negative). **C** removes only $x$ from each dimension. **E** has an extra factor $x$.
+- **A**, **B** and **C** are $V(6)$, $V(9)$ (the square) and $V(8)$. **D** is the volume at the extremes of the range.
         `
       },
       {
@@ -553,34 +551,28 @@ $$\mu(x)=e^{-\ln x}=\frac1x.$$
         `
       },
       {
-        number: 7, label: 'B1', title: 'Optimization — an open container of fixed volume', section: 'Section B · §6.6', marks: 11,
+        number: 7, label: 'B1', title: 'Optimization — an open box from a square sheet; two numbers with a fixed sum', section: 'Section B · §6.6', marks: 11,
         prompt: String.raw`
-An open-top storage container has a square base and four vertical rectangular sides (no top). Its volume must be $32\ \text{m}^3$. The material for the base and sides is to be **minimised**, i.e. the total surface area $S$ (base plus four sides) must be as small as possible. Let the base have side $x$ metres and the container height $h$ metres.
+**(a)** Describe the steps of the Closed Interval Method for finding the absolute maximum and absolute minimum values of a continuous function $f$ on a closed interval $[a,b]$. (2)
 
-**(a)** Draw a labelled diagram. Use the volume constraint to eliminate $h$, and show that $S(x)=x^{2}+\dfrac{128}{x}$. (4)
+**(b)** A square sheet of cardboard of side $s$ cm has a square of side $x$ cm cut from each corner, and the sides are folded up to form an open box. The largest volume that such a box can have is $128\ \text{cm}^{3}$. Find $s$, and the value of $x$ that gives the largest volume. (5)
 
-**(b)** State the domain of $S$. (1)
-
-**(c)** Find the critical number(s) of $S$. (3)
-
-**(d)** Evaluate $\displaystyle\lim_{x\to0^{+}}S(x)$ and $\displaystyle\lim_{x\to\infty}S(x)$, and hence justify that the critical number gives the absolute minimum. State the dimensions of the best container and the minimum surface area. (3)
+**(c)** Two positive numbers $x$ and $y$ satisfy $x+y=30$. Find the values of $x$ and $y$ that make $x^{2}y$ as large as possible, and the maximum value of $x^{2}y$. (4)
         `,
         solution: String.raw`
-**(a)** *Diagram:* a box with a square base of side $x$ and height $h$, with no top. ✓
+**(a)** (1) Find all critical numbers of $f$ in the open interval $(a,b)$ (where $f'(x)=0$ or $f'(x)$ does not exist). ✓ (2) Evaluate $f$ at each of these critical numbers and at the endpoints $a$ and $b$; the largest value is the absolute maximum and the smallest is the absolute minimum. ✓
 
-Constraint: $x^2h=32$, so $h=\dfrac{32}{x^2}$. ✓ The surface area is the base $x^2$ plus four sides of area $xh$ each: ✓
-$$S=x^2+4xh=x^2+4x\cdot\frac{32}{x^2}=x^2+\frac{128}{x}.$$ ✓
+**(b)** The box has base $s-2x$ by $s-2x$ and height $x$:
+$$V(x)=x(s-2x)^{2},\qquad 0<x<\tfrac s2.$$ ✓
+$$V'(x)=(s-2x)^{2}-4x(s-2x)=(s-2x)(s-6x).$$ ✓
+$V'(x)=0$ gives $x=\dfrac s6$ or $x=\dfrac s2$; at $x=\frac s2$ (and $x=0$) the volume is $0$, so the maximum occurs at $x=\dfrac s6$, ✓
+$$V_{\max}=\frac s6\left(\frac{2s}{3}\right)^{2}=\frac{2s^{3}}{27}.$$
+Setting $\dfrac{2s^{3}}{27}=128$ gives $s^{3}=1728$, so $s=\boxed{12}$ cm. ✓ Then the best cut is $x=\dfrac{12}{6}=\boxed{2}$ cm. ✓
 
-**(b)** The side must be positive and has no upper bound, so the domain is the **open** interval $(0,\infty)$. ✓
-
-**(c)** $S'(x)=2x-\dfrac{128}{x^2}$ exists for all $x>0$, so set $S'(x)=0$: ✓✓
-$$2x=\frac{128}{x^2}\ \Longrightarrow\ x^3=64\ \Longrightarrow\ x=4.$$ ✓
-
-**(d)** The domain is not a closed interval, so we examine the end behaviour:
-$$\lim_{x\to0^+}\left(x^2+\frac{128}{x}\right)=\infty,\qquad\lim_{x\to\infty}\left(x^2+\frac{128}{x}\right)=\infty.$$ ✓
-$S$ is continuous on $(0,\infty)$, has the single critical number $x=4$, and $S\to\infty$ at both ends of the domain. So the critical point cannot be a maximum and must be the **absolute minimum**. ✓ (This end-behaviour argument replaces the Closed Interval Method when the domain is open: Study Guide 1 §6.3 states the Extreme Value Theorem only for closed intervals. Also $S'<0$ for $0<x<4$ and $S'>0$ for $x>4$.)
-
-The best container has $x=4$ m and $h=\dfrac{32}{16}=2$ m, and the minimum surface area is $S(4)=16+32=\boxed{48\ \text{m}^2}$. ✓
+**(c)** With $y=30-x$, let $f(x)=x^{2}(30-x)=30x^{2}-x^{3}$, $0<x<30$. ✓
+$f'(x)=60x-3x^{2}=3x(20-x)$. ✓
+$f'(x)=0\Rightarrow x=20$ (the root $x=0$ is an endpoint, where $f=0$). ✓
+Hence $x=\boxed{20}$, $y=\boxed{10}$ and the maximum value is $f(20)=400\cdot10=\boxed{4000}$. ✓
         `
       },
       {
@@ -633,25 +625,26 @@ $$\int_0^{\pi/3}\sec^3x\,dx=\left(\sqrt3+\frac12\ln\left(2+\sqrt3\right)\right)-
         `
       },
       {
-        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        number: 10, label: 'B4', title: 'Improper integrals — a comparison and a logarithm at a singular endpoint', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_{-2}^{3}\frac{dx}{x^{2}-1}$ is called improper, and say how it must be treated. (2)
+**(a)** Use the Comparison Theorem to determine whether $\displaystyle\int_1^{\infty}\frac{2+\cos x}{\sqrt x}\,dx$ converges or diverges. (3)
 
 **(b)** Determine whether the improper integral
-$$\int_0^{4}\frac{dx}{\sqrt{x\,(4-x)}}$$
-converges or diverges. If it converges, find its value. HINT: complete the square in $x(4-x)$. (8)
+$$\int_0^{1}\frac{\ln x}{\sqrt x}\,dx$$
+converges or diverges. If it converges, find its value. Justify every limit that you use. (7)
         `,
         solution: String.raw`
-**(a)** The integrand $\dfrac{1}{x^2-1}=\dfrac{1}{(x-1)(x+1)}$ is **undefined and unbounded at $x=1$ and at $x=-1$**, and both points lie **inside** $[-2,3]$. ✓ So the Fundamental Theorem cannot be used directly: the interval must be split at each discontinuity into pieces such as $\int_{-2}^{-1}$, $\int_{-1}^{1}$ (split again at an interior point, e.g. $0$) and $\int_1^3$, each written as a one-sided limit, and the integral converges only if **every** piece converges. ✓
+**(a)** Since $\cos x\ge-1$, we have $2+\cos x\ge1$, so $\dfrac{2+\cos x}{\sqrt x}\ge\dfrac{1}{\sqrt x}>0$ for $x\ge1$. ✓
+$\displaystyle\int_1^{\infty}x^{-1/2}dx=\lim_{t\to\infty}\left(2\sqrt t-2\right)=\infty$ diverges (a $p$-integral with $p=\frac12\le1$). ✓
+By the Comparison Theorem, the larger integral $\displaystyle\int_1^{\infty}\frac{2+\cos x}{\sqrt x}dx$ **diverges**. ✓
 
-**(b)** The integrand is unbounded at **both** endpoints $x=0$ and $x=4$, so split at the midpoint $x=2$: ✓
-$$\int_0^4=\int_0^2+\int_2^4,$$
-and each piece is a limit ($t\to0^+$ for the first, $s\to4^-$ for the second). Now $x(4-x)=4x-x^2=4-(x-2)^2$, so ✓
-$$\int\frac{dx}{\sqrt{4-(x-2)^2}}=\arcsin\frac{x-2}{2}.$$ ✓
-First piece: $\displaystyle\int_0^2=\lim_{t\to0^+}\Big[\arcsin\frac{x-2}{2}\Big]_t^2=\arcsin0-\arcsin(-1)=\frac\pi2.$ ✓✓
-Second piece: $\displaystyle\int_2^4=\lim_{s\to4^-}\Big[\arcsin\frac{x-2}{2}\Big]_2^s=\arcsin1-\arcsin0=\frac\pi2.$ ✓✓
-Both pieces converge, so the integral **converges** and ✓
-$$\int_0^4\frac{dx}{\sqrt{x(4-x)}}=\pi.$$
+**(b)** The integrand is undefined at $x=0$ (and $\ln x\to-\infty$), so the integral is improper at $0$ (Type II): $\displaystyle\int_0^{1}\frac{\ln x}{\sqrt x}dx=\lim_{t\to0^{+}}\int_t^{1}\frac{\ln x}{\sqrt x}dx$. ✓
+By parts with $u=\ln x$, $dv=x^{-1/2}dx$ ($du=\frac1x dx$, $v=2\sqrt x$): ✓
+$$\int\frac{\ln x}{\sqrt x}dx=2\sqrt x\ln x-\int\frac{2}{\sqrt x}dx=2\sqrt x\ln x-4\sqrt x.$$ ✓
+$$\int_t^{1}\frac{\ln x}{\sqrt x}dx=\Big[2\sqrt x\ln x-4\sqrt x\Big]_t^{1}=-4-\left(2\sqrt t\ln t-4\sqrt t\right).$$ ✓
+$\displaystyle\lim_{t\to0^{+}}\sqrt t\ln t=\lim_{t\to0^{+}}\frac{\ln t}{t^{-1/2}}=\lim_{t\to0^{+}}\frac{1/t}{-\tfrac12t^{-3/2}}=\lim_{t\to0^{+}}\left(-2\sqrt t\right)=0$ by l’Hôpital’s rule ✓, and $\sqrt t\to0$. ✓
+Therefore the integral **converges** and
+$$\int_0^{1}\frac{\ln x}{\sqrt x}dx=-4.$$ ✓
         `
       },
       {
@@ -764,7 +757,7 @@ With $y(1)=0$: $(C-1)e=0$, so $C=1$. ✓ The **particular solution** is $y=\left
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'A wire cut into a square and a circle (§6.6), products of sines and cosines with different arguments (§9.4), x eˣ cosh x and the cosⁿ reduction formula (§9.2), improper integral with a substitution, a recursive sequence with a geometric series, the Root Test, Maclaurin and Taylor series, verifying a repeated-root solution, a separable ODE with ∫dy/(y ln y), and a linear ODE with integrating factor (1+x²)^(3/2).',
+    topics: 'A cylinder of largest volume with an unknown surface area, the cheapest tin, and why the Extreme Value Theorem needs a closed interval (§6.6), products of sines and cosines with different arguments (§9.4), x eˣ cosh x and the cosⁿ reduction formula (§9.2), a symmetric-limit trap and an improper integral that converges only for one value of a constant (§10), a recursive sequence with a geometric series, the Root Test, Maclaurin and Taylor series, verifying a repeated-root solution, a separable ODE with ∫dy/(y ln y), and a linear ODE with integrating factor (1+x²)^(3/2).',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -774,24 +767,24 @@ With $y(1)=0$: $(C-1)e=0$, so $C=1$. ✓ The **particular solution** is $y=\left
     ],
     questions: [
       {
-        number: 1, label: 'A1', title: 'A constrained maximum on a closed interval', section: 'Section A · §6.6', marks: 2,
+        number: 1, label: 'A1', title: 'The largest closed box of a given surface area', section: 'Section A · §6.6', marks: 2,
         prompt: String.raw`
-Two non-negative numbers $x$ and $y$ satisfy $x+y=10$. The largest possible value of $xy^{2}$ is
+A closed box with a square base has a total surface area of $600\ \text{cm}^{2}$. The largest possible volume of the box is
 
-- **A.** $125$.
-- **B.** $\dfrac{2000}{27}$.
-- **C.** $\dfrac{4000}{27}$.
-- **D.** $\dfrac{1000}{27}$.
-- **E.** $0$.
+- **A.** $944\ \text{cm}^{3}$.
+- **B.** $1000\ \text{cm}^{3}$.
+- **C.** $936\ \text{cm}^{3}$.
+- **D.** $600\ \text{cm}^{3}$.
+- **E.** $2000\ \text{cm}^{3}$.
         `,
         solution: String.raw`
-**Answer: C.** ✓✓
+**Answer: B.** ✓✓
 
-Eliminate $x=10-y$: the objective is $f(y)=(10-y)y^2=10y^2-y^3$ with domain $0\le y\le10$ (so that $x\ge0$).  Then $f'(y)=20y-3y^2=y(20-3y)=0$ gives $y=0$ or $y=\frac{20}{3}$. Closed Interval Method:
-$$f(0)=0,\qquad f\!\left(\tfrac{20}3\right)=\tfrac{10}{3}\cdot\tfrac{400}{9}=\tfrac{4000}{27},\qquad f(10)=0.$$ 
-So the maximum is $\dfrac{4000}{27}\approx148.1$ (at $x=\frac{10}3$, $y=\frac{20}3$).
+Let the base have side $x$ and the height be $h$. From $2x^{2}+4xh=600$ we get $h=\dfrac{300-x^{2}}{2x}$, so
+$$V(x)=x^{2}h=\frac{x\left(300-x^{2}\right)}{2},\qquad V'(x)=\frac{300-3x^{2}}{2}=0\Rightarrow x=10.$$
+Then $h=\dfrac{200}{20}=10$ (a cube) and $V=1000$; $V=0$ at the ends of the range, so this is the maximum.
 
-- **A** is the value at $x=y=5$ (not the maximum). **B** swaps the roles of $x$ and $y$ ($x=\frac{20}3$, $y=\frac{10}3$). **D** is an arithmetic slip. **E** is the value at the endpoints, which is the minimum.
+- **A** and **C** are $V(8)$ and $V(12)$. **D** confuses the surface area with the volume. **E** forgets the factor $\frac12$.
         `
       },
       {
@@ -902,36 +895,28 @@ which is a function of $x$ times a function of $y$.
         `
       },
       {
-        number: 7, label: 'B1', title: 'Optimization — a wire cut into a square and a circle', section: 'Section B · §6.6', marks: 11,
+        number: 7, label: 'B1', title: 'Optimization — a cylinder with an unknown surface area; the cheapest tin', section: 'Section B · §6.6', marks: 11,
         prompt: String.raw`
-A piece of wire of length $24$ cm is cut into two pieces. One piece, of length $x$ cm, is bent into a **square**; the other piece is bent into a **circle**. Let $A$ be the total area enclosed by the square and the circle.
+**(a)** The function $f(x)=\dfrac1x$ is continuous on $(0,1]$ but has no absolute maximum value there. Explain why this does not contradict the Extreme Value Theorem. (2)
 
-**(a)** Draw a labelled diagram. Express the side of the square and the radius of the circle in terms of $x$, and hence show that
-$$A(x)=\frac{x^{2}}{16}+\frac{(24-x)^{2}}{4\pi}.$$ (4)
+**(b)** A closed cylinder has total surface area $S$. The largest volume that such a cylinder can have is $250\pi$. Find $S$, and the radius and height of the cylinder of largest volume. (5)
 
-**(b)** State the domain of $A$. (1)
-
-**(c)** Find the critical number(s) of $A$. (3)
-
-**(d)** Use the Closed Interval Method to find the absolute maximum and absolute minimum values of $A$, and say how the wire must be cut in each case. (3)
+**(c)** A closed cylindrical tin must hold $54\pi\ \text{cm}^{3}$. Find the radius and height that use the least metal, and the least surface area. (4)
         `,
         solution: String.raw`
-**(a)** *Diagram:* a wire of total length $24$ split into a piece $x$ (formed into a square) and a piece $24-x$ (formed into a circle). ✓
+**(a)** As $x\to0^{+}$, $\dfrac1x\to\infty$, so $f$ is unbounded and has no largest value. ✓ The Extreme Value Theorem needs a **closed** interval, and $(0,1]$ is not closed (it leaves out $0$), so the hypothesis fails and the theorem makes no promise. ✓
 
-The square has perimeter $x$, so its side is $\dfrac x4$ and its area is $\dfrac{x^2}{16}$. ✓ The circle has circumference $24-x=2\pi r$, so $r=\dfrac{24-x}{2\pi}$ and its area is ✓
-$$\pi r^2=\pi\cdot\frac{(24-x)^2}{4\pi^2}=\frac{(24-x)^2}{4\pi}.$$
-Adding the two areas gives $A(x)=\dfrac{x^2}{16}+\dfrac{(24-x)^2}{4\pi}$. ✓
+**(b)** From $S=2\pi r^{2}+2\pi rh$ we get $h=\dfrac{S-2\pi r^{2}}{2\pi r}$, so
+$$V(r)=\pi r^{2}h=\frac{Sr}{2}-\pi r^{3}.$$ ✓
+$V'(r)=\dfrac S2-3\pi r^{2}=0\Rightarrow r=\sqrt{\dfrac{S}{6\pi}}$. ✓ Since $V(0)=0$ and $V\to-\infty$ for large $r$, this gives the maximum:
+$$V_{\max}=r\left(\frac S2-\pi r^{2}\right)=r\left(\frac S2-\frac S6\right)=\frac{Sr}{3},\qquad V_{\max}^{2}=\frac{S^{2}}{9}\cdot\frac{S}{6\pi}=\frac{S^{3}}{54\pi}.$$ ✓
+Setting $V_{\max}=250\pi$: $S^{3}=54\pi\cdot62\,500\,\pi^{2}=3\,375\,000\,\pi^{3}$, so $S=\boxed{150\pi}$. ✓
+Then $r=\sqrt{\dfrac{150\pi}{6\pi}}=\boxed{5}$ and $h=\dfrac{150\pi-50\pi}{10\pi}=\boxed{10}$ (so $h=2r$). ✓
 
-**(b)** The piece for the square can be anything from none to all of the wire: the domain is the closed interval $[0,24]$. ✓
-
-**(c)** $A'(x)=\dfrac x8-\dfrac{24-x}{2\pi}$ exists everywhere, so set $A'(x)=0$: ✓✓
-$$\frac x8=\frac{24-x}{2\pi}\ \Longrightarrow\ \pi x=4(24-x)\ \Longrightarrow\ x=\frac{96}{\pi+4}.$$ ✓
-(This lies in $[0,24]$ since $\frac{96}{\pi+4}\approx13.4$.)
-
-**(d)** $A$ is continuous on $[0,24]$, so by the Extreme Value Theorem the absolute extrema are among the values at the critical number and endpoints: ✓
-$$A(0)=\frac{576}{4\pi}=\frac{144}{\pi}\approx45.8,\qquad A(24)=\frac{576}{16}=36,\qquad A\!\left(\frac{96}{\pi+4}\right)=\frac{576+144\pi}{(\pi+4)^2}=\frac{144}{\pi+4}\approx20.2.$$ ✓
-- **Absolute maximum:** $\dfrac{144}{\pi}$ cm², when $x=0$ — **all the wire is used for the circle**.
-- **Absolute minimum:** $\dfrac{144}{\pi+4}$ cm², when $x=\dfrac{96}{\pi+4}$ cm for the square (and $\dfrac{24\pi}{\pi+4}$ cm for the circle). ✓
+**(c)** $h=\dfrac{54\pi}{\pi r^{2}}=\dfrac{54}{r^{2}}$, so $S(r)=2\pi r^{2}+2\pi rh=2\pi r^{2}+\dfrac{108\pi}{r}$, $r>0$. ✓
+$S'(r)=4\pi r-\dfrac{108\pi}{r^{2}}=0\Rightarrow r^{3}=27\Rightarrow r=3$. ✓
+$S''(r)=4\pi+\dfrac{216\pi}{r^{3}}>0$, so this is the minimum. ✓
+With $r=3$: $h=6$ cm and $S_{\min}=18\pi+36\pi=\boxed{54\pi\ \text{cm}^{2}}$. ✓
         `
       },
       {
@@ -988,25 +973,27 @@ $$C_6=\frac{5}{16}\cdot\frac\pi2=\frac{5\pi}{32}.$$ ✓
         `
       },
       {
-        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        number: 10, label: 'B4', title: 'Improper integrals — a symmetric trap and a constant chosen for convergence', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_0^{\infty}\frac{dx}{x}$ is called improper, and say how it must be treated. (2)
+**(a)** A student argues that $\displaystyle\int_{-\infty}^{\infty}\frac{x}{1+x^{2}}\,dx=0$ because the integrand is an odd function. Show that this is wrong: the integral diverges. (3)
 
-**(b)** Determine whether the improper integral
-$$\int_0^{\infty}e^{-\sqrt{x}}\,dx$$
-converges or diverges. If it converges, find its value. HINT: substitute $u=\sqrt x$, then integrate by parts. (8)
+**(b)** Find all values of the constant $k$ for which the improper integral
+$$\int_1^{\infty}\left(\frac{2x}{x^{2}+1}-\frac{k}{x+1}\right)dx$$
+converges. For that value of $k$, find the value of the integral. (7)
         `,
         solution: String.raw`
-**(a)** It is improper for **two** reasons: the upper limit is infinite (Type I), and the integrand $\dfrac1x\to\infty$ as $x\to0^+$, so it is unbounded at the lower limit (Type II). ✓ The integral must be **split** at an interior point (say $x=1$) into $\int_0^1+\int_1^\infty$, each written as a limit, and it converges only if both pieces converge. (Here neither does.) ✓
+**(a)** The integral is improper at both ends, so by definition it is $\displaystyle\int_{-\infty}^{0}\frac{x}{1+x^{2}}dx+\int_0^{\infty}\frac{x}{1+x^{2}}dx$, and **each** piece must converge. ✓
+$$\int_0^{t}\frac{x}{1+x^{2}}dx=\tfrac12\ln\left(1+t^{2}\right)\to\infty\quad(t\to\infty),$$
+so the second piece diverges, and hence the whole integral diverges. ✓ The calculation $\displaystyle\lim_{t\to\infty}\int_{-t}^{t}\frac{x}{1+x^{2}}dx=0$ uses a *symmetric* limit, which is not the definition, so it does not give the value of the integral. ✓
 
-**(b)** There is no vertical asymptote ($e^{-\sqrt x}\to1$ as $x\to0^+$), so the only issue is the infinite upper limit:
-$$\int_0^\infty e^{-\sqrt x}dx=\lim_{t\to\infty}\int_0^te^{-\sqrt x}dx.$$ ✓
-Substitute $u=\sqrt x$, so $x=u^2$, $dx=2u\,du$, with limits $u=0$ to $u=\sqrt t$: ✓✓
-$$\int_0^te^{-\sqrt x}dx=2\int_0^{\sqrt t}u\,e^{-u}\,du.$$
-By parts ($u$, $e^{-u}du$): $\displaystyle\int ue^{-u}du=-ue^{-u}-e^{-u}$. ✓✓ So
-$$\int_0^te^{-\sqrt x}dx=2\Big[-(u+1)e^{-u}\Big]_0^{\sqrt t}=2-2\left(\sqrt t+1\right)e^{-\sqrt t}.$$ ✓
-Let $s=\sqrt t\to\infty$. Then $\dfrac{s+1}{e^{s}}\to0$ by l'Hôpital's rule ($\frac{1}{e^s}\to0$). ✓ So the limit exists: the integral **converges** and ✓
-$$\int_0^\infty e^{-\sqrt x}dx=2.$$
+**(b)** An antiderivative is $\ln\left(x^{2}+1\right)-k\ln(x+1)$ (since $\frac{2x}{x^{2}+1}$ is $\frac{f'}{f}$ for $f=x^{2}+1$). ✓
+$$\int_1^{t}\left(\frac{2x}{x^{2}+1}-\frac{k}{x+1}\right)dx=\ln\frac{t^{2}+1}{(t+1)^{k}}-\ln2+k\ln2.$$ ✓
+The limit depends on the behaviour of $\dfrac{t^{2}+1}{(t+1)^{k}}\sim t^{\,2-k}$:
+- if $k<2$ it tends to $\infty$, so the integral diverges to $+\infty$; ✓
+- if $k>2$ it tends to $0$, so $\ln$ of it tends to $-\infty$ and the integral diverges to $-\infty$. ✓
+
+For $k=2$, $\dfrac{t^{2}+1}{(t+1)^{2}}\to1$, so $\ln(\cdot)\to0$ and the integral **converges only for $k=2$**. ✓ Its value is
+$$0-\ln2+2\ln2=\ln2.$$ ✓✓
         `
       },
       {
@@ -1115,7 +1102,7 @@ With $y(0)=1$: $1=\tfrac13+C$, so $C=\tfrac23$. ✓ The **particular solution** 
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Parabola rectangle and a closed cylindrical tin (§6.6), exponential and logarithmic substitutions and a double-angle trigonometric integral (§9.1, §9.4), x² sinh x and the reduction formula for (arcsin x)ⁿ (§9.2), improper integral with an interior discontinuity and a cyclic integral, a telescoping series and the Comparison Test, interval of convergence and the product series of eˣ sin x with a limit, a separable ODE with sin⁴x, and a linear ODE with right-hand side eˣ sin x.',
+    topics: 'A window with an unknown perimeter, and a rectangle under a parabola, with the definition of a critical number (§6.6), exponential and logarithmic substitutions and a double-angle trigonometric integral (§9.1, §9.4), x² sinh x and the reduction formula for (arcsin x)ⁿ (§9.2), a Type II comparison and a parameter integral by two integrations by parts (§10), a telescoping series and the Comparison Test, interval of convergence and the product series of eˣ sin x with a limit, a separable ODE with sin⁴x, and a linear ODE with right-hand side eˣ sin x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -1125,22 +1112,24 @@ With $y(0)=1$: $1=\tfrac13+C$, so $C=\tfrac23$. ✓ The **particular solution** 
     ],
     questions: [
       {
-        number: 1, label: 'A1', title: 'A rectangle under a parabola', section: 'Section A · §6.6', marks: 2,
+        number: 1, label: 'A1', title: 'Fencing an enclosure with a divider', section: 'Section A · §6.6', marks: 2,
         prompt: String.raw`
-A rectangle has its base on the $x$-axis and its two upper vertices on the parabola $y=12-x^{2}$, symmetric about the $y$-axis. Let the upper right vertex be $(x,\,12-x^{2})$ with $x\ge0$. Which choice gives the area of the rectangle as a function of $x$, together with its correct domain?
+A farmer has $240$ m of fencing to build a rectangular enclosure divided into two equal pens by one fence parallel to a pair of its sides. The largest total area that can be enclosed is
 
-- **A.** $A(x)=2x\left(12-x^{2}\right)$, $\;0\le x\le2\sqrt3$.
-- **B.** $A(x)=x\left(12-x^{2}\right)$, $\;0\le x\le2\sqrt3$.
-- **C.** $A(x)=2x\left(12-x^{2}\right)$, $\;0\le x\le12$.
-- **D.** $A(x)=2x\left(12-x^{2}\right)$, $\;-2\sqrt3\le x\le2\sqrt3$.
-- **E.** $A(x)=2x^{2}(12-x)$, $\;0\le x\le12$.
+- **A.** $7200\ \text{m}^{2}$.
+- **B.** $2250\ \text{m}^{2}$.
+- **C.** $1800\ \text{m}^{2}$.
+- **D.** $2400\ \text{m}^{2}$.
+- **E.** $3600\ \text{m}^{2}$.
         `,
         solution: String.raw`
-**Answer: A.** ✓✓
+**Answer: D.** ✓✓
 
-The vertices are $(\pm x,0)$ and $(\pm x,\,12-x^2)$, so the rectangle has width $2x$ and height $12-x^{2}$. Hence $A(x)=2x\left(12-x^{2}\right)$.  The height cannot be negative, so $12-x^2\ge0$, i.e. $x\le2\sqrt3$; and $x\ge0$ because it is a half-width. The domain is $\left[0,\,2\sqrt3\right]$.
+Let each of the three parallel fences have length $x$ and the other two sides length $y$. Then $3x+2y=240$, so $y=\dfrac{240-3x}{2}$ and
+$$A(x)=xy=\frac{x(240-3x)}{2},\qquad A'(x)=120-3x=0\Rightarrow x=40,\ y=60.$$
+$A=0$ at the ends of the range, so $A_{\max}=40\cdot60=2400$.
 
-- **B** forgets that the width is $2x$. **C** allows a negative height. **D** allows a negative half-width. **E** is the wrong expression.
+- **A** forgets the divider ($\frac{240^{2}}{8}$). **B** and **C** are $A(30)$ and $A(60)$. **E** is $60^{2}$.
         `
       },
       {
@@ -1244,31 +1233,28 @@ Separate: $\dfrac{dy}{y}=\dfrac{2\,dx}{x}$, so $\ln|y|=2\ln x+C$ and $y=Ax^{2}$.
         `
       },
       {
-        number: 7, label: 'B1', title: 'Optimization — a closed cylindrical tin', section: 'Section B · §6.6', marks: 11,
+        number: 7, label: 'B1', title: 'Optimization — a window with an unknown perimeter; a rectangle under a parabola', section: 'Section B · §6.6', marks: 11,
         prompt: String.raw`
-A manufacturer makes closed cylindrical tins, each of volume $54\pi\ \text{cm}^{3}$. A tin has radius $r$ cm and height $h$ cm; the top, bottom and side are all made from the same material. The manufacturer wants the tin with the **smallest total surface area** $S$.
+**(a)** Define a *critical number* of a function $f$. (2)
 
-**(a)** Draw a labelled diagram. Use the volume constraint to eliminate $h$, and show that $$S(r)=2\pi r^{2}+\frac{108\pi}{r}.$$ (4)
+**(b)** A window consists of a rectangle topped by a semicircle whose diameter is the width of the rectangle. The total perimeter of the window is $P$ metres. The largest area that such a window can have is $\dfrac{8}{4+\pi}\ \text{m}^{2}$. Find $P$. (5)
 
-**(b)** State the domain of $S$. (1)
-
-**(c)** Find the critical number(s) of $S$. (3)
-
-**(d)** Use the Second Derivative Test to show that the critical number gives the absolute minimum. State the dimensions of the best tin and the minimum surface area. (3)
+**(c)** A rectangle has its base on the $x$-axis, symmetric about the $y$-axis, and its two upper vertices on the parabola $y=12-x^{2}$. Find the dimensions of the rectangle of largest area, and that area. (4)
         `,
         solution: String.raw`
-**(a)** *Diagram:* a cylinder with radius $r$ and height $h$; the surface consists of a top disc, a bottom disc and a curved side. ✓
+**(a)** A critical number of $f$ is a number $c$ **in the domain of $f$** ✓ such that **$f'(c)=0$ or $f'(c)$ does not exist**. ✓
 
-The volume constraint is $\pi r^{2}h=54\pi$, so $h=\dfrac{54}{r^{2}}$. ✓ The objective function is the total surface area: two discs plus the side, ✓
-$$S=2\pi r^{2}+2\pi rh=2\pi r^{2}+2\pi r\cdot\frac{54}{r^{2}}=2\pi r^{2}+\frac{108\pi}{r}.$$ ✓
+**(b)** Let the semicircle have radius $r$ and the rectangle have height $h$. The perimeter is $P=2r+2h+\pi r$, so $h=\dfrac{P-2r-\pi r}{2}$ and
+$$A=2rh+\frac{\pi r^{2}}{2}=Pr-\left(2+\frac\pi2\right)r^{2}.$$ ✓
+$$A'(r)=P-(4+\pi)r=0\Rightarrow r=\frac{P}{4+\pi}.$$ ✓
+$A''(r)=-(4+\pi)<0$, so this is the maximum, ✓
+$$A_{\max}=\frac{P^{2}}{4+\pi}-\frac{(4+\pi)}{2}\cdot\frac{P^{2}}{(4+\pi)^{2}}=\frac{P^{2}}{2(4+\pi)}.$$ ✓
+Setting $\dfrac{P^{2}}{2(4+\pi)}=\dfrac{8}{4+\pi}$ gives $P^{2}=16$, so $P=\boxed{4}$ m. ✓
 
-**(b)** The radius must be positive and there is no upper restriction, so the domain is the **open interval** $(0,\infty)$. ✓
-
-**(c)** $S'(r)=4\pi r-\dfrac{108\pi}{r^{2}}=\dfrac{4\pi\left(r^{3}-27\right)}{r^{2}}$. It is defined for all $r>0$, so critical numbers come from $S'(r)=0$: ✓✓
-$$r^{3}=27\ \Longrightarrow\ r=3.$$ ✓
-
-**(d)** $S''(r)=4\pi+\dfrac{216\pi}{r^{3}}>0$ for every $r>0$, so $S$ is concave up on its whole domain. ✓ Hence the critical number $r=3$ gives the **absolute minimum**. ✓ (Theorem 6.11 in Study Guide 1 gives a *local* minimum; because $S$ is concave up on its whole domain, the graph lies above its tangent line at $r=3$, so the local minimum is the absolute minimum.) The height is $h=\dfrac{54}{9}=6$ (so $h=2r$), and ✓
-$$S(3)=2\pi(9)+\frac{108\pi}{3}=18\pi+36\pi=\boxed{54\pi\ \text{cm}^{2}}.$$
+**(c)** Let the upper vertices be $(\pm x,\,12-x^{2})$. Then
+$$A(x)=2x\left(12-x^{2}\right)=24x-2x^{3},\qquad 0<x<2\sqrt3.$$ ✓
+$A'(x)=24-6x^{2}=0\Rightarrow x=2$. ✓ Since $A=0$ at both ends, this is the maximum. ✓
+The rectangle has width $2x=\boxed{4}$, height $12-4=\boxed{8}$ and area $\boxed{32}$. ✓
         `
       },
       {
@@ -1327,28 +1313,31 @@ $$\int_0^1(\arcsin x)^2dx=\frac{\pi^2}{4}-2\approx0.467.$$ ✓
         `
       },
       {
-        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        number: 10, label: 'B4', title: 'Improper integrals — a comparison and a parameter integral', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_{-2}^{\infty}\frac{dx}{(x+1)^{2}}$ is called improper, and say how it must be treated. (2)
+**(a)** Use the Comparison Theorem to determine whether $\displaystyle\int_0^{1}\frac{dx}{\sqrt x+x^{3}}$ converges or diverges. (3)
 
-**(b)** Determine whether the improper integral
-$$\int_0^{\infty}e^{-x}\sin 2x\,dx$$
-converges or diverges. If it converges, find its value. Justify every limit that you use. (8)
+**(b)** Let $a>0$ and $b$ be real constants. Show that
+$$\int_0^{\infty}e^{-ax}\sin bx\,dx=\frac{b}{a^{2}+b^{2}}.$$
+Justify every limit that you use. (7)
         `,
         solution: String.raw`
-**(a)** There are **two** problems. The upper limit is infinite (Type I), and the integrand $\dfrac{1}{(x+1)^{2}}$ is undefined, and unbounded, at $x=-1$, which lies **inside** the interval $(-2,\infty)$ (Type II). ✓ The integral must therefore be split at $x=-1$ (and at a convenient point such as $0$ to isolate the infinite limit):
-$$\int_{-2}^{-1}+\int_{-1}^{0}+\int_{0}^{\infty},$$
-each part being defined as a limit; the original integral converges only if **every** part converges. ✓
+**(a)** For $0<x\le1$, $\sqrt x+x^{3}\ge\sqrt x>0$, so $0<\dfrac{1}{\sqrt x+x^{3}}\le\dfrac{1}{\sqrt x}$. ✓
+$\displaystyle\int_0^{1}x^{-1/2}dx=\lim_{s\to0^{+}}\left(2-2\sqrt s\right)=2$ converges (a $p$-integral with $p=\frac12<1$). ✓
+By the Comparison Theorem, $\displaystyle\int_0^{1}\frac{dx}{\sqrt x+x^{3}}$ **converges**. ✓
 
-**(b)** The upper limit is infinite, so the integral is $\displaystyle\lim_{t\to\infty}\int_0^{t}e^{-x}\sin2x\,dx$. ✓
-
-Let $I=\displaystyle\int e^{-x}\sin2x\,dx$. Integrate by parts with $u=\sin2x$, $dv=e^{-x}dx$: ✓
-$$I=-e^{-x}\sin2x+2\int e^{-x}\cos2x\,dx.$$
-Integrate by parts again ($u=\cos2x$, $dv=e^{-x}dx$): $\displaystyle\int e^{-x}\cos2x\,dx=-e^{-x}\cos2x-2I$. ✓ Hence
-$$I=-e^{-x}\sin2x-2e^{-x}\cos2x-4I\ \Longrightarrow\ I=-\frac{e^{-x}\left(\sin2x+2\cos2x\right)}{5}.$$ ✓✓
-$$\int_0^{t}e^{-x}\sin2x\,dx=-\frac{e^{-t}\left(\sin2t+2\cos2t\right)}{5}+\frac25.$$ ✓
-Since $\left|\sin2t+2\cos2t\right|\le3$, we have $\left|e^{-t}\left(\sin2t+2\cos2t\right)\right|\le3e^{-t}\to0$, so this term tends to $0$ by the **Squeeze Theorem**. ✓ The limit exists, so the integral **converges** and ✓
-$$\int_0^{\infty}e^{-x}\sin2x\,dx=\frac25.$$
+**(b)** $\displaystyle\int_0^{\infty}e^{-ax}\sin bx\,dx=\lim_{t\to\infty}I(t)$ where $I(t)=\int_0^{t}e^{-ax}\sin bx\,dx$. ✓
+First integration by parts ($u=\sin bx$, $dv=e^{-ax}dx$):
+$$I(t)=\Big[-\tfrac1ae^{-ax}\sin bx\Big]_0^{t}+\frac ba\int_0^{t}e^{-ax}\cos bx\,dx.$$ ✓
+Second integration by parts ($u=\cos bx$, $dv=e^{-ax}dx$):
+$$\int_0^{t}e^{-ax}\cos bx\,dx=\Big[-\tfrac1ae^{-ax}\cos bx\Big]_0^{t}-\frac ba\,I(t).$$ ✓
+Substituting,
+$$I(t)=-\frac{e^{-at}\sin bt}{a}-\frac{b}{a^{2}}e^{-at}\cos bt+\frac{b}{a^{2}}-\frac{b^{2}}{a^{2}}I(t),$$
+so
+$$\left(1+\frac{b^{2}}{a^{2}}\right)I(t)=\frac{b}{a^{2}}-\frac{e^{-at}\sin bt}{a}-\frac{b\,e^{-at}\cos bt}{a^{2}}.$$ ✓
+Because $a>0$, $e^{-at}\to0$ as $t\to\infty$, while $|\sin bt|\le1$ and $|\cos bt|\le1$; by the Squeeze Theorem $e^{-at}\sin bt\to0$ and $e^{-at}\cos bt\to0$. ✓✓
+So the limit exists (the integral **converges**) and
+$$\int_0^{\infty}e^{-ax}\sin bx\,dx=\frac{b/a^{2}}{1+b^{2}/a^{2}}=\frac{b}{a^{2}+b^{2}}.$$ ✓
         `
       },
       {
@@ -1469,7 +1458,7 @@ With $y(0)=0$: $0=-\tfrac12+C$, so $C=\tfrac12$. ✓ The **particular solution**
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Norman window and a rectangle in a semicircle (§6.6), inverse-sine and logarithmic integrals and cos²x sin 3x (§9.1, §9.4), x sinh²x cosh x and the reduction formula for xⁿ sin x (§9.2), improper integral with a substitution, alternating series, power series from 1/(1+x³) with an error bound and the Taylor series of e²ˣ about 1, implicit verification of a solution, a separable ODE with an implicit solution, and a linear ODE needing integration by parts.',
+    topics: 'A cone of fixed slant height with an unknown value, a rectangle in a triangle, and a proof of Fermat’s Theorem (§6.6), inverse-sine and logarithmic integrals and cos²x sin 3x (§9.1, §9.4), x sinh²x cosh x and the reduction formula for xⁿ sin x (§9.2), a Type I divergence by comparison and an integral with two bad endpoints (§10), alternating series, power series from 1/(1+x³) with an error bound and the Taylor series of e²ˣ about 1, implicit verification of a solution, a separable ODE with an implicit solution, and a linear ODE needing integration by parts.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -1479,24 +1468,24 @@ With $y(0)=0$: $0=-\tfrac12+C$, so $C=\tfrac12$. ✓ The **particular solution**
     ],
     questions: [
       {
-        number: 1, label: 'A1', title: 'A window of fixed perimeter', section: 'Section A · §6.6', marks: 2,
+        number: 1, label: 'A1', title: 'Least fencing against a wall', section: 'Section A · §6.6', marks: 2,
         prompt: String.raw`
-A window is made from a rectangle topped by a semicircle whose diameter is the top side of the rectangle. The rectangle has width $2r$ and height $h$. The total length of the boundary of the window (the bottom edge, the two vertical sides and the semicircular arc) is $12$ m. Which choice gives the area of the window as a function of $r$, together with its correct domain?
+A rectangular pen of area $200\ \text{m}^{2}$ is built against a long straight wall, which forms one of its sides. The other three sides are fenced. The least length of fencing needed is
 
-- **A.** $A(r)=12r-(2+\pi)r^{2}$, $\;0\le r\le\dfrac{12}{2+\pi}$.
-- **B.** $A(r)=12r-\left(2+\dfrac\pi2\right)r^{2}$, $\;0\le r\le6$.
-- **C.** $A(r)=12r-\left(2+\dfrac\pi2\right)r^{2}$, $\;0\le r\le\dfrac{12}{2+\pi}$.
-- **D.** $A(r)=6r-\left(1+\dfrac\pi4\right)r^{2}$, $\;0\le r\le\dfrac{12}{2+\pi}$.
-- **E.** $A(r)=12r-\left(2+\dfrac\pi2\right)r^{2}$, $\;0\le r\le\dfrac{12}{\pi}$.
+- **A.** $10$ m.
+- **B.** $50$ m.
+- **C.** $40$ m.
+- **D.** $40\sqrt2$ m.
+- **E.** $20$ m.
         `,
         solution: String.raw`
 **Answer: C.** ✓✓
 
-The boundary is $2r+2h+\pi r=12$, so $h=\dfrac{12-2r-\pi r}{2}$. The area is the rectangle plus the semicircle:
-$$A=2rh+\frac{\pi r^{2}}{2}=r\left(12-2r-\pi r\right)+\frac{\pi r^{2}}{2}=12r-\left(2+\frac\pi2\right)r^{2}.$$ ✓
-The height must satisfy $h\ge0$, i.e. $12-(2+\pi)r\ge0$, so $r\le\dfrac{12}{2+\pi}$. ✓
+Let the two sides perpendicular to the wall have length $x$; the side parallel to the wall has length $\dfrac{200}{x}$. The fencing needed is
+$$F(x)=2x+\frac{200}{x},\qquad F'(x)=2-\frac{200}{x^{2}}=0\Rightarrow x=10.$$
+$F\to\infty$ as $x\to0^{+}$ and as $x\to\infty$ (and $F''(x)=\frac{400}{x^{3}}>0$), so this is the minimum: $F(10)=20+20=40$.
 
-- **A** uses the wrong coefficient (the semicircle's contribution is mishandled). **B** and **E** have the wrong upper bound on $r$. **D** halves every term.
+- **A** and **E** are side lengths ($x$ and $\frac{200}{x}$). **B** is $F(5)$. **D** is the minimum perimeter if all four sides were fenced ($4\sqrt{200}$).
         `
       },
       {
@@ -1597,33 +1586,27 @@ A first-order equation is linear if it can be written $\dfrac{dy}{dx}+P(x)y=Q(x)
         `
       },
       {
-        number: 7, label: 'B1', title: 'Optimization — a rectangle inscribed in a semicircle', section: 'Section B · §6.6', marks: 11,
+        number: 7, label: 'B1', title: 'Optimization — a cone of fixed slant height; a rectangle in a triangle', section: 'Section B · §6.6', marks: 11,
         prompt: String.raw`
-A rectangle is inscribed in a semicircle of radius $10$ cm: one side of the rectangle lies along the diameter, and the two upper vertices lie on the arc. Let $(x,y)$, with $x\ge0$, be the upper right vertex, so the rectangle has width $2x$ and height $y$. We want the rectangle of **largest area**.
+**(a)** Prove Fermat’s Theorem in one case: if $f$ has a local maximum at $c$ and $f'(c)$ exists, then $f'(c)=0$. (2)
 
-**(a)** Draw a labelled diagram. Express $y$ in terms of $x$, and hence show that the area is $$A(x)=2x\sqrt{100-x^{2}}.$$ (4)
+**(b)** A right circular cone has slant height $L$ cm. The largest volume that such a cone can have is $16\sqrt3\,\pi\ \text{cm}^{3}$. Find $L$, and the height and base radius of the cone of largest volume. (5)
 
-**(b)** State the domain of $A$. (1)
-
-**(c)** Find the critical number(s) of $A$ in the interior of the domain. (3)
-
-**(d)** Use the Closed Interval Method to find the dimensions of the rectangle of largest area, and that area. (3)
+**(c)** An isosceles triangle has base $12$ cm and height $8$ cm. A rectangle is inscribed in the triangle with one side on the base. Find the largest possible area of the rectangle. (4)
         `,
         solution: String.raw`
-**(a)** *Diagram:* a semicircle of radius $10$ centred at the origin, with a rectangle whose base lies on the diameter from $(-x,0)$ to $(x,0)$ and whose upper vertices are $(\pm x,y)$ on the arc. ✓
+**(a)** Since $f(c)$ is a local maximum, $f(c+h)\le f(c)$ for small $h$, so $\dfrac{f(c+h)-f(c)}{h}\le0$ for $h>0$ and $\ge0$ for $h<0$. ✓ Because $f'(c)$ exists, the right-hand limit ($\le0$) and the left-hand limit ($\ge0$) are both equal to $f'(c)$, forcing $f'(c)=0$. ✓
 
-The vertex $(x,y)$ lies on the circle $x^{2}+y^{2}=100$ with $y\ge0$, so $y=\sqrt{100-x^{2}}$. ✓✓ The area is width times height:
-$$A=2x\,y=2x\sqrt{100-x^{2}}.$$ ✓
+**(b)** With height $h$ and base radius $r$ we have $r^{2}=L^{2}-h^{2}$, so
+$$V(h)=\frac\pi3\,r^{2}h=\frac\pi3\left(L^{2}h-h^{3}\right).$$ ✓
+$V'(h)=\dfrac\pi3\left(L^{2}-3h^{2}\right)=0\Rightarrow h=\dfrac{L}{\sqrt3}$. ✓ Since $V=0$ at $h=0$ and $h=L$, this is the maximum, ✓
+$$V_{\max}=\frac\pi3\cdot\frac{L}{\sqrt3}\cdot\frac{2L^{2}}{3}=\frac{2\pi L^{3}}{9\sqrt3}.$$
+Setting $\dfrac{2\pi L^{3}}{9\sqrt3}=16\sqrt3\,\pi$ gives $L^{3}=\dfrac{16\cdot3\cdot9}{2}=216$, so $L=\boxed{6}$ cm. ✓
+Then $h=\dfrac{6}{\sqrt3}=\boxed{2\sqrt3}$ cm and $r=\sqrt{36-12}=\boxed{2\sqrt6}$ cm. ✓
 
-**(b)** The half-width satisfies $0\le x\le10$, so the domain is the **closed interval** $[0,10]$. ✓
-
-**(c)** Using the product and chain rules, for $0<x<10$: ✓
-$$A'(x)=2\sqrt{100-x^{2}}-\frac{2x^{2}}{\sqrt{100-x^{2}}}=\frac{2\left(100-2x^{2}\right)}{\sqrt{100-x^{2}}}.$$ ✓
-$A'(x)=0$ when $100-2x^{2}=0$, i.e. $x=\sqrt{50}=5\sqrt2$. ($A'$ is undefined only at the endpoint $x=10$.) ✓
-
-**(d)** $A$ is continuous on $[0,10]$, so compare the critical number and the endpoints: ✓
-$$A(0)=0,\qquad A\!\left(5\sqrt2\right)=2\left(5\sqrt2\right)\left(5\sqrt2\right)=100,\qquad A(10)=0.$$ ✓
-The absolute maximum is $\boxed{100\ \text{cm}^{2}}$. The rectangle has width $2x=10\sqrt2$ cm and height $y=\sqrt{50}=5\sqrt2$ cm. ✓
+**(c)** Let the rectangle have width $w$ and height $y$. Similar triangles (the small triangle above the rectangle has base $w$ and height $8-y$) give $\dfrac{w}{12}=\dfrac{8-y}{8}$, so $y=8-\dfrac{2w}{3}$. ✓
+$$A(w)=wy=8w-\frac{2w^{2}}{3},\qquad 0<w<12.$$ ✓
+$A'(w)=8-\dfrac{4w}{3}=0\Rightarrow w=6$. ✓ Since $A=0$ at $w=0$ and $w=12$, this is the maximum: $y=4$ and $A_{\max}=6\cdot4=\boxed{24\ \text{cm}^{2}}$. ✓
         `
       },
       {
@@ -1684,23 +1667,26 @@ $$\int_0^{\pi/2}x^{3}\sin x\,dx=\frac{3\pi^{2}}{4}-6.$$ ✓
         `
       },
       {
-        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        number: 10, label: 'B4', title: 'Improper integrals — a comparison and an integral with two bad endpoints', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_{1}^{2}\frac{dx}{\ln x}$ is called improper, and say how it must be treated. (2)
+**(a)** Use the Comparison Theorem to determine whether $\displaystyle\int_2^{\infty}\frac{dx}{\sqrt x-1}$ converges or diverges. (3)
 
 **(b)** Determine whether the improper integral
-$$\int_0^{1}\frac{\arcsin x}{\sqrt{1-x^{2}}}\,dx$$
-converges or diverges. If it converges, find its value. Justify every limit that you use. (8)
+$$\int_1^{\infty}\frac{dx}{x\sqrt{x^{2}-1}}$$
+converges or diverges. If it converges, find its value. HINT: $\dfrac{d}{dx}\left(\operatorname{arcsec}x\right)=\dfrac{1}{x\sqrt{x^{2}-1}}$ for $x>1$, with $\operatorname{arcsec}1=0$, $\operatorname{arcsec}2=\dfrac\pi3$ and $\displaystyle\lim_{x\to\infty}\operatorname{arcsec}x=\dfrac\pi2$. (7)
         `,
         solution: String.raw`
-**(a)** At the **lower endpoint** $x=1$ we have $\ln1=0$, so the integrand $\dfrac{1}{\ln x}$ is undefined and unbounded there (it tends to $+\infty$ as $x\to1^{+}$). ✓ The integral is improper (Type II) and means $\displaystyle\lim_{t\to1^{+}}\int_t^{2}\frac{dx}{\ln x}$. ✓
+**(a)** For $x\ge2$, $0<\sqrt x-1<\sqrt x$, so $\dfrac{1}{\sqrt x-1}>\dfrac{1}{\sqrt x}>0$. ✓
+$\displaystyle\int_2^{\infty}x^{-1/2}dx=\lim_{t\to\infty}\left(2\sqrt t-2\sqrt2\right)=\infty$ diverges. ✓
+By the Comparison Theorem, $\displaystyle\int_2^{\infty}\frac{dx}{\sqrt x-1}$ **diverges**. ✓
 
-**(b)** As $x\to1^{-}$, $\sqrt{1-x^{2}}\to0$ while $\arcsin x\to\frac\pi2$, so the integrand is unbounded at the **upper endpoint**: the integral is improper (Type II) and equals $\displaystyle\lim_{t\to1^{-}}\int_0^{t}\frac{\arcsin x}{\sqrt{1-x^{2}}}\,dx$. ✓✓
-
-Let $u=\arcsin x$, so $du=\dfrac{dx}{\sqrt{1-x^{2}}}$; $x=0\Rightarrow u=0$ and $x=t\Rightarrow u=\arcsin t$. ✓✓
-$$\int_0^{t}\frac{\arcsin x}{\sqrt{1-x^{2}}}\,dx=\int_0^{\arcsin t}u\,du=\frac{(\arcsin t)^{2}}{2}.$$ ✓
-Since $\arcsin$ is continuous, $\arcsin t\to\arcsin1=\dfrac\pi2$ as $t\to1^{-}$. ✓ The limit exists, so the integral **converges** and ✓
-$$\int_0^{1}\frac{\arcsin x}{\sqrt{1-x^{2}}}\,dx=\frac12\left(\frac\pi2\right)^{2}=\frac{\pi^{2}}{8}.$$ ✓
+**(b)** The interval is infinite **and** the integrand is undefined at $x=1$ (where $\sqrt{x^{2}-1}=0$), so the integral is improper at both ends. We split at $x=2$: ✓
+$$\int_1^{\infty}=\int_1^{2}\frac{dx}{x\sqrt{x^{2}-1}}+\int_2^{\infty}\frac{dx}{x\sqrt{x^{2}-1}},$$
+and both pieces must converge. ✓
+$$\int_1^{2}=\lim_{s\to1^{+}}\Big[\operatorname{arcsec}x\Big]_s^{2}=\frac\pi3-\operatorname{arcsec}1=\frac\pi3-0=\frac\pi3.$$ ✓✓
+$$\int_2^{\infty}=\lim_{t\to\infty}\Big[\operatorname{arcsec}x\Big]_2^{t}=\frac\pi2-\frac\pi3=\frac\pi6.$$ ✓
+Both limits exist, so the integral **converges** ✓ and
+$$\int_1^{\infty}\frac{dx}{x\sqrt{x^{2}-1}}=\frac\pi3+\frac\pi6=\frac\pi2.$$ ✓
         `
       },
       {
@@ -1818,7 +1804,7 @@ $$y=x^{4}\left[(x-1)e^{x}+2\right].$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'Nearest point on a curve and a cone in a sphere (§6.6), an exponential substitution over a completed square and mixed even powers (§9.1, §9.4), x sech²x and the reduction formula for 1/(1+x²)ⁿ (§9.2), comparison test and an arctangent improper integral, squeeze theorem and Ratio Test, the Maclaurin series of x eˣ from the coefficient formula, a separable ODE with an arcsine solution and a linear ODE with integrating factor ln x.',
+    topics: 'The closest point on a parabola to an unknown point and a cone in a sphere (Fermat’s Theorem) (§6.6), an exponential substitution over a completed square and mixed even powers (§9.1, §9.4), x sech²x and the reduction formula for 1/(1+x²)ⁿ (§9.2), a Comparison Theorem convergence and a reduction formula for ∫xⁿe^{−x}dx (§10), squeeze theorem and Ratio Test, the Maclaurin series of x eˣ from the coefficient formula, a separable ODE with an arcsine solution and a linear ODE with integrating factor ln x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -1828,24 +1814,24 @@ $$y=x^{4}\left[(x-1)e^{x}+2\right].$$
     ],
     questions: [
       {
-        number: 1, label: 'A1', title: 'The point of a curve nearest a given point', section: 'Section A · §6.6', marks: 2,
+        number: 1, label: 'A1', title: 'Maximum profit from a demand function', section: 'Section A · §6.6', marks: 2,
         prompt: String.raw`
-Let $P=\left(x,\sqrt x\right)$ be a point on the curve $y=\sqrt x$, and let $D$ be the **square** of the distance from $P$ to the point $(4,0)$. Which choice gives $D$ as a function of $x$, together with its correct domain?
+The quantity demanded of an item is $q=60-2p$ units when the price is $p$ rand, and each unit costs $\text{R}6$ to make. The maximum possible profit is
 
-- **A.** $D(x)=(x-4)^{2}+x^{2}$, $\;x\ge0$.
-- **B.** $D(x)=(x-4)^{2}+x$, $\;x\ge0$.
-- **C.** $D(x)=\sqrt{(x-4)^{2}+x}$, $\;x\ge0$.
-- **D.** $D(x)=(x-4)^{2}+x$, $\;x\ge4$.
-- **E.** $D(x)=(x-4)^{2}+\sqrt x$, $\;x\ge0$.
+- **A.** $\text{R}18$.
+- **B.** $\text{R}24$.
+- **C.** $\text{R}450$.
+- **D.** $\text{R}216$.
+- **E.** $\text{R}288$.
         `,
         solution: String.raw`
-**Answer: B.** ✓✓
+**Answer: E.** ✓✓
 
-The horizontal distance is $x-4$ and the vertical distance is $\sqrt x-0$, so
-$$D=(x-4)^{2}+\left(\sqrt x\right)^{2}=(x-4)^{2}+x.$$ ✓
-$\sqrt x$ is defined only for $x\ge0$, and there is no further restriction, so the domain is $[0,\infty)$. ✓
+Profit $=$ (price $-$ cost) $\times$ quantity:
+$$P(p)=(p-6)(60-2p)=-2p^{2}+72p-360,\qquad P'(p)=72-4p=0\Rightarrow p=18.$$
+$P''(p)=-4<0$, so this is the maximum: $P(18)=12\cdot24=288$.
 
-- **A** uses $y=x$ instead of $\sqrt x$. **C** is the distance itself, not its square. **D** wrongly restricts to $x\ge4$. **E** forgets to square $\sqrt x$.
+- **A** is the best *price*, **B** the quantity sold. **C** is the maximum *revenue* ($p=15$), forgetting the cost. **D** is $P(12)$.
         `
       },
       {
@@ -1948,35 +1934,28 @@ $$y''+2y'+y=\left[(x-2)+2(1-x)+x\right]e^{-x}=0.$$ ✓
         `
       },
       {
-        number: 7, label: 'B1', title: 'Optimization — a cone inscribed in a sphere', section: 'Section B · §6.6', marks: 11,
+        number: 7, label: 'B1', title: 'Optimization — the closest point on a parabola; a cone in a sphere', section: 'Section B · §6.6', marks: 11,
         prompt: String.raw`
-A right circular cone is inscribed in a sphere of radius $3$ cm: its apex is at the top of the sphere and its base circle lies on the sphere. Let $h$ cm be the height of the cone (the distance from the apex to the plane of the base) and $r$ cm the radius of its base. We want the cone of **largest volume**.
+**(a)** State Fermat’s Theorem. (2)
 
-**(a)** Draw a labelled cross-section. Use Pythagoras' theorem to show that $r^{2}=6h-h^{2}$, and hence that $$V(h)=\frac\pi3\left(6h^{2}-h^{3}\right).$$ (4)
+**(b)** The points on the parabola $y=x^{2}$ that are closest to the point $(0,c)$, where $c>\tfrac12$, are $(1,1)$ and $(-1,1)$. Find the value of $c$, and the least distance from $(0,c)$ to the parabola. (5)
 
-**(b)** State the domain of $V$. (1)
-
-**(c)** Find the critical number(s) of $V$. (3)
-
-**(d)** Use the Closed Interval Method to find the dimensions and the volume of the largest cone. (3)
+**(c)** A right circular cone is inscribed in a sphere of radius $3$ cm. Find the largest possible volume of the cone. (4)
         `,
         solution: String.raw`
-**(a)** *Cross-section:* a circle of radius $3$ with centre $O$; the apex $A$ at the top, a horizontal chord of half-length $r$ at distance $h$ below $A$. ✓
+**(a)** If $f$ has a **local maximum or local minimum** at $c$ ✓ and $f'(c)$ exists, then $f'(c)=0$. ✓
 
-The centre $O$ is $3$ below the apex, so it is at distance $|h-3|$ from the plane of the base. A radius to a point of the base circle forms a right triangle: ✓
-$$r^{2}+(h-3)^{2}=3^{2}\ \Longrightarrow\ r^{2}=9-(h-3)^{2}=6h-h^{2}.$$ ✓
-The volume of a cone is $V=\dfrac13\pi r^{2}h$, so ✓
-$$V(h)=\frac\pi3\left(6h-h^{2}\right)h=\frac\pi3\left(6h^{2}-h^{3}\right).$$
+**(b)** The square of the distance from $(0,c)$ to $\left(x,x^{2}\right)$ is
+$$D(x)=x^{2}+\left(x^{2}-c\right)^{2}.$$ ✓
+$$D'(x)=2x+4x\left(x^{2}-c\right)=2x\left(2x^{2}-2c+1\right).$$ ✓
+So $D'(x)=0$ at $x=0$ or $x^{2}=c-\tfrac12$. The closest points have $x=\pm1\neq0$, so they must satisfy $1=c-\tfrac12$, giving $c=\boxed{\tfrac32}$. ✓
+Check against $x=0$: $D(0)=c^{2}=\tfrac94$, while $D(\pm1)=1+\left(1-\tfrac32\right)^{2}=\tfrac54<\tfrac94$ (and $D\to\infty$ as $|x|\to\infty$), so $x=\pm1$ really gives the minimum. ✓
+The least distance is $\sqrt{\tfrac54}=\boxed{\dfrac{\sqrt5}{2}}$. ✓
 
-**(b)** The height ranges from $0$ to the diameter $6$, so the domain is the **closed interval** $[0,6]$. ✓
-
-**(c)** $V'(h)=\dfrac\pi3\left(12h-3h^{2}\right)=\pi h(4-h)$, which exists for all $h$. ✓ Setting $V'(h)=0$ gives ✓✓
-$$h=0\quad\text{or}\quad h=4,$$
-where $h=0$ is also an endpoint of the domain.
-
-**(d)** $V$ is continuous on $[0,6]$, so by the Extreme Value Theorem compare the critical number and endpoints: ✓
-$$V(0)=0,\qquad V(4)=\frac\pi3\left(96-64\right)=\frac{32\pi}{3},\qquad V(6)=\frac\pi3\left(216-216\right)=0.$$ ✓
-The absolute maximum is $\boxed{\dfrac{32\pi}{3}\ \text{cm}^{3}}$, attained when $h=4$ cm and $r^{2}=6(4)-16=8$, i.e. $r=2\sqrt2$ cm. ✓
+**(c)** Let the cone have height $h$ and base radius $r$. The base lies at distance $h-3$ from the centre, so $r^{2}=9-(h-3)^{2}=6h-h^{2}$. ✓
+$$V(h)=\frac\pi3r^{2}h=\frac\pi3\left(6h^{2}-h^{3}\right),\qquad 0<h<6.$$ ✓
+$V'(h)=\dfrac\pi3\left(12h-3h^{2}\right)=\pi h(4-h)=0\Rightarrow h=4$. ✓ Since $V=0$ at $h=0$ and $h=6$, this is the maximum:
+$$V_{\max}=\frac\pi3(96-64)=\boxed{\frac{32\pi}{3}\ \text{cm}^{3}}.$$ ✓
         `
       },
       {
@@ -2028,25 +2007,25 @@ $$J_3=\frac{1}{16}+\frac34J_2=\frac1{16}+\frac3{16}+\frac{3\pi}{32}=\frac14+\fra
         `
       },
       {
-        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        number: 10, label: 'B4', title: 'Improper integrals — a comparison and a reduction formula', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_0^{\pi}\frac{dx}{\sin x}$ is called improper. (2)
+**(a)** Use the Comparison Theorem to determine whether $\displaystyle\int_1^{\infty}\frac{3+\sin x}{x^{2}}\,dx$ converges or diverges. (3)
 
-**(b)** **(i)** Use the Comparison Test to determine whether $\displaystyle\int_2^{\infty}\frac{dx}{\ln x}$ converges or diverges. (3)
-
-**(ii)** Determine whether the improper integral
-$$\int_0^{\infty}\frac{dx}{x^{2}+6x+10}$$
-converges or diverges. If it converges, find its value. Justify every limit that you use. (5)
+**(b)** For each integer $n\ge0$ let $I_n=\displaystyle\int_0^{\infty}x^{n}e^{-x}\,dx$ (assume it converges). Use integration by parts to show that $I_n=n\,I_{n-1}$ for $n\ge1$, justifying every limit, and hence find $I_4$. (7)
         `,
         solution: String.raw`
-**(a)** $\sin x=0$ at both $x=0$ and $x=\pi$, so the integrand $\dfrac{1}{\sin x}$ is undefined and unbounded at **both endpoints**. ✓ The integral is doubly improper (Type II at each end): it must be split at an interior point such as $\frac\pi2$ and each half treated as a limit. ✓
+**(a)** Since $\sin x\le1$, $0<\dfrac{3+\sin x}{x^{2}}\le\dfrac{4}{x^{2}}$ for $x\ge1$. ✓
+$\displaystyle\int_1^{\infty}\frac{4}{x^{2}}dx=\lim_{t\to\infty}\left(4-\frac4t\right)=4$ converges. ✓
+By the Comparison Theorem, $\displaystyle\int_1^{\infty}\frac{3+\sin x}{x^{2}}dx$ **converges**. ✓
 
-**(b)(i)** For $x\ge2$ we have $0<\ln x<x$, so $\dfrac{1}{\ln x}>\dfrac1x>0$. ✓ The integral $\displaystyle\int_2^{\infty}\frac{dx}{x}=\lim_{t\to\infty}\left(\ln t-\ln2\right)=\infty$ **diverges** ($p=1$). ✓ By the Comparison Test, $\displaystyle\int_2^{\infty}\frac{dx}{\ln x}$ **diverges**. ✓
-
-**(ii)** The upper limit is infinite (Type I), so the integral is $\displaystyle\lim_{t\to\infty}\int_0^{t}\frac{dx}{x^{2}+6x+10}$. ✓ Complete the square: $x^{2}+6x+10=(x+3)^{2}+1$, so ✓
-$$\int_0^{t}\frac{dx}{(x+3)^{2}+1}=\Big[\arctan(x+3)\Big]_0^{t}=\arctan(t+3)-\arctan3.$$ ✓
-As $t\to\infty$, $\arctan(t+3)\to\dfrac\pi2$, so the limit exists and the integral **converges**: ✓
-$$\int_0^{\infty}\frac{dx}{x^{2}+6x+10}=\frac\pi2-\arctan3=\arctan\frac13.$$ ✓
+**(b)** For $n\ge1$ and $t>0$, integrate by parts with $u=x^{n}$, $dv=e^{-x}dx$: ✓
+$$\int_0^{t}x^{n}e^{-x}dx=\Big[-x^{n}e^{-x}\Big]_0^{t}+n\int_0^{t}x^{n-1}e^{-x}dx=-t^{n}e^{-t}+n\int_0^{t}x^{n-1}e^{-x}dx.$$
+(At $x=0$ the boundary term is $0$ because $n\ge1$.) ✓
+Now $\displaystyle\lim_{t\to\infty}t^{n}e^{-t}=\lim_{t\to\infty}\frac{t^{n}}{e^{t}}=0$ by applying l’Hôpital’s rule $n$ times. ✓
+Letting $t\to\infty$ gives $I_n=n\,I_{n-1}$. ✓
+Next, $I_0=\displaystyle\lim_{t\to\infty}\int_0^{t}e^{-x}dx=\lim_{t\to\infty}\left(1-e^{-t}\right)=1$. ✓
+Hence
+$$I_4=4I_3=4\cdot3\,I_2=4\cdot3\cdot2\,I_1=4\cdot3\cdot2\cdot1\,I_0=\boxed{24}.$$ ✓✓
         `
       },
       {
@@ -2158,7 +2137,7 @@ With $y(e)=3$: $3=1+C$, so $C=2$. ✓ The **particular solution** is $y=\ln x+\d
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'A closed box and a field divided by a fence along a river (§6.6), a logarithmic substitution over a completed square and a product of three sines (§9.1, §9.4), sinh x ln(cosh x) and the reduction formula for xⁿe^{−x²} (§9.2), an interior discontinuity, the integral of (ln x)² and the Comparison Theorem (§10), an alternating series with ln n / n, a hyperbolic Maclaurin series and a limit by series, a separable ODE needing ∫ln x with a blow-up interval, and a linear ODE with integrating factor sin x.',
+    topics: 'A box with an unknown volume given its cheapest cost, and a profit maximisation (§6.6), a logarithmic substitution over a completed square and a product of three sines (§9.1, §9.4), sinh x ln(cosh x) and the reduction formula for xⁿe^{−x²} (§9.2), an interior singularity that cancels and a logarithmic Type II integral (§10), an alternating series with ln n / n, a hyperbolic Maclaurin series and a limit by series, a separable ODE needing ∫ln x with a blow-up interval, and a linear ODE with integrating factor sin x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -2168,22 +2147,24 @@ With $y(e)=3$: $3=1+C$, so $C=2$. ✓ The **particular solution** is $y=\ln x+\d
     ],
     questions: [
       {
-        number: 1, label: 'A1', title: 'Setting up an optimization problem', section: 'Section A · §6.6', marks: 2,
+        number: 1, label: 'A1', title: 'A cylinder inscribed in a sphere', section: 'Section A · §6.6', marks: 2,
         prompt: String.raw`
-A closed rectangular box has a square base of side $x$ and height $h$. Its total surface area (top, bottom and four sides) is $150$. Eliminating $h$, the volume of the box is a function of $x$ alone. Which choice gives that function together with its correct domain?
+A right circular cylinder is inscribed in a sphere of radius $3$ cm. The largest possible volume of the cylinder is
 
-- **A.** $V(x)=\dfrac{x^{2}\left(75-x^{2}\right)}{2}$, $\;0\le x\le5\sqrt3$.
-- **B.** $V(x)=\dfrac{x\left(150-x^{2}\right)}{4}$, $\;0\le x\le\sqrt{150}$.
-- **C.** $V(x)=\dfrac{x\left(75-x^{2}\right)}{2}$, $\;0\le x\le75$.
-- **D.** $V(x)=\dfrac{x\left(75-x^{2}\right)}{2}$, $\;0\le x\le5\sqrt3$.
-- **E.** $V(x)=2x\left(75-x^{2}\right)$, $\;0\le x\le5\sqrt3$.
+- **A.** $16\pi\ \text{cm}^{3}$.
+- **B.** $20\pi\ \text{cm}^{3}$.
+- **C.** $\dfrac{81\pi}{4}\ \text{cm}^{3}$.
+- **D.** $12\sqrt3\,\pi\ \text{cm}^{3}$.
+- **E.** $36\pi\ \text{cm}^{3}$.
         `,
         solution: String.raw`
 **Answer: D.** ✓✓
 
-The surface area is $2x^{2}$ (top and bottom) plus $4xh$ (four sides), so $2x^{2}+4xh=150$ and $h=\dfrac{75-x^{2}}{2x}$. Then $V=x^{2}h=\dfrac{x\left(75-x^{2}\right)}{2}$. The height cannot be negative, so $x^{2}\le75$, i.e. $x\le5\sqrt3$. The domain is $\left[0,5\sqrt3\right]$.
+Let the cylinder have height $h$ and radius $r$. The right-angled triangle through the centre gives $r^{2}+\dfrac{h^{2}}{4}=9$, so
+$$V(h)=\pi r^{2}h=\pi\left(9h-\frac{h^{3}}{4}\right),\qquad V'(h)=\pi\left(9-\frac{3h^{2}}{4}\right)=0\Rightarrow h=2\sqrt3.$$
+Then $r^{2}=9-3=6$ and $V=\pi\cdot6\cdot2\sqrt3=12\sqrt3\,\pi\approx20.8\pi$; $V=0$ at the ends of the range, so this is the maximum.
 
-- **B** is the formula for a box with **no top** (surface area $x^{2}+4xh$). **C** has the right function but the domain $[0,75]$ would make $h$ negative. **A** and **E** have the wrong power of $x$ in the function.
+- **A**, **B** and **C** are $V(2)$, $V(4)$ and $V(3)$ (nice values of $h$, but not the critical number). **E** is the surface area of the sphere ($4\pi\cdot3^{2}$), not a volume.
         `
       },
       {
@@ -2286,34 +2267,28 @@ Separate: $\dfrac{dy}{y}=e^{x}\,dx$. Integrate: $\ln|y|=e^{x}+C_1$, so $y=Ce^{e^
         `
       },
       {
-        number: 7, label: 'B1', title: 'Optimization — a field divided by a fence along a river', section: 'Section B · §6.6', marks: 11,
+        number: 7, label: 'B1', title: 'Optimization — a box with an unknown volume; maximum profit', section: 'Section B · §6.6', marks: 11,
         prompt: String.raw`
-A farmer has $240$ m of fencing. She will build a rectangular field beside a long straight river; **no fence is needed along the river**. The field is divided into two equal pens by a fence **perpendicular to the river**. So the fencing is used for the far side (parallel to the river, length $y$ m) and for **three** fences perpendicular to the river (the two ends and the divider, each of length $x$ m). She wants the **largest possible total area**.
+**(a)** Give an example of a function $f$ with $f'(0)=0$ that has neither a local maximum nor a local minimum at $x=0$, and explain why. (2)
 
-**(a)** Draw a labelled diagram. Use the length of fencing available to write $y$ in terms of $x$, and hence write the total area $A$ as a function of $x$ alone. (4)
+**(b)** An open-top box has a square base of side $x$ metres and a volume of $V\ \text{m}^{3}$. The base costs $\text{R}5$ per $\text{m}^{2}$ and the four sides cost $\text{R}2$ per $\text{m}^{2}$. The cheapest possible such box costs $\text{R}240$. Find $V$, and the dimensions of the cheapest box. (5)
 
-**(b)** State the domain of $A$. (1)
-
-**(c)** Find the critical number(s) of $A$. (3)
-
-**(d)** Use the Closed Interval Method to show that the critical number gives the absolute maximum area. State the dimensions of the best field and its area. (3)
+**(c)** A company sells $q$ units per day at a price of $p=100-2q$ rand per unit. The daily cost of producing $q$ units is $C(q)=20q+500$ rand. Find the number of units that maximises the daily profit, and the maximum daily profit. (4)
         `,
         solution: String.raw`
-**(a)** *Diagram:* a rectangle with the river along the bottom side. Three vertical fences of length $x$ (left end, divider, right end) and one horizontal fence of length $y$ along the top. ✓
+**(a)** For example $f(x)=x^{3}$: $f'(x)=3x^{2}$ so $f'(0)=0$, ✓ but $f$ is increasing on the whole real line ($f'\ge0$), so $f(x)<f(0)$ for $x<0$ and $f(x)>f(0)$ for $x>0$: there is no local maximum or minimum at $0$. ✓
 
-The fencing used is $3x+y=240$, so ✓
-$$y=240-3x.$$ ✓
-The area (objective function) is $A=xy$, so ✓
-$$A(x)=x(240-3x)=240x-3x^{2}.$$
+**(b)** The height is $h=\dfrac{V}{x^{2}}$, so the cost is
+$$C(x)=5x^{2}+2\cdot4xh=5x^{2}+\frac{8V}{x},\qquad x>0.$$ ✓
+$C'(x)=10x-\dfrac{8V}{x^{2}}=0\Rightarrow x^{3}=\dfrac{4V}{5}$. ✓ Since $C\to\infty$ as $x\to0^{+}$ and as $x\to\infty$ (and $C''(x)>0$), this gives the minimum. At this point $\dfrac{8V}{x}=\dfrac{8}{x}\cdot\dfrac{5x^{3}}{4}=10x^{2}$, so
+$$C_{\min}=5x^{2}+10x^{2}=15x^{2}.$$ ✓
+Setting $15x^{2}=240$ gives $x=4$ m, and then $V=\dfrac{5x^{3}}{4}=\boxed{80\ \text{m}^{3}}$. ✓
+The cheapest box has base $4\text{ m}\times4\text{ m}$ and height $h=\dfrac{80}{16}=\boxed{5\text{ m}}$. ✓
 
-**(b)** Both lengths are non-negative: $x\ge0$ and $y=240-3x\ge0$, i.e. $x\le80$. The domain is the **closed interval** $[0,80]$. ✓
-
-**(c)** $A'(x)=240-6x$ exists for all $x$, so the critical numbers come from $A'(x)=0$: ✓✓
-$$240-6x=0\ \Longrightarrow\ x=40.$$ ✓
-
-**(d)** $A$ is continuous on the closed interval $[0,80]$, so by the **Extreme Value Theorem** it has an absolute maximum there, found by the **Closed Interval Method**: ✓
-$$A(0)=0,\qquad A(40)=240(40)-3(1600)=9600-4800=4800,\qquad A(80)=0.$$ ✓
-The largest value is $A(40)=4800$. The best field has $x=40$ m and $y=240-120=120$ m (each pen $40$ m by $60$ m), with total area $\boxed{4800\ \text{m}^{2}}$. ✓
+**(c)** Revenue is $q\,p=q(100-2q)$, so the profit is
+$$P(q)=q(100-2q)-(20q+500)=-2q^{2}+80q-500.$$ ✓
+$P'(q)=80-4q=0\Rightarrow q=\boxed{20}$ units per day. ✓
+$P''(q)=-4<0$, so this is the maximum. ✓ $P(20)=-800+1600-500=\boxed{300}$ rand per day. ✓
         `
       },
       {
@@ -2365,32 +2340,27 @@ So $\displaystyle\int_0^1x^5e^{-x^2}dx=1-\dfrac{5}{2e}\approx0.080$.
         `
       },
       {
-        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        number: 10, label: 'B4', title: 'Improper integrals — an interior singularity and a logarithmic Type II', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_0^{4}\frac{dx}{(x-2)^{2/3}}$ is called improper, and say how it must be treated. (2)
+**(a)** Determine whether the improper integral $\displaystyle\int_{-1}^{1}\frac{dx}{\sqrt[3]{x}}$ converges or diverges, and find its value if it converges. (3)
 
 **(b)** Determine whether the improper integral
-$$\int_0^{1}\left(\ln x\right)^{2}dx$$
-converges or diverges. If it converges, find its value. Justify every limit that you use. (4)
-
-**(c)** Use the Comparison Theorem to determine whether $\displaystyle\int_{1}^{\infty}\frac{dx}{\sqrt{x^{3}+1}}$ converges or diverges. (4)
+$$\int_0^{1/2}\frac{dx}{x\,(\ln x)^{2}}$$
+converges or diverges. If it converges, find its value. Justify every limit that you use. (7)
         `,
         solution: String.raw`
-**(a)** The integrand is undefined at $x=2$, which lies **inside** $[0,4]$, and $\dfrac{1}{(x-2)^{2/3}}\to\infty$ there. ✓ The Fundamental Theorem cannot be applied across the discontinuity, so the integral is improper (Type II). It must be **split at $x=2$**,
-$$\int_0^{2}\frac{dx}{(x-2)^{2/3}}+\int_2^{4}\frac{dx}{(x-2)^{2/3}},$$
-and each piece treated as a limit; the original integral converges only if **both** pieces converge. ✓
+**(a)** The integrand is undefined at $x=0$, inside the interval, so we split: $\displaystyle\int_{-1}^{0}x^{-1/3}dx+\int_0^{1}x^{-1/3}dx$, and **both** must converge. ✓
+$$\int_0^{1}x^{-1/3}dx=\lim_{s\to0^{+}}\Big[\tfrac32x^{2/3}\Big]_s^{1}=\tfrac32,\qquad\int_{-1}^{0}x^{-1/3}dx=\lim_{s\to0^{-}}\Big[\tfrac32x^{2/3}\Big]_{-1}^{s}=0-\tfrac32=-\tfrac32.$$ ✓
+Both pieces converge, so the integral **converges** and equals $\tfrac32-\tfrac32=0$. ✓
 
-**(b)** The integrand is unbounded as $x\to0^+$, so the integral is improper of Type II:
-$$\int_0^1(\ln x)^2dx=\lim_{t\to0^+}\int_t^1(\ln x)^2dx.$$ ✓
-Integrate by parts twice ($u=\ln^2x$, $dv=dx$, then $u=\ln x$, $dv=dx$):
-$$\int(\ln x)^2dx=x\ln^2x-2\int\ln x\,dx=x\ln^2x-2x\ln x+2x.$$ ✓
-So $\displaystyle\int_t^1(\ln x)^2dx=2-\left(t\ln^2t-2t\ln t+2t\right)$. As $t\to0^+$: $t\to0$, and by L'Hôpital
-$$\lim_{t\to0^+}t\ln t=\lim_{t\to0^+}\frac{\ln t}{1/t}=\lim_{t\to0^+}\frac{1/t}{-1/t^2}=0,\qquad \lim_{t\to0^+}t\ln^2t=\lim_{t\to0^+}\frac{\ln^2t}{1/t}=\lim_{t\to0^+}\frac{2\ln t}{-1/t}=0.$$ ✓
-Hence the integral **converges** and equals $2$. ✓
-
-**(c)** For $x\ge1$ we have $x^{3}+1>x^{3}$, so
-$$0<\frac{1}{\sqrt{x^{3}+1}}<\frac{1}{\sqrt{x^{3}}}=x^{-3/2}.$$ ✓✓
-Now $\displaystyle\int_{1}^{\infty}x^{-3/2}dx=\lim_{t\to\infty}\left[-2x^{-1/2}\right]_1^t=2$ converges ($p=\frac32>1$). ✓ By the **Comparison Theorem** (a smaller non-negative integrand than a convergent integral), $\displaystyle\int_{1}^{\infty}\frac{dx}{\sqrt{x^{3}+1}}$ **converges**. ✓
+**(b)** The integrand is undefined at $x=0$ (and $\ln x\to-\infty$ there), so the integral is improper (Type II) at $0$: ✓
+$$\int_0^{1/2}\frac{dx}{x(\ln x)^{2}}=\lim_{s\to0^{+}}\int_s^{1/2}\frac{dx}{x(\ln x)^{2}}.$$ ✓
+Let $u=\ln x$, $du=\frac1x\,dx$: ✓
+$$\int\frac{dx}{x(\ln x)^{2}}=\int\frac{du}{u^{2}}=-\frac1u=-\frac{1}{\ln x}.$$ ✓
+$$\int_s^{1/2}\frac{dx}{x(\ln x)^{2}}=\left[-\frac1{\ln x}\right]_s^{1/2}=-\frac{1}{\ln\frac12}+\frac{1}{\ln s}=\frac{1}{\ln2}+\frac{1}{\ln s}.$$ ✓
+As $s\to0^{+}$, $\ln s\to-\infty$, so $\dfrac1{\ln s}\to0$. ✓
+Therefore the integral **converges** and
+$$\int_0^{1/2}\frac{dx}{x(\ln x)^{2}}=\frac{1}{\ln2}.$$ ✓
         `
       },
       {
@@ -2509,7 +2479,7 @@ $$y=\frac{1-5e^{\cos x}}{\sin x}.$$
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'A pen against a wall and a cable across a river (§6.6), a hyperbolic integral, a tangent substitution and sin⁴x cos⁴x (§9.1, §9.4), the cyclic integral of sin x cosh x and the reduction formula for eˣ sinⁿx (§9.2), 1/x² across zero, a hyperbolic improper integral and the Comparison Theorem (§10), the Root Test, a comparison for n^{1/n} − 1 and a geometric sum, the radius of convergence of Σ nⁿxⁿ/n!, tan x by comparing coefficients, verifying a family of solutions, a separable ODE with a completed-square integral, and a linear ODE with integrating factor sec x + tan x.',
+    topics: 'A rectangle in an ellipse with an unknown semi-axis, the cheapest speed of a ship, and why points where f′ does not exist must be tested (§6.6), a hyperbolic integral, a tangent substitution and sin⁴x cos⁴x (§9.1, §9.4), the cyclic integral of sin x cosh x and the reduction formula for eˣ sinⁿx (§9.2), a two-piece Comparison Theorem argument and a doubly infinite integral with a normalising constant (§10), the Root Test, a comparison for n^{1/n} − 1 and a geometric sum, the radius of convergence of Σ nⁿxⁿ/n!, tan x by comparing coefficients, verifying a family of solutions, a separable ODE with a completed-square integral, and a linear ODE with integrating factor sec x + tan x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -2519,22 +2489,24 @@ $$y=\frac{1-5e^{\cos x}}{\sin x}.$$
     ],
     questions: [
       {
-        number: 1, label: 'A1', title: 'A pen against a wall', section: 'Section A · §6.6', marks: 2,
+        number: 1, label: 'A1', title: 'The cheapest open box', section: 'Section A · §6.6', marks: 2,
         prompt: String.raw`
-A rectangular pen is built against a long straight wall using $60$ m of fencing. No fence is needed along the wall, so the fencing forms the two sides of length $x$ that are perpendicular to the wall and the side of length $y$ parallel to it. Using the length of fencing to eliminate $y$, the area of the pen is a function of $x$. Which choice gives that function together with its correct domain?
+An open-top box with a square base must hold $32\ \text{m}^{3}$. The smallest possible surface area of the box is
 
-- **A.** $A(x)=x(60-2x)$, $\;0\le x\le60$.
-- **B.** $A(x)=x(60-x)$, $\;0\le x\le60$.
-- **C.** $A(x)=x(60-2x)$, $\;0\le x\le30$.
-- **D.** $A(x)=x(30-x)$, $\;0\le x\le30$.
-- **E.** $A(x)=x(60-3x)$, $\;0\le x\le20$.
+- **A.** $48\ \text{m}^{2}$.
+- **B.** $68\ \text{m}^{2}$.
+- **C.** $80\ \text{m}^{2}$.
+- **D.** $32\ \text{m}^{2}$.
+- **E.** $96\ \text{m}^{2}$.
         `,
         solution: String.raw`
-**Answer: C.** ✓✓
+**Answer: A.** ✓✓
 
-The fencing is $2x+y=60$, so $y=60-2x$ and $A=xy=x(60-2x)$. Both lengths are non-negative: $x\ge0$ and $y=60-2x\ge0$ give $x\le30$. The domain is $[0,30]$.
+Let the base have side $x$ and the height be $h=\dfrac{32}{x^{2}}$. The surface area (base plus four sides) is
+$$S(x)=x^{2}+4xh=x^{2}+\frac{128}{x},\qquad S'(x)=2x-\frac{128}{x^{2}}=0\Rightarrow x=4.$$
+$S\to\infty$ as $x\to0^{+}$ and as $x\to\infty$ (and $S''(x)=2+\frac{256}{x^{3}}>0$), so this is the minimum: $S(4)=16+32=48$.
 
-- **B** counts only one side of length $x$. **A** has the right function but the domain $[0,60]$ would give a negative $y$. **D** halves the area incorrectly. **E** counts three sides of length $x$ (that is the shape with a divider).
+- **B** and **C** are $S(2)$ and $S(8)$. **D** is the volume, not the area. **E** is double the answer.
         `
       },
       {
@@ -2640,38 +2612,29 @@ Differentiate: $\dfrac{dy}{dx}=\dfrac{d}{dx}(1-x)^{-1}=(1-x)^{-2}=\dfrac{1}{(1-x
         `
       },
       {
-        number: 7, label: 'B1', title: 'Optimization — a cable across a river', section: 'Section B · §6.6', marks: 11,
+        number: 7, label: 'B1', title: 'Optimization — a rectangle in an ellipse with an unknown semi-axis; the cheapest speed of a ship', section: 'Section B · §6.6', marks: 11,
         prompt: String.raw`
-A straight river is $3$ km wide. A power station $A$ is on one bank. A factory $B$ is on the opposite bank, $8$ km downstream from the point $P$ that is directly opposite $A$. A cable is laid from $A$ **under the river** to a point $Q$ on the factory's bank, and then **along the bank** from $Q$ to $B$. Let $x$ km be the distance $PQ$.
+**(a)** Explain why, in the Closed Interval Method, we must test the numbers where $f'(x)$ does not exist as well as the numbers where $f'(x)=0$. Give an example. (2)
 
-Laying cable under water costs R$5000$ per km and laying it along the bank costs R$3000$ per km. The company wants the **cheapest** route. Work with the cost $C$ measured in **thousands of rand**.
+**(b)** A rectangle with sides parallel to the coordinate axes is inscribed in the ellipse $\dfrac{x^{2}}{a^{2}}+\dfrac{y^{2}}{16}=1$, where $a>0$. The largest possible area of such a rectangle is $24$. Find $a$. (5)
 
-**(a)** Draw a labelled diagram. Find the length of the underwater section in terms of $x$, and hence write the cost $C$ as a function of $x$ alone. (4)
-
-**(b)** State the domain of $C$. (1)
-
-**(c)** Find the critical number(s) of $C$. (3)
-
-**(d)** Use the Closed Interval Method to show that the critical number gives the absolute minimum cost. State the position of $Q$ and the minimum cost. (3)
+**(c)** The fuel cost of a ship is $0.001v^{3}+128$ rand per hour when it travels at $v$ km/h. Find the speed that minimises the cost per kilometre, and that minimum cost per kilometre. (4)
         `,
         solution: String.raw`
-**(a)** *Diagram:* the river as a strip of width $3$ with $A$ on the near bank and $P$ directly opposite on the far bank; $Q$ is $x$ from $P$ towards $B$, and $B$ is $8$ from $P$ on the same bank. ✓
+**(a)** A continuous function can reach its maximum or minimum at a corner or cusp, where there is no derivative, so such points are also critical numbers and must be tested. ✓ For example $f(x)=|x|$ has its absolute minimum at $x=0$, where $f'(0)$ does not exist. ✓
 
-The underwater section $AQ$ is the hypotenuse of a right triangle with sides $3$ and $x$ (Pythagoras): ✓
-$$AQ=\sqrt{9+x^{2}}.$$
-The section along the bank is $QB=8-x$. ✓ The cost (objective function), in thousands of rand, is
-$$C(x)=5\sqrt{9+x^{2}}+3(8-x).$$ ✓
+**(b)** Let the vertex in the first quadrant be $(x,y)$ with $y=4\sqrt{1-\dfrac{x^{2}}{a^{2}}}$. The rectangle has area
+$$A=4xy=16x\sqrt{1-\frac{x^{2}}{a^{2}}},\qquad 0<x<a.$$ ✓
+It is easier to maximise $A^{2}=256x^{2}\left(1-\dfrac{x^{2}}{a^{2}}\right)=256\left(x^{2}-\dfrac{x^{4}}{a^{2}}\right)$:
+$$\frac{d}{dx}A^{2}=256\left(2x-\frac{4x^{3}}{a^{2}}\right)=0\Rightarrow x^{2}=\frac{a^{2}}{2}.$$ ✓✓
+Then $x=\dfrac{a}{\sqrt2}$ and $y=\dfrac{4}{\sqrt2}$, and $A=0$ at $x=0$ and $x=a$, so $A_{\max}=4\cdot\dfrac{a}{\sqrt2}\cdot\dfrac4{\sqrt2}=8a$. ✓
+Setting $8a=24$ gives $a=\boxed{3}$. ✓
 
-**(b)** $Q$ must lie on the bank between $P$ and $B$, so $0\le x\le8$. The domain is the **closed interval** $[0,8]$. ✓
-
-**(c)** $C'(x)=\dfrac{5x}{\sqrt{9+x^{2}}}-3$ exists for all $x$, so critical numbers come from $C'(x)=0$: ✓
-$$5x=3\sqrt{9+x^{2}}\ \Longrightarrow\ 25x^{2}=9\left(9+x^{2}\right)\ \Longrightarrow\ 16x^{2}=81\ \Longrightarrow\ x=\frac94.$$ ✓✓
-(Only the positive root is in the domain, and it satisfies the original equation since both sides are positive.)
-
-**(d)** $C$ is continuous on $[0,8]$, so by the **Extreme Value Theorem** it has an absolute minimum there; compare the critical number and the endpoints: ✓
-$$C(0)=5(3)+3(8)=39,\qquad C\!\left(\tfrac94\right)=5\sqrt{9+\tfrac{81}{16}}+3\left(8-\tfrac94\right)=5\cdot\tfrac{15}{4}+3\cdot\tfrac{23}{4}=\tfrac{75+69}{4}=36,$$
-$$C(8)=5\sqrt{73}>5\cdot8=40.$$ ✓
-The smallest value is $C\!\left(\frac94\right)=36$. The cable should reach the far bank at $Q$, $\dfrac94=2.25$ km from $P$, and the minimum cost is $\boxed{\text{R}36\,000}$. ✓
+**(c)** The cost per kilometre is (cost per hour) $\div$ (km per hour):
+$$C(v)=\frac{0.001v^{3}+128}{v}=0.001v^{2}+\frac{128}{v},\qquad v>0.$$ ✓
+$C'(v)=0.002v-\dfrac{128}{v^{2}}=0\Rightarrow v^{3}=64\,000\Rightarrow v=\boxed{40}$ km/h. ✓
+$C''(v)=0.002+\dfrac{256}{v^{3}}>0$, so this is the minimum. ✓
+$C(40)=1.6+3.2=\boxed{\text{R}4.80}$ per kilometre. ✓
         `
       },
       {
@@ -2727,29 +2690,27 @@ and the integral is $\dfrac25\left(e^\pi-1\right)\approx8.86$. ✓
         `
       },
       {
-        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        number: 10, label: 'B4', title: 'Improper integrals — a comparison and a normalising constant', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_{-1}^{1}\frac{dx}{x^{2}}$ is called improper. Explain also why the calculation $\left[-\dfrac1x\right]_{-1}^{1}=-2$ is **not** a valid value for it. (2)
+**(a)** Use the Comparison Theorem to show that $\displaystyle\int_0^{\infty}\frac{dx}{\sqrt x\,(1+x)}$ converges. (3)
 
-**(b)** Determine whether the improper integral
-$$\int_0^{\infty}\frac{dx}{e^{x}+e^{-x}}$$
-converges or diverges. If it converges, find its value. Justify every limit that you use. (4)
-
-**(c)** Use the Comparison Theorem to determine whether $\displaystyle\int_{2}^{\infty}\frac{dx}{\sqrt x-1}$ converges or diverges. (4)
+**(b)** Find the constant $k$ such that
+$$\int_{-\infty}^{\infty}\frac{k}{x^{2}+2x+5}\,dx=1.$$
+Justify every limit that you use. (7)
         `,
         solution: String.raw`
-**(a)** The integrand $\dfrac1{x^{2}}$ is undefined at $x=0$, which lies **inside** $[-1,1]$, and it tends to $+\infty$ there. ✓ The Fundamental Theorem cannot be applied across the discontinuity, so the integral is improper (Type II). The value $-2$ is impossible: the integrand is **positive** everywhere, so its integral cannot be negative. The integral must be split at $0$, and each half $\displaystyle\int_0^{1}\frac{dx}{x^{2}}$ diverges ($p=2\ge1$). ✓ So the integral **diverges**.
+**(a)** The integral is improper at $0$ and at $\infty$, so we split at $1$ and bound each piece: ✓
+- for $0<x\le1$: $\dfrac{1}{\sqrt x(1+x)}\le\dfrac{1}{\sqrt x}$ and $\displaystyle\int_0^{1}x^{-1/2}dx=2$ converges;
+- for $x\ge1$: $\dfrac{1}{\sqrt x(1+x)}\le\dfrac{1}{x^{3/2}}$ and $\displaystyle\int_1^{\infty}x^{-3/2}dx=2$ converges. ✓
 
-**(b)** The upper limit is infinite (Type I). Multiply top and bottom by $e^{x}$: ✓
-$$\frac{1}{e^{x}+e^{-x}}=\frac{e^{x}}{e^{2x}+1}.$$
-With $u=e^{x}$, $du=e^{x}dx$: $\displaystyle\int\frac{e^{x}}{e^{2x}+1}dx=\arctan\left(e^{x}\right)$. ✓ So
-$$\int_0^{t}\frac{dx}{e^{x}+e^{-x}}=\arctan\left(e^{t}\right)-\arctan1.$$ ✓
-As $t\to\infty$, $e^{t}\to\infty$ and $\arctan\left(e^{t}\right)\to\dfrac\pi2$. Hence the integral **converges** and ✓
-$$\int_0^{\infty}\frac{dx}{e^{x}+e^{-x}}=\frac\pi2-\frac\pi4=\frac\pi4.$$
+By the Comparison Theorem both pieces converge, so the integral **converges**. ✓
 
-**(c)** For $x\ge2$ we have $0<\sqrt x-1<\sqrt x$, so
-$$\frac{1}{\sqrt x-1}>\frac{1}{\sqrt x}=x^{-1/2}>0.$$ ✓✓
-Now $\displaystyle\int_2^{\infty}x^{-1/2}dx=\lim_{t\to\infty}\left[2\sqrt x\right]_2^t=\infty$ **diverges** ($p=\frac12\le1$). ✓ A larger integrand than a divergent integral also diverges, so by the **Comparison Theorem** $\displaystyle\int_{2}^{\infty}\frac{dx}{\sqrt x-1}$ **diverges**. ✓
+**(b)** Completing the square, $x^{2}+2x+5=(x+1)^{2}+4$, so an antiderivative of $\dfrac{1}{x^{2}+2x+5}$ is $\dfrac12\arctan\dfrac{x+1}{2}$. ✓
+The integral is improper at both ends, so we split at $x=-1$: ✓
+$$\int_{-1}^{\infty}\frac{dx}{(x+1)^{2}+4}=\lim_{t\to\infty}\frac12\arctan\frac{t+1}{2}-\frac12\arctan0=\frac12\cdot\frac\pi2=\frac\pi4,$$ ✓
+$$\int_{-\infty}^{-1}\frac{dx}{(x+1)^{2}+4}=\lim_{s\to-\infty}\left(\frac12\arctan0-\frac12\arctan\frac{s+1}{2}\right)=0-\frac12\left(-\frac\pi2\right)=\frac\pi4.$$ ✓
+Both converge, so $\displaystyle\int_{-\infty}^{\infty}\frac{dx}{x^{2}+2x+5}=\frac\pi4+\frac\pi4=\frac\pi2$. ✓
+We need $k\cdot\dfrac\pi2=1$, so $k=\boxed{\dfrac{2}{\pi}}$. ✓✓
         `
       },
       {
@@ -2866,7 +2827,7 @@ $$y=\frac{\cos x\,\left(x+1-\cos x\right)}{1+\sin x}.$$ ✓
     kind: 'CALCULUS EXAMINATION',
     totalMarks: 90,
     duration: 120,
-    topics: 'A cone of fixed slant height and a printed poster with margins, an open-domain optimization (§6.6), arcsine and arctangent integrals and a power of 1+cos x (§9.1, §9.4), x sech x tanh x and the reduction formula for ∫(1−x²)ⁿdx (§9.2), improper integrals near zero and at infinity, including one with two bad endpoints (§10), L’Hôpital for ln n/√n and comparison tests, a power series with its derivative and the Maclaurin series of x² cos x, a separable ODE with arctan(sin x), and a linear ODE with integrating factor e^√x.',
+    topics: 'A poster with unknown printed area (open interval) and an open cylindrical tank (§6.6), arcsine and arctangent integrals and a power of 1+cos x (§9.1, §9.4), x sech x tanh x and the reduction formula for ∫(1−x²)ⁿdx (§9.2), a Comparison Theorem Type II argument and a logarithm integral with a parameter p (§10), L’Hôpital for ln n/√n and comparison tests, a power series with its derivative and the Maclaurin series of x² cos x, a separable ODE with arctan(sin x), and a linear ODE with integrating factor e^√x.',
     instructions: [
       'Section A (Questions A1–A6): multiple choice. Choose ONE answer for each question. [14 marks]',
       'Section B (Questions B1–B8): give FULL solutions and show ALL workings. [76 marks]',
@@ -2876,22 +2837,24 @@ $$y=\frac{\cos x\,\left(x+1-\cos x\right)}{1+\sin x}.$$ ✓
     ],
     questions: [
       {
-        number: 1, label: 'A1', title: 'A cone of fixed slant height', section: 'Section A · §6.6', marks: 2,
+        number: 1, label: 'A1', title: 'Minimizing a weighted sum with a fixed product', section: 'Section A · §6.6', marks: 2,
         prompt: String.raw`
-A right circular cone has **slant height** $5$ (the distance from its apex to any point on the rim of its base). Let $h$ be the height and $r$ the radius of the base. Using $r^{2}+h^{2}=25$ to eliminate $r$, the volume of the cone is a function of $h$ alone. Which choice gives that function together with its correct domain?
+Two positive numbers $x$ and $y$ satisfy $xy=36$. The smallest possible value of $4x+y$ is
 
-- **A.** $V(h)=\dfrac{\pi}{3}\left(25+h^{2}\right)h$, $\;h\ge0$.
-- **B.** $V(h)=\pi\left(25-h^{2}\right)h$, $\;0\le h\le5$.
-- **C.** $V(h)=\dfrac{\pi}{3}\left(25-h^{2}\right)h$, $\;0\le h\le25$.
-- **D.** $V(h)=\dfrac{\pi}{3}(5-h)h^{2}$, $\;0\le h\le5$.
-- **E.** $V(h)=\dfrac{\pi}{3}\left(25-h^{2}\right)h$, $\;0\le h\le5$.
+- **A.** $26$.
+- **B.** $24$.
+- **C.** $30$.
+- **D.** $40$.
+- **E.** $12$.
         `,
         solution: String.raw`
-**Answer: E.** ✓✓
+**Answer: B.** ✓✓
 
-The volume is $V=\dfrac13\pi r^{2}h$ and $r^{2}=25-h^{2}$, so $V(h)=\dfrac\pi3\left(25-h^{2}\right)h$. Since $r^{2}\ge0$ we need $h^{2}\le25$, so $0\le h\le5$ (at $h=5$ the radius is $0$).
+Substitute $y=\dfrac{36}{x}$: $f(x)=4x+\dfrac{36}{x}$, $x>0$. Then
+$$f'(x)=4-\frac{36}{x^{2}}=0\Rightarrow x=3,\ y=12.$$
+$f\to\infty$ as $x\to0^{+}$ and as $x\to\infty$ (and $f''(x)=\frac{72}{x^{3}}>0$), so the critical number gives the absolute minimum: $f(3)=12+12=24$.
 
-- **B** omits the factor $\frac13$. **C** has the right function but the domain $[0,25]$ would make $r^{2}$ negative. **D** and **A** use the wrong relation between $r$ and $h$.
+- **A**, **C** and **D** are $f(2)$, $f(6)$ and $f(1)=f(9)$. **E** is only the term $4x$ at $x=3$.
         `
       },
       {
@@ -2989,34 +2952,30 @@ The highest derivative is $y''$, so the equation is **second order**. The term $
         `
       },
       {
-        number: 7, label: 'B1', title: 'Optimization — a poster with margins (open domain)', section: 'Section B · §6.6', marks: 11,
+        number: 7, label: 'B1', title: 'Optimization — a poster with unknown printed area; an open tank', section: 'Section B · §6.6', marks: 11,
         prompt: String.raw`
-A rectangular poster must contain $150\ \text{cm}^{2}$ of printed material. The printed region is surrounded by margins of $2$ cm at the top and at the bottom and $3$ cm at each side. Let $x$ cm be the **width** of the printed region. The printer wants the poster of **smallest total area**.
+**(a)** Explain why the Extreme Value Theorem and the Closed Interval Method cannot be used directly to find the maximum value of a function on $[0,\infty)$. (2)
 
-**(a)** Draw a labelled diagram. Write the height of the printed region in terms of $x$, and hence write the total area $P$ of the poster as a function of $x$ alone. (4)
+**(b)** A rectangular poster has a printed area of $k\ \text{cm}^{2}$, with margins of $3$ cm at the top and at the bottom and $2$ cm on each side. The smallest possible area of paper for such a poster is $216\ \text{cm}^{2}$. Find $k$, and the dimensions of the poster of least area. (5)
 
-**(b)** State the domain of $P$. (1)
-
-**(c)** Find the critical number(s) of $P$. (3)
-
-**(d)** The domain in (b) is **not** a closed interval, so the Closed Interval Method cannot be used. Use the Second Derivative Test (or the behaviour of $P$ at the ends of the domain) to justify that the critical number gives the absolute minimum. State the dimensions of the poster and its area. (3)
+**(c)** An open cylindrical tank (with no lid) must hold $27\pi\ \text{m}^{3}$. Find the radius and height that use the least material, and the least area of material. (4)
         `,
         solution: String.raw`
-**(a)** *Diagram:* an outer rectangle (the poster) containing an inner rectangle (the printed region) of width $x$ and height $y$, with margins $3$ at each side and $2$ at top and bottom. ✓
+**(a)** The Extreme Value Theorem only applies to a **closed and bounded** interval $[a,b]$, and $[0,\infty)$ is unbounded. ✓ There is no right-hand endpoint at which to evaluate the function, so instead we must examine the **limit** as $x\to\infty$ (the function may approach a value without ever attaining it, or may not have a maximum at all). ✓
 
-The printed area is $xy=150$, so ✓
-$$y=\frac{150}{x}.$$
-The poster has width $x+6$ and height $y+4=\dfrac{150}{x}+4$, so the total area is ✓✓
-$$P(x)=(x+6)\left(\frac{150}{x}+4\right)=174+4x+\frac{900}{x}.$$
+**(b)** Let the printed region have width $x$ and height $\dfrac kx$. The paper measures $(x+4)$ by $\left(\dfrac kx+6\right)$, so
+$$A(x)=(x+4)\left(\frac kx+6\right)=k+24+6x+\frac{4k}{x},\qquad x>0.$$ ✓
+$$A'(x)=6-\frac{4k}{x^{2}}=0\Rightarrow x^{2}=\frac{2k}{3}.$$ ✓
+$A\to\infty$ as $x\to0^{+}$ and as $x\to\infty$ (and $A''>0$), so this is the minimum. At this point $6x=\dfrac{4k}{x}$ (because $6x^{2}=4k$), so
+$$A_{\min}=k+24+12x=\frac{3x^{2}}{2}+12x+24\qquad\left(k=\tfrac{3x^{2}}{2}\right).$$ ✓
+Setting $A_{\min}=216$: $\dfrac{3x^{2}}{2}+12x-192=0\Rightarrow x^{2}+8x-128=0\Rightarrow(x+16)(x-8)=0$, so $x=8$ (as $x>0$). ✓
+Then $k=\dfrac{3\cdot64}{2}=\boxed{96}$. The printed region is $8\text{ cm}\times12\text{ cm}$, so the poster is $\boxed{12\text{ cm}\times18\text{ cm}}$ (area $216$). ✓
 
-**(b)** The width must be positive and can be as large as we like: the domain is the **open interval** $(0,\infty)$. ✓
-
-**(c)** $P'(x)=4-\dfrac{900}{x^{2}}$ exists for all $x>0$, so the critical numbers come from $P'(x)=0$: ✓✓
-$$4=\frac{900}{x^{2}}\ \Longrightarrow\ x^{2}=225\ \Longrightarrow\ x=15\quad(x>0).$$ ✓
-
-**(d)** $P''(x)=\dfrac{1800}{x^{3}}>0$ for **every** $x>0$, so $P$ is concave up on its whole domain. ✓ Hence the graph lies above its tangent line at $x=15$, which is horizontal, so the local minimum at $x=15$ is the **absolute minimum**. (Equivalently, $P(x)\to\infty$ both as $x\to0^{+}$ and as $x\to\infty$, so the only critical point must be the absolute minimum.) ✓
-
-The printed region is $15$ cm wide and $\dfrac{150}{15}=10$ cm high, so the best poster is $\boxed{21\ \text{cm wide}\times14\ \text{cm high}}$, with area $P(15)=174+60+60=\boxed{294\ \text{cm}^{2}}$. ✓
+**(c)** $h=\dfrac{27\pi}{\pi r^{2}}=\dfrac{27}{r^{2}}$, and the material is the base plus the curved side:
+$$S(r)=\pi r^{2}+2\pi rh=\pi r^{2}+\frac{54\pi}{r},\qquad r>0.$$ ✓
+$S'(r)=2\pi r-\dfrac{54\pi}{r^{2}}=0\Rightarrow r^{3}=27\Rightarrow r=3$. ✓
+$S''(r)=2\pi+\dfrac{108\pi}{r^{3}}>0$, and $S\to\infty$ at both ends of $(0,\infty)$, so this is the absolute minimum. ✓
+With $r=3$: $h=3$ m and $S_{\min}=9\pi+18\pi=\boxed{27\pi\ \text{m}^{2}}$. ✓
         `
       },
       {
@@ -3076,29 +3035,27 @@ $$I_1=\frac23\,I_0=\frac23,\qquad I_2=\frac45\,I_1=\frac{8}{15},\qquad I_3=\frac
         `
       },
       {
-        number: 10, label: 'B4', title: 'Improper integrals', section: 'Section B · §10', marks: 10,
+        number: 10, label: 'B4', title: 'Improper integrals — a comparison and a logarithm with a parameter', section: 'Section B · §10', marks: 10,
         prompt: String.raw`
-**(a)** Explain why the integral $\displaystyle\int_0^{\infty}\frac{dx}{\sqrt x\,(1+x)}$ is called improper, and say how it must be treated. (2)
+**(a)** Use the Comparison Theorem to show that $\displaystyle\int_0^{1}\frac{\sin x}{x^{3/2}}\,dx$ converges. (3)
 
-**(b)** Determine whether the improper integral
-$$\int_{2}^{\infty}\frac{dx}{x\,(\ln x)^{2}}$$
-converges or diverges. If it converges, find its value. Justify every limit that you use. (4)
-
-**(c)** Use the Comparison Theorem to determine whether $\displaystyle\int_{0}^{1}\frac{dx}{\sqrt x+x^{3}}$ converges or diverges. (4)
+**(b)** For which real numbers $p$ does $\displaystyle\int_1^{\infty}\frac{\ln x}{x^{p}}\,dx$ converge? For those values of $p$, find the value of the integral in terms of $p$. Justify every limit that you use. (7)
         `,
         solution: String.raw`
-**(a)** It is improper for **two** reasons: the interval is infinite ($[0,\infty)$) and the integrand is unbounded as $x\to0^+$. ✓ It must be split at a point $c$ in $(0,\infty)$, for example $c=1$:
-$$\int_0^{\infty}=\lim_{s\to0^+}\int_s^{1}+\lim_{t\to\infty}\int_1^{t},$$
-and the integral converges only if **both** limits exist (finite). ✓
+**(a)** For $0<x\le1$ we have $0<\sin x\le x$, so $0<\dfrac{\sin x}{x^{3/2}}\le\dfrac{x}{x^{3/2}}=\dfrac{1}{\sqrt x}$. ✓
+$\displaystyle\int_0^{1}x^{-1/2}dx=2$ converges. ✓
+By the Comparison Theorem, $\displaystyle\int_0^{1}\frac{\sin x}{x^{3/2}}dx$ **converges** (the integral is improper at $0$ only apparently, since $\frac{\sin x}{x^{3/2}}\sim\frac1{\sqrt x}$). ✓
 
-**(b)** The upper limit is infinite (Type I): $\displaystyle\lim_{t\to\infty}\int_2^{t}\frac{dx}{x(\ln x)^{2}}$. ✓ Substitute $u=\ln x$, $du=\dfrac{dx}{x}$: $\displaystyle\int\frac{dx}{x(\ln x)^{2}}=\int u^{-2}du=-\frac1u=-\frac{1}{\ln x}$. ✓ So
-$$\int_2^{t}\frac{dx}{x(\ln x)^{2}}=-\frac{1}{\ln t}+\frac{1}{\ln2}.$$ ✓
-As $t\to\infty$, $\ln t\to\infty$ and $\dfrac{1}{\ln t}\to0$. The integral **converges** and
-$$\int_2^{\infty}\frac{dx}{x(\ln x)^{2}}=\frac{1}{\ln2}.$$ ✓
+**(b)** *Case $p\le1$.* For $x\ge e$, $\ln x\ge1$ and $x^{p}\le x$, so $\dfrac{\ln x}{x^{p}}\ge\dfrac{1}{x^{p}}\ge\dfrac1x$. Since $\displaystyle\int_e^{\infty}\dfrac{dx}{x}$ diverges, the integral **diverges** by comparison. ✓
 
-**(c)** The integrand is undefined at $x=0$ (Type II), so the integral is $\displaystyle\lim_{t\to0^{+}}\int_t^{1}\frac{dx}{\sqrt x+x^{3}}$. For $0<x\le1$ we have $\sqrt x+x^{3}>\sqrt x$, so
-$$0<\frac{1}{\sqrt x+x^{3}}<\frac{1}{\sqrt x}=x^{-1/2}.$$ ✓✓
-Now $\displaystyle\int_0^{1}x^{-1/2}dx=\lim_{t\to0^{+}}\Big[2\sqrt x\Big]_t^{1}=2$ converges (the $p$-integral at zero converges for $p<1$, and $p=\frac12$). ✓ By the **Comparison Theorem**, $\displaystyle\int_0^{1}\frac{dx}{\sqrt x+x^{3}}$ **converges**. ✓
+*Case $p>1$.* Integrate by parts with $u=\ln x$, $dv=x^{-p}dx$ ($v=\dfrac{x^{1-p}}{1-p}$): ✓
+$$\int x^{-p}\ln x\,dx=\frac{x^{1-p}\ln x}{1-p}-\frac{1}{1-p}\int x^{-p}dx=\frac{x^{1-p}\ln x}{1-p}-\frac{x^{1-p}}{(1-p)^{2}}.$$ ✓
+Evaluating from $1$ to $t$ (note $\ln1=0$):
+$$\int_1^{t}x^{-p}\ln x\,dx=\frac{t^{1-p}\ln t}{1-p}-\frac{t^{1-p}}{(1-p)^{2}}+\frac{1}{(1-p)^{2}}.$$ ✓
+Since $1-p<0$, $t^{1-p}\to0$, and $t^{1-p}\ln t=\dfrac{\ln t}{t^{p-1}}\to0$ by l’Hôpital’s rule ($\frac{1/t}{(p-1)t^{p-2}}=\frac{1}{(p-1)t^{p-1}}\to0$). ✓
+So for $p>1$ the integral **converges** and
+$$\int_1^{\infty}\frac{\ln x}{x^{p}}dx=\frac{1}{(p-1)^{2}}.$$ ✓
+Hence the integral converges **exactly when $p>1$**. ✓
         `
       },
       {

@@ -237,12 +237,12 @@
   <div id="exam-overlay" class="hidden" role="dialog" aria-label="Practice Exams">
     <div class="exam-shell">
       <div class="exam-shell-header">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-icon"
-          style="flex-shrink:0">
-          <path d="M9 11l3 3L22 4" />
-          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-        </svg>
+        <button class="panel-icon-btn exam-header-back" id="exam-back" aria-label="Back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-icon">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
         <h2>Practice Exams</h2>
         <div class="exam-timer-bar hidden" id="exam-timer-bar">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
@@ -262,6 +262,10 @@
         <button class="panel-close" id="exam-close" aria-label="Close">✕</button>
       </div>
       <div id="exam-content"></div>
+      <div class="exam-shell-footer hidden" id="exam-footer">
+        <button class="exam-nav-btn" id="exam-prev" type="button"></button>
+        <button class="exam-nav-btn exam-nav-next" id="exam-next" type="button"></button>
+      </div>
     </div>
   </div>
 

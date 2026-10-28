@@ -3745,6 +3745,7 @@ const ContentRenderer = {
       initSteps(area);
       initOutcomeChecks(area, num);
       initDecisionTree(area);
+      if (typeof initVideos === 'function') initVideos(area);
       initGraphsForChapter(num);
     }, 50);
   },

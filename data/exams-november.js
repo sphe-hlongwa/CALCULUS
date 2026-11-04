@@ -3044,7 +3044,7 @@ $$I_1=\frac23\,I_0=\frac23,\qquad I_2=\frac45\,I_1=\frac{8}{15},\qquad I_3=\frac
         solution: String.raw`
 **(a)** For $0<x\le1$ we have $0<\sin x\le x$, so $0<\dfrac{\sin x}{x^{3/2}}\le\dfrac{x}{x^{3/2}}=\dfrac{1}{\sqrt x}$. ✓
 $\displaystyle\int_0^{1}x^{-1/2}dx=2$ converges. ✓
-By the Comparison Theorem, $\displaystyle\int_0^{1}\frac{\sin x}{x^{3/2}}dx$ **converges** (the integral is improper at $0$ only apparently, since $\frac{\sin x}{x^{3/2}}\sim\frac1{\sqrt x}$). ✓
+By the Comparison Theorem, $\displaystyle\int_0^{1}\frac{\sin x}{x^{3/2}}dx$ **converges**. This is a genuine Type II improper integral at $0$: $\frac{\sin x}{x^{3/2}}\sim\frac1{\sqrt x}\to\infty$ as $x\to0^+$. ✓
 
 **(b)** *Case $p\le1$.* For $x\ge e$, $\ln x\ge1$ and $x^{p}\le x$, so $\dfrac{\ln x}{x^{p}}\ge\dfrac{1}{x^{p}}\ge\dfrac1x$. Since $\displaystyle\int_e^{\infty}\dfrac{dx}{x}$ diverges, the integral **diverges** by comparison. ✓
 

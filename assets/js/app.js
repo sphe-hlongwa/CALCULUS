@@ -2067,7 +2067,7 @@ const CHAPTER_CONTENT = {
       <div class="viz-controls">
         <div class="viz-control-group">
           <label>r =</label>
-          <input type="range" id="series-plot-r" min="-0.99" max="0.99" step="0.01" value="0.5">
+          <input type="range" id="series-plot-r" min="-1.2" max="1.2" step="0.01" value="0.5">
           <span id="series-plot-rval">0.50</span>
         </div>
       </div>
@@ -2124,7 +2124,7 @@ const CHAPTER_CONTENT = {
     <div class="content-card card-memory fade-up">
       <div class="card-badge">${Icons.brain} Your two benchmark series</div>
       <ul>
-        <li><strong>$p$-series</strong> $\\displaystyle\\sum_{n=1}^\\infty \\frac{1}{n^p}$: converges if $p > 1$, diverges if $p \\le 1$. (This is the Integral Test applied to $\\int_1^\\infty x^{-p}\\,dx$, which is finite exactly when $p > 1$.)</li>
+        <li><strong>$p$-series</strong> $\\displaystyle\\sum_{n=1}^\\infty \\frac{1}{n^p}$: converges if $p > 1$, diverges if $p \\le 1$. For $p > 0$, the Integral Test applies to $\\int_1^\\infty x^{-p}\\,dx$, which is finite exactly when $p > 1$. For $p \\le 0$, the terms do not tend to zero, so divergence follows from the Divergence Test.</li>
         <li><strong>Geometric series</strong> $\\displaystyle\\sum_{n=0}^\\infty ar^n$: converges if $|r| < 1$, with sum $\\dfrac{a}{1-r}$; diverges if $|r| \\ge 1$.</li>
       </ul>
       <p>The Comparison Tests below measure everything else against these two.</p>

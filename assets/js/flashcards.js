@@ -66,8 +66,9 @@ const Flashcards = (() => {
 
   // After rating: drop card from pending and jump to the next unrated card
   function advance(card) {
-    pending.delete(card.id);
-    if (!pending.size) { finished = true; renderCard(); return; }
+    const removed = pending.delete(card.id);
+    if (removed && !pending.size) { finished = true; renderCard(); return; }
+    if (!removed && !pending.size) { go(1); return; }
     for (let i = 1; i <= deck.length; i++) {
       const idx = (curIdx + i) % deck.length;
       if (pending.has(deck[idx].id)) { curIdx = idx; break; }

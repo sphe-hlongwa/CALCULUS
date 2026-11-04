@@ -208,6 +208,7 @@
         restart();
       }
       if (card.dataset.carouselClone === 'true') {
+        event.stopPropagation();
         const original = originalByClone.get(card);
         if (!original) return;
         forwarding = true;
@@ -247,6 +248,7 @@
       restart();
     });
     root.addEventListener('pointerdown', event => {
+      suppressSwipeClick = false;
       pointerStart = event.clientX;
     });
     root.addEventListener('pointerup', event => {

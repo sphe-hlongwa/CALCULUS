@@ -272,6 +272,12 @@
   max-height: none;
   border-radius: 0;
 }
+@supports (height: 100dvh) {
+  .exam-shell.exam-shell-fullscreen {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+}
 .exam-shell.exam-shell-fullscreen #exam-content {
   max-height: none;
 }

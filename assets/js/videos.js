@@ -48,6 +48,7 @@
 
     var facade = card.querySelector('.video-facade');
     facade.addEventListener('click', function () {
+      var shouldFocusIframe = document.activeElement === facade;
       var start = parseInt(entry.start, 10) > 0 ? '&start=' + parseInt(entry.start, 10) : '';
       var wrap = document.createElement('div');
       wrap.className = 'video-frame';
@@ -55,7 +56,9 @@
         '?autoplay=1&rel=0' + start + '" title="' + esc(entry.title) + '" ' +
         'allow="accelerometer; autoplay; encrypted-media; picture-in-picture" ' +
         'allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+      var iframe = wrap.querySelector('iframe');
       facade.replaceWith(wrap);
+      if (shouldFocusIframe) iframe.focus();
     });
     return card;
   }

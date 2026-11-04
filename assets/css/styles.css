@@ -1720,10 +1720,12 @@ h3.section-heading {
 
 .fc-area {
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: safe center;
   padding: 24px;
 }
 
@@ -2418,3 +2420,8 @@ kbd {
 @media (max-width: 640px) {
   .video-card { padding: 14px 12px; }
 }
+/* Flashcards: keep controls on one horizontal line */
+.fc-actions-row { max-width: 392px; gap: 6px; flex-wrap: nowrap; }
+.fc-actions-row .btn-fc { padding: 10px 6px; white-space: nowrap; min-width: 0; }
+.fc-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+.fc-filter-btn { flex: 0 0 auto; white-space: nowrap; padding: 5px 10px; }

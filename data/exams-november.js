@@ -3081,7 +3081,7 @@ The series $\sum\dfrac1{6\sqrt n}=\tfrac16\sum\dfrac{1}{n^{1/2}}$ diverges (a $p
         `
       },
       {
-        number: 12, label: 'B6', title: 'Power series and the series for sin x / x', section: 'Section B · §11.4, §11.6', marks: 9,
+        number: 12, label: 'B6', title: 'Power series and the Maclaurin series of x² cos x', section: 'Section B · §11.4, §11.6', marks: 9,
         prompt: String.raw`
 **(a)** **(i)** Find the radius of convergence and the interval of convergence of the power series
 $$\sum_{n=1}^{\infty}\frac{n!\,x^{n}}{(2n)!}.$$ (3)

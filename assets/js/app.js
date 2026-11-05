@@ -3730,7 +3730,7 @@ const ContentRenderer = {
     const ch = chaptersData.find(c => c.number === chapterNum);
     if (!ch) return;
     const isComplete = AppStorage.isComplete(ch.id);
-    if (isComplete) AppStorage.markIncomplete(ch.id);
+    if (isComplete) AppStorage.markIncomplete(ch.id, Progress.chapterStats(ch).completionSignature);
     else AppStorage.markComplete(ch.id);
     Navigation.refresh();
     Progress.update();
@@ -3899,6 +3899,8 @@ function renderWelcome() {
             <button type="button" class="welcome-carousel__dot" aria-label="Show Proofs"></button>
           </div>
           <button type="button" class="welcome-carousel__arrow" data-carousel-action="next" aria-label="Next card">›</button>
+          <button type="button" class="welcome-carousel__rotation" data-carousel-action="toggle-rotation"
+            aria-label="Stop automatic rotation" aria-pressed="false">Pause</button>
         </div>
       </div>
 

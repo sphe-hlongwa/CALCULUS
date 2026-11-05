@@ -24,10 +24,30 @@ const AppStorage = {
   setProgress(d)         { this._set(this.KEYS.progress, d); },
   markComplete(chapterId){
     const d = this.getProgress();
+    delete d._autoCompleteOptOuts?.[chapterId];
+    if (d._autoCompleteOptOuts && !Object.keys(d._autoCompleteOptOuts).length) delete d._autoCompleteOptOuts;
     if (!d[chapterId]) this.logActivity('chapter');
     d[chapterId] = true; this.setProgress(d);
   },
-  markIncomplete(chapterId) { const d = this.getProgress(); delete d[chapterId]; this.setProgress(d); },
+  markIncomplete(chapterId, criteriaSignature) {
+    const d = this.getProgress();
+    delete d[chapterId];
+    if (criteriaSignature !== undefined) {
+      d._autoCompleteOptOuts = d._autoCompleteOptOuts || {};
+      d._autoCompleteOptOuts[chapterId] = criteriaSignature;
+    }
+    this.setProgress(d);
+  },
+  shouldSkipAutoComplete(chapterId, criteriaSignature) {
+    const d = this.getProgress();
+    const optOuts = d._autoCompleteOptOuts;
+    if (!optOuts || !(chapterId in optOuts)) return false;
+    if (optOuts[chapterId] === criteriaSignature) return true;
+    delete optOuts[chapterId];
+    if (!Object.keys(optOuts).length) delete d._autoCompleteOptOuts;
+    this.setProgress(d);
+    return false;
+  },
   isComplete(chapterId)  { return !!this.getProgress()[chapterId]; },
   // Only counts ids that are real chapters, so stale saved ids can't inflate progress
   completedCount()       {

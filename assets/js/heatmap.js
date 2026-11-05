@@ -34,7 +34,7 @@ const Heatmap = (() => {
         const n = AppStorage.activityCount(rec);
         total += n; if (n) activeDays++;
         const when = day.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-        const detail = n ? Object.entries(rec).filter(([, v]) => v).map(([k, v]) => `${v} ${LABELS[k] || k}${v === 1 ? '' : 's'}`).join(', ') : 'No activity';
+        const detail = n ? Object.entries(rec).filter(([, v]) => v).map(([k, v]) => plural(v, LABELS[k] || k)).join(', ') : 'No activity';
         cells += `<i class="hm-cell hm-l${level(n)}${day.getTime() === today.getTime() ? ' hm-today' : ''}" style="${pos}" title="${when}: ${detail}"></i>`;
       }
     }

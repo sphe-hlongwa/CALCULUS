@@ -21,6 +21,7 @@ const Progress = (() => {
     const outs    = (typeof chapterOutcomes !== 'undefined' && chapterOutcomes[ch.number]) || [];
 
     const savedOuts = AppStorage._get(`outcomes_ch${ch.number}`, {});
+    const outcomeStates = outs.map((_, i) => !!savedOuts[i]);
     const outcomesDone = outs.filter((_, i) => savedOuts[i]).length;
 
     const quiz = quizzes.find(q => q.chapter === ch.number);
@@ -33,10 +34,12 @@ const Progress = (() => {
     const chCards = cards.filter(c => c.chapter === ch.number);
     const cardsMastered = chCards.filter(c => mastered.has(c.id)).length;
     const cardsTouched  = chCards.some(c => mastered.has(c.id) || ratings[c.id]);
+    const cardStates = chCards.map(card => [card.id, mastered.has(card.id)]);
 
     const studied = AppStorage._get('proofs_studied', {});
     const chProofs = groups.filter(g => parseInt(g.section, 10) === ch.number).flatMap(g => g.proofs);
     const proofsDone = chProofs.filter(p => studied[p.id]).length;
+    const proofStates = chProofs.map(proof => [proof.id, !!studied[proof.id]]);
 
     // Each criterion only applies if the chapter has that kind of material.
     const met = {
@@ -51,6 +54,12 @@ const Progress = (() => {
       quizPct, cardsMastered, cardsTotal: chCards.length,
       proofsDone, proofsTotal: chProofs.length,
       met, allMet: Object.values(met).every(Boolean),
+      completionSignature: JSON.stringify({
+        outcomes: outcomeStates,
+        quiz: quiz ? [quiz.id, sc?.score ?? null, sc?.total ?? null] : null,
+        cards: cardStates,
+        proofs: proofStates
+      }),
       started: outcomesDone > 0 || quizPct !== null || cardsTouched || proofsDone > 0
     };
   }
@@ -63,7 +72,9 @@ const Progress = (() => {
     let changed = false;
     chaptersData.forEach(ch => {
       if (AppStorage.isComplete(ch.id)) return;
-      if (chapterStats(ch).allMet) {
+      const stats = chapterStats(ch);
+      if (AppStorage.shouldSkipAutoComplete(ch.id, stats.completionSignature)) return;
+      if (stats.allMet) {
         AppStorage.markComplete(ch.id);
         changed = true;
         if (typeof toast === 'function') toast(`Chapter ${ch.number} completed automatically!`, 3500);

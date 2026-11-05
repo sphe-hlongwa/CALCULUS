@@ -129,7 +129,7 @@ const Proofs = (() => {
         <div class="chapter-actions"><button type="button" class="btn-secondary" data-top="home">Back to home</button></div>
       </div>`;
 
-    bind(area);
+    bind(area.querySelector('#proofs-page'));
     updateProgress(area);
     setTimeout(() => {
       // Only the always-visible proof titles are typeset up front.

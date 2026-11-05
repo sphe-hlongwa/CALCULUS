@@ -26,7 +26,14 @@
     const caption = root.querySelector('.welcome-carousel__caption');
     const previous = scope.querySelector('[data-carousel-action="previous"]');
     const next = scope.querySelector('[data-carousel-action="next"]');
+    const rotationToggle = scope.querySelector('[data-carousel-action="toggle-rotation"]');
     if (!ring || !originals.length) return;
+    const originalToggleState = rotationToggle && {
+      text: rotationToggle.textContent,
+      label: rotationToggle.getAttribute('aria-label'),
+      pressed: rotationToggle.getAttribute('aria-pressed'),
+      disabled: rotationToggle.disabled
+    };
 
     const realCount = originals.length;
 
@@ -54,6 +61,7 @@
     let forwarding = false;
     let suppressSwipeClick = false;
     let disposed = false;
+    let rotationStopped = false;
     let pointerWithinScope = scope.matches(':hover');
     let focusWithinScope = scope.contains(document.activeElement);
 
@@ -178,20 +186,9 @@
       ? new ResizeObserver(scheduleLayout)
       : null;
 
-    const dispose = () => {
-      if (disposed) return;
-      disposed = true;
-      stop();
-      if (layoutFrame) window.cancelAnimationFrame(layoutFrame);
-      layoutFrame = 0;
-      resizeObserver?.disconnect();
-      window.removeEventListener('resize', scheduleLayout);
-      controllers.delete(root);
-    };
-
     const restart = () => {
       stop();
-      if (disposed || reduced || pointerWithinScope || focusWithinScope) return;
+      if (disposed || reduced || rotationStopped || pointerWithinScope || focusWithinScope) return;
       animationFrame = window.requestAnimationFrame(function drift(timestamp) {
         if (!lastFrame) lastFrame = timestamp;
         const elapsed = Math.min(48, timestamp - lastFrame);
@@ -234,42 +231,57 @@
       }
     };
 
-    root.addEventListener('click', handleCardClick, true);
-    previous?.addEventListener('click', () => step(-1));
-    next?.addEventListener('click', () => step(1));
-    dots.forEach((dot, index) => dot.addEventListener('click', () => {
+    const handlePreviousClick = () => step(-1);
+    const handleNextClick = () => step(1);
+    const updateRotationToggle = () => {
+      if (!rotationToggle) return;
+      const resume = rotationStopped;
+      rotationToggle.textContent = reduced ? 'Rotation off' : resume ? 'Resume' : 'Pause';
+      rotationToggle.setAttribute('aria-label', reduced
+        ? 'Automatic rotation is disabled by your reduced-motion preference'
+        : resume ? 'Resume automatic rotation' : 'Stop automatic rotation');
+      rotationToggle.setAttribute('aria-pressed', String(rotationStopped));
+      rotationToggle.disabled = reduced;
+    };
+    const handleRotationToggle = () => {
+      rotationStopped = !rotationStopped;
+      updateRotationToggle();
+      if (rotationStopped) stop();
+      else restart();
+    };
+    const dotClickHandlers = dots.map((dot, index) => () => {
       update(index);
       restart();
-    }));
-    root.addEventListener('keydown', event => {
+    });
+    const handleKeydown = event => {
       const focusActiveCard = () => cards[active].focus();
       if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1); focusActiveCard(); }
       if (event.key === 'ArrowRight') { event.preventDefault(); step(1); focusActiveCard(); }
       if (event.key === 'Home') { event.preventDefault(); update(0); restart(); focusActiveCard(); }
       if (event.key === 'End') { event.preventDefault(); update(realCount - 1); restart(); focusActiveCard(); }
-    });
-    scope.addEventListener('pointerenter', () => {
+    };
+    const handlePointerEnter = () => {
       pointerWithinScope = true;
       stop();
-    });
-    scope.addEventListener('pointerleave', () => {
+    };
+    const handlePointerLeave = () => {
       pointerWithinScope = false;
       restart();
-    });
-    scope.addEventListener('focusin', () => {
+    };
+    const handleFocusIn = () => {
       focusWithinScope = true;
       stop();
-    });
-    scope.addEventListener('focusout', event => {
+    };
+    const handleFocusOut = event => {
       if (scope.contains(event.relatedTarget)) return;
       focusWithinScope = false;
       restart();
-    });
-    root.addEventListener('pointerdown', event => {
+    };
+    const handlePointerDown = event => {
       suppressSwipeClick = false;
       pointerStart = event.clientX;
-    });
-    root.addEventListener('pointerup', event => {
+    };
+    const handlePointerUp = event => {
       if (pointerStart == null) return;
       const delta = event.clientX - pointerStart;
       pointerStart = null;
@@ -277,8 +289,70 @@
         suppressSwipeClick = true;
         step(delta > 0 ? -1 : 1);
       }
-    });
-    root.addEventListener('pointercancel', () => { pointerStart = null; });
+    };
+    const handlePointerCancel = () => { pointerStart = null; };
+
+    const dispose = () => {
+      if (disposed) return;
+      disposed = true;
+      stop();
+      if (layoutFrame) window.cancelAnimationFrame(layoutFrame);
+      layoutFrame = 0;
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', scheduleLayout);
+      root.removeEventListener('click', handleCardClick, true);
+      root.removeEventListener('keydown', handleKeydown);
+      root.removeEventListener('pointerdown', handlePointerDown);
+      root.removeEventListener('pointerup', handlePointerUp);
+      root.removeEventListener('pointercancel', handlePointerCancel);
+      previous?.removeEventListener('click', handlePreviousClick);
+      next?.removeEventListener('click', handleNextClick);
+      rotationToggle?.removeEventListener('click', handleRotationToggle);
+      dots.forEach((dot, index) => dot.removeEventListener('click', dotClickHandlers[index]));
+      scope.removeEventListener('pointerenter', handlePointerEnter);
+      scope.removeEventListener('pointerleave', handlePointerLeave);
+      scope.removeEventListener('focusin', handleFocusIn);
+      scope.removeEventListener('focusout', handleFocusOut);
+      if (rotationToggle && originalToggleState) {
+        rotationToggle.textContent = originalToggleState.text;
+        if (originalToggleState.label == null) rotationToggle.removeAttribute('aria-label');
+        else rotationToggle.setAttribute('aria-label', originalToggleState.label);
+        if (originalToggleState.pressed == null) rotationToggle.removeAttribute('aria-pressed');
+        else rotationToggle.setAttribute('aria-pressed', originalToggleState.pressed);
+        rotationToggle.disabled = originalToggleState.disabled;
+      }
+      clones.forEach(clone => clone.remove());
+      originals.forEach(card => {
+        card.style.removeProperty('--carousel-index');
+        card.style.removeProperty('--carousel-angle');
+        card.style.removeProperty('opacity');
+        card.style.removeProperty('filter');
+        card.removeAttribute('aria-current');
+        card.removeAttribute('data-carousel-position');
+        card.removeAttribute('tabindex');
+      });
+      root.style.removeProperty('--carousel-radius');
+      root.style.removeProperty('--carousel-step');
+      root.style.removeProperty('--carousel-tilt');
+      root.style.removeProperty('perspective');
+      delete root.dataset.carouselReady;
+      controllers.delete(root);
+    };
+
+    updateRotationToggle();
+    root.addEventListener('click', handleCardClick, true);
+    previous?.addEventListener('click', handlePreviousClick);
+    next?.addEventListener('click', handleNextClick);
+    rotationToggle?.addEventListener('click', handleRotationToggle);
+    dots.forEach((dot, index) => dot.addEventListener('click', dotClickHandlers[index]));
+    root.addEventListener('keydown', handleKeydown);
+    scope.addEventListener('pointerenter', handlePointerEnter);
+    scope.addEventListener('pointerleave', handlePointerLeave);
+    scope.addEventListener('focusin', handleFocusIn);
+    scope.addEventListener('focusout', handleFocusOut);
+    root.addEventListener('pointerdown', handlePointerDown);
+    root.addEventListener('pointerup', handlePointerUp);
+    root.addEventListener('pointercancel', handlePointerCancel);
     window.addEventListener('resize', scheduleLayout, { passive: true });
     resizeObserver?.observe(root);
     controllers.set(root, dispose);

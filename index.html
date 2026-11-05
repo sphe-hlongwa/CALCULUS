@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MATH1036 - Interactive Calculus Study Book</title>
+  <!-- Security: only our own files plus the pinned KaTeX/Plotly builds may run; no inline scripts. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob: https://i.ytimg.com; frame-src https://www.youtube-nocookie.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description"
     content="Interactive calculus study guide for MATH1036, 2nd semester. Flashcards, quizzes, visualizations, and step-by-step worked examples.">
   <link rel="icon" type="image/svg+xml" href="Integral-icon.svg">
@@ -12,19 +15,16 @@
   <!-- Fonts: link in head is 15-40% faster than @import in CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&display=swap"
-    media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&display=swap">
-  </noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&display=swap">
 
   <!-- KaTeX (loaded before our own CSS so our overrides always win the cascade) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}],throwOnError:false,strict:false,trust:false})"></script>
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+  <script defer src="assets/js/math-init.js"></script>
 
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -342,7 +342,8 @@
   <!-- ═══════════════════════════════════════════════════════
      LIBRARIES (Plotly, KaTeX auto-render already above)
 ═══════════════════════════════════════════════════════ -->
-  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.27.0/plotly.min.js"
+    integrity="sha384-Hl48Kq2HifOWdXEjMsKo6qxqvRLTYqIGbvlENBmkHAxZKIGCXv43H6W1jA671RzC" crossorigin="anonymous"></script>
 
   <!-- ═══════════════════════════════════════════════════════
      APP MODULES (order matters)
@@ -367,16 +368,7 @@
   <!-- ═══════════════════════════════════════════════════════
      SIDEBAR TAB SWITCHING
 ═══════════════════════════════════════════════════════ -->
-  <script>
-    document.querySelectorAll('.sidebar-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.sidebar-pane').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active');
-      });
-    });
-  </script>
+  <script src="assets/js/sidebar-tabs.js"></script>
 
 </body>
 

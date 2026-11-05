@@ -1,0 +1,135 @@
+/* ── Proofs page: grouped dropdowns, step accordions, toolbar ── */
+.pf-toolbar {
+  position: sticky; top: 0; z-index: 5; margin: 0 0 22px; padding: 14px 16px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); display: grid; gap: 12px;
+}
+.pf-toolbar-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.pf-search {
+  flex: 1 1 220px; display: flex; align-items: center; gap: 8px; padding: 0 12px;
+  background: var(--surface-2); border: 1.5px solid var(--border); border-radius: 10px;
+}
+.pf-search:focus-within { border-color: var(--accent); }
+.pf-search svg { color: var(--text-3); flex-shrink: 0; }
+.pf-search input {
+  flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: var(--text);
+  font: inherit; font-size: .88rem; padding: 10px 0;
+}
+.pf-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.pf-chip, .pf-btn {
+  font: inherit; font-size: .78rem; font-weight: 600; cursor: pointer; border-radius: 99px;
+  padding: 7px 14px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-2);
+  transition: background .15s, border-color .15s, color .15s;
+}
+.pf-chip:hover, .pf-btn:hover { border-color: var(--accent); color: var(--text); }
+.pf-chip[aria-pressed="true"] { background: rgba(62, 166, 255, .14); border-color: var(--accent); color: var(--accent); }
+.pf-progress { display: flex; align-items: center; gap: 12px; font-size: .78rem; color: var(--text-2); }
+.pf-progress-bar { flex: 1; height: 6px; border-radius: 99px; background: var(--border); overflow: hidden; }
+.pf-progress-bar > span { display: block; height: 100%; width: 0; background: var(--green); border-radius: inherit; transition: width .3s; }
+
+/* Collapsible region (animated) */
+.pf-collapse { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s ease; }
+.pf-open > .pf-collapse { grid-template-rows: 1fr; }
+.pf-collapse-inner { overflow: hidden; min-height: 0; }
+
+/* Group (section) dropdown */
+.pf-group { margin-bottom: 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+.pf-group-head {
+  width: 100%; display: flex; align-items: center; gap: 14px; padding: 16px 20px; cursor: pointer;
+  background: none; border: 0; color: var(--text); font: inherit; text-align: left; border-radius: var(--radius);
+}
+.pf-group-head:hover { background: var(--surface-2); }
+.pf-group-num {
+  min-width: 46px; text-align: center; font-size: .8rem; font-weight: 700; padding: 6px 10px;
+  border-radius: 10px; background: rgba(255, 0, 0, .12); color: var(--blue);
+}
+.pf-group-title { flex: 1; font-size: 1.05rem; font-weight: 700; }
+.pf-meta { font-size: .76rem; color: var(--text-3); white-space: nowrap; }
+.pf-chevron { color: var(--text-3); transition: transform .2s; flex-shrink: 0; }
+.pf-open > .pf-group-head .pf-chevron, .pf-open > .pf-head .pf-chevron { transform: rotate(180deg); }
+.pf-group-list { padding: 4px 16px 16px; display: grid; gap: 10px; }
+
+/* Proof dropdown */
+.pf-proof { border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); transition: border-color .2s; }
+.pf-proof.pf-open { border-color: rgba(62, 166, 255, .45); }
+.pf-proof.pf-done .pf-ref { background: rgba(43, 166, 64, .14); color: var(--green); }
+.pf-head {
+  width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer;
+  background: none; border: 0; color: var(--text); font: inherit; text-align: left; border-radius: 12px;
+}
+.pf-head:hover { background: rgba(255, 255, 255, .03); }
+.pf-ref {
+  font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap;
+  padding: 3px 10px; border-radius: 99px; background: rgba(255, 0, 0, .12); color: var(--blue);
+}
+.pf-title { flex: 1; font-size: .95rem; font-weight: 600; min-width: 0; }
+.pf-tick {
+  width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border); flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center; font-size: .75rem; color: transparent;
+}
+.pf-done .pf-tick { background: var(--green); border-color: var(--green); color: #fff; }
+
+.pf-body { padding: 4px 16px 18px; display: grid; gap: 14px; }
+.pf-body .content-card { margin: 0; }
+.pf-statement { overflow-x: auto; font-size: .95rem; color: var(--text); }
+.pf-block-title {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: .72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--text-3);
+}
+.pf-block-title .pf-spacer { flex: 1; }
+.pf-btn { padding: 5px 12px; font-size: .72rem; text-transform: none; letter-spacing: 0; }
+.pf-btn-primary { background: rgba(62, 166, 255, .14); border-color: var(--accent); color: var(--accent); }
+
+/* Steps */
+.pf-steps { list-style: none; margin: 0; padding: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--surface); }
+.pf-step { border-bottom: 1px solid var(--border); }
+.pf-step:last-child { border-bottom: 0; }
+.pf-step[hidden] { display: none; }
+.pf-step-head {
+  width: 100%; display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer;
+  background: none; border: 0; color: var(--text); font: inherit; text-align: left;
+}
+.pf-step-head:hover { background: var(--surface-2); }
+.pf-step-num {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: .76rem; font-weight: 700; background: var(--border); color: var(--text-2);
+}
+.pf-step.pf-open .pf-step-num { background: var(--green); color: #fff; }
+.pf-step-label { flex: 1; font-size: .88rem; font-weight: 600; min-width: 0; }
+.pf-step.pf-open > .pf-step-head .pf-chevron { transform: rotate(180deg); }
+.pf-step-body { padding: 6px 18px 16px 54px; font-size: .9rem; color: var(--text-2); overflow-x: auto; }
+.pf-step-body .katex-display { margin: .7em 0; }
+
+.pf-footer { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.pf-empty { text-align: center; padding: 40px 10px; color: var(--text-3); font-size: .9rem; }
+
+@media (max-width: 640px) {
+  .pf-head { flex-wrap: wrap; }
+  .pf-title { flex-basis: 100%; order: 3; }
+  .pf-meta-steps { display: none; }
+  .pf-step-body { padding-left: 18px; }
+  .pf-group-head { padding: 14px; }
+}
+.pf-proof, .pf-group { scroll-margin-top: 150px; }
+
+/* Keep grid tracks from growing past the viewport (wide equations scroll inside their own box) */
+.pf-collapse, .pf-body, .pf-group-list { grid-template-columns: minmax(0, 1fr); }
+.pf-collapse > .pf-collapse-inner, .pf-body > *, .pf-steps, .pf-step { min-width: 0; max-width: 100%; }
+.pf-step-label { overflow-wrap: anywhere; }
+.pf-statement { max-width: 100%; }
+@media (max-width: 640px) {
+  .pf-toolbar { position: static; }
+  .pf-group-list { padding: 4px 10px 12px; }
+  .pf-body { padding: 4px 10px 14px; }
+}
+
+/* ── Performance: keep scrolling smooth ── */
+/* Closed groups/proofs leave layout entirely (no animated re-layout of a huge page) */
+.pf-group:not(.pf-open) > .pf-collapse,
+.pf-proof:not(.pf-open) > .pf-collapse { display: none; }
+.pf-group > .pf-collapse, .pf-proof > .pf-collapse { transition: none; }
+/* Let the browser skip layout/paint for proofs that are scrolled out of view */
+.pf-proof { content-visibility: auto; contain-intrinsic-size: auto 56px; }
+.pf-proof.pf-open { contain-intrinsic-size: auto 900px; }
+.pf-toolbar { contain: layout style; transform: translateZ(0); }
+.pf-step-body { overscroll-behavior-x: contain; }

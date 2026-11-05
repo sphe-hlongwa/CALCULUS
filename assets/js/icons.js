@@ -22,7 +22,6 @@ const Icons = {
   starOff: iconWrapper(`<path d="M12 17.8 5.8 21 7 14.1 2 9.3l7-1L12 2"/><path d="m22 2-2 2"/>`), // roughly
   chevronRight: iconWrapper(`<path d="m9 18 6-6-6-6"/>`),
   search: iconWrapper(`<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>`),
-  notes: iconWrapper(`<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/>`),
   edit: iconWrapper(`<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>`),
   trendingUp: iconWrapper(`<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>`),
   bulb: iconWrapper(`<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>`),

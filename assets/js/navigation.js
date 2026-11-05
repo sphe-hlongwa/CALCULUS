@@ -139,7 +139,8 @@ const Navigation = (() => {
     const ch = (typeof chaptersData !== 'undefined') && chaptersData.find(c => c.id === id);
     if (!ch) return;
 
-    if (contentChapterId !== id) {
+    // Re-render if another chapter is showing, or if the content area was taken over (e.g. Home)
+    if (contentChapterId !== id || !document.querySelector('#content-area .chapter-hero')) {
       activeChapterId = id;
       contentChapterId = id;
       renderDetail(ch);
@@ -199,6 +200,13 @@ const Navigation = (() => {
     }
   }
   function getActive() { return activeChapterId; }
+  // Called when a non-chapter page (e.g. Proofs) takes over the content area,
+  // so re-opening the same chapter later re-renders it.
+  function reset() {
+    contentChapterId = null;
+    if (_observer) _observer.disconnect();
+    document.querySelectorAll('#nav-rail-chapters .icon-nav-btn').forEach(b => b.classList.remove('active'));
+  }
 
-  return { build, loadChapter, refresh, getActive };
+  return { build, loadChapter, refresh, getActive, reset };
 })();

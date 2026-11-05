@@ -3623,40 +3623,7 @@ const ContentRenderer = {
       ? quizzesData.find(q => q.chapter === num) : null;
 
     // Learning outcomes - from chaptersData
-    const outcomesRaw = {
-      7:  ['Know definitions of sinh, cosh, tanh, sech, coth, cosech and their graphs',
-           'Know hyperbolic identities and their derivations',
-           'Know derivatives (and proofs) of hyperbolic functions',
-           'Know inverse hyperbolic functions and their sketches',
-           'Express inverse hyperbolic functions in terms of natural logarithms',
-           'Know derivatives of inverse hyperbolic functions and use in integration',
-           'Solve examinable tutorial problems'],
-      8:  ['Understand Riemann Sums and their application to areas',
-           'Use Σ-notation and summation formulæ with Riemann Sums',
-           'Know the definition of the definite integral',
-           'Compute areas between curves (x-axis and y-axis)',
-           'Apply the Disk and Washer methods for volumes of revolution',
-           'Use the Definite Integral as a function (FTC Part 1)'],
-      9:  ['Use inverse trig, exponential and logarithmic integrals',
-           'Apply integration by parts (IBP) including reduction formulas',
-           'Perform trigonometric substitutions',
-           'Evaluate trigonometric integrals (powers of sin/cos, tan/cot)',
-           'Decompose rational functions via partial fractions and integrate'],
-      10: ['Define and evaluate Type I improper integrals (infinite intervals)',
-           'Define and evaluate Type II improper integrals (discontinuous integrands)',
-           'Apply convergence tests to improper integrals'],
-      11: ['Determine convergence of sequences',
-           'Compute partial sums and determine convergence of series',
-           'Apply the Integral, Comparison, Alternating Series, Ratio and Root Tests',
-           'Find radius and interval of convergence for power series',
-           'Represent functions as power series',
-           'Derive Taylor and Maclaurin series and estimate remainders',
-           'Apply the Binomial Series'],
-      12: ['Identify and solve separable ODEs',
-           'Identify and solve homogeneous ODEs',
-           'Identify and solve linear first-order ODEs using integrating factor',
-           'Identify and solve exact ODEs'],
-    };
+    const outcomesRaw = chapterOutcomes;
     const outcomes = outcomesRaw[num] || [];
     const savedOutcomes = AppStorage._get(`outcomes_ch${num}`, {});
     const outcomesHTML = outcomes.length ? `
@@ -3702,13 +3669,6 @@ const ContentRenderer = {
         ${outcomesHTML}
         ${richContent}
         ${formulaSection}
-
-        <div class="content-card" style="border-left-color:var(--teal)" id="notes-card">
-          <div class="card-badge" style="background:rgba(20,184,166,.1);color:var(--teal)">${Icons.notes} My Notes</div>
-          <textarea id="chapter-notes" rows="4" placeholder="Write your notes for this chapter here…"
-            style="width:100%;margin-top:10px;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-family:inherit;font-size:.88rem;background:var(--surface-2);color:var(--text);resize:vertical"></textarea>
-          <div id="notes-status" style="font-size:.75rem;color:var(--text-3);margin-top:4px;text-align:right;min-height:18px;"></div>
-        </div>
 
         <div class="chapter-actions">
           <button type="button" class="btn-primary" data-action="open-flashcards"><span class="btn-icon-inner">${Icons.layers}</span> Study Flashcards</button>
@@ -3764,11 +3724,6 @@ const ContentRenderer = {
     container.querySelectorAll('[data-action="load-chapter"]').forEach(btn => {
       btn.addEventListener('click', () => Navigation.loadChapter(btn.dataset.chapterId));
     });
-    const notes = container.querySelector('#chapter-notes');
-    if (notes) {
-      notes.value = AppStorage.getNote(chapter.id);
-      notes.addEventListener('input', () => this.saveNote(chapter.id));
-    }
   },
 
   markDone(chapterNum) {
@@ -3796,17 +3751,6 @@ const ContentRenderer = {
       btn.innerHTML = buttonHTML;
     });
   },
-
-  saveNote(chapterId) {
-    const text = document.getElementById('chapter-notes')?.value || '';
-    AppStorage.saveNote(chapterId, text);
-    const status = document.getElementById('notes-status');
-    if (status) {
-      status.textContent = 'Saved just now';
-      clearTimeout(this._noteTimer);
-      this._noteTimer = setTimeout(() => { status.textContent = ''; }, 2000);
-    }
-  },
 };
 
 // ─── Step-by-step interactions ────────────────────────────────────────────
@@ -3831,6 +3775,8 @@ function initOutcomeChecks(container, chapterNum) {
       AppStorage._set(`outcomes_ch${chapterNum}`, saved);
       chk.classList.toggle('done', !!saved[idx]);
       chk.textContent = saved[idx] ? '✓' : '';
+      if (saved[idx]) AppStorage.logActivity('outcome');
+      Progress.syncAll();
     });
   });
 }
@@ -3874,8 +3820,8 @@ function renderWelcome() {
   const area = document.getElementById('content-area');
   if (!area || typeof chaptersData === 'undefined') return;
   window.CircularCarousel?.destroy?.(area.querySelector('#welcome-carousel'));
-  const prog = AppStorage.getProgress();
-  const done = Object.keys(prog).length;
+  if (typeof Navigation !== 'undefined') Navigation.reset();
+  const done = AppStorage.completedCount();
   const total = chaptersData.length;
 
   area.innerHTML = `
@@ -3933,6 +3879,12 @@ function renderWelcome() {
                 <div class="wc-title">Practice Exams</div>
                 <div class="wc-desc">Timed papers and exam practice</div>
               </button>
+              <button type="button" class="welcome-carousel__card welcome-card" data-carousel-index="4"
+                data-carousel-label="Proofs" data-action="open-proofs">
+                <div class="wc-icon">${Icons.book}</div>
+                <div class="wc-title">Proofs</div>
+                <div class="wc-desc">${typeof proofsData !== 'undefined' ? proofsData.reduce((n, g) => n + g.proofs.length, 0) : 0} step-by-step proofs</div>
+              </button>
             </div>
           </div>
           <div class="welcome-carousel__caption" aria-live="polite"></div>
@@ -3944,33 +3896,18 @@ function renderWelcome() {
             <button type="button" class="welcome-carousel__dot" aria-label="Show Formulas"></button>
             <button type="button" class="welcome-carousel__dot" aria-label="Show Dashboard"></button>
             <button type="button" class="welcome-carousel__dot" aria-label="Show Practice Exams"></button>
+            <button type="button" class="welcome-carousel__dot" aria-label="Show Proofs"></button>
           </div>
           <button type="button" class="welcome-carousel__arrow" data-carousel-action="next" aria-label="Next card">›</button>
         </div>
       </div>
 
-      <div class="topics-folder-wrap">
-        <p style="font-size:.9rem;font-weight:600;color:var(--text-2);margin:0 0 4px">Explore topics</p>
-        <div class="folder-float" id="topics-folder" role="region" aria-label="Course topics" tabindex="0"
-          data-trigger="click">
-          <div class="folder-float__items" aria-label="Topic choices">
-            ${chaptersData.map(ch => `
-              <button type="button" class="folder-float__item" data-value="${ch.id}" tabindex="-1" aria-hidden="true">
-                ${ch.number}. ${ch.shortTitle}
-              </button>`).join('')}
-          </div>
-          <div class="folder-float__folder">
-            <span class="folder-float__back" aria-hidden="true"></span>
-            <span class="folder-float__paper" aria-hidden="true"></span>
-            <span class="folder-float__front" aria-hidden="true">
-              <span class="folder-float__label">Course topics</span>
-              <span class="folder-float__sub">${chaptersData.length} chapters</span>
-            </span>
-            <button type="button" class="folder-float__trigger" aria-expanded="false" aria-label="Open course topics"></button>
-          </div>
+      <section class="topics-section" aria-labelledby="topics-heading">
+        <h2 class="topics-section__heading" id="topics-heading">Explore topics</h2>
+        <div class="chapter-grid" id="chapter-grid">
+          ${window.ChapterCards ? ChapterCards.render(chaptersData) : ''}
         </div>
-        <p class="topics-folder-hint">Touch or click the folder, then choose a topic</p>
-      </div>
+      </section>
 
     </div>`;
 
@@ -3986,17 +3923,16 @@ function renderWelcome() {
     document.getElementById('formula-panel')?.classList.add('open');
     renderFormulaPanel();
   });
+  area.querySelector('[data-action="open-proofs"]')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (typeof Proofs !== 'undefined') Proofs.open();
+  });
   area.querySelector('[data-action="open-exams"]')?.addEventListener('click', (e) => {
     e.stopPropagation();
     if (typeof Exams !== 'undefined') Exams.open();
   });
   window.CircularCarousel?.init(document.getElementById('welcome-carousel'));
-  const topicsFolder = document.getElementById('topics-folder');
-  topicsFolder?.addEventListener('folderfloatselect', event => {
-    const chapterId = event.detail?.value;
-    if (chapterId) Navigation.loadChapter(chapterId);
-  });
-  window.FolderFloat?.init(topicsFolder);
+  window.ChapterCards?.init(document.getElementById('chapter-grid'), id => Navigation.loadChapter(id));
 }
 
 // ─── Main init ────────────────────────────────────────────────────────────
@@ -4050,6 +3986,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('formula-panel')?.classList.remove('open');
   });
   document.getElementById('fc-btn')?.addEventListener('click', () => Flashcards.open('all'));
+  document.getElementById('proofs-btn')?.addEventListener('click', () => Proofs.open());
 
   // Sidebar toggle - collapses the column on desktop, opens an overlay drawer on mobile
   const MOBILE_QUERY = window.matchMedia('(max-width: 900px)');
@@ -4084,35 +4021,62 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function renderDashboard() {
-  const prog   = AppStorage.getProgress();
-  const scores = AppStorage.getQuizScores();
-  const fcMast = AppStorage.getFCMastered();
-  const streak = AppStorage.getStreak();
-  const done   = Object.keys(prog).length;
-  const total  = typeof chaptersData !== 'undefined' ? chaptersData.length : 0;
-  const qTotal = Object.values(scores).reduce((a, s) => a + s.total, 0);
-  const qRight = Object.values(scores).reduce((a, s) => a + s.score, 0);
-  const fcT    = typeof flashcardsData !== 'undefined' ? flashcardsData.length : 0;
+  const chapters = typeof chaptersData !== 'undefined' ? chaptersData : [];
+  const cards    = typeof flashcardsData !== 'undefined' ? flashcardsData : [];
+  const proofGroups = typeof proofsData !== 'undefined' ? proofsData : [];
+  const studied  = AppStorage._get('proofs_studied', {});
+  const rows = chapters.map(ch => Progress.chapterStats(ch));
+  const exams = typeof Exams !== 'undefined' ? Exams.stats() : [];
 
+  const done   = rows.filter(r => r.isDone).length;
+  const total  = rows.length;
+  const quizRows = rows.filter(r => r.quizPct !== null);
+  const quizAvg  = quizRows.length ? Math.round(quizRows.reduce((a, r) => a + r.quizPct, 0) / quizRows.length) : null;
+  const fcDone   = rows.reduce((a, r) => a + r.cardsMastered, 0);
+  const proofsTot = proofGroups.reduce((a, g) => a + g.proofs.length, 0);
+  const proofsStudied = proofGroups.reduce((a, g) => a + g.proofs.filter(p => studied[p.id]).length, 0);
+  const examsDone = exams.reduce((a, e) => a + e.completed, 0);
+  const examsTot  = exams.reduce((a, e) => a + e.total, 0);
+
+  Heatmap.render(document.getElementById('db-heatmap'));
   const statsEl = document.getElementById('db-stats');
   const listEl  = document.getElementById('db-chapter-list');
+  const examEl  = document.getElementById('db-exam-list');
   if (statsEl) {
     statsEl.innerHTML = `
-      <div class="stat-card"><div class="stat-val">${streak}</div><div class="stat-label">Day Streak ${Icons.flame}</div></div>
+      <div class="stat-card"><div class="stat-val">${AppStorage.activityStreaks().current}</div><div class="stat-label">Day Streak ${Icons.flame}</div></div>
       <div class="stat-card"><div class="stat-val">${done}/${total}</div><div class="stat-label">Chapters Done</div></div>
-      <div class="stat-card"><div class="stat-val">${qTotal ? Math.round(qRight/qTotal*100)+'%' : '-'}</div><div class="stat-label">Quiz Avg</div></div>
-      <div class="stat-card"><div class="stat-val">${fcMast.length}/${fcT}</div><div class="stat-label">Flashcards Mastered</div></div>
-      <div class="stat-card"><div class="stat-val">${qRight}/${qTotal}</div><div class="stat-label">Quiz Score</div></div>
-      <div class="stat-card"><div class="stat-val">${total - done}</div><div class="stat-label">Remaining</div></div>`;
+      <div class="stat-card"><div class="stat-val">${quizAvg !== null ? quizAvg + '%' : '-'}</div><div class="stat-label">Avg Best Quiz Score</div></div>
+      <div class="stat-card"><div class="stat-val">${fcDone}/${cards.length}</div><div class="stat-label">Flashcards Mastered</div></div>
+      <div class="stat-card"><div class="stat-val">${proofsStudied}/${proofsTot}</div><div class="stat-label">Proofs Studied</div></div>
+      <div class="stat-card"><div class="stat-val">${examsDone}/${examsTot}</div><div class="stat-label">Exam Papers Done</div></div>`;
   }
-  if (listEl && typeof chaptersData !== 'undefined') {
-    listEl.innerHTML = chaptersData.map(ch => {
-      const isDone = AppStorage.isComplete(ch.id);
+  if (listEl) {
+    const tick = ok => ok ? ' <span class="cp-ok">✓</span>' : '';
+    listEl.innerHTML = rows.map(r => {
+      const status = r.isDone ? 'done' : r.started ? 'prog' : 'new';
+      const label = { done: `<span class="btn-icon-inner">${Icons.check}</span> Complete`, prog: 'In Progress', new: 'Not Started' }[status];
+      const bits = [
+        r.outcomesTotal ? `Outcomes ${r.outcomesDone}/${r.outcomesTotal}${tick(r.met.outcomes)}` : '',
+        `Quiz ${r.quizPct !== null ? r.quizPct + '%' : '-'}${tick(r.met.quiz)}`,
+        `Cards ${r.cardsMastered}/${r.cardsTotal}${tick(r.met.cards)}`,
+        r.proofsTotal ? `Proofs ${r.proofsDone}/${r.proofsTotal}${tick(r.met.proofs)}` : ''
+      ].filter(Boolean).join(' · ');
       return `<div class="cp-row">
-        <span class="cp-name">Ch ${ch.number}: ${ch.shortTitle}</span>
-        <span class="cp-badge ${isDone ? 'cp-done' : 'cp-pend'}">${isDone ? `<span class="btn-icon-inner">${Icons.check}</span> Complete` : 'In Progress'}</span>
+        <span class="cp-name">Ch ${r.ch.number}: ${r.ch.shortTitle}<span class="cp-detail">${bits}</span></span>
+        <span class="cp-badge cp-${status}">${label}</span>
       </div>`;
     }).join('');
+  }
+  if (examEl) {
+    examEl.innerHTML = exams.map(e => {
+      const status = e.total && e.completed === e.total ? 'done' : e.started ? 'prog' : 'new';
+      const label = { done: `<span class="btn-icon-inner">${Icons.check}</span> Complete`, prog: 'In Progress', new: 'Not Started' }[status];
+      return `<div class="cp-row">
+        <span class="cp-name">${e.label}<span class="cp-detail">${e.completed}/${e.total} papers completed · ${e.started} started</span></span>
+        <span class="cp-badge cp-${status}">${label}</span>
+      </div>`;
+    }).join('') || '<div class="cp-row"><span class="cp-name">No exam papers yet</span></div>';
   }
 }
 

@@ -1,0 +1,104 @@
+.topics-section {
+  /* 2cm from each side of the screen (the welcome screen already has 32px of padding);
+     on small screens the gap shrinks so cards stay a usable size. */
+  --topics-edge: min(2cm, 6vw);
+  align-self: stretch;
+  width: auto;
+  margin: 8px calc(var(--topics-edge) - 32px) 36px;
+}
+
+.topics-section__heading {
+  margin: 0 0 14px;
+  color: var(--text);
+  font-size: 1.35rem;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+/* Under 900px the welcome screen has no side padding, so use the full gap */
+@media (max-width: 900px) {
+  .topics-section { margin-left: var(--topics-edge); margin-right: var(--topics-edge); }
+}
+
+/* 3 columns x 2 rows on wide screens, 2 columns x 3 rows on narrow ones */
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 16px;
+}
+
+@media (min-width: 640px) {
+  .chapter-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 18px; }
+}
+
+.chapter-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.chapter-card__art {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 12px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--surface-2);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .45);
+  transition: transform 260ms cubic-bezier(.23, 1, .32, 1), box-shadow 260ms ease;
+}
+
+.chapter-card__art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.chapter-card__title {
+  display: -webkit-box;
+  width: 100%;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.3;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.chapter-card__meta {
+  margin-top: 4px;
+  color: var(--text-2);
+  font-size: .85rem;
+  line-height: 1.3;
+}
+
+.chapter-card:hover .chapter-card__art,
+.chapter-card:focus-visible .chapter-card__art {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .55), 0 0 0 2px var(--cc-accent);
+}
+
+.chapter-card:active .chapter-card__art { transform: translateY(-1px) scale(.985); }
+
+.chapter-card:focus-visible { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter-card__art { transition: box-shadow 200ms ease; }
+  .chapter-card:hover .chapter-card__art,
+  .chapter-card:focus-visible .chapter-card__art { transform: none; }
+}

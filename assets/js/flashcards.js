@@ -22,6 +22,7 @@ const Flashcards = (() => {
     const r = getRatings();
     const c = r[id] || { h: 0, e: 0 };
     c[kind]++; c.last = kind; r[id] = c;
+    AppStorage.logActivity('card');
     try { localStorage.setItem(RKEY, JSON.stringify(r)); } catch {}
   }
 
@@ -195,7 +196,9 @@ const Flashcards = (() => {
     document.getElementById('fc-easy')?.addEventListener('click', () => { rate(card.id, 'e'); advance(card); });
     document.getElementById('fc-master')?.addEventListener('click', () => {
       const nowMastered = AppStorage.toggleFCMastered(card.id);
+      if (nowMastered) AppStorage.logActivity('card');
       Progress.update();
+      Progress.syncAll();
       if (nowMastered) advance(card); else renderCard();
     });
   }

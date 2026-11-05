@@ -88,6 +88,7 @@ const Quizzes = (() => {
     document.getElementById('qz-submit')?.addEventListener('click', () => {
       if (selectedOi === null || answered) return;
       answered = true;
+      AppStorage.logActivity('quiz');
       userAnswers[idx] = selectedOi;
       const correct = q.type === 'tf' ? (q.answer ? 0 : 1) : (q.correct !== undefined ? q.correct : q.answer);
       const isRight = selectedOi === correct;
@@ -123,6 +124,7 @@ const Quizzes = (() => {
 
     AppStorage.saveQuizScore(activeQuiz.id, score, total);
     Progress.update();
+    Progress.syncAll();
 
     // SVG ring
     const r = 50, circ = 2 * Math.PI * r;

@@ -836,9 +836,9 @@ body {
 }
 
 .content-page {
-  max-width: 860px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 24px 32px 80px;
+  padding: 24px 40px 80px;
 }
 
 /* ── Chapter header ── */
@@ -2093,9 +2093,10 @@ h3.section-heading {
 .dashboard-panel {
   background: var(--surface);
   border-radius: 20px;
-  padding: 36px;
-  width: 620px;
-  max-height: 80vh;
+  padding: 40px;
+  width: 780px;
+  max-width: 94vw;
+  max-height: 84vh;
   overflow-y: auto;
   box-shadow: var(--shadow-lg);
 }
@@ -2167,9 +2168,34 @@ h3.section-heading {
   color: var(--green);
 }
 
-.cp-pend {
+.cp-prog {
+  background: rgba(62, 166, 255, .14);
+  color: var(--accent);
+}
+
+.cp-new {
   background: var(--border);
   color: var(--text-3);
+}
+
+.db-rule {
+  margin: -4px 0 12px;
+  color: var(--text-3);
+  font-size: .75rem;
+  line-height: 1.5;
+}
+
+.cp-row .cp-ok {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.cp-row .cp-detail {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-3);
+  font-size: .75rem;
+  font-weight: 500;
 }
 
 /* ── Formula reference panel ── */
@@ -2425,3 +2451,29 @@ kbd {
 .fc-actions-row .btn-fc { padding: 10px 6px; white-space: nowrap; min-width: 0; }
 .fc-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
 .fc-filter-btn { flex: 0 0 auto; white-space: nowrap; padding: 5px 10px; }
+/* ── Dashboard study-activity heatmap ── */
+.heatmap {
+  --hm-0: var(--surface-2);
+  --hm-1: #0e4429;
+  --hm-2: #006d32;
+  --hm-3: #26a641;
+  --hm-4: #39d353;
+  padding: 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+}
+.hm-summary { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 14px; color: var(--text-3); font-size: .78rem; }
+.hm-summary strong { color: var(--text); font-size: .95rem; margin-right: 3px; }
+.hm-grid { display: grid; grid-template-rows: 16px repeat(7, auto); gap: 3px; }
+.hm-month, .hm-dl { font-size: .68rem; color: var(--text-3); line-height: 1; white-space: nowrap; }
+.hm-month { align-self: start; overflow: visible; }
+.hm-dl { display: flex; align-items: center; }
+.hm-cell { display: block; aspect-ratio: 1; border-radius: 3px; background: var(--hm-0); outline: 1px solid rgba(255,255,255,.04); outline-offset: -1px; }
+.hm-l1 { background: var(--hm-1); } .hm-l2 { background: var(--hm-2); }
+.hm-l3 { background: var(--hm-3); } .hm-l4 { background: var(--hm-4); }
+.hm-future { background: transparent; outline: none; }
+.hm-today { outline: 1.5px solid var(--text-2); outline-offset: 1px; }
+.hm-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 12px; color: var(--text-3); font-size: .72rem; }
+.hm-legend { display: inline-flex; align-items: center; gap: 3px; }
+.hm-legend .hm-cell { width: 11px; height: 11px; }

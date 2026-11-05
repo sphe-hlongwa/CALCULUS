@@ -72,6 +72,24 @@
       radius = Math.max(130, width / (2 * Math.tan(Math.PI / cards.length)) + spacing);
       root.style.setProperty('--carousel-radius', `${radius}px`);
       root.style.setProperty('--carousel-step', `${stepAngle()}deg`);
+
+      // The cylinder grows with the number of cards, and under perspective a
+      // bigger cylinder magnifies the front card and (because of the stage tilt)
+      // pushes it down until it spills over the caption. Keep the front card the
+      // same projected size and height as the 4-card design (8 slots with the
+      // far-side clones) by scaling the perspective and tilt with the radius.
+      root.style.removeProperty('perspective');
+      const basePerspective = parseFloat(getComputedStyle(root).perspective) || 1100;
+      const baseRadius = width / (2 * Math.tan(Math.PI / 8)) + 28;
+      const baseScale = basePerspective > baseRadius ? basePerspective / (basePerspective - baseRadius) : 1;
+      if (baseScale > 1 && radius > baseRadius) {
+        root.style.perspective = `${(baseScale * radius) / (baseScale - 1)}px`;
+      }
+      const baseTilt = 7 * Math.PI / 180;
+      const tilt = radius > baseRadius
+        ? Math.asin(Math.min(1, (baseRadius * Math.sin(baseTilt)) / radius))
+        : baseTilt;
+      root.style.setProperty('--carousel-tilt', `${(tilt * 180 / Math.PI).toFixed(3)}deg`);
     };
 
     // Depth shading: front cards are bright and opaque, back cards dim out.

@@ -43,6 +43,35 @@ const Exams = (() => {
       }
     ];
   }
+  // Exam progress: { 'session/paper': { started: ts, memos: [questionNumbers] } }
+  const EXAM_KEY = 'exam_progress';
+  const examKey = (sid, pid) => `${sid}/${pid}`;
+  function getExamProgress() { return AppStorage._get(EXAM_KEY, {}); }
+  function recordPaper(paper, memoQ) {
+    const all = getExamProgress();
+    const k = examKey(currentSessionId, paper.id);
+    const e = all[k] || { started: Date.now(), memos: [] };
+    if (memoQ != null && !e.memos.includes(memoQ)) { e.memos.push(memoQ); AppStorage.logActivity('exam'); }
+    all[k] = e;
+    AppStorage._set(EXAM_KEY, all);
+  }
+  // A paper is "completed" once every question's memo has been opened (worked through and checked).
+  function paperState(sid, paper) {
+    const e = getExamProgress()[examKey(sid, paper.id)];
+    const seen = e ? e.memos.filter(n => paper.questions.some(q => q.number === n)).length : 0;
+    return { started: !!e, seen, total: paper.questions.length, completed: !!e && seen >= paper.questions.length };
+  }
+  function stats() {
+    return getSessions().map(sess => {
+      const states = sess.papers.map(p => paperState(sess.id, p));
+      return {
+        id: sess.id, label: sess.label, total: sess.papers.length,
+        started: states.filter(x => x.started).length,
+        completed: states.filter(x => x.completed).length
+      };
+    });
+  }
+
   function getSession(id) { return getSessions().find(x => x.id === id); }
   function currentPapers() { return (getSession(currentSessionId) || {}).papers || []; }
 
@@ -227,7 +256,7 @@ const Exams = (() => {
           <span class="exam-pick-num">${i + 1}</span>
           <div>
             <h3>${paper.label}</h3>
-            <p class="exam-pick-meta">${paper.totalMarks} marks &middot; ${paper.duration} minutes &middot; ${paper.questions.length} questions</p>
+            <p class="exam-pick-meta">${paper.totalMarks} marks &middot; ${paper.duration} minutes &middot; ${paper.questions.length} questions${(() => { const st = paperState(sess.id, paper); return st.completed ? ' &middot; <strong>Completed ✓</strong>' : st.started ? ` &middot; Memos ${st.seen}/${st.total}` : ''; })()}</p>
           </div>
         </div>
         <span class="exam-start-link">${sess.startLabel || 'Start Paper'} <span aria-hidden="true">&rarr;</span></span>
@@ -262,6 +291,7 @@ const Exams = (() => {
     if (!paper || !root) return;
     currentView = 'paper';
     currentPaperId = paper.id;
+    recordPaper(paper);
     {
       const list = currentPapers();
       const idx = list.findIndex(p => p.id === paper.id);
@@ -325,6 +355,7 @@ const Exams = (() => {
         solEl.classList.toggle('hidden');
         btn.textContent = showing ? 'Show Memo (Solution)' : 'Hide Memo (Solution)';
         if (!showing) {
+          recordPaper(paper, Number(btn.dataset.q));
           renderMath(solEl);
           requestAnimationFrame(() => renderMath(solEl));
           const q = paper.questions.find(qq => qq.number === Number(btn.dataset.q));
@@ -378,7 +409,7 @@ const Exams = (() => {
     return esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   }
 
-  return { open, close, goBack, renderSessions, renderList, renderPaper, toggleFullscreen };
+  return { open, close, goBack, renderSessions, renderList, renderPaper, toggleFullscreen, stats };
 })();
 
 document.addEventListener('DOMContentLoaded', () => {

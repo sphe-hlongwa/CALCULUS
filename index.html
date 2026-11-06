@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="assets/css/circular-carousel.css">
   <link rel="stylesheet" href="assets/css/chapter-cards.css">
   <link rel="stylesheet" href="assets/css/proofs.css">
+  <link rel="stylesheet" href="assets/css/skeleton.css">
+  <noscript><style>.sk-wrap{display:none!important}</style></noscript>
 </head>
 
 <body>
@@ -76,7 +78,11 @@
           </div>
 
           <div class="nav-rail-items" id="nav-rail-chapters">
-            <!-- Chapter icons injected here -->
+            <!-- Chapter icons injected here (skeleton is replaced by Navigation.build) -->
+            <div class="sk-wrap sk-rail" aria-hidden="true">
+              <span class="sk sk-rail-btn"></span><span class="sk sk-rail-btn"></span><span class="sk sk-rail-btn"></span>
+              <span class="sk sk-rail-btn"></span><span class="sk sk-rail-btn"></span><span class="sk sk-rail-btn"></span>
+            </div>
           </div>
 
           <div class="nav-rail-spacer"></div>
@@ -164,7 +170,12 @@
           </div>
 
           <div class="sidebar-detail-content" id="sidebar-detail-content">
-            <!-- Sections injected here -->
+            <!-- Sections injected here (skeleton is replaced by Navigation.build) -->
+            <div class="sk-wrap sk-list" aria-hidden="true">
+              <span class="sk sk-list-label"></span>
+              <span class="sk sk-row"></span><span class="sk sk-row"></span><span class="sk sk-row"></span>
+              <span class="sk sk-row"></span><span class="sk sk-row"></span>
+            </div>
             <!-- </div>
         
         </div> -->
@@ -177,7 +188,35 @@
 
     <!-- ── Main content ─────────────────────────────────────── -->
     <main class="main-content" id="main-content">
-      <div id="content-area"></div>
+      <div id="content-area" aria-busy="true">
+        <!-- Skeleton of the welcome screen; renderWelcome() replaces it -->
+        <div class="sk-wrap sk-welcome" aria-hidden="true">
+          <div class="sk-hero">
+            <span class="sk sk-hero-icon"></span>
+            <span class="sk sk-hero-title"></span>
+          </div>
+          <div class="sk-carousel-wrap">
+            <div class="sk-carousel">
+              <span class="sk sk-card sk-card--side"></span>
+              <span class="sk sk-card sk-card--main">
+                <span class="sk sk-circle"></span><span class="sk sk-line w60"></span><span class="sk sk-line w40"></span>
+              </span>
+              <span class="sk sk-card sk-card--side"></span>
+            </div>
+            <span class="sk sk-caption"></span>
+            <div class="sk-controls">
+              <span class="sk sk-arrow"></span>
+              <span class="sk sk-dot"></span><span class="sk sk-dot"></span><span class="sk sk-dot"></span><span class="sk sk-dot"></span><span class="sk sk-dot"></span>
+              <span class="sk sk-arrow"></span>
+            </div>
+          </div>
+          <div class="sk-topics">
+            <span class="sk sk-topics-heading"></span>
+            <span class="sk sk-folder"></span>
+          </div>
+        </div>
+        <span class="sk-sr" role="status">Loading content…</span>
+      </div>
     </main>
 
   </div><!-- /app-shell -->

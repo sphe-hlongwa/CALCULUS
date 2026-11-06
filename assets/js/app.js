@@ -3899,8 +3899,6 @@ function renderWelcome() {
             <button type="button" class="welcome-carousel__dot" aria-label="Show Proofs"></button>
           </div>
           <button type="button" class="welcome-carousel__arrow" data-carousel-action="next" aria-label="Next card">›</button>
-          <button type="button" class="welcome-carousel__rotation" data-carousel-action="toggle-rotation"
-            aria-label="Stop automatic rotation" aria-pressed="false">Pause</button>
         </div>
       </div>
 
@@ -3947,6 +3945,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render welcome
   renderWelcome();
+  document.getElementById('content-area')?.removeAttribute('aria-busy');
 
   // Update progress bar
   Progress.update();

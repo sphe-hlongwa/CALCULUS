@@ -95,8 +95,7 @@
 }
 
 .welcome-carousel__arrow,
-.welcome-carousel__dot,
-.welcome-carousel__rotation {
+.welcome-carousel__dot {
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text-2);
@@ -111,24 +110,6 @@
   font-size: 1.05rem;
   line-height: 1;
   transition: border-color .2s ease, color .2s ease, transform .2s ease;
-}
-
-.welcome-carousel__rotation {
-  min-height: 32px;
-  padding: 0 10px;
-  border-radius: 16px;
-  font-size: .75rem;
-  transition: border-color .2s ease, color .2s ease;
-}
-
-.welcome-carousel__rotation:hover:not(:disabled) {
-  border-color: var(--blue);
-  color: var(--blue);
-}
-
-.welcome-carousel__rotation:disabled {
-  cursor: not-allowed;
-  opacity: .65;
 }
 
 .welcome-carousel__arrow:hover {
@@ -158,8 +139,7 @@
 }
 
 .welcome-carousel__arrow:focus-visible,
-.welcome-carousel__dot:focus-visible,
-.welcome-carousel__rotation:focus-visible {
+.welcome-carousel__dot:focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 3px;
 }
@@ -199,8 +179,7 @@
   .welcome-carousel__ring,
   .welcome-carousel__card,
   .welcome-carousel__arrow,
-  .welcome-carousel__dot,
-  .welcome-carousel__rotation {
+  .welcome-carousel__dot {
     transition: none;
   }
 }

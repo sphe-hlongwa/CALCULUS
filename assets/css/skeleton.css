@@ -31,46 +31,39 @@
 
 /* ── Sidebar detail: list of section rows ── */
 .sk-list { display: flex; flex-direction: column; gap: 10px; padding: 16px 14px; }
-.sk-row { height: 34px; border-radius: 8px; }
-.sk-row:nth-child(1) { width: 92%; } .sk-row:nth-child(2) { width: 78%; }
-.sk-row:nth-child(3) { width: 86%; } .sk-row:nth-child(4) { width: 70%; }
-.sk-row:nth-child(5) { width: 82%; }
 .sk-list-label { width: 72px; height: 12px; margin: 4px 0 6px 6px; border-radius: 6px; }
+/* every row takes the width of the longest one */
+.sk-row { width: 92%; height: 34px; border-radius: 8px; }
 
-/* ── Welcome screen: hero, carousel, topics ── */
+/* ── Welcome screen: the title and the six chapter tiles ── */
 .sk-welcome { display: flex; flex-direction: column; align-items: center; padding: 32px 32px 60px; }
+@media (max-width: 900px) { .sk-welcome { padding-left: 0; padding-right: 0; } }
+
+/* Hero box: same height and anchors as the real hero, holding only the title bar */
 .sk-hero {
-  width: 100%; max-width: 1100px; height: calc(clamp(360px, 50vw, 520px) - clamp(24px, 4.5vw, 64px)); margin-bottom: 8px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+  --hero-trim: clamp(24px, 4.5vw, 64px);
+  --hero-cy: calc(50% - var(--hero-trim) / 2);
+  position: relative; width: 100%; max-width: 1100px; margin-bottom: 8px;
+  height: calc(clamp(360px, 50vw, 520px) - var(--hero-trim));
 }
-.sk-hero-icon { width: clamp(64px, 6vw, 100px); height: clamp(34px, 3.2vw, 52px); border-radius: 999px; }
-.sk-hero-title { width: min(78%, 520px); height: clamp(34px, 6vw, 62px); border-radius: 12px; }
+@media (max-width: 900px) { .sk-hero { max-width: none; } }
+.sk-hero-title {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  top: calc(var(--hero-cy) + clamp(104px, 15vw, 172px) + clamp(7px, 1vw, 10px));
+  width: min(62%, 480px); height: clamp(35px, 5.3vw, 53px); border-radius: 12px;
+}
 
-.sk-carousel-wrap { width: min(100%, 760px); margin: 4px auto 32px; }
-.sk-carousel {
-  position: relative; height: 335px; display: flex; align-items: center; justify-content: center; gap: 18px;
-}
-.sk-card { width: clamp(140px, 44vw, 180px); height: 140px; border-radius: 18px; border: 1px solid var(--border, #2a2a2a); }
-.sk-card--side { opacity: .55; transform: scale(.88); }
-.sk-card--main { width: clamp(180px, 52vw, 300px); height: 190px; padding: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
-.sk-card--main .sk { background: rgba(255, 255, 255, .06); }
-.sk-circle { width: 38px; height: 38px; border-radius: 50%; }
+/* Empty space where the carousel will appear, so the title and tiles do not jump */
+.sk-carousel-gap { height: 377px; margin: 4px 0 32px; }
+@media (min-width: 901px) { .sk-carousel-gap { height: 462px; } }
+
+/* Chapter tiles reuse the real .topics-section / .chapter-grid layout */
+.sk-topics-heading { display: block; width: 180px; height: 24px; margin: 6px 0 19px; border-radius: 8px; }
+.sk-chapter { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding-bottom: 28px; }
+.sk-art { width: 100%; aspect-ratio: 1 / 1; margin-bottom: 12px; border-radius: 8px; }
 .sk-line { height: 12px; border-radius: 6px; }
-.sk-line.w60 { width: 60%; } .sk-line.w40 { width: 40%; }
-.sk-caption { width: 90px; height: 12px; margin: 0 auto 14px; border-radius: 6px; }
-.sk-controls { display: flex; align-items: center; justify-content: center; gap: 12px; }
-.sk-arrow { width: 32px; height: 32px; border-radius: 50%; }
-.sk-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-.sk-topics { align-self: stretch; margin: 8px max(0px, calc(min(2cm, 6vw) - 32px)) 0; }
-.sk-topics-heading { width: 180px; height: 24px; margin-bottom: 18px; border-radius: 8px; }
-.sk-folder { width: min(100%, 250px); height: 150px; margin: 0 auto; border-radius: 18px 18px 14px 14px; }
-
-@media (max-width: 640px) {
-  .sk-welcome { padding: 20px 16px 40px; }
-  .sk-carousel { height: 300px; gap: 10px; }
-  .sk-card--side { display: none; }
-}
+.sk-ctitle { width: 70%; height: 16px; margin-bottom: 8px; }
+.sk-cmeta { width: 42%; height: 12px; }
 
 @media (prefers-reduced-motion: reduce) {
   .sk::after { animation: none; opacity: .5; transform: none; background: rgba(255, 255, 255, .04); }
